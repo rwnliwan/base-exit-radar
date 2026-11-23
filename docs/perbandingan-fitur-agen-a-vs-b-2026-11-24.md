@@ -356,3 +356,35 @@ tipis.
 Keputusan 1–2 inilah yang menahan jadwal maju dari 28 Nov
 (brief keputusan 23 Nov). Begitu diputuskan, jendela 28–30 Nov
 bisa jalan.
+
+## 8. Keputusan Septian — 24 Nov 2026 ~01:51 WITA (ACC)
+
+- **Fitur agen: (a) research-to-portfolio — ACC.**
+- **Sub-kebijakan: (a2) — ACC.** Brief saja; proposal tetap
+  terkunci sampai ada quote firm. Konsekuensi yang dicatat:
+  TIDAK ada relaksasi invariant `decide()` aturan 4–5 (tidak ada
+  perubahan policy, tidak ada risiko keberatan Instinct soal itu);
+  demo menunjukkan brief + keputusan WATCH + alasan "belum ada
+  proposal karena bukti exit belum firm" — demo lebih tipis
+  daripada (a1), dan itu pilihan sadar Septian.
+- **Elemen onchain: hash registry, jaringan Sepolia — ACC.**
+  Mainnet menyusul hanya bila Septian ACC wallet + gas di 1–3 Des;
+  mainnet BUKAN prasyarat kill-switch 30 Nov.
+- **Nama: MASIH TERBUKA — pertanyaan Septian 01:51 WITA.**
+  "Exit Radar dipakai 2x, apakah aman? Untuk Base dan untuk CMC?"
+  Jawaban chief (dicatat di sini): entry CMC bernama **RWA Radar**,
+  bukan Exit Radar — nama itu TIDAK dipakai dua kali sebagai nama
+  entry. "Exit Radar" muncul di materi CMC hanya sebagai rujukan
+  prior work yang jujur ("method know-how carries over from our
+  separate Exit Radar prototype", SUBMISSION.md). Entry Base bernama
+  "Exit Radar" adalah nama produknya sendiri (radar.omdanny.site)
+  + fitur baru yang dibangun selama quest — itu justru framing
+  yang sesuai eligibilitas Base (produk live boleh, asal fitur
+  baru terkait saham dibangun 13 Nov–5 Des). Yang harus dijaga:
+  teks form Base harus membingkainya sebagai produk existing +
+  fitur baru (bukan mengklaim seluruh Radar sebagai baru), dan
+  kedua entry harus tetap terpisah (repo, kode, dan hackathon
+  berbeda — CMC repo baru dgn kode baru; Base repo existing dgn
+  fitur baru). Bila Septian tetap mau pembeda visual, opsi:
+  nama display entry Base "Exit Radar for Base" sementara produk
+  tetap "Exit Radar".
