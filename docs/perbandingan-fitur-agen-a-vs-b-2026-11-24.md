@@ -510,3 +510,30 @@ ketat yang tersirat:**
 - Kriteria 2 butuh **jalur quote FIRM yang dibangun** — bukan
   sekadar coverage. Adapter saat ini simulasi `eth_call` saja;
   jalur FIRM adalah item kerja besar di jendela yang sama.
+
+### 8.5 Kesimpulan chief dari kedua pendapat (DeepSeek + Instinct) — 24 Nov ~02:0x WITA
+
+Kedua pendapat **tidak bertentangan — Instinct mengoperasionalkan
+reframe DeepSeek.** DeepSeek mendiagnosis (a1 versi relaksasi =
+overclaim; risiko pindah ke Scope 1; Sepolia benar; registry butuh
+pinning rantai input; hash di-commit terakhir setelah freeze; kata
+"portfolio" harus sesuai isi), Instinct meresepkan bentuk
+operasionalnya (checklist 5 kriteria + fallback (a2) + early exit
+hari ke-3). Chief menerima paket lengkapnya: **(a) + (a1') +
+Sepolia + fallback (a2) + kill-switch 5 kriteria.**
+
+Kesimpulan chief: keputusan bukan lagi soal fitur agen — **soal
+jadwal.** Scope 1 + jalur quote FIRM adalah critical path, dan
+tanggal yang mengikat adalah **26 Nov** (bukan 30 Nov): kriteria 1
+(5 hari data) membuat Scope 1 harus hidup 26 Nov, dan kriteria 2
+membutuhkan jalur FIRM yang dibangun di jendela yang sama. 30 Nov
+hanya checkpoint penilaiannya.
+
+**Klarifikasi tanggal (pertanyaan Septian 02:06): 30 Nov BUKAN
+deadline submit.** 30 Nov adalah kill-switch operasional — bila
+integrasi Base belum jalan, BERHENTI. Deadline submit resmi
+adalah **5 Des 2026 23:59 UTC = 6 Des 07:59 WITA** (form juga
+menulis "Ends December 5, 2026, 11:59pm EST" = 6 Des 12:59 WITA;
+deadline kerja yang dipakai adalah yang lebih awal, 5 Des 23:59
+UTC). Rencana: 28–30 Nov jendela kerja terakhir, 1–3 Des uji
+akhir + QA, 4–5 Des submit.
