@@ -357,34 +357,105 @@ Keputusan 1–2 inilah yang menahan jadwal maju dari 28 Nov
 (brief keputusan 23 Nov). Begitu diputuskan, jendela 28–30 Nov
 bisa jalan.
 
-## 8. Keputusan Septian — 24 Nov 2026 ~01:51 WITA (ACC)
+## 8. Keputusan Septian — 24 Nov 2026 ~01:51–01:55 WITA (ACC)
 
 - **Fitur agen: (a) research-to-portfolio — ACC.**
-- **Sub-kebijakan: (a2) — ACC.** Brief saja; proposal tetap
-  terkunci sampai ada quote firm. Konsekuensi yang dicatat:
-  TIDAK ada relaksasi invariant `decide()` aturan 4–5 (tidak ada
-  perubahan policy, tidak ada risiko keberatan Instinct soal itu);
-  demo menunjukkan brief + keputusan WATCH + alasan "belum ada
-  proposal karena bukti exit belum firm" — demo lebih tipis
-  daripada (a1), dan itu pilihan sadar Septian.
+- **Sub-kebijakan: (a1) — ACC. KOREKSI:** pesan 01:51 tertulis
+  "a2", diklarifikasi pesan 01:55 menjadi "A, A1" — yang berlaku
+  adalah (a1): proposal paper boleh keluar di atas bukti exit
+  simulasi dengan label paper yang melekat.
 - **Elemen onchain: hash registry, jaringan Sepolia — ACC.**
   Mainnet menyusul hanya bila Septian ACC wallet + gas di 1–3 Des;
   mainnet BUKAN prasyarat kill-switch 30 Nov.
-- **Nama: MASIH TERBUKA — pertanyaan Septian 01:51 WITA.**
-  "Exit Radar dipakai 2x, apakah aman? Untuk Base dan untuk CMC?"
-  Jawaban chief (dicatat di sini): entry CMC bernama **RWA Radar**,
-  bukan Exit Radar — nama itu TIDAK dipakai dua kali sebagai nama
+- **Nama: SUDAH ACC** (pesan 01:55: "Bukan soal nama, karna sy
+  sdh ACC") — **"Exit Radar"**, display submission
+  "Exit Radar for Base". Jawaban chief atas pertanyaan nama
+  (dicatat di sini): entry CMC bernama **RWA Radar**, bukan
+  Exit Radar — nama itu TIDAK dipakai dua kali sebagai nama
   entry. "Exit Radar" muncul di materi CMC hanya sebagai rujukan
   prior work yang jujur ("method know-how carries over from our
-  separate Exit Radar prototype", SUBMISSION.md). Entry Base bernama
-  "Exit Radar" adalah nama produknya sendiri (radar.omdanny.site)
-  + fitur baru yang dibangun selama quest — itu justru framing
-  yang sesuai eligibilitas Base (produk live boleh, asal fitur
-  baru terkait saham dibangun 13 Nov–5 Des). Yang harus dijaga:
-  teks form Base harus membingkainya sebagai produk existing +
-  fitur baru (bukan mengklaim seluruh Radar sebagai baru), dan
-  kedua entry harus tetap terpisah (repo, kode, dan hackathon
-  berbeda — CMC repo baru dgn kode baru; Base repo existing dgn
-  fitur baru). Bila Septian tetap mau pembeda visual, opsi:
-  nama display entry Base "Exit Radar for Base" sementara produk
-  tetap "Exit Radar".
+  separate Exit Radar prototype", SUBMISSION.md). Entry Base
+  bernama "Exit Radar" adalah nama produknya sendiri
+  (radar.omdanny.site) + fitur baru yang dibangun selama quest —
+  itu justru framing yang sesuai eligibilitas Base (produk live
+  boleh, asal fitur baru terkait saham dibangun 13 Nov–5 Des).
+  Yang harus dijaga: teks form Base harus membingkainya sebagai
+  produk existing + fitur baru (bukan mengklaim seluruh Radar
+  sebagai baru), dan kedua entry harus tetap terpisah (repo, kode,
+  dan hackathon berbeda — CMC repo baru dgn kode baru; Base repo
+  existing dgn fitur baru).
+
+### 8.1 Second opinion DeepSeek atas paket (a)+(a1)+Sepolia — 24 Nov ~01:5x WITA
+
+Verdict lengkap:
+`~/workspace/bug-bounty/deepseek-base-paket-a-a1-sepolia-verdict-2026-11-24.md`.
+Ringkasannya:
+
+- **(1) (a) benar, tapi kemenangannya semu.** (b) memang tidak
+  mungkin dalam 3 hari — dan jangan dibuka lagi. Tapi nilai (a)
+  sepenuhnya bergantung pada **Scope 1**. Kalau coverage Base
+  belum jalan, (a) jatuh jadi wrapper LLM generik di atas NVDAc /
+  AAPLc dan track "Base Stocks" tidak terpenuhi. Keputusan (a)
+  memindahkan seluruh risiko ke slot 24–27 Nov, bukan 28–30 Nov.
+- **(2) (a1) sebagaimana dirumuskan = overclaim.** Melemahkan
+  invariant `decide()` supaya PAPER_PROPOSAL keluar di atas bukti
+  simulasi adalah pola klasik "safety property dilonggarkan di
+  jendela terakhir karena deadline" — label UI tidak
+  menyelamatkan, karena label adalah presentasi sedangkan
+  invariant adalah semantik. Audit v0.3.3 sudah mempublikasikan
+  "gate proposal MATI". **Rekomendasi DeepSeek: jangan sentuh
+  `decide()`.** Keluarkan proposal paper sebagai artefak terpisah
+  — tipe sendiri (`RESEARCH_DRAFT` / `ILLUSTRATIVE`), di luar
+  state machine `decide()`, tidak pernah menyentuh jalur
+  eksekusi, tidak bisa dipromosikan tanpa quote firm. Bila
+  refactor itu tidak muat, ambil (a2). Syarat minimum bila tetap
+  jalan (a1) versi relaksasi: label machine-readable di data
+  (`evidence_class: SIMULATED`, `commitment: false`,
+  `gate: OFF`), ikut ter-render di API/export, hash Sepolia
+  meng-commit evidence_class itu, plus ADR bertanggal.
+- **(3) Sepolia benar, jangan mainnet.** Registry tidak butuh
+  mainnet (tidak ada dana bergerak, tidak ada invariant keamanan
+  yang diuji). Mainnet hanya menambah beban operasional tanpa
+  nilai evaluatif. Satu yang perlu dicek: apakah rubrik juri
+  memberi bobot pada deployment mainnet — kalau ya, catat
+  sebagai trade-off sadar. Catatan teknis: commit hash di AKHIR,
+  setelah metodologi dan prompt freeze; pin seluruh rantai input
+  (prompt + versi model + input snapshot), bukan hanya output —
+  tanpa itu registry jadi dekoratif karena brief LLM
+  non-deterministik.
+- **(4) Risiko terbesar yang belum terlihat:** critical path
+  adalah 24–27 Nov (Scope 1), bukan 28–30 Nov — framing
+  "jendela 3 hari" menyesatkan; kalibrasi Exit Score di atas
+  sampel tipis (risiko overfit — jawab jujur "kalibrasi awal,
+  N kecil, belum tervalidasi"); kill-switch belum falsifiable —
+  tetapkan kriteria lulus operasional SEKARANG; kata "portfolio"
+  harus sesuai isinya (bila isinya ranked list, beri nama
+  sesuai itu).
+
+### 8.2 Posisi chief sesudah verdict DeepSeek
+
+Chief **SETUJU** dengan reframe DeepSeek. (a1) versi chief
+(relaksasi invariant + label) lebih lemah — DeepSeek benar:
+label presentasi tidak menyelamatkan semantik, dan diff "gate
+dilonggarkan di jendela terakhir" sulit dibela di depan audit
+yang sudah mempublikasikan gate MATI. **Usulan chief: (a1')
+sebagai pengganti (a1)** — artefak terpisah
+RESEARCH_DRAFT/ILLUSTRATIVE di luar state machine `decide()`,
+gate tetap OFF, hash Sepolia meng-commit evidence_class.
+Poin (1), (3), (4) chief terima penuh — termasuk definisi
+operasional kill-switch dan pinning rantai input untuk registry.
+
+### 8.3 Keputusan yang MASIH dibutuhkan dari Septian
+
+1. **(a1') reframe vs (a2) jatuh.** (a1') = proposal paper
+   sebagai artefak terpisah di luar `decide()`; (a2) = brief
+   saja, proposal tetap terkunci. Ini keputusan yang paling
+   menentukan, bersama definisi kill-switch (DeepSeek).
+2. **Definisi operasional "Base jalan" untuk kill-switch 30 Nov**
+   — kriteria lulus yang bisa diuji (contoh: poller
+   mengembalikan ≥N token Base, web menampilkannya, `decide()`
+   jalan end-to-end pada fixture Base).
+3. **Instinct** — brief chat sudah disiapkan
+   (`base-paket-a-a1-sepolia-brief-chat-untuk-instinct-2026-11-24.txt`,
+   di `~/workspace/bug-bounty/`); menunggu Septian meneruskan
+   karena Instinct hanya terjangkau lewat dia.
