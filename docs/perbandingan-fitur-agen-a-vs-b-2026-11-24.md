@@ -459,3 +459,54 @@ operasional kill-switch dan pinning rantai input untuk registry.
    (`base-paket-a-a1-sepolia-brief-chat-untuk-instinct-2026-11-24.txt`,
    di `~/workspace/bug-bounty/`); menunggu Septian meneruskan
    karena Instinct hanya terjangkau lewat dia.
+
+### 8.4 Verdict Instinct — 24 Nov 2026 ~02:01 WITA (diteruskan Septian)
+
+Instinct **menerima reframe DeepSeek (a1') dengan satu syarat
+fallback ke (a2)**. Alasan reframe: proposal keluar dari dalam
+`decide()` atas bukti simulasi itu overclaim; PAPER_PROPOSAL tetap
+hanya untuk quote FIRM. Proposal jadi artefak terpisah di luar
+state machine, berlabel RESEARCH_DRAFT/ILLUSTRATIVE — tanpa kolom
+exit atau PnL yang terbaca seperti hasil nyata. Tetap jadi bahan
+portofolio, tanpa merusak integritas gate.
+
+**Syarat fallback:** kalau Scope 1 belum lolos kriteria di bawah
+pada checkpoint 30 Nov, kunci ke (a2): brief harian saja, artefak
+proposal ditunda. Sepolia: setuju — hash komitmen brief dan
+proposal cukup, jangan mainnet.
+
+**Definisi "Base jalan" untuk kill-switch 30 Nov — SEMUA harus
+terpenuhi:**
+
+1. Data Base asli masuk otomatis tanpa input manual, minimal
+   5 hari berturut-turut. Tiap record punya timestamp dan sumber.
+2. Minimal 1 jalur quote berstatus FIRM, dicek silang ke sumber
+   independen (selisih dalam toleransi, misal 1% atau kurang),
+   minimal 10 sampel.
+3. Brief harian ter-generate otomatis minimal 3 hari tanpa
+   bantuan manusia, dan bisa direproduksi dari data yang sama.
+4. Hash di Sepolia terbukti: ada tx, dan hash bisa diverifikasi
+   ulang dari brief.
+5. Gate tetap OFF, `decide()` tidak diubah, dan tes membuktikan
+   simulasi tidak pernah menghasilkan PAPER_PROPOSAL.
+
+**Aturan kill-switch:** poin 1 atau 2 gagal → Base belum jalan
+→ kill-switch jalan. Poin 3–5 tidak menyelamatkan kalau data
+aslinya belum ada. **Early exit:** kalau Scope 1 belum jalan di
+hari ke-3, putuskan (a2) lebih awal daripada memaksa.
+
+**Checklist satu halaman:** Instinct menyusun
+`base-killswitch-checklist-muse-b63737dd.md` (diterima via
+upload Septian, `~/workspace/user/files/`; salinan kerja di
+`docs/killswitch-checklist-2026-11-24.md` repo ini). Chief
+verifikasi: isi checklist cocok poin-per-poin dengan pendapat
+Instinct yang diteruskan Septian. **Catatan chief atas dua hal
+ketat yang tersirat:**
+- Kriteria 1 (5 hari berturut-turut) + checkpoint 30 Nov =
+  Scope 1 WAJIB sudah jalan paling lambat **26 Nov** (26–30 Nov
+  = tepat 5 hari). Checklist menulis early exit "hari ke-3
+  (27 Nov)" — bila dihitung dari mulai kerja 24 Nov, hari ke-3
+  adalah **26 Nov**; ambil 26 Nov sebagai tanggal aman.
+- Kriteria 2 butuh **jalur quote FIRM yang dibangun** — bukan
+  sekadar coverage. Adapter saat ini simulasi `eth_call` saja;
+  jalur FIRM adalah item kerja besar di jendela yang sama.
