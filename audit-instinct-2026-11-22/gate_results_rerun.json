@@ -1,0 +1,74 @@
+{
+  "failed": 0,
+  "gate": "base-prototype \u00a77",
+  "methodology_version": "base-proto-method v0.1.0",
+  "passed": 9,
+  "policy_version": "base-proto-policy v0.1.0",
+  "results": [
+    {
+      "actual": "10/10 checks pass; failed: none",
+      "details": "snapshot=snap-a075a81b28e6cc61 decision=WATCH",
+      "expected": "identity correct, values/timestamps/sources saved, decision explainable",
+      "pass": true,
+      "test": "happy_path"
+    },
+    {
+      "actual": "decision=ABSTAIN reasons=['dex_deviation_extreme'] alert_duplicate=False mode=TEST/REPLAY",
+      "details": "input change: pool 0xF668e21993f0ACd7ab00BB1cFbAeD0df28A3C8EC price 131.9900 -> 142.5276 (+8% vs median 131.97); rule_version=base-proto-policy v0.1.0; alert_id=alert-15b21b7dbde465db",
+      "expected": "decision=ABSTAIN reason=dex_deviation_extreme, one TEST/REPLAY alert emitted",
+      "pass": true,
+      "test": "controlled_trigger"
+    },
+    {
+      "actual": "8/8 checks pass; failed: none",
+      "details": "nav_age_seconds=122207 nav_gap_pct=1.6524",
+      "expected": "NAV shown as last published reference + age/off-hours; not a live alarm",
+      "pass": true,
+      "test": "nav_weekend"
+    },
+    {
+      "actual": "4/4 checks pass; failed: none",
+      "details": "nav=129.82480034 multiplier=1.0005379395763694 nav_x_mult=129.89463824 raw_share=129.75499999",
+      "expected": "NAV not multiplied again; raw share conversion uses effective multiplier",
+      "pass": true,
+      "test": "multiplier"
+    },
+    {
+      "actual": "missing_pools: decision=ABSTAIN (expect ABSTAIN) ok=True; stale_nav: decision=WATCH codes=['no_exit_quote_adapter', 'nav_stale_off_hours'] ok=True; gates_separate ok=True",
+      "details": "missing pools median=None (not 0); stale NAV age=604800s flagged",
+      "expected": "missing source -> ABSTAIN (no zero-risk); stale NAV flagged; gates separate",
+      "pass": true,
+      "test": "missing_stale"
+    },
+    {
+      "actual": "cross_check_same_pool ok=True; single_pool decision=ABSTAIN (expect ABSTAIN) median=None ok=True",
+      "details": "live pools=11 venues=7; single-pool fixture median=None",
+      "expected": "two aggregators one pool = one pool; one venue -> no false confidence",
+      "pass": true,
+      "test": "coverage"
+    },
+    {
+      "actual": "decision=WATCH (expect WATCH) ok=True; alert proxy_label ok=True; oi_change_24h=None ok=True",
+      "details": "funding set to 0.05 (5%%/h); decision unchanged by proxy alone",
+      "expected": "extreme funding/OI alone does not trigger token-exit claim; label persists; OI change null",
+      "pass": true,
+      "test": "proxy"
+    },
+    {
+      "actual": "5/5 checks pass; failed: none",
+      "details": "top_pool_liquidity_usd=1294546.67 decision=WATCH",
+      "expected": "large TVL without sell quote stays exit_quality_unverified; no sell claim",
+      "pass": true,
+      "test": "liquidity_vs_exit"
+    },
+    {
+      "actual": "first emit duplicate=False, second emit duplicate=True, same id=True; bad input: assess_snapshot({}) raised KeyError (structured error, not empty success)",
+      "details": "alert_id=alert-c8a0ca656c0cb919",
+      "expected": "same snapshot/rule replay does not duplicate alert; bad input errors",
+      "pass": true,
+      "test": "idempotency"
+    }
+  ],
+  "schema_version": "base-proto-schema v0.1.0",
+  "total": 9
+}

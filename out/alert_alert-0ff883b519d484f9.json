@@ -1,0 +1,26 @@
+{
+  "alert_id": "alert-0ff883b519d484f9",
+  "assessment_status": "degraded",
+  "asset": "AAPLc",
+  "decision": "WATCH",
+  "emitted_at": "2026-11-22T13:45:36Z",
+  "exit_evidence": "indicative_only/exit_quality_unverified",
+  "median_price_usd": 350.0719,
+  "mode": "live",
+  "nav_gap_pct_labeled": {
+    "label": "dex_median_vs_last_published_nav",
+    "nav_age_seconds": 138806,
+    "note": "labeled_description_only_cause_and_exploitability_unproven",
+    "session_status": "off_hours",
+    "value_pct": 1.3826
+  },
+  "note": "Local alert only. Not sent to any production channel.",
+  "proxy_label": "UNDERLYING EQUITY PERP PROXY",
+  "reasons": [
+    "exit_quote_missing",
+    "nav_stale_off_hours",
+    "no_exit_quote_adapter"
+  ],
+  "rule_version": "base-proto-policy v0.2.1",
+  "snapshot_id": "snap-da8e8d16e2b64703"
+}

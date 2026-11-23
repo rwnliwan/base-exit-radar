@@ -1,0 +1,117 @@
+{
+  "alert-0ff883b519d484f9": {
+    "emitted_at": "2026-11-22T13:45:36Z",
+    "mode": "live",
+    "snapshot_id": "snap-da8e8d16e2b64703"
+  },
+  "alert-11e8c80d5a8250f3": {
+    "emitted_at": "2026-11-22T15:04:30Z",
+    "mode": "live",
+    "snapshot_id": "snap-273d383d669082a1"
+  },
+  "alert-1254e876827f10ab": {
+    "emitted_at": "2026-11-22T09:39:37Z",
+    "mode": "live",
+    "snapshot_id": "snap-a075a81b28e6cc61"
+  },
+  "alert-1a42b5e2424c06df": {
+    "emitted_at": "2026-11-22T15:02:10Z",
+    "mode": "live",
+    "snapshot_id": "snap-234341f4a8c915f7"
+  },
+  "alert-21aca0daa4c8e74d": {
+    "emitted_at": "2026-11-22T15:39:09Z",
+    "mode": "live",
+    "snapshot_id": "snap-0b7db9d476756fb3"
+  },
+  "alert-22d4f481d0e206bb": {
+    "emitted_at": "2026-11-22T13:45:28Z",
+    "mode": "live",
+    "snapshot_id": "snap-1d3c5a93307a9972"
+  },
+  "alert-231349aabe2d1c60": {
+    "emitted_at": "2026-11-22T14:35:52Z",
+    "mode": "live",
+    "snapshot_id": "snap-96074cc749c662b8"
+  },
+  "alert-2e634292cfe24105": {
+    "emitted_at": "2026-11-22T13:56:04Z",
+    "mode": "live",
+    "snapshot_id": "snap-a291ebccb08618c9"
+  },
+  "alert-4370047bd8a2ae44": {
+    "emitted_at": "2026-11-22T13:56:12Z",
+    "mode": "live",
+    "snapshot_id": "snap-0adfe27408528d0f"
+  },
+  "alert-463ac6ea2bdd45e1": {
+    "emitted_at": "2026-11-22T15:02:40Z",
+    "mode": "live",
+    "snapshot_id": "snap-43a88a17b5a9d592"
+  },
+  "alert-52cefbafbb9a7cfd": {
+    "emitted_at": "2026-11-22T15:04:03Z",
+    "mode": "live",
+    "snapshot_id": "snap-1c9b3f08d79eff71"
+  },
+  "alert-5d7887e7127876d5": {
+    "emitted_at": "2026-11-22T14:35:35Z",
+    "mode": "live",
+    "snapshot_id": "snap-5cc6486b6c6ee367"
+  },
+  "alert-6ff978bff40f05e1": {
+    "emitted_at": "2026-11-22T16:13:18Z",
+    "mode": "live",
+    "snapshot_id": "snap-5e8602d1366e5cc0"
+  },
+  "alert-7290331f4253a6d2": {
+    "emitted_at": "2026-11-22T14:37:46Z",
+    "mode": "live",
+    "snapshot_id": "snap-34b13a613a803f46"
+  },
+  "alert-73e3569b4c3eaa9f": {
+    "emitted_at": "2026-11-22T15:08:13Z",
+    "mode": "live",
+    "snapshot_id": "snap-6e1dac4934d7561f"
+  },
+  "alert-9556f384ad166bc3": {
+    "emitted_at": "2026-11-22T13:29:21Z",
+    "mode": "live",
+    "snapshot_id": "snap-a7da34c2855e4e92"
+  },
+  "alert-ad4466abc1671a1a": {
+    "emitted_at": "2026-11-22T16:12:51Z",
+    "mode": "live",
+    "snapshot_id": "snap-fd9590f579ca41b4"
+  },
+  "alert-b80bdbb8dd269f80": {
+    "emitted_at": "2026-11-22T15:08:32Z",
+    "mode": "live",
+    "snapshot_id": "snap-4ca6ca74b109028b"
+  },
+  "alert-c6ba8db96de16d0d": {
+    "emitted_at": "2026-11-22T14:37:20Z",
+    "mode": "live",
+    "snapshot_id": "snap-2fed783e9f2dbf82"
+  },
+  "alert-e6234f73e4cee831": {
+    "emitted_at": "2026-11-22T14:59:22Z",
+    "mode": "live",
+    "snapshot_id": "snap-696562e2b18f11b2"
+  },
+  "alert-e9dea4dfa3d6bb2f": {
+    "emitted_at": "2026-11-22T15:38:41Z",
+    "mode": "live",
+    "snapshot_id": "snap-dcc13d57a793099a"
+  },
+  "alert-f4e6114bbb1ae571": {
+    "emitted_at": "2026-11-22T14:59:49Z",
+    "mode": "live",
+    "snapshot_id": "snap-38db9bd2fd2249ee"
+  },
+  "alert-f5359e2c515cedfa": {
+    "emitted_at": "2026-11-22T09:39:46Z",
+    "mode": "live",
+    "snapshot_id": "snap-2318530b8418808f"
+  }
+}

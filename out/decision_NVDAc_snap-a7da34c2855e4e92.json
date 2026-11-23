@@ -1,0 +1,126 @@
+{
+  "assessment": {
+    "confidence_basis": "pools=12 venues=6 fresh_pools=12 nav_age=37.8h session=off_hours exit_quote=missing proxy=present",
+    "coverage_recomputed": {
+      "canonical_venues": [
+        "aerodrome",
+        "equalizer",
+        "hydrex",
+        "nami",
+        "topaz",
+        "uniswap"
+      ],
+      "recomputed_pool_count": 12,
+      "recomputed_venue_count": 6,
+      "stored_pool_count": 12,
+      "stored_venue_count": 7
+    },
+    "freshness": {
+      "eval_at": "2026-11-22T13:29:12Z",
+      "eval_context": "live",
+      "nav": {
+        "age_seconds": 135992,
+        "market_session": "closed",
+        "status": "stale"
+      },
+      "pool": {
+        "fresh_count": 12,
+        "max_age_min": 60,
+        "price_timestamp_unknown": true,
+        "stale_count": 0,
+        "unknown_timestamp_count": 0
+      },
+      "quote": {
+        "reason_codes": [
+          "exit_quote_missing"
+        ],
+        "status": "missing"
+      }
+    },
+    "layer_a": {
+      "median_price_usd": 132.84,
+      "nav_gap_pct_labeled": {
+        "label": "dex_median_vs_last_published_nav",
+        "nav_age_seconds": 135992,
+        "note": "labeled_description_only_cause_and_exploitability_unproven",
+        "session_status": "off_hours",
+        "value_pct": 2.3225
+      },
+      "note": "",
+      "per_venue_deviation_pct": {
+        "0x19cCE0486BB8b36C525E74445A28A2449EE4b2BD": -2.424,
+        "0x20E5fAd2661Ee9Eb0c04824524030AF31943B62D": 0.0226,
+        "0x337beA70489CD71a8C3951C1Aa49C637b4b9B122": 0.1378,
+        "0x345D4337134A718B0F62C56ed5b82aF033e4237D": -1.6034,
+        "0x3e8126A4a5DF68DD9cCA675E8dc925B5FED70CA9": 0.0828,
+        "0x60661b315553EB81872deEA9a66d567Cf0CCd33B": -0.0828,
+        "0x853F5f1B92b16714Fe6CDA67CAad0856B83C7ab9": 0.195,
+        "0x8e740D5Fa742B763cD82159894b9919eD57E4f70": -0.0226,
+        "0xCe56168C09f4B7FCa30523822C48008705C01156": 0.2108,
+        "0xF668e21993f0ACd7ab00BB1cFbAeD0df28A3C8EC": 0.1129,
+        "0xFe27C510b1fC9B926c0a144597a62813564a189B": -0.3689,
+        "0xaf37c58BAaD0dF59bBAe19B7Ee17afC93Db8bDF5": -1.4529
+      }
+    },
+    "layer_b": {
+      "exit_quote": null,
+      "note": "no_sell_quote_adapter_in_prototype",
+      "quote_validation": {
+        "details": {
+          "note": "no_exit_quote_present"
+        },
+        "reason_codes": [
+          "exit_quote_missing"
+        ],
+        "status": "missing"
+      },
+      "status": "indicative_only/exit_quality_unverified"
+    },
+    "layer_c": {
+      "note": "proxy_displayed_separately_does_not_trigger_token_exit_alert",
+      "proxy": {
+        "dex": "xyz",
+        "funding_raw": 3.94207e-05,
+        "funding_unit": "fraction/1h",
+        "instrument": "xyz:NVDA",
+        "label": "UNDERLYING EQUITY PERP PROXY",
+        "oi_change_24h": null,
+        "oi_unit": "base_asset_units",
+        "open_interest_raw": 3840254.9319999986
+      }
+    },
+    "reason_codes": [
+      "dex_price_timestamp_unknown",
+      "dex_deviation_watch",
+      "exit_quote_missing",
+      "no_exit_quote_adapter",
+      "nav_stale_off_hours"
+    ],
+    "snapshot_identity": {
+      "matches": true,
+      "recomputed_id": "snap-a7da34c2855e4e92",
+      "stored_id": "snap-a7da34c2855e4e92"
+    },
+    "status": "degraded"
+  },
+  "asset": "NVDAc",
+  "decision": "WATCH",
+  "decision_reasons": [
+    "dex_deviation_watch",
+    "exit_quote_missing",
+    "nav_stale_off_hours",
+    "no_exit_quote_adapter"
+  ],
+  "explanation": "Decision WATCH under base-proto-policy v0.2.0 for NVDAc (chain base, contract 0xb20000000000000000000078ee7ce2fE4908108C). Reason codes: dex_deviation_watch, exit_quote_missing, nav_stale_off_hours, no_exit_quote_adapter. Reference NAV (already multiplier-adjusted, NOT multiplied again): 129.82480034, updated 2026-11-20T23:42:40Z, age 135992 seconds, session off_hours. DEX median (independent pools=12, venues=6): 132.84 USD. Labeled description: DEX median is 2.3225% vs last published NAV (age 135992 seconds, session off_hours). Cause and exploitability unproven; not labeled a discount, mispricing, or arbitrage. Exit evidence: indicative_only/exit_quality_unverified (no sell quote adapter in this prototype; liquidity/TVL is not used as exit evidence). Underlying context (UNDERLYING EQUITY PERP PROXY, separate): xyz:NVDA funding 3.94207e-05 fraction/1h, OI raw 3840254.9319999986 base_asset_units. Proxy does not trigger a token-exit alert. Paper record: all simulated cash (cash_weight 1.0), no buy proposed. Holding cash is a valid outcome.",
+  "fetched_at": "2026-11-22T13:29:12Z",
+  "policy_version": "base-proto-policy v0.2.0",
+  "proposal": {
+    "cash_weight": 1.0,
+    "expiry_days": 7,
+    "horizon_days": 7,
+    "reason": "holding_all_simulated_cash_watch",
+    "simulation_notional": 10000.0,
+    "weights": {}
+  },
+  "snapshot_id": "snap-a7da34c2855e4e92"
+}

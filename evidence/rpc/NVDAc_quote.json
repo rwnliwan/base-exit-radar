@@ -1,0 +1,24 @@
+{
+  "block_number": 60867888,
+  "fetched_at": "2026-11-22T16:14:08Z",
+  "note": "quoteExactInputSingleV3(pool, tokenIn, amountIn, 0) pada block snapshot; amountOut harus cocok dengan snapshot amount_out_estimate (USDC 6 desimal).",
+  "request": {
+    "id": 1,
+    "jsonrpc": "2.0",
+    "method": "eth_call",
+    "params": [
+      {
+        "data": "0x0a674142000000000000000000000000f668e21993f0acd7ab00bb1cfbaed0df28a3c8ec000000000000000000000000b20000000000000000000078ee7ce2fe4908108c00000000000000000000000000000000000000000000000000000001d6d8a09e0000000000000000000000000000000000000000000000000000000000000000",
+        "to": "0x1dDfeC5058180C207F55BB77D95AcDd0d8227868"
+      },
+      "0x3a0c530"
+    ]
+  },
+  "response": {
+    "id": 1,
+    "jsonrpc": "2.0",
+    "result": "0x0000000000000000000000000000000000000000000000000000000271bfe9ab0000000000000000000000000000000000000000de0d2e63dac6b7728e2801020000000000000000000000000000000000000000000000000000000000000001"
+  },
+  "rpc_url": "https://mainnet.base.org",
+  "token": "NVDAc"
+}

@@ -1,0 +1,141 @@
+{
+  "assessment": {
+    "confidence_basis": "pools=11 venues=7 fresh_pools=11 nav_age=38.9h session=off_hours exit_quote=verified proxy=present",
+    "coverage_recomputed": {
+      "canonical_venues": [
+        "aerodrome",
+        "dromos",
+        "equalizer",
+        "hydrex",
+        "nami",
+        "topaz",
+        "uniswap"
+      ],
+      "recomputed_pool_count": 11,
+      "recomputed_venue_count": 7,
+      "stored_pool_count": 11,
+      "stored_venue_count": 7
+    },
+    "freshness": {
+      "eval_at": "2026-11-22T14:36:41Z",
+      "eval_context": "live",
+      "nav": {
+        "age_seconds": 140041,
+        "market_session": "closed",
+        "status": "stale"
+      },
+      "pool": {
+        "fresh_count": 11,
+        "max_age_min": 60,
+        "price_timestamp_unknown": true,
+        "stale_count": 0,
+        "unknown_timestamp_count": 0
+      },
+      "quote": {
+        "reason_codes": [],
+        "status": "verified"
+      }
+    },
+    "layer_a": {
+      "median_price_usd": 132.89,
+      "nav_gap_pct_labeled": {
+        "label": "dex_median_vs_last_published_nav",
+        "nav_age_seconds": 140041,
+        "note": "labeled_description_only_cause_and_exploitability_unproven",
+        "session_status": "off_hours",
+        "value_pct": 2.361
+      },
+      "note": "",
+      "per_venue_deviation_pct": {
+        "0x19cCE0486BB8b36C525E74445A28A2449EE4b2BD": -2.4607,
+        "0x20E5fAd2661Ee9Eb0c04824524030AF31943B62D": -0.0828,
+        "0x337beA70489CD71a8C3951C1Aa49C637b4b9B122": -0.0226,
+        "0x345D4337134A718B0F62C56ed5b82aF033e4237D": -1.6405,
+        "0x3e8126A4a5DF68DD9cCA675E8dc925B5FED70CA9": 0.1407,
+        "0x60661b315553EB81872deEA9a66d567Cf0CCd33B": 0.0,
+        "0x853F5f1B92b16714Fe6CDA67CAad0856B83C7ab9": 0.0452,
+        "0x8e740D5Fa742B763cD82159894b9919eD57E4f70": 0.1046,
+        "0xCe56168C09f4B7FCa30523822C48008705C01156": 0.0,
+        "0xF668e21993f0ACd7ab00BB1cFbAeD0df28A3C8EC": 0.0075,
+        "0xaf37c58BAaD0dF59bBAe19B7Ee17afC93Db8bDF5": -1.49
+      }
+    },
+    "layer_b": {
+      "exit_quote": {
+        "amount_in": 79.00677200902935,
+        "amount_out_min": 10500.539821,
+        "chain": "base",
+        "expires_at": "2026-11-22T14:42:19Z",
+        "kind": "firm",
+        "notional_usd": 10500.0,
+        "pool": "0xF668e21993f0ACd7ab00BB1cFbAeD0df28A3C8EC",
+        "quoted_at": "2026-11-22T14:37:19Z",
+        "side": "SELL",
+        "source": "dromos-metaquoter-v3",
+        "sqrt_price_x96_after": 68719706153602313323387473807,
+        "ticks_crossed": 1,
+        "token_in": "0xb20000000000000000000078ee7ce2fE4908108C",
+        "token_out": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+        "venue": "dromos"
+      },
+      "note": "sell_quote_validated",
+      "quote_validation": {
+        "details": {
+          "computed_notional_usd": 10499.20993227991,
+          "expires_at": "2026-11-22T14:42:19Z",
+          "implied_price_usd": 132.90683259151427,
+          "kind": "firm",
+          "median_price_usd": 132.89,
+          "notional_usd": 10500.0,
+          "quoted_at": "2026-11-22T14:37:19Z",
+          "venue": "dromos"
+        },
+        "reason_codes": [],
+        "status": "verified"
+      },
+      "status": "verified"
+    },
+    "layer_c": {
+      "note": "proxy_displayed_separately_does_not_trigger_token_exit_alert",
+      "proxy": {
+        "dex": "xyz",
+        "funding_raw": 2.55627e-05,
+        "funding_unit": "fraction/1h",
+        "instrument": "xyz:NVDA",
+        "label": "UNDERLYING EQUITY PERP PROXY",
+        "oi_change_24h": null,
+        "oi_unit": "base_asset_units",
+        "open_interest_raw": 3846840.0439999993
+      }
+    },
+    "reason_codes": [
+      "dex_price_timestamp_unknown",
+      "dex_deviation_watch",
+      "nav_stale_off_hours"
+    ],
+    "snapshot_identity": {
+      "matches": true,
+      "recomputed_id": "snap-2fed783e9f2dbf82",
+      "stored_id": "snap-2fed783e9f2dbf82"
+    },
+    "status": "degraded"
+  },
+  "asset": "NVDAc",
+  "decision": "WATCH",
+  "decision_reasons": [
+    "dex_deviation_watch",
+    "nav_stale_off_hours"
+  ],
+  "explanation": "Decision WATCH under base-proto-policy v0.3.0 for NVDAc (chain base, contract 0xb20000000000000000000078ee7ce2fE4908108C). Reason codes: dex_deviation_watch, nav_stale_off_hours. Reference NAV (already multiplier-adjusted, NOT multiplied again): 129.82480034, updated 2026-11-20T23:42:40Z, age 140041 seconds, session off_hours. DEX median (independent pools=11, venues=7): 132.89 USD. Labeled description: DEX median is 2.361% vs last published NAV (age 140041 seconds, session off_hours). Cause and exploitability unproven; not labeled a discount, mispricing, or arbitrage. Exit evidence: verified (sell quote from Dromos Metaquoter V3, read-only eth_call; liquidity/TVL is not used as exit evidence). Oracle registry: multiplier 1.0005379395763696, paused False (read-only getOracleParams; paused = oracle feed frozen, not a transfer pause). Underlying context (UNDERLYING EQUITY PERP PROXY, separate): xyz:NVDA funding 2.55627e-05 fraction/1h, OI raw 3846840.0439999993 base_asset_units. Proxy does not trigger a token-exit alert. Paper record: all simulated cash (cash_weight 1.0), no buy proposed. Holding cash is a valid outcome.",
+  "fetched_at": "2026-11-22T14:36:41Z",
+  "policy_version": "base-proto-policy v0.3.0",
+  "proposal": {
+    "cash_weight": 1.0,
+    "expiry_days": 7,
+    "horizon_days": 7,
+    "reason": "holding_all_simulated_cash_watch",
+    "simulation_notional": 10000.0,
+    "weights": {}
+  },
+  "snapshot_id": "snap-2fed783e9f2dbf82"
+}

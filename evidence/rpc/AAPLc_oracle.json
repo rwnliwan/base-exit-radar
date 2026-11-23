@@ -1,0 +1,24 @@
+{
+  "block_number": 60868044,
+  "fetched_at": "2026-11-22T16:14:19Z",
+  "note": "getOracleParams(token) pada block snapshot; multiplier/paused harus cocok dengan snapshot oracle.",
+  "request": {
+    "id": 1,
+    "jsonrpc": "2.0",
+    "method": "eth_call",
+    "params": [
+      {
+        "data": "0xd4197e82000000000000000000000000b200000000000000000000c2e324d24d7eecd1fb",
+        "to": "0x3f3E8cf41cdd3b1D118c16471aB0113DfDDd5CaD"
+      },
+      "0x3a0c5cc"
+    ]
+  },
+  "response": {
+    "id": 1,
+    "jsonrpc": "2.0",
+    "result": "0x0000000000000000000000000000000000000000000000000de27dcd9dfc0c3b0000000000000000000000000000000000000000000000000000000000000000"
+  },
+  "rpc_url": "https://mainnet.base.org",
+  "token": "AAPLc"
+}

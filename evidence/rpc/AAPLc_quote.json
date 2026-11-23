@@ -1,0 +1,24 @@
+{
+  "block_number": 60868044,
+  "fetched_at": "2026-11-22T16:14:15Z",
+  "note": "quoteExactInputSingleV3(pool, tokenIn, amountIn, 0) pada block snapshot; amountOut harus cocok dengan snapshot amount_out_estimate (USDC 6 desimal).",
+  "request": {
+    "id": 1,
+    "jsonrpc": "2.0",
+    "method": "eth_call",
+    "params": [
+      {
+        "data": "0x0a674142000000000000000000000000f5fcb9cdafce67d50afef298f88e709d2b946ba6000000000000000000000000b200000000000000000000c2e324d24d7eecd1fb00000000000000000000000000000000000000000000000000000000b3036e9a0000000000000000000000000000000000000000000000000000000000000000",
+        "to": "0x1dDfeC5058180C207F55BB77D95AcDd0d8227868"
+      },
+      "0x3a0c5cc"
+    ]
+  },
+  "response": {
+    "id": 1,
+    "jsonrpc": "2.0",
+    "result": "0x0000000000000000000000000000000000000000000000000000000271b99128000000000000000000000000000000000000000088ec2a15c2d96ed8caa858430000000000000000000000000000000000000000000000000000000000000001"
+  },
+  "rpc_url": "https://mainnet.base.org",
+  "token": "AAPLc"
+}

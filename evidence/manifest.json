@@ -1,0 +1,71 @@
+{
+  "captured_at": "2026-11-22T16:13:41Z",
+  "entries": [
+    {
+      "bytes": 243605,
+      "error": null,
+      "fetched_at": "2026-11-22T16:13:42Z",
+      "file": "coinbase_tokenized_stocks_page1.json",
+      "http_status": 200,
+      "sha256": "29af80d1d42064ac01465063207d97a2ee06143cf491056f8259016909daad5a",
+      "source": "https://api.coinbase.com/v1/tokenized-stocks"
+    },
+    {
+      "bytes": 35469,
+      "error": null,
+      "fetched_at": "2026-11-22T16:13:43Z",
+      "file": "dexscreener_nvdac.json",
+      "http_status": 200,
+      "sha256": "47d52676129e3b6fd4bfddbedaf2be46dce24c736f3e1c7ff9821b217c640d7d",
+      "source": "https://api.dexscreener.com/latest/dex/tokens/0xb20000000000000000000078ee7ce2fE4908108C"
+    },
+    {
+      "bytes": 1716,
+      "error": null,
+      "fetched_at": "2026-11-22T16:13:44Z",
+      "file": "geckoterminal_nvdac_pool.json",
+      "http_status": 200,
+      "sha256": "ef23b095bc632892aa15f99c5e31970a079e496b05e4d522146c13e2a691e40c",
+      "source": "https://api.geckoterminal.com/api/v2/networks/base/pools/0xF668e21993f0ACd7ab00BB1cFbAeD0df28A3C8EC"
+    },
+    {
+      "bytes": 27645,
+      "error": null,
+      "fetched_at": "2026-11-22T16:13:45Z",
+      "file": "dexscreener_aaplc.json",
+      "http_status": 200,
+      "sha256": "19311b77769fddac1dcca91b19c424781284576b0d2800c2a4a5553ad376a514",
+      "source": "https://api.dexscreener.com/latest/dex/tokens/0xb200000000000000000000C2e324d24d7eEcd1fb"
+    },
+    {
+      "bytes": 1696,
+      "error": null,
+      "fetched_at": "2026-11-22T16:13:46Z",
+      "file": "geckoterminal_aaplc_pool.json",
+      "http_status": 200,
+      "sha256": "caca62b91981c1c11c668bf0514c3599c0a58b7ad7378215cbbff4ddc10287ca",
+      "source": "https://api.geckoterminal.com/api/v2/networks/base/pools/0xF5FCB9CDAFcE67d50AfEf298F88E709d2B946BA6"
+    },
+    {
+      "bytes": 65095,
+      "error": null,
+      "fetched_at": "2026-11-22T16:13:47Z",
+      "file": "hyperliquid_metaAndAssetCtxs_xyz.json",
+      "http_status": 200,
+      "sha256": "54ff52adf736c73d4e63686ed56db663076b4eaa779ca83e69bc7a7f21b5ac50",
+      "source": "https://api.hyperliquid.xyz/info dex=xyz"
+    },
+    {
+      "bytes": 10804,
+      "error": null,
+      "fetched_at": "2026-11-22T16:13:48Z",
+      "file": "hyperliquid_metaAndAssetCtxs_io.json",
+      "http_status": 200,
+      "sha256": "74e57dd52a097064c28cda28b44138ba27141e209c2f1654d6475a74ca802614",
+      "source": "https://api.hyperliquid.xyz/info dex=io"
+    }
+  ],
+  "methodology_version": "base-proto-method v0.3.3",
+  "policy_version": "base-proto-policy v0.3.3",
+  "schema_version": "base-proto-schema v0.3.3"
+}

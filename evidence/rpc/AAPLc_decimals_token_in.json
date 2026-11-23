@@ -1,0 +1,24 @@
+{
+  "block_number": 60868044,
+  "fetched_at": "2026-11-22T16:14:26Z",
+  "note": "decimals() decimals_token_in pada block snapshot (G2 guard).",
+  "request": {
+    "id": 1,
+    "jsonrpc": "2.0",
+    "method": "eth_call",
+    "params": [
+      {
+        "data": "0x313ce567",
+        "to": "0xb200000000000000000000C2e324d24d7eEcd1fb"
+      },
+      "0x3a0c5cc"
+    ]
+  },
+  "response": {
+    "id": 1,
+    "jsonrpc": "2.0",
+    "result": "0x0000000000000000000000000000000000000000000000000000000000000008"
+  },
+  "rpc_url": "https://mainnet.base.org",
+  "token": "AAPLc"
+}

@@ -1,0 +1,453 @@
+{
+  "alert": null,
+  "assessment": {
+    "confidence_basis": "pools=11 venues=6 fresh_pools=11 nav_age=39.3h session=off_hours exit_quote=missing proxy=present",
+    "coverage_recomputed": {
+      "canonical_venues": [
+        "aerodrome",
+        "equalizer",
+        "hydrex",
+        "nami",
+        "topaz",
+        "uniswap"
+      ],
+      "fallback_pool_count": 1,
+      "has_factory_data": true,
+      "recomputed_pool_count": 11,
+      "recomputed_venue_count": 6,
+      "stored_pool_count": 11,
+      "stored_venue_count": 6,
+      "verified_venue_count": 6,
+      "verified_venues": [
+        "aerodrome",
+        "equalizer",
+        "hydrex",
+        "nami",
+        "topaz",
+        "uniswap"
+      ]
+    },
+    "freshness": {
+      "eval_at": "2026-11-22T15:02:10Z",
+      "eval_context": "live",
+      "nav": {
+        "age_seconds": 141570,
+        "market_session": "closed",
+        "status": "stale"
+      },
+      "pool": {
+        "fresh_count": 11,
+        "max_age_min": 60,
+        "price_timestamp_unknown": true,
+        "stale_count": 0,
+        "unknown_timestamp_count": 0
+      },
+      "quote": {
+        "reason_codes": [
+          "exit_quote_missing"
+        ],
+        "status": "missing"
+      }
+    },
+    "layer_a": {
+      "median_price_usd": 133.077,
+      "nav_gap_pct_labeled": {
+        "label": "dex_median_vs_last_published_nav",
+        "nav_age_seconds": 141570,
+        "note": "labeled_description_only_cause_and_exploitability_unproven",
+        "session_status": "off_hours",
+        "value_pct": 2.5051
+      },
+      "note": "",
+      "per_venue_deviation_pct": {
+        "0x19cCE0486BB8b36C525E74445A28A2449EE4b2BD": -2.5977,
+        "0x20E5fAd2661Ee9Eb0c04824524030AF31943B62D": 0.0173,
+        "0x337beA70489CD71a8C3951C1Aa49C637b4b9B122": -0.0286,
+        "0x345D4337134A718B0F62C56ed5b82aF033e4237D": -1.7787,
+        "0x3e8126A4a5DF68DD9cCA675E8dc925B5FED70CA9": 0.0,
+        "0x60661b315553EB81872deEA9a66d567Cf0CCd33B": -0.1405,
+        "0x853F5f1B92b16714Fe6CDA67CAad0856B83C7ab9": 0.0248,
+        "0x8e740D5Fa742B763cD82159894b9919eD57E4f70": 0.0774,
+        "0xCe56168C09f4B7FCa30523822C48008705C01156": 0.0323,
+        "0xF668e21993f0ACd7ab00BB1cFbAeD0df28A3C8EC": 0.0398,
+        "0xaf37c58BAaD0dF59bBAe19B7Ee17afC93Db8bDF5": -1.6284
+      }
+    },
+    "layer_b": {
+      "exit_quote": null,
+      "note": "no_sell_quote_available",
+      "quote_validation": {
+        "details": {
+          "note": "no_exit_quote_present"
+        },
+        "reason_codes": [
+          "exit_quote_missing"
+        ],
+        "status": "missing"
+      },
+      "status": "indicative_only/exit_quality_unverified"
+    },
+    "layer_c": {
+      "note": "proxy_displayed_separately_does_not_trigger_token_exit_alert",
+      "proxy": {
+        "dex": "xyz",
+        "funding_raw": 9.28823e-05,
+        "funding_unit": "fraction/1h",
+        "instrument": "xyz:NVDA",
+        "label": "UNDERLYING EQUITY PERP PROXY",
+        "oi_change_24h": null,
+        "oi_unit": "base_asset_units",
+        "open_interest_raw": 3847728.352
+      }
+    },
+    "reason_codes": [
+      "dex_price_timestamp_unknown",
+      "dex_deviation_watch",
+      "exit_quote_missing",
+      "no_exit_quote_adapter",
+      "nav_stale_off_hours"
+    ],
+    "snapshot_identity": {
+      "matches": true,
+      "recomputed_id": "snap-234341f4a8c915f7",
+      "stored_id": "snap-234341f4a8c915f7"
+    },
+    "status": "degraded"
+  },
+  "asset": {
+    "chain": "base",
+    "decimals": 8,
+    "symbol": "NVDAc",
+    "token_address": "0xb20000000000000000000078ee7ce2fE4908108C"
+  },
+  "coverage": {
+    "fallback_pool_count": 1,
+    "independent_pool_count": 11,
+    "independent_venue_count": 6,
+    "missing_fields": [],
+    "rejected_observations": [
+      {
+        "field": "pairAddress",
+        "reason": "invalid_address"
+      },
+      {
+        "field": "pairAddress",
+        "reason": "invalid_address"
+      },
+      {
+        "field": "pairAddress",
+        "reason": "invalid_address"
+      },
+      {
+        "field": "pairAddress",
+        "reason": "invalid_address"
+      },
+      {
+        "field": "pairAddress",
+        "reason": "invalid_address"
+      },
+      {
+        "field": "pairAddress",
+        "reason": "invalid_address"
+      },
+      {
+        "field": "pairAddress",
+        "reason": "invalid_address"
+      },
+      {
+        "field": "pairAddress",
+        "reason": "invalid_address"
+      },
+      {
+        "field": "pairAddress",
+        "reason": "invalid_address"
+      },
+      {
+        "field": "pairAddress",
+        "reason": "invalid_address"
+      },
+      {
+        "field": "pairAddress",
+        "reason": "invalid_address"
+      },
+      {
+        "pool": "0x7806872f3c157c547f7304d2227d62baadeeaf87",
+        "reason": "liquidity_nonpositive_or_missing"
+      },
+      {
+        "pool": "0xea32f5813cdd23598b6b8b37ac873596dd4936ea",
+        "reason": "liquidity_nonpositive_or_missing"
+      },
+      {
+        "pool": "0xccb9d8152fe783fada0f86e87551a1423ea69577",
+        "reason": "price_nonpositive_or_missing"
+      },
+      {
+        "field": "pairAddress",
+        "reason": "invalid_address"
+      },
+      {
+        "field": "pairAddress",
+        "reason": "invalid_address"
+      },
+      {
+        "pool": "0x4278f56e09986147d168bbc3460f7ba4c9208d55",
+        "reason": "base_token_mismatch"
+      },
+      {
+        "pool": "0xc108eed68a790377ba69f0292ee4e3626fa4c483",
+        "reason": "base_token_mismatch"
+      },
+      {
+        "field": "pairAddress",
+        "reason": "invalid_address"
+      }
+    ],
+    "verified_pool_count": 10,
+    "verified_venue_count": 6
+  },
+  "decision": "WATCH",
+  "decision_reasons": [
+    "dex_deviation_watch",
+    "exit_quote_missing",
+    "nav_stale_off_hours",
+    "no_exit_quote_adapter"
+  ],
+  "exit_quote": null,
+  "explanation": "Decision WATCH under base-proto-policy v0.3.1 for NVDAc (chain base, contract 0xb20000000000000000000078ee7ce2fE4908108C). Reason codes: dex_deviation_watch, exit_quote_missing, nav_stale_off_hours, no_exit_quote_adapter. Reference NAV (already multiplier-adjusted, NOT multiplied again): 129.82480034, updated 2026-11-20T23:42:40Z, age 141570 seconds, session off_hours. DEX median (independent pools=11, venues=6): 133.077 USD. Labeled description: DEX median is 2.5051% vs last published NAV (age 141570 seconds, session off_hours). Cause and exploitability unproven; not labeled a discount, mispricing, or arbitrage. Exit evidence: indicative_only/exit_quality_unverified (sell quote from Aero Metaquoter V3, read-only eth_call; liquidity/TVL is not used as exit evidence). Oracle registry: multiplier 1.0005379395763696, paused False (read-only getOracleParams; paused = oracle feed frozen, not a transfer pause). Underlying context (UNDERLYING EQUITY PERP PROXY, separate): xyz:NVDA funding 9.28823e-05 fraction/1h, OI raw 3847728.352 base_asset_units. Proxy does not trigger a token-exit alert. Paper record: all simulated cash (cash_weight 1.0), no buy proposed. Holding cash is a valid outcome.",
+  "fetched_at": "2026-11-22T15:02:10Z",
+  "methodology_version": "base-proto-method v0.3.1",
+  "multiplier": {
+    "observed_at": "2026-11-20T23:42:40Z",
+    "source": "https://api.coinbase.com/v1/tokenized-stocks",
+    "value": 1.0005379395763694
+  },
+  "oracle": {
+    "fetched_at": "2026-11-22T15:00:29Z",
+    "multiplier": 1.0005379395763696,
+    "paused": false,
+    "source": "0x3f3E8cf41cdd3b1D118c16471aB0113DfDDd5CaD"
+  },
+  "policy_version": "base-proto-policy v0.3.1",
+  "pools": [
+    {
+      "cross_check": {
+        "fetched_at": "2026-11-22T15:02:10Z",
+        "note": "same_pool_not_independent_venue",
+        "price_usd": 132.845040398337,
+        "reserve_usd": 1643996.614,
+        "source": "https://api.geckoterminal.com/api/v2/networks/base/pools/0xF668e21993f0ACd7ab00BB1cFbAeD0df28A3C8EC"
+      },
+      "dex": "aero",
+      "factory": null,
+      "factory_verified": false,
+      "fetched_at": "2026-11-22T15:02:10Z",
+      "indicative_price_usd": 133.13,
+      "liquidity_usd": 1626810.28,
+      "pool_address": "0xF668e21993f0ACd7ab00BB1cFbAeD0df28A3C8EC",
+      "protocol_family": "aerodrome",
+      "quote_asset": "USDC",
+      "source": "https://api.dexscreener.com/latest/dex/tokens/0xb20000000000000000000078ee7ce2fE4908108C",
+      "source_updated_at": "unknown",
+      "venue": "aerodrome",
+      "venue_label_source": "dexscreener_fallback",
+      "venue_verified": false
+    },
+    {
+      "dex": "aerodrome",
+      "factory": "0xf8f2eb4940cfe7d13603dddd87f123820fc061ef",
+      "factory_verified": true,
+      "fetched_at": "2026-11-22T15:02:10Z",
+      "indicative_price_usd": 133.11,
+      "liquidity_usd": 255712.99,
+      "pool_address": "0x853F5f1B92b16714Fe6CDA67CAad0856B83C7ab9",
+      "protocol_family": "aerodrome",
+      "quote_asset": "USDC",
+      "source": "https://api.dexscreener.com/latest/dex/tokens/0xb20000000000000000000078ee7ce2fE4908108C",
+      "source_updated_at": "unknown",
+      "venue": "aerodrome",
+      "venue_label_source": "factory",
+      "venue_verified": true
+    },
+    {
+      "dex": "aero",
+      "factory": "0x9cb220581b91b0c83223012fe69688b92ad07a76",
+      "factory_verified": true,
+      "fetched_at": "2026-11-22T15:02:10Z",
+      "indicative_price_usd": 133.12,
+      "liquidity_usd": 126311.43,
+      "pool_address": "0xCe56168C09f4B7FCa30523822C48008705C01156",
+      "protocol_family": "aerodrome",
+      "quote_asset": "WETH",
+      "source": "https://api.dexscreener.com/latest/dex/tokens/0xb20000000000000000000078ee7ce2fE4908108C",
+      "source_updated_at": "unknown",
+      "venue": "aerodrome",
+      "venue_label_source": "factory",
+      "venue_verified": true
+    },
+    {
+      "dex": "uniswap",
+      "factory": "0x33128a8fc17869897dce68ed026d694621f6fdfd",
+      "factory_verified": true,
+      "fetched_at": "2026-11-22T15:02:10Z",
+      "indicative_price_usd": 133.18,
+      "liquidity_usd": 46175.18,
+      "pool_address": "0x8e740D5Fa742B763cD82159894b9919eD57E4f70",
+      "protocol_family": "uniswap",
+      "quote_asset": "WETH",
+      "source": "https://api.dexscreener.com/latest/dex/tokens/0xb20000000000000000000078ee7ce2fE4908108C",
+      "source_updated_at": "unknown",
+      "venue": "uniswap",
+      "venue_label_source": "factory",
+      "venue_verified": true
+    },
+    {
+      "dex": "uniswap",
+      "factory": "0x33128a8fc17869897dce68ed026d694621f6fdfd",
+      "factory_verified": true,
+      "fetched_at": "2026-11-22T15:02:10Z",
+      "indicative_price_usd": 132.89,
+      "liquidity_usd": 41001.96,
+      "pool_address": "0x60661b315553EB81872deEA9a66d567Cf0CCd33B",
+      "protocol_family": "uniswap",
+      "quote_asset": "USDC",
+      "source": "https://api.dexscreener.com/latest/dex/tokens/0xb20000000000000000000078ee7ce2fE4908108C",
+      "source_updated_at": "unknown",
+      "venue": "uniswap",
+      "venue_label_source": "factory",
+      "venue_verified": true
+    },
+    {
+      "dex": "nami",
+      "factory": "0xf4502a98a15e82d66d28d2381e2f3a407ea45b83",
+      "factory_verified": true,
+      "fetched_at": "2026-11-22T15:02:10Z",
+      "indicative_price_usd": 133.039,
+      "liquidity_usd": 10908.65,
+      "pool_address": "0x337beA70489CD71a8C3951C1Aa49C637b4b9B122",
+      "protocol_family": "nami",
+      "quote_asset": "USDC",
+      "source": "https://api.dexscreener.com/latest/dex/tokens/0xb20000000000000000000078ee7ce2fE4908108C",
+      "source_updated_at": "unknown",
+      "venue": "nami",
+      "venue_label_source": "factory",
+      "venue_verified": true
+    },
+    {
+      "dex": "aerodrome",
+      "factory": "0xf8f2eb4940cfe7d13603dddd87f123820fc061ef",
+      "factory_verified": true,
+      "fetched_at": "2026-11-22T15:02:10Z",
+      "indicative_price_usd": 133.1,
+      "liquidity_usd": 7065.78,
+      "pool_address": "0x20E5fAd2661Ee9Eb0c04824524030AF31943B62D",
+      "protocol_family": "aerodrome",
+      "quote_asset": "WETH",
+      "source": "https://api.dexscreener.com/latest/dex/tokens/0xb20000000000000000000078ee7ce2fE4908108C",
+      "source_updated_at": "unknown",
+      "venue": "aerodrome",
+      "venue_label_source": "factory",
+      "venue_verified": true
+    },
+    {
+      "dex": "hydrex",
+      "factory": "0x36077d39cdc65e1e3fb65810430e5b2c4d5fa29e",
+      "factory_verified": true,
+      "fetched_at": "2026-11-22T15:02:10Z",
+      "indicative_price_usd": 133.077,
+      "liquidity_usd": 887.25,
+      "pool_address": "0x3e8126A4a5DF68DD9cCA675E8dc925B5FED70CA9",
+      "protocol_family": "hydrex",
+      "quote_asset": "wtNVDA",
+      "source": "https://api.dexscreener.com/latest/dex/tokens/0xb20000000000000000000078ee7ce2fE4908108C",
+      "source_updated_at": "unknown",
+      "venue": "hydrex",
+      "venue_label_source": "factory",
+      "venue_verified": true
+    },
+    {
+      "dex": "topaz",
+      "factory": "0xaa5865dc3a60b25d305226d66fd573021f0d8ffb",
+      "factory_verified": true,
+      "fetched_at": "2026-11-22T15:02:10Z",
+      "indicative_price_usd": 129.62,
+      "liquidity_usd": 96.63,
+      "pool_address": "0x19cCE0486BB8b36C525E74445A28A2449EE4b2BD",
+      "protocol_family": "topaz",
+      "quote_asset": "WETH",
+      "source": "https://api.dexscreener.com/latest/dex/tokens/0xb20000000000000000000078ee7ce2fE4908108C",
+      "source_updated_at": "unknown",
+      "venue": "topaz",
+      "venue_label_source": "factory",
+      "venue_verified": true
+    },
+    {
+      "dex": "equalizer",
+      "factory": "0xed8db60acc29e14bc867a497d94ca6e3ceb5ec04",
+      "factory_verified": true,
+      "fetched_at": "2026-11-22T15:02:10Z",
+      "indicative_price_usd": 130.91,
+      "liquidity_usd": 25.98,
+      "pool_address": "0xaf37c58BAaD0dF59bBAe19B7Ee17afC93Db8bDF5",
+      "protocol_family": "equalizer",
+      "quote_asset": "VVV",
+      "source": "https://api.dexscreener.com/latest/dex/tokens/0xb20000000000000000000078ee7ce2fE4908108C",
+      "source_updated_at": "unknown",
+      "venue": "equalizer",
+      "venue_label_source": "factory",
+      "venue_verified": true
+    },
+    {
+      "dex": "equalizer",
+      "factory": "0xed8db60acc29e14bc867a497d94ca6e3ceb5ec04",
+      "factory_verified": true,
+      "fetched_at": "2026-11-22T15:02:10Z",
+      "indicative_price_usd": 130.71,
+      "liquidity_usd": 15.14,
+      "pool_address": "0x345D4337134A718B0F62C56ed5b82aF033e4237D",
+      "protocol_family": "equalizer",
+      "quote_asset": "USDC",
+      "source": "https://api.dexscreener.com/latest/dex/tokens/0xb20000000000000000000078ee7ce2fE4908108C",
+      "source_updated_at": "unknown",
+      "venue": "equalizer",
+      "venue_label_source": "factory",
+      "venue_verified": true
+    }
+  ],
+  "proposal": {
+    "cash_weight": 1.0,
+    "expiry_days": 7,
+    "horizon_days": 7,
+    "reason": "holding_all_simulated_cash_watch",
+    "simulation_notional": 10000.0,
+    "weights": {}
+  },
+  "reference": {
+    "age_seconds": 141570,
+    "nav_price": 129.82480034,
+    "nav_price_updated_at": "2026-11-20T23:42:40Z",
+    "registry_pause_status": "active",
+    "session_status": "off_hours",
+    "session_status_basis": "nav_age_39.3h_exceeds_24h_heartbeat_feed_holding_last_close",
+    "source": "https://api.coinbase.com/v1/tokenized-stocks"
+  },
+  "schema_version": "base-proto-schema v0.3.1",
+  "snapshot_id": "snap-234341f4a8c915f7",
+  "underlying_proxy": {
+    "dex": "xyz",
+    "funding_interval": "1h",
+    "funding_raw": 9.28823e-05,
+    "funding_unit": "fraction/1h",
+    "instrument": "xyz:NVDA",
+    "label": "UNDERLYING EQUITY PERP PROXY",
+    "markPx": 133.06,
+    "observed_at": "2026-11-22T15:02:10Z",
+    "oi_change_24h": null,
+    "oi_change_24h_basis": "insufficient_history_no_baseline",
+    "oi_notional_usd_derived": 511978734.51712,
+    "oi_unit": "base_asset_units",
+    "open_interest_raw": 3847728.352,
+    "oraclePx": 132.89,
+    "source": "https://api.hyperliquid.xyz/info dex=xyz"
+  }
+}

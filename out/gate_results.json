@@ -1,0 +1,166 @@
+{
+  "failed": 0,
+  "gate": "base-prototype \u00a77 + audit regression A-D",
+  "methodology_version": "base-proto-method v0.3.3",
+  "passed": 19,
+  "policy_version": "base-proto-policy v0.3.3",
+  "results": [
+    {
+      "actual": "10/10 checks pass; failed: none",
+      "details": "snapshot=snap-a075a81b28e6cc61 decision=WATCH",
+      "expected": "identity correct, values/timestamps/sources saved, decision explainable",
+      "pass": true,
+      "test": "happy_path"
+    },
+    {
+      "actual": "decision=ABSTAIN reasons=['dex_deviation_extreme'] alert_duplicate=False mode=TEST/REPLAY",
+      "details": "input change: pool 0xF668e21993f0ACd7ab00BB1cFbAeD0df28A3C8EC price 131.9900 -> 142.5276 (+8% vs median 131.97); rule_version=base-proto-policy v0.3.3; alert_id=alert-dc6296ed07a3cee2",
+      "expected": "decision=ABSTAIN reason=dex_deviation_extreme, one TEST/REPLAY alert emitted",
+      "pass": true,
+      "test": "controlled_trigger"
+    },
+    {
+      "actual": "8/8 checks pass; failed: none",
+      "details": "nav_age_seconds=122207 nav_gap_pct=1.6524",
+      "expected": "NAV shown as last published reference + age/off-hours; not a live alarm",
+      "pass": true,
+      "test": "nav_weekend"
+    },
+    {
+      "actual": "4/4 checks pass; failed: none",
+      "details": "nav=129.82480034 multiplier=1.0005379395763694 nav_x_mult=129.89463824 raw_share=129.75499999",
+      "expected": "NAV not multiplied again; raw share conversion uses effective multiplier",
+      "pass": true,
+      "test": "multiplier"
+    },
+    {
+      "actual": "missing_pools: decision=ABSTAIN (expect ABSTAIN) ok=True; stale_nav: decision=WATCH codes=['exit_quote_missing', 'nav_stale_off_hours', 'no_exit_quote_adapter', 'oracle_registry_unknown', 'snapshot_transformed_replay'] ok=True; gates_separate ok=True",
+      "details": "missing pools median=None (not 0); stale NAV age=604800s flagged",
+      "expected": "missing source -> ABSTAIN (no zero-risk); stale NAV flagged; gates separate",
+      "pass": true,
+      "test": "missing_stale"
+    },
+    {
+      "actual": "cross_check_same_pool ok=True; single_pool decision=ABSTAIN (expect ABSTAIN) median=None ok=True",
+      "details": "live pools=11 venues=7; single-pool fixture median=None",
+      "expected": "two aggregators one pool = one pool; one venue -> no false confidence",
+      "pass": true,
+      "test": "coverage"
+    },
+    {
+      "actual": "decision=WATCH (expect WATCH) ok=True; alert proxy_label ok=True; oi_change_24h=None ok=True",
+      "details": "funding set to 0.05 (5%%/h); decision unchanged by proxy alone",
+      "expected": "extreme funding/OI alone does not trigger token-exit claim; label persists; OI change null",
+      "pass": true,
+      "test": "proxy"
+    },
+    {
+      "actual": "5/5 checks pass; failed: none",
+      "details": "top_pool_liquidity_usd=1294546.67 decision=WATCH",
+      "expected": "large TVL without sell quote stays exit_quality_unverified; no sell claim",
+      "pass": true,
+      "test": "liquidity_vs_exit"
+    },
+    {
+      "actual": "first emit duplicate=False, second emit duplicate=True, same id=True; bad input: assess_snapshot({}) raised KeyError (structured error, not empty success)",
+      "details": "alert_id=alert-badc6c890ffd6368",
+      "expected": "same snapshot/rule replay does not duplicate alert; bad input errors",
+      "pass": true,
+      "test": "idempotency"
+    },
+    {
+      "actual": "31/31 cases cash-only; failed: none",
+      "details": "validator statuses: missing/invalid/stale/verified; gate default OFF",
+      "expected": "null/empty/malformed/invalid/stale quotes -> cash-only WATCH; real USDC (native + USDC.e) verified; PAPER_PROPOSAL requires verified layer B + gate on",
+      "pass": true,
+      "test": "quote_validation"
+    },
+    {
+      "actual": "13/13 checks pass; failed: none",
+      "details": "pool/quote/nav stale codes + market session (open/closed/holiday)",
+      "expected": "DEX/quote/NAV freshness tested by time input; separate codes; replay vs live distinguished",
+      "pass": true,
+      "test": "freshness"
+    },
+    {
+      "actual": "11/11 checks pass; failed: none",
+      "details": "recomputed pools=11 venues=6 (aero==aerodrome)",
+      "expected": "chain/identity validated; counts recomputed from validated pools; venue aliases canonical; transformed payloads marked",
+      "pass": true,
+      "test": "coverage_recomputed"
+    },
+    {
+      "actual": "8/8 checks pass; failed: none",
+      "details": "E2 regression: build -> public_snapshot -> replay",
+      "expected": "snapshot built by fixed build_snapshot is self-consistent on replay: identity matches, no transformed flag, stored == recomputed coverage",
+      "pass": true,
+      "test": "snapshot_identity_live_build"
+    },
+    {
+      "actual": "10/10 checks pass; failed: none",
+      "details": "error stages: lock/read/write; ok flag enforced",
+      "expected": "persist failures are structured errors (not empty success); restart still duplicate; concurrent workers get exactly one new emit",
+      "pass": true,
+      "test": "dedup_persistence"
+    },
+    {
+      "actual": "16/16 checks pass; failed: none",
+      "details": "raw capture evidence/ used as adapter mock source",
+      "expected": "NVDAc + AAPLc full chain (mock adapter from raw capture): build, assess, decide, explain, emit, paper record",
+      "pass": true,
+      "test": "happy_path_both_tokens"
+    },
+    {
+      "actual": "8/8 checks pass; failed: none",
+      "details": "variations: (200,3), (129.82,1.0005), (50.5,1.5), (1000,0.5)",
+      "expected": "NAV stored as-is (not multiplied) across NAV/multiplier variations on the build path",
+      "pass": true,
+      "test": "nav_multiplier_build"
+    },
+    {
+      "actual": "26/26 checks pass; failed: none",
+      "details": "v0.3.1 quoter phase; gate stays off, decision stays WATCH",
+      "expected": "Aero Metaquoter V3 + OracleRegistry + factory venue (mock RPC, offline): parsing, fail-closed decoder, venue mapping (Aero Slipstream = aerodrome), full build layer B simulated_exit_quote_verified, paused oracle marks NAV stale",
+      "pass": true,
+      "test": "quoter_adapter"
+    },
+    {
+      "actual": "44/44 checks pass; failed: none",
+      "details": "v0.3.1; gate stays off, decision stays WATCH",
+      "expected": "regression G1-G6 re-audit v5: venue terpisah, guard quote, partial-fill, decoder fail-closed, label jujur, registry blocking",
+      "pass": true,
+      "test": "quoter_g1_g6"
+    },
+    {
+      "actual": "22/22 checks pass; failed: none",
+      "details": "v0.3.3; gate stays off, decision stays WATCH",
+      "expected": "follow-up F1+F2+F3 re-audit v6 + minor M1-M3 re-audit v7: MAX kontrak TickMath, double-quote probe, validator cap max_age, factory Aero V2, probe wajib sukses, factory di exit_quote",
+      "pass": true,
+      "test": "quoter_f1_f2_m1_m3"
+    }
+  ],
+  "run_at": "2026-11-22T16:12:17Z",
+  "schema_version": "base-proto-schema v0.3.3",
+  "source_identity": {
+    "adapter.py": "083b1342acea92d0c5aa399e7af0962db9e4b21e4be0a6613b90553cbe591abf",
+    "capture_evidence.py": "601386c52863e21c3102d2875a3be14b9011c357c337a971cbbbb833daff5853",
+    "config.py": "bd863b8aeaccfb494b34cb0db0e560556882afed782f3cdc1aeb013313b805f2",
+    "gate.py": "0eaefa0651415b014df73a999e5980d6ff75ff9c0b53cc2faed1741bc8dcba35",
+    "pipeline.py": "e891f228663d60414508a1ce63c74392ee6bcbc8f652ce79fd605a83b47c6b8e",
+    "run.py": "9820fa43fb97527383086c651731a2a793f67acdeddefea1624114f4af393cb5"
+  },
+  "test_config": {
+    "dev_abstain_pct": 5.0,
+    "dev_watch_pct": 2.0,
+    "max_future_skew_sec": 300,
+    "max_pool_age_min": 60,
+    "max_weight_per_asset": 0.5,
+    "min_independent_pools": 2,
+    "min_independent_venues": 2,
+    "nav_stale_hours": 24,
+    "paper_proposals_enabled": false,
+    "quote_max_age_sec": 300,
+    "simulation_notional_usd": 10000.0
+  },
+  "total": 19
+}

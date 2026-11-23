@@ -1,0 +1,70 @@
+{
+  "assessment": {
+    "confidence_basis": "pools=11 venues=7 nav_age=33.9h session=off_hours exit_quote=absent proxy=present",
+    "layer_a": {
+      "median_price_usd": 131.97,
+      "nav_gap_pct_labeled": {
+        "label": "dex_median_vs_last_published_nav",
+        "nav_age_seconds": 122207,
+        "note": "labeled_description_only_cause_and_exploitability_unproven",
+        "session_status": "off_hours",
+        "value_pct": 1.6524
+      },
+      "note": "",
+      "per_venue_deviation_pct": {
+        "0x19cCE0486BB8b36C525E74445A28A2449EE4b2BD": -1.7807,
+        "0x20E5fAd2661Ee9Eb0c04824524030AF31943B62D": -0.2425,
+        "0x337beA70489CD71a8C3951C1Aa49C637b4b9B122": 0.0,
+        "0x3e8126A4a5DF68DD9cCA675E8dc925B5FED70CA9": 0.5228,
+        "0x60661b315553EB81872deEA9a66d567Cf0CCd33B": 0.1894,
+        "0x853F5f1B92b16714Fe6CDA67CAad0856B83C7ab9": -0.0379,
+        "0x8e740D5Fa742B763cD82159894b9919eD57E4f70": 0.2576,
+        "0xCe56168C09f4B7FCa30523822C48008705C01156": 0.0233,
+        "0xF668e21993f0ACd7ab00BB1cFbAeD0df28A3C8EC": 0.0152,
+        "0xFe27C510b1fC9B926c0a144597a62813564a189B": -1.1366,
+        "0xaf37c58BAaD0dF59bBAe19B7Ee17afC93Db8bDF5": -0.8032
+      }
+    },
+    "layer_b": {
+      "exit_quote": null,
+      "note": "no_sell_quote_adapter_in_prototype",
+      "status": "indicative_only/exit_quality_unverified"
+    },
+    "layer_c": {
+      "note": "proxy_displayed_separately_does_not_trigger_token_exit_alert",
+      "proxy": {
+        "dex": "xyz",
+        "funding_raw": 0.0002303803,
+        "funding_unit": "fraction/1h",
+        "instrument": "xyz:NVDA",
+        "label": "UNDERLYING EQUITY PERP PROXY",
+        "oi_change_24h": null,
+        "oi_unit": "base_asset_units",
+        "open_interest_raw": 3848171.9839999992
+      }
+    },
+    "reason_codes": [
+      "no_exit_quote_adapter",
+      "nav_stale_off_hours"
+    ],
+    "status": "degraded"
+  },
+  "asset": "NVDAc",
+  "decision": "WATCH",
+  "decision_reasons": [
+    "no_exit_quote_adapter",
+    "nav_stale_off_hours"
+  ],
+  "explanation": "Decision WATCH under base-proto-policy v0.1.0 for NVDAc (chain base, contract 0xb20000000000000000000078ee7ce2fE4908108C). Reason codes: no_exit_quote_adapter, nav_stale_off_hours. Reference NAV (already multiplier-adjusted, NOT multiplied again): 129.82480034, updated 2026-11-20T23:42:40Z, age 122207 seconds, session off_hours. DEX median (independent pools=11, venues=7): 131.97 USD. Labeled description: DEX median is 1.6524% vs last published NAV (age 122207 seconds, session off_hours). Cause and exploitability unproven; not labeled a discount, mispricing, or arbitrage. Exit evidence: indicative_only/exit_quality_unverified (no sell quote adapter in this prototype; liquidity/TVL is not used as exit evidence). Underlying context (UNDERLYING EQUITY PERP PROXY, separate): xyz:NVDA funding 0.0002303803 fraction/1h, OI raw 3848171.9839999992 base_asset_units. Proxy does not trigger a token-exit alert. Paper record: all simulated cash (cash_weight 1.0), no buy proposed. Holding cash is a valid outcome.",
+  "fetched_at": "2026-11-22T09:39:27Z",
+  "policy_version": "base-proto-policy v0.1.0",
+  "proposal": {
+    "cash_weight": 1.0,
+    "expiry_days": 7,
+    "horizon_days": 7,
+    "reason": "holding_all_simulated_cash_watch",
+    "simulation_notional": 10000.0,
+    "weights": {}
+  },
+  "snapshot_id": "snap-a075a81b28e6cc61"
+}

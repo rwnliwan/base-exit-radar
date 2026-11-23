@@ -1,0 +1,742 @@
+diff -ru '--exclude=out' '--exclude=evidence' '--exclude=fixtures' '--exclude=__pycache__' /tmp/v7code/base-prototype/DECISION_MEMO.md /tmp/v8code/base-prototype/DECISION_MEMO.md
+--- /tmp/v7code/base-prototype/DECISION_MEMO.md	2026-11-22 23:41:32.000000000 +0800
++++ /tmp/v8code/base-prototype/DECISION_MEMO.md	2026-11-23 00:23:14.000000000 +0800
+@@ -1,49 +1,63 @@
+ # Decision memo — Prototipe kecil Base Stocks Maxxing
+ 
+-Tanggal: 22 November 2026 (WITA). Status: **gate 19/19 (18 lama + 1 baru
+-quoter_f1_f2)**, adapter quoter v0.3.2 selesai (follow-up F1+F2+F3 re-audit
+-v6) dan terverifikasi chief (live run kedua token, layer B
+-simulated-verified, probe partial-fill sehat, replay RPC byte-exact 18/18).
+-Memo ini untuk keputusan ACC Alex (Septian) atas fase berikutnya. **Lolos
+-gate bukan izin otomatis melanjutkan.**
+-
+-## CURRENT_STATUS (22 Nov 23:39 WITA — v0.3.2, BELUM ACC)
+-
+-**Re-audit v6 Instinct (22 Nov 23:28 WITA): 8,5/10 — ACC v0.3.1 untuk tahap
+-read-only, gate proposal TETAP MATI.** 5 dari 6 fix G1-G6 benar penuh
+-(direpro on-chain independen: 2 RPC, block pinned, 16/16 transcript cocok,
+-gate 18/18). G3 partial fill baru substansial. **2 follow-up WAJIB sebelum
+-proposal gate boleh nyala (F1+F2) — SEMUA SUDAH diperbaiki chief di v0.3.2,
+-gate kini 19/19** (tes baru `quoter_f1_f2` 13/13):
+-F1 (deteksi partial-fill bukan yang diklaim: MAX_SQRT_RATIO diperbaiki ke
+-nilai EXACT TickMath + double-quote probe sebagai deteksi yang benar;
+-guard batas didokumentasikan jujur sebagai cek sekunder), F2 (validator
+-cap max_age milik quote ke QUOTE_VALIDITY_SEC), F3 (factory Aerodrome V2
+-ditambahkan, terverifikasi BaseScan). Minor F4 (batasan Uniswap V4)
+-didokumentasikan; F5 (README Python 3.10+).
+-
+-**Live run v0.3.2 (22 Nov 23:38 WITA, block-pinned):** NVDAc → WATCH
+-(median $132,97; simulasi 78,95924199 token → estimate $10.499,37;
+-implisit $132,97198868, **−0,001%**; block 60857668; probe partial-fill
+-rasio **1,99987** — sehat; oracle 1,000538, paused=false; 11 pool/6 venue,
+-0 fallback). AAPLc → WATCH (median $349,77; simulasi 30,02144388 token →
+-estimate $10.496,97; implisit $349,64919395, **−0,034%**; block 60857777;
+-probe rasio **1,99972** — sehat; oracle 1,000500, paused=false; 6 pool/4
+-venue, 0 fallback). Keduanya cash 1.0, gate proposal TETAP MATI. **RPC
++Tanggal: 23 November 2026 (WITA). Status: **gate 19/19 (18 lama + 1 baru
++quoter_f1_f2_m1_m3)**, adapter quoter v0.3.3 selesai (minor M1-M3 re-audit
++v7) dan terverifikasi chief (live run kedua token, layer B
++simulated-verified, probe partial-fill sehat + probe_ok, factory di
++exit_quote, replay RPC byte-exact 18/18). Memo ini untuk keputusan ACC
++Alex (Septian) atas fase berikutnya. **Lolos gate bukan izin otomatis
++melanjutkan.**
++
++## CURRENT_STATUS (23 Nov 00:15 WITA — v0.3.3, BELUM ACC)
++
++**Re-audit v7 Instinct (22 Nov 23:52 WITA): 9,5/10 — ACC v0.3.2 untuk tahap
++read-only, TIDAK ADA must-fix baru.** F1+F2 terverifikasi independen
++(probe diuji adversarial di luar gate; F2 cap max_age diuji dua arah).
++Gate 19/19 direpro auditor di Python 3.10; replay on-chain 18/18 cocok di
++**3 RPC independen** pada block pin asli. Diff v6→v7 bersih; fix generik.
++**Prasyarat "gate proposal boleh dinyalakan" dari v6 kini TERPENUHI secara
++teknis — TAPI nyalain gate hari ini tetap TIDAK menghasilkan
++PAPER_PROPOSAL**, karena `decide()` menahan simulasi di WATCH
++(`exit_evidence_simulated_not_firm`); proposal baru terjangkau bila ada
++quote FIRM. Jadi keputusan nyalain gate murni soal kesiapan proses, bukan
++risiko baru.
++
++**Minor M1-M3 (re-audit v7) — SEMUA SUDAH diperbaiki chief di v0.3.3, gate
++tetap 19/19** (tes `quoter_f1_f2_m1_m3` 22/22; atas pilihan Septian 23 Nov
++00:09 WITA):
++M1 (MAX_SQRT_RATIO diganti ke KONSTANTA KONTRAK TickMath.sol
++`1461446703485210103287273052203988822378723970342`, diverifikasi chief ke
++Uniswap v3-core GitHub; nilai v0.3.2 adalah floor eksak RUMUS, beda
++~2,9e-8 relatif), M2 (probe WAJIB sukses — probe gagal RPC = quote
++DITOLAK, bukan dipakai inconclusive; `REQUIRE_PROBE_SUCCESS=True`), M3
++(`factory` disimpan di exit_quote snapshot). **TIDAK ADA perubahan di luar
++M1-M3.** `PAPER_PROPOSALS_ENABLED` TETAP False (gate mati).
++
++**Live run v0.3.3 (23 Nov 00:12 WITA, block-pinned):** NVDAc → WATCH
++(median $132,82; simulasi 78,99488414 token → estimate $10.498,34;
++implisit $132,89895047, **+0,059%**; block 60867888; probe partial-fill
++rasio **1,99991884** — sehat, probe_ok=True; oracle 1,000538,
++paused=false; 11 pool/6 venue, 0 fallback; factory di exit_quote
++`0x9cb2...7a76`). AAPLc → WATCH (median $349,565; simulasi 30,03346586
++token → estimate $10.497,92; implisit $349,5407879, **−0,007%**; block
++60868044; probe rasio **1,99983284** — sehat, probe_ok=True; oracle
++1,000500, paused=false; 6 pool/4 venue, 0 fallback; factory di exit_quote
++`0x9cb2...7a76`). Keduanya cash 1.0, gate proposal TETAP MATI. **RPC
+ transcript** (`evidence/rpc/`, 18 file + manifest, kini termasuk
+-`quote_probe`): replay byte-exact — amount_out, sqrt-price, ticks, probe
+-amount_out, oracle multiplier, block hash, factory, token0/token1,
+-decimals (8/6) cocok persis dengan snapshot.
++`quote_probe`): replay byte-exact 18/18 + 4/4 amount_out snapshot —
++amount_out, sqrt-price, ticks, probe amount_out, oracle multiplier, block
++hash, factory, token0/token1, decimals (8/6) cocok persis dengan snapshot.
+ 
+ **Kill-switch 30 Nov = komitmen OPERASIONAL (bukan cutoff otomatis di
+ kode):** bila fase quoter tidak selesai / tidak feasible sebelum itu,
+ prototipe berhenti di situ — tidak ada kode yang mematikan prototipe
+-otomatis pada 30 Nov. Review 28 Nov tetap jalan. **v0.3.2 BELUM ACC —
+-menunggu re-audit Instinct atas fix F1+F2+F3 (v7).** Persiapan submit (form +
+-post X + video demo) TETAP DITUNDA sampai prototipe lolos (perintah
+-Septian 22 Nov 22:16 WITA).
++otomatis pada 30 Nov. Review 28 Nov tetap jalan. **v0.3.3 BELUM ACC —
++menunggu audit diff Instinct atas fix M1-M3 (v8, audit cepat atas diff
++saja, bukan re-audit penuh — perintah Septian 23 Nov 00:09 WITA).**
++Persiapan submit (form + post X + video demo) TETAP DITUNDA sampai
++prototipe lolos (perintah Septian 22 Nov 22:16 WITA).
+ 
+-## ARSIP — CURRENT_STATUS v0.3.1 (22 Nov 23:08 WITA — BELUM ACC, kini ACC read-only per re-audit v6)
++## ARSIP — CURRENT_STATUS v0.3.2 (22 Nov 23:39 WITA — BELUM ACC, kini ACC read-only per re-audit v7)
+ 
+ **Re-audit v5 Instinct (22 Nov 22:50 WITA): 7,5/10 — BELUM ACC v5.**
+ Terverifikasi benar oleh Instinct (2 RPC, block 60.841.377): quote akurat,
+diff -ru '--exclude=out' '--exclude=evidence' '--exclude=fixtures' '--exclude=__pycache__' /tmp/v7code/base-prototype/DESIGN.md /tmp/v8code/base-prototype/DESIGN.md
+--- /tmp/v7code/base-prototype/DESIGN.md	2026-11-22 23:41:18.000000000 +0800
++++ /tmp/v8code/base-prototype/DESIGN.md	2026-11-23 00:18:04.000000000 +0800
+@@ -186,7 +186,7 @@
+ perbaikan: **9/9 PASS**. Perilaku live tidak berubah (snapshot internal tetap
+ memakai `_token_ok` asli).
+ 
+-## 10. Deteksi partial-fill yang jujur (v0.3.2, re-audit v6, 22 Nov 2026)
++## 10. Deteksi partial-fill yang jujur (v0.3.2, re-audit v6, 22 Nov 2026; diperketat v0.3.3, re-audit v7)
+ 
+ **Klaim v0.3.1 yang SALAH:** guard batas sqrt-price MIN/MAX disebut
+ "deteksi partial-fill". Yang benar (temuan F1 re-audit v6): guard batas
+@@ -203,11 +203,16 @@
+    quote kedua dengan amount_in x 2 di pool yang sama (block sama). Bila
+    output probe / output pertama < 1,5, quote pertama sudah di kapasitas
+    pool (partial fill) → pool ditolak sebagai bukti exit. Rasio sehat
+-   ~1,9–2,0 (live run v0.3.2: NVDAc 1,99987, AAPLc 1,99972). Probe yang
+-   gagal RPC = inconclusive — quote pertama tetap dipakai (sanity ±10%
+-   tetap berlaku); probe tidak boleh menggagalkan quote valid karena RPC
+-   probe-nya sendiri bermasalah. Hasil probe tercatat transparan di
+-   snapshot (`exit_quote.partial_fill_probe` + transcript `quote_probe`).
++   ~1,9–2,0 (live run v0.3.3: NVDAc 1,99991884, AAPLc 1,99983284).
++   **M2 (v0.3.3): probe WAJIB sukses** (`REQUIRE_PROBE_SUCCESS=True`) —
++   probe yang gagal RPC membuat quote TIDAK usable, pool ditolak
++   (`quoter_probe_failed:<pool>`), bukan dipakai inconclusive. (Perilaku
++   v0.3.2: probe gagal = inconclusive, quote tetap dipakai — diubah atas
++   temuan M2 re-audit v7: pool tipis + kegagalan probe transien tidak
++   boleh lolos hanya dengan sanity ±10%.) Helper `_probe_quote_usable`:
++   usable bila tidak capped DAN probe_ok. Hasil probe tercatat transparan
++   di snapshot (`exit_quote.partial_fill_probe` + transcript
++   `quote_probe`).
+    Ambang 1,5 konservatif: pool yang hanya punya 1,2x likuiditas dari
+    notional pun ikut tertandai (thin pool = bukti exit lemah).
+ 2. **Sanity implied-price ±10% di validator** (sudah ada sejak v0.2.1):
+@@ -217,9 +222,17 @@
+ 3. **Guard batas sqrt MIN/MAX (sekunder):** terminal sqrt-price TEPAT di
+    batas → error `quote_possible_partial_fill`. Bukan deteksi utama.
+    Konstanta MAX_SQRT_RATIO v0.3.1 SALAH (1e9x terlalu kecil); v0.3.2
+-   memakai nilai EXACT TickMath
+-   `1461446703485210103244672773810124308346321380902`
+-   (floor(sqrt(1.0001^887272)·2^96), dihitung dengan integer math penuh).
++   memakai floor eksak RUMUS sqrt(1.0001^887272)·2^96
++   `1461446703485210103244672773810124308346321380902`. **M1 (v0.3.3):
++   nilai itu ternyata floor rumus, BUKAN konstanta kontrak** — v0.3.3
++   memakai KONSTANTA KONTRAK TickMath.sol
++   `1461446703485210103287273052203988822378723970342` (diverifikasi ke
++   Uniswap v3-core GitHub, L28; beda ~2,9e-8 relatif, arah konservatif).
++   MIN_SQRT_RATIO 4295128739 cocok TickMath (L24) dan tidak berubah.
++
++**M3 (v0.3.3):** `factory` kini disimpan di `exit_quote` snapshot
++(dari sell_quote) — transparansi: venue + factory keduanya terlihat di
++snapshot, bukan hanya venue.
+ 
+ **Residual yang diakui:** partial fill RINGAN (implied masih dalam ±10%
+ median, probe ratio di atas 1,5 tapi di bawah ~1,9) masih bisa lolos
+diff -ru '--exclude=out' '--exclude=evidence' '--exclude=fixtures' '--exclude=__pycache__' /tmp/v7code/base-prototype/README.md /tmp/v8code/base-prototype/README.md
+--- /tmp/v7code/base-prototype/README.md	2026-11-22 23:41:04.000000000 +0800
++++ /tmp/v8code/base-prototype/README.md	2026-11-23 00:16:52.000000000 +0800
+@@ -70,92 +70,97 @@
+ | `adapter.py` | Adapter data publik read-only (Coinbase, DexScreener, GeckoTerminal, Hyperliquid) |
+ | `pipeline.py` | Ingest → validate → assess → decide → explain → alert → paper record |
+ | `run.py` | Runner live / replay |
+-| `gate.py` | Gate 19 tes (§7 + regression pasca-audit A-D + quoter v0.3.0 + G1-G6 v0.3.1 + F1/F2/F3 v0.3.2: quote validation, freshness, coverage recomputed, dedup persistence, happy-path kedua token, NAV/multiplier build, quoter adapter, quoter_g1_g6, quoter_f1_f2) |
++| `gate.py` | Gate 19 tes (§7 + regression pasca-audit A-D + quoter v0.3.0 + G1-G6 v0.3.1 + F1/F2/F3 v0.3.2 + M1/M2/M3 v0.3.3: quote validation, freshness, coverage recomputed, dedup persistence, happy-path kedua token, NAV/multiplier build, quoter adapter, quoter_g1_g6, quoter_f1_f2_m1_m3) |
+ | `capture_evidence.py` | Capture evidence mentah + manifest hash (manual, bukan bagian gate) |
+ | `capture_rpc_evidence.py` | Capture RPC transcript (raw eth_call + block + calldata) + manifest hash (manual, bukan bagian gate) |
+ | `fixtures/` | Snapshot live 22 Nov 2026 + 5 fixture uji terkontrol |
+-| `evidence/` | Respons mentah sumber publik (Coinbase, DexScreener, GeckoTerminal NVDAc+AAPLc, Hyperliquid) + `manifest.json` + `rpc/` (transcript eth_call v0.3.2, 18 file + `manifest.json`) |
++| `evidence/` | Respons mentah sumber publik (Coinbase, DexScreener, GeckoTerminal NVDAc+AAPLc, Hyperliquid) + `manifest.json` + `rpc/` (transcript eth_call v0.3.3, 18 file + `manifest.json`) |
+ | `out/` | Output lokal (snapshot, decision, paper record, alert, hasil gate) |
+ | `DESIGN.md` | Design note (flow, data mapping, policy, threshold, coverage, asumsi) |
+ | `DECISION_MEMO.md` | Decision memo (lulus/gagal/unknown, sisa pekerjaan, GO terbatas atau STOP) |
+ 
+-## Status terakhir (terverifikasi 22 Nov 2026 ~23:39 WITA, run live v0.3.2)
++## Status terakhir (terverifikasi 23 Nov 2026 ~00:15 WITA, run live v0.3.3)
+ 
+ - Gate: **19/19 PASS** (`python3 gate.py`) — 18 lama + 1 baru
+-  `quoter_f1_f2` (13/13: follow-up F1+F2+F3 re-audit v6). Versi
+-  policy/method/schema v0.3.2.
+-- **Re-audit v6 Instinct (22 Nov 23:28 WITA, skor 8,5/10 — ACC v0.3.1
+-  untuk tahap read-only, gate proposal TETAP MATI):** 5 dari 6 fix G1-G6
+-  benar penuh (direpro on-chain independen: 2 RPC, block pinned, 16/16
+-  transcript cocok, gate 18/18). G3 partial fill baru substansial. **2
+-  follow-up WAJIB sebelum proposal gate boleh nyala (F1+F2)** — keduanya
+-  SUDAH diperbaiki chief di v0.3.2 (gate kini 19/19):
+-  - **F1 (dari G3).** Deteksi partial-fill BUKAN yang diklaim: guard
+-    batas MIN/MAX tidak menangkap signature standar (terminal MAX−1/
+-    MIN+1 — quoter memakai itu sebagai limit saat sqrtPriceLimitX96=0),
+-    dan probe empiris auditor (amount_in 10^18 wei) menunjukkan partial
+-    fill nyata dengan sqrtAfter 1,7359e38 yang BUKAN di batas. Yang
+-    menangkap saat itu hanya sanity implied-price ±10% di validator.
+-    Fix v0.3.2: **(a)** MAX_SQRT_RATIO diperbaiki ke nilai EXACT TickMath
+-    `1461446703485210103244672773810124308346321380902` (v0.3.1 salah
+-    1e9x ke arah konservatif; dihitung chief dengan integer math penuh,
+-    ujung `...244672773810124308346321380902` — cocok dengan hitungan
+-    auditor); **(b)** DOUBLE-QUOTE PROBE sebagai deteksi yang benar:
+-    sesudah quote pertama, ambil quote kedua dengan amount_in x 2 di
+-    pool yang sama (block sama); bila output probe / output pertama <
+-    1,5, quote pertama sudah di kapasitas pool → pool ditolak. Hasil
+-    probe disimpan transparan di snapshot (`partial_fill_probe`);
+-    **(c)** guard batas MIN/MAX tetap ada tapi didokumentasikan jujur
+-    sebagai cek sekunder (exact-bound saja) — BUKAN deteksi utama.
+-    Deteksi partial-fill = probe + sanity ±10%, BUKAN guard sqrt semata.
+-  - **F2 (dari G5).** Validator mempercayai `max_age_sec` milik quote:
+-    simulasi dengan max_age raksasa + observed_at 5 jam lalu lolos
+-    freshness (direpro auditor). Fix v0.3.2: validator memakai
+-    `max_age_efektif = min(quote.max_age_sec, QUOTE_VALIDITY_SEC)` —
+-    max_age adalah klaim diri sendiri, bukan komitmen vendor seperti
+-    `expires_at` pada firm. Klaim asli tetap dicatat di detail.
+-  - **F3 (minor).** Factory Aerodrome V2 (basic) `0x420D...` belum
+-    terdaftar (terverifikasi chief ke BaseScan: "Aerodrome: Pool
+-    Factory"). Fix: ditambahkan ke FACTORY_VENUE → "aerodrome".
+-  - **F4 (minor).** Pool Uniswap V4 (~11 di evidence NVDAc, termasuk
+-    ~$130rb likuiditas) ter-reject `invalid_address` karena pairAddress
+-    V4 adalah poolId 32-byte, bukan kontrak — venue V4 tidak masuk
+-    coverage. Sudah transparan di `rejected_observations`; didokumentasikan
+-    sebagai batasan metodologi (bukan bug).
+-  - **F5 (minor).** README sebut Python 3.12; gate + run lolos di 3.10.
+-    Fix: README kini "Python 3.10+ (teruji di 3.10 dan 3.12)".
+-- Live run v0.3.2 (22 Nov 2026, fetched ~15:38 UTC = 23:38 WITA):
+-  - **NVDAc → WATCH** (median $132,97; NAV basi, off_hours; coverage
+-    11 pool/6 venue, 6 verified, 0 fallback). **Layer B:
++  `quoter_f1_f2_m1_m3` (22/22: follow-up F1+F2+F3 re-audit v6 + minor
++  M1-M3 re-audit v7). Versi policy/method/schema v0.3.3.
++- **Re-audit v7 Instinct (22 Nov 23:52 WITA, skor 9,5/10 — ACC v0.3.2
++  untuk tahap read-only, TIDAK ADA must-fix baru):** F1+F2 terverifikasi
++  independen (probe diuji adversarial di luar gate: rasio 1,0/1,45/
++  1,4999 → capped ditolak; 1,5/1,55/1,9/2,0/2,1 → diterima; partial-fill
++  ringan yang lolos di v6 kini tertangkap probe; F2 cap max_age diuji
++  dua arah). Gate 19/19 direpro auditor di Python 3.10; replay on-chain
++  18/18 cocok di **3 RPC independen** (mainnet.base.org, publicnode,
++  blastapi) pada block pin asli. Diff v6→v7 bersih; fix generik.
++  **Prasyarat "gate proposal boleh dinyalakan" dari v6 kini TERPENUHI
++  secara teknis — TAPI nyalain gate hari ini tetap TIDAK menghasilkan
++  PAPER_PROPOSAL**, karena `decide()` menahan simulasi di WATCH
++  (`exit_evidence_simulated_not_firm`); proposal baru terjangkau bila
++  ada quote FIRM. Jadi keputusan nyalain gate murni soal kesiapan
++  proses, bukan risiko baru.
++- **Minor M1-M3 (re-audit v7) — SEMUA diperbaiki chief di v0.3.3
++  (atas pilihan Septian 23 Nov 00:09 WITA), gate tetap 19/19:**
++  - **M1.** Istilah "EXACT TickMath" kurang tepat: nilai config
++    v0.3.2 adalah floor eksak RUMUS sqrt(1.0001^887272)·2^96
++    (`1461446703485210103244672773810124308346321380902`), sedangkan
++    konstanta on-chain `TickMath.sol` adalah
++    `1461446703485210103287273052203988822378723970342` (beda ~2,9e-8
++    relatif, arah konservatif, dampak ~nol). Fix v0.3.3: MAX_SQRT_RATIO
++    diganti ke KONSTANTA KONTRAK — diverifikasi chief ke sumber resmi
++    Uniswap v3-core TickMath.sol di GitHub (L28), cocok persis dengan
++    nilai auditor; MIN_SQRT_RATIO 4295128739 cocok (L24) dan tidak
++    berubah.
++  - **M2.** Probe RPC gagal = inconclusive (diterima): quote tetap
++    dipakai bila probe gagal — sisa risiko pool tipis + kegagalan probe
++    transien lolos hanya dengan sanity ±10%. Fix v0.3.3: probe WAJIB
++    sukses (`REQUIRE_PROBE_SUCCESS=True`); probe gagal RPC → quote
++    TIDAK usable, pool ditolak (`quoter_probe_failed:<pool>`), bukan
++    dipakai inconclusive. Helper `_probe_quote_usable(probe)` — usable
++    bila tidak capped DAN probe_ok.
++  - **M3.** `exit_quote.factory` tidak disimpan di snapshot (venue
++    tersimpan, factory None). Fix v0.3.3: factory disimpan di exit_quote
++    (satu baris, dari sell_quote).
++  - TIDAK ADA perubahan di luar M1-M3. `PAPER_PROPOSALS_ENABLED` TETAP
++    False (gate mati).
++- Live run v0.3.3 (22 Nov 2026, fetched ~16:12 UTC = 23 Nov 00:12 WITA):
++  - **NVDAc → WATCH** (median $132,82; NAV basi, off_hours; coverage
++    11 pool/6 venue, 11 verified/6 verified, 0 fallback). **Layer B:
+     simulated_exit_quote_verified** — simulasi Aero Metaquoter V3:
+-    78,95924199 token → estimate $10.499,37 (harga implisit $132,97198868
+-    vs median $132,97, selisih **−0,001%**). Block 60857668, observed
+-    15:38:41Z, max_age 300 dtk. **Probe partial-fill: rasio 1,99987**
+-    (probe $20.997,40 vs base $10.499,37) — sehat, tidak capped.
+-    Oracle: multiplier 1,0005379395763696, paused=false, status active.
+-    Alasan WATCH: `dex_deviation_watch`, `nav_stale_off_hours`.
+-  - **AAPLc → WATCH** (median $349,77; NAV basi, off_hours; coverage
+-    6 pool/4 venue, 4 verified, 0 fallback). **Layer B:
+-    simulated_exit_quote_verified** — simulasi: 30,02144388 token →
+-    estimate $10.496,97 (harga implisit $349,64919395 vs median $349,77,
+-    selisih **−0,034%**). Block 60857777, observed 15:39:09Z.
+-    **Probe partial-fill: rasio 1,99972** — sehat, tidak capped.
+-    Oracle: multiplier 1,0005003893019802, paused=false, status active.
+-    Alasan WATCH: `nav_stale_off_hours`.
++    78,99488414 token → estimate $10.498,34 (harga implisit $132,89895047
++    vs median $132,82, selisih **+0,059%**). Block 60867888, observed
++    16:12:50Z, max_age 300 dtk. **Probe partial-fill: rasio 1,99991884**
++    (probe $20.995,82 vs base $10.498,34) — sehat, tidak capped,
++    **probe_ok=True**. Oracle: multiplier 1,0005379395763696,
++    paused=false, status active. Alasan WATCH: `dex_deviation_watch`,
++    `nav_stale_off_hours`. **Factory di exit_quote:
++    `0x9cb220581b91b0c83223012fe69688b92ad07a76`** (Aero Slipstream
++    CLFactory) — M3 terverifikasi live.
++  - **AAPLc → WATCH** (median $349,565; NAV basi, off_hours; coverage
++    6 pool/4 venue, 6 verified/4 verified, 0 fallback). **Layer B:
++    simulated_exit_quote_verified** — simulasi: 30,03346586 token →
++    estimate $10.497,92 (harga implisit $349,5407879 vs median $349,565,
++    selisih **−0,007%**). Block 60868044, observed 16:13:17Z.
++    **Probe partial-fill: rasio 1,99983284** — sehat, tidak capped,
++    **probe_ok=True**. Oracle: multiplier 1,0005003893019802,
++    paused=false, status active. Alasan WATCH: `nav_stale_off_hours`.
++    **Factory di exit_quote: `0x9cb2...7a76`** — M3 terverifikasi live.
+   - Keduanya menahan seluruh alokasi simulasi di cash (`cash_weight: 1.0`)
+     karena **gate proposal MATI** — PAPER_PROPOSAL tetap tidak terjangkau
+     sampai review ulang. Itu by-design, bukan bug.
+-  - **RPC transcript v0.3.2 (18 file + manifest):** kini termasuk
+-    `quote_probe` per token (double-quote probe F1). **Replay byte-exact
+-    terverifikasi chief (18/18):** amount_out, sqrt-price, ticks,
+-    probe amount_out, oracle multiplier, block hash, factory, token0/
+-    token1, decimals (8/6) di transcript COCOK PERSIS dengan snapshot
+-    v0.3.2 — semua eth_call dipin ke satu block per token.
+-- **v0.3.1 RESMI ACC (tahap read-only saja)** — re-audit v6, 8,5/10.
+-  `PAPER_PROPOSALS_ENABLED` TETAP False. **v0.3.2 BELUM ACC** — menunggu
+-  re-audit Instinct atas fix F1+F2+F3 (v7).
++  - **RPC transcript v0.3.3 (18 file + manifest):** kini termasuk
++    `quote_probe` per token. **Replay byte-exact terverifikasi chief
++    (18/18 transcript + 4/4 amount_out snapshot):** amount_out, sqrt-price,
++    ticks, probe amount_out, oracle multiplier, block hash, factory,
++    token0/token1, decimals (8/6) di transcript COCOK PERSIS dengan
++    snapshot v0.3.3 — semua eth_call dipin ke satu block per token.
++    (Catatan: replay block via urllib sempat IncompleteRead — transport,
++    bukan mismatch; diverifikasi ulang via curl, hash block cocok.)
++- **v0.3.2 RESMI ACC (tahap read-only saja)** — re-audit v7, 9,5/10.
++  `PAPER_PROPOSALS_ENABLED` TETAP False. **v0.3.3 BELUM ACC** — menunggu
++  audit diff Instinct atas fix M1-M3 (v8, audit cepat atas diff saja,
++  bukan re-audit penuh — perintah Septian 23 Nov 00:09 WITA).
+ 
+-## Status v0.3.1 (arsip — terverifikasi 22 Nov 2026 ~23:08 WITA, run live v0.3.1)
++## Status v0.3.2 (arsip — terverifikasi 22 Nov 2026 ~23:39 WITA, run live v0.3.2)
+ 
+ - Gate: **18/18 PASS** (`python3 gate.py`) — 17 lama + 1 baru
+   `quoter_g1_g6` (44/44: fix G1-G6 re-audit v5). Versi policy/method/schema
+@@ -234,16 +239,16 @@
+ - Re-audit v4 Instinct (skor kejujuran **10/10** untuk scope v0.2.2):
+   F1 TERBUKTI beres. Syarat review 28 Nov terpenuhi (A-D, E1-E3, F1) —
+   Base masuk fase quoter sesuai Opsi A (GO Terbatas, ACC Septian 22 Nov
+-  22:03 WITA). **Quoter kini TERPASANG (v0.3.2)**; PAPER_PROPOSAL tetap
+-  tidak terjangkau (gate mati) — sesuai batas keras audit. **v0.3.1
+-  RESMI ACC (tahap read-only)** — re-audit v6, 8,5/10. **v0.3.2 BELUM
+-  ACC** — menunggu re-audit Instinct atas fix F1+F2+F3 (v7).
++  22:03 WITA). **Quoter kini TERPASANG (v0.3.3)**; PAPER_PROPOSAL tetap
++  tidak terjangkau (gate mati) — sesuai batas keras audit. **v0.3.2
++  RESMI ACC (tahap read-only)** — re-audit v7, 9,5/10. **v0.3.3 BELUM
++  ACC** — menunggu audit diff Instinct atas fix M1-M3 (v8).
+ 
+ ## Batas yang dipegang
+ 
+ - Hanya NVDAc + AAPLc. Tidak ada perluasan ticker, tidak ada Monday Gap Base,
+   tidak ada autonomous rebalancing.
+-- Sell-quote adapter **terpasang (v0.3.2, Aero Metaquoter V3, read-only)**:
++- Sell-quote adapter **terpasang (v0.3.3, Aero Metaquoter V3, read-only)**:
+   layer B kini bisa `simulated_exit_quote_verified` (BUKAN "verified" —
+   quote adalah simulasi eth_call, bukan komitmen eksekusi bertanda tangan;
+   lihat G5). Quote adalah simulasi on-chain saat call (eth_call, dipin ke
+@@ -251,7 +256,7 @@
+   bertanda tangan — eksekusi di luar scope. TVL bukan pengganti bukti exit.
+   Semua eth_call dipin ke satu block agar snapshot bisa direplay byte-exact
+   dari transcript RPC (`evidence/rpc/`).
+-- Deteksi partial-fill (F1, v0.3.2): **double-quote probe** (quote kedua
++- Deteksi partial-fill (F1, v0.3.2; M2, v0.3.3): **double-quote probe** (quote kedua
+   2x amount_in; rasio output < 1,5 = partial fill → pool ditolak) +
+   sanity implied-price ±10% di validator. Guard batas sqrt MIN/MAX
+   (exact-bound saja) adalah cek sekunder — BUKAN deteksi utama. Hasil
+diff -ru '--exclude=out' '--exclude=evidence' '--exclude=fixtures' '--exclude=__pycache__' /tmp/v7code/base-prototype/capture_rpc_evidence.py /tmp/v8code/base-prototype/capture_rpc_evidence.py
+--- /tmp/v7code/base-prototype/capture_rpc_evidence.py	2026-11-22 23:39:32.000000000 +0800
++++ /tmp/v8code/base-prototype/capture_rpc_evidence.py	2026-11-23 00:13:34.000000000 +0800
+@@ -1,7 +1,7 @@
+ """Capture RPC transcript (re-audit v5, koreksi dok #3): raw request/response
+ eth_call untuk run live v0.3.2, agar klaim historical exact bisa direplay.
+ 
+-Membaca snapshot v0.3.2 (out/v0.3.2/) lalu mengulang panggilan RPC yang SAMA
++Membaca snapshot v0.3.3 (out/v0.3.3/) lalu mengulang panggilan RPC yang SAMA
+ (calldata sama) PADA BLOCK yang sama (block_number snapshot) — sehingga
+ hasilnya harus cocok dengan nilai snapshot (bukan "latest" yang sudah
+ bergerak). Output: evidence/rpc/<token>_<call>.json + evidence/rpc/manifest.json.
+@@ -35,7 +35,7 @@
+ import config
+ 
+ BASE = os.path.dirname(os.path.abspath(__file__))
+-OUT = os.path.join(BASE, "out", "v0.3.2")
++OUT = os.path.join(BASE, "out", "v0.3.3")
+ RPC_DIR = os.path.join(BASE, "evidence", "rpc")
+ 
+ 
+diff -ru '--exclude=out' '--exclude=evidence' '--exclude=fixtures' '--exclude=__pycache__' /tmp/v7code/base-prototype/config.py /tmp/v8code/base-prototype/config.py
+--- /tmp/v7code/base-prototype/config.py	2026-11-22 23:36:30.000000000 +0800
++++ /tmp/v8code/base-prototype/config.py	2026-11-23 00:10:56.000000000 +0800
+@@ -115,13 +115,28 @@
+ # Batas sqrt-price Uniswap V3 / Slipstream (TickMath): quote exact-input
+ # yang terminal sqrt-price-nya menyentuh batas ini kemungkinan PARTIAL FILL
+ # (G3) — input tidak habis terjual. Guard di adapter/validator.
+-# KOREKSI F1 (re-audit v6, 22 Nov 2026): MAX_SQRT_RATIO v0.3.1 SALAH
+-# (1461446703485210103287273058057407946277, ~1,46e39 — 1e9x terlalu kecil,
+-# guard menolak terlalu cepat). Nilai EXACT TickMath (floor(sqrt(1.0001^
+-# 887272) * 2^96), dihitung chief dengan integer math penuh, ujung
+-# ...244672773810124308346321380902 — cocok dengan hitungan auditor):
++# KOREKSI M1 (re-audit v7, 22 Nov 2026): nilai v0.3.2 adalah floor eksak
++# RUMUS sqrt(1.0001^887272)*2^96 (1461446703485210103244672773810124308346321380902)
++# — BUKAN konstanta kontrak TickMath.sol. Konstanta on-chain yang benar
++# (hasil bit-decomposition kontrak, getSqrtRatioAtTick(MAX_TICK)):
++# DIVERIFIKASI chief ke sumber resmi — Uniswap v3-core TickMath.sol di
++# GitHub (raw.githubusercontent.com/Uniswap/v3-core/main/contracts/
++# libraries/TickMath.sol, L28): MAX_SQRT_RATIO =
++# 1461446703485210103287273052203988822378723970342. Beda ~2,9e-8 relatif
++# dari floor rumus (arah konservatif — nilai rumus lebih kecil, guard
++# memicu sedikit lebih awal; dampak praktis ~nol, kata auditor). v0.3.3
++# memakai KONSTANTA KONTRAK agar guard memeriksa batas yang benar-benar
++# ditegakkan quoter di chain. MIN_SQRT_RATIO 4295128739 cocok TickMath
++# (L24 sumber yang sama) dan tidak berubah.
+ MIN_SQRT_RATIO = 4295128739
+-MAX_SQRT_RATIO = 1461446703485210103244672773810124308346321380902
++MAX_SQRT_RATIO = 1461446703485210103287273052203988822378723970342
++# M2 (re-audit v7): probe partial-fill WAJIB sukses agar quote boleh
++# dipakai sebagai bukti exit. Bila probe gagal RPC, quote DITOLAK (pool
++# ditolak, bukan dipakai inconclusive) — pool tipis + kegagalan probe
++# transien tidak boleh lolos hanya dengan sanity ±10%. Berlaku sejak
++# v0.3.3; gate proposal tetap MATI, jadi perubahan ini hanya memperketat
++# bukti exit (keputusan tetap maks WATCH), bukan mengaktifkan proposal.
++REQUIRE_PROBE_SUCCESS = True
+ # CATATAN JUJUR F1 (re-audit v6): guard batas MIN/MAX di atas HANYA
+ # menangkap terminal sqrt-price TEPAT di batas. Signature partial-fill
+ # standar (terminal MIN+1/MAX−1 — quoter memakai itu sebagai limit saat
+@@ -172,9 +187,9 @@
+ }
+ 
+ # ---------------------------------------------------------------- versi
+-SCHEMA_VERSION = "base-proto-schema v0.3.2"
+-METHODOLOGY_VERSION = "base-proto-method v0.3.2"
+-POLICY_VERSION = "base-proto-policy v0.3.2"
++SCHEMA_VERSION = "base-proto-schema v0.3.3"
++METHODOLOGY_VERSION = "base-proto-method v0.3.3"
++POLICY_VERSION = "base-proto-policy v0.3.3"
+ # Semua versi di atas adalah EKSPERIMEN, belum tervalidasi (brief §6).
+ # v0.2.0 (22 Nov 2026, pasca-audit Instinct): validator quote eksplisit +
+ # feature gate proposal, freshness per-jenis-data, coverage dihitung ulang
+@@ -221,6 +236,15 @@
+ # V4 (pairAddress = poolId 32-byte, bukan kontrak) didokumentasikan.
+ # F5 — README Python 3.10+ (gate + run lolos di 3.10 dan 3.12).
+ # PAPER_PROPOSALS_ENABLED TETAP False (ACC v0.3.1 hanya tahap read-only).
++# v0.3.3 (23 Nov 2026, re-audit v7 Instinct, 9,5/10, ACC read-only):
++# M1 — MAX_SQRT_RATIO diganti ke KONSTANTA KONTRAK TickMath.sol
++# (1461446703485210103287273052203988822378723970342, diverifikasi chief
++# ke Uniswap v3-core GitHub); nilai v0.3.2 adalah floor eksak RUMUS
++# (beda ~2,9e-8 relatif, arah konservatif). M2 — probe WAJIB sukses
++# (REQUIRE_PROBE_SUCCESS=True): probe gagal RPC = quote DITOLAK, bukan
++# dipakai inconclusive. M3 — `factory` disimpan di exit_quote snapshot
++# (transparansi). TIDAK ADA perubahan di luar M1-M3. PAPER_PROPOSALS_ENABLED
++# TETAP False (gate mati).
+ 
+ # ---------------------------------------------------------------- policy
+ # Threshold eksperimen (versioned, jelas berlabel BELUM TERVALIDASI).
+diff -ru '--exclude=out' '--exclude=evidence' '--exclude=fixtures' '--exclude=__pycache__' /tmp/v7code/base-prototype/gate.py /tmp/v8code/base-prototype/gate.py
+--- /tmp/v7code/base-prototype/gate.py	2026-11-22 23:38:10.000000000 +0800
++++ /tmp/v8code/base-prototype/gate.py	2026-11-23 00:12:10.000000000 +0800
+@@ -2134,14 +2134,14 @@
+         "v0.3.1; gate stays off, decision stays WATCH")
+ 
+ 
+-def test_quoter_f1_f2():
+-    """Regresi follow-up F1+F2+F3 re-audit v6 Instinct (22 Nov 2026).
++def test_quoter_f1_f2_m1_m3():
++    """Regresi follow-up F1+F2+F3 re-audit v6 + minor M1-M3 re-audit v7
++    Instinct (22-23 Nov 2026).
+ 
+     F1 (dari G3): deteksi partial-fill yang benar.
+       - MAX_SQRT_RATIO = nilai EXACT TickMath (v0.3.1 salah 1e9x).
+       - Double-quote probe: probe 2x amount_in; rasio < 1,5 = capped
+-        (partial fill) -> quote ditolak; rasio ~1,9 = sehat -> diterima;
+-        probe gagal RPC -> inconclusive, quote tetap dipakai.
++        (partial fill) -> quote ditolak; rasio ~1,9 = sehat -> diterima.
+       - Guard batas hanya exact-bound (min+1/max-1 lolos — keterbatasan
+         terdokumentasi, bukan bukti sehat).
+     F2 (dari G5): validator cap max_age milik quote ke QUOTE_VALIDITY_SEC.
+@@ -2149,6 +2149,11 @@
+       - Simulasi max_age raksasa + observed_at baru -> simulated_verified
+         TAPI max_age_sec di detail = 300 (dicap), klaim asli tercatat.
+     F3: factory Aerodrome V2 (0x420D...) -> aerodrome.
++    M1 (re-audit v7): MAX_SQRT_RATIO = KONSTANTA KONTRAK TickMath.sol
++      (bukan floor rumus); nilai v0.3.2 tidak lagi dipakai.
++    M2 (re-audit v7): probe WAJIB sukses — probe gagal RPC membuat quote
++      TIDAK usable (pool ditolak), bukan dipakai inconclusive.
++    M3 (re-audit v7): `factory` disimpan di exit_quote snapshot.
+     """
+     import adapter as _adapter
+     checks = []
+@@ -2156,12 +2161,19 @@
+     _USDC = config.USDC_NATIVE_BASE
+     _POOL = "0xF668e21993f0ACd7ab00BB1cFbAeD0df28A3C8EC"
+ 
+-    # ---- F1a: MAX_SQRT_RATIO exact TickMath ----
++    # ---- F1a: MAX_SQRT_RATIO (v0.3.2: floor eksak rumus; v0.3.3: M1 =
++    # konstanta KONTRAK TickMath.sol) ----
+     # floor(sqrt(1.0001^887272) * 2^96)
+     # = floor(10001^443636 * 2^96 / 10000^443636).
+     _exact_max = (pow(10001, 443636) * pow(2, 96)) // pow(10000, 443636)
+-    checks.append(("f1_max_sqrt_ratio_exact_tickmath",
+-                   config.MAX_SQRT_RATIO == _exact_max))
++    # M1: konfigurasi memakai konstanta kontrak (bukan floor rumus).
++    _contract_max = 1461446703485210103287273052203988822378723970342
++    checks.append(("m1_max_sqrt_ratio_is_contract_constant",
++                   config.MAX_SQRT_RATIO == _contract_max))
++    checks.append(("m1_formula_floor_not_used",
++                   config.MAX_SQRT_RATIO != _exact_max))
++    checks.append(("m1_contract_constant_larger_than_formula_floor",
++                   config.MAX_SQRT_RATIO > _exact_max))
+     checks.append(("f1_max_sqrt_ratio_49_digits",
+                    len(str(config.MAX_SQRT_RATIO)) == 49))
+     checks.append(("f1_min_sqrt_ratio_correct",
+@@ -2227,14 +2239,38 @@
+                                          _BASE_OUT / 1e6)
+         checks.append(("f1_probe_healthy_ratio_1_9_accepted",
+                        r["capped"] is False and abs(r["ratio"] - 1.9) < 0.01))
+-        # (iii) Probe gagal RPC -> inconclusive, TIDAK capped.
++        # (iii) Probe gagal RPC -> probe_ok False, TIDAK capped (bukan
++        # partial fill), TAPI M2 (v0.3.3): quote TIDAK usable — pool
++        # ditolak, bukan dipakai inconclusive.
+         _adapter.fetch_sell_quote = _mock_quote_factory(
+             probe_error="rpc_error:boom")
+         r = pipeline._partial_fill_probe(_POOL, _TOK, _BASE_IN,
+                                          _BASE_OUT / 1e6)
+-        checks.append(("f1_probe_rpc_fail_inconclusive_not_capped",
++        checks.append(("f1_probe_rpc_fail_not_capped_but_probe_not_ok",
+                        r["capped"] is False
++                       and r["probe_ok"] is False
+                        and r["info"]["error"] is not None))
++        checks.append(("m2_probe_rpc_fail_quote_not_usable",
++                       pipeline._probe_quote_usable(r) is False))
++        # M2: capped -> tidak usable; sehat -> usable; kebijakan lama
++        # (REQUIRE_PROBE_SUCCESS=False) -> probe gagal tetap usable
++        # (inconclusive, perilaku v0.3.2).
++        checks.append(("m2_capped_quote_not_usable",
++                       pipeline._probe_quote_usable(
++                           {"capped": True, "probe_ok": True}) is False))
++        checks.append(("m2_healthy_probe_quote_usable",
++                       pipeline._probe_quote_usable(
++                           {"capped": False, "probe_ok": True}) is True))
++        _old_req = config.REQUIRE_PROBE_SUCCESS
++        try:
++            config.REQUIRE_PROBE_SUCCESS = False
++            checks.append(("m2_old_policy_probe_fail_still_usable",
++                           pipeline._probe_quote_usable(
++                               {"capped": False, "probe_ok": False}) is True))
++        finally:
++            config.REQUIRE_PROBE_SUCCESS = _old_req
++        checks.append(("m2_require_probe_success_enabled",
++                       config.REQUIRE_PROBE_SUCCESS is True))
+         # (iv) Repro auditor: partial fill nyata (output ter-cap di
+         # likuiditas) — probe ratio ~1.0 -> capped.
+         _adapter.fetch_sell_quote = _mock_quote_factory(
+@@ -2298,15 +2334,55 @@
+                    config.FACTORY_VENUE.get(
+                        config.AERODROME_V2_FACTORY.lower()) == "aerodrome"))
+ 
++    # ---- M3: factory disimpan di exit_quote snapshot ----
++    _now = pipeline._iso(pipeline._now())
++    _ing = {
++        "meta": {"fetched_at": _now, "errors": {}, "sources": {}},
++        "coinbase_record": {"contract_address": _TOK, "symbol": "NVDAc",
++                            "nav_price": 132.97,
++                            "nav_price_updated_at": _now,
++                            "multiplier": 1.000538},
++        "dexscreener_pairs": [],
++        "geckoterminal_pool": None,
++        "geckoterminal_pool_address": None,
++        "hyperliquid": {},
++        "oracle_params": {"ok": False},
++        "pool_factories": {},
++        "sell_quote": {"ok": True, "amount_out_usd": 10500.54,
++                       "amount_in": 79.0, "amount_in_wei": 79 * 10 ** 8,
++                       "top_price_usd": 132.97, "top_pool": _POOL,
++                       "token_out": _USDC, "venue": "aerodrome",
++                       "factory": config.AERO_SLIPSTREAM_CL_FACTORY,
++                       "token0": _USDC, "token1": _TOK,
++                       "block_number": 60857668,
++                       "block_hash": "0x" + "ab" * 32,
++                       "sqrt_price_x96_after": 913300000000000000000000000000,
++                       "ticks_crossed": 1,
++                       "partial_fill_probe": {"ratio": 1.99,
++                                              "capped": False,
++                                              "probe_ok": True},
++                       "fetched_at": _now,
++                       "source": "aero-metaquoter-v3"},
++    }
++    _snap_m3 = pipeline.build_snapshot("NVDAc", ingested=_ing)
++    checks.append(("m3_exit_quote_factory_saved",
++                   _snap_m3["exit_quote"] is not None
++                   and _snap_m3["exit_quote"].get("factory")
++                   == config.AERO_SLIPSTREAM_CL_FACTORY))
++    checks.append(("m3_exit_quote_venue_still_saved",
++                   _snap_m3["exit_quote"] is not None
++                   and _snap_m3["exit_quote"].get("venue") == "aerodrome"))
++
+     failed = [c for c, ok in checks if not ok]
+     return _result(
+-        "quoter_f1_f2",
+-        "follow-up F1+F2+F3 re-audit v6: MAX TickMath exact, double-quote "
+-        "probe partial-fill, validator cap max_age, factory Aero V2",
++        "quoter_f1_f2_m1_m3",
++        "follow-up F1+F2+F3 re-audit v6 + minor M1-M3 re-audit v7: "
++        "MAX kontrak TickMath, double-quote probe, validator cap max_age, "
++        "factory Aero V2, probe wajib sukses, factory di exit_quote",
+         "%d/%d checks pass; failed: %s" % (len(checks) - len(failed),
+                                            len(checks), failed or "none"),
+         not failed,
+-        "v0.3.2; gate stays off, decision stays WATCH")
++        "v0.3.3; gate stays off, decision stays WATCH")
+ 
+ 
+ # -------------------------------------------------------------------- main
+@@ -2332,8 +2408,8 @@
+     ("quoter_adapter", test_quoter_adapter),
+     # Must-fix G1-G6 re-audit v5 (v0.3.1).
+     ("quoter_g1_g6", test_quoter_g1_g6),
+-    # Follow-up F1+F2+F3 re-audit v6 (v0.3.2).
+-    ("quoter_f1_f2", test_quoter_f1_f2),
++    # Follow-up F1+F2+F3 re-audit v6 + minor M1-M3 re-audit v7 (v0.3.3).
++    ("quoter_f1_f2_m1_m3", test_quoter_f1_f2_m1_m3),
+ ]
+ 
+ 
+Only in /tmp/v8code/base-prototype: package_v8.py
+diff -ru '--exclude=out' '--exclude=evidence' '--exclude=fixtures' '--exclude=__pycache__' /tmp/v7code/base-prototype/pipeline.py /tmp/v8code/base-prototype/pipeline.py
+--- /tmp/v7code/base-prototype/pipeline.py	2026-11-22 23:37:10.000000000 +0800
++++ /tmp/v8code/base-prototype/pipeline.py	2026-11-23 00:11:08.000000000 +0800
+@@ -562,40 +562,64 @@
+     """Double-quote probe (F1, re-audit v6): deteksi partial-fill yang benar.
+ 
+     Quote kedua dengan amount_in x PARTIAL_FILL_PROBE_MULTIPLIER (2x) di
+-    pool yang sama (block sama). Kembalikan {"capped", "ratio", "info"}:
++    pool yang sama (block sama). Kembalikan {"capped", "probe_ok", "ratio",
++    "info"}:
+     - capped=True bila ratio = probe_out / base_out < RATIO_MIN (1,5):
+       menggandakan input hampir tidak menambah output -> quote pertama
+       sudah di kapasitas pool (partial fill). Pool ditolak sebagai bukti exit.
+-    - capped=False bila ratio >= RATIO_MIN (sehat ~1,9) ATAU probe gagal
+-      (RPC error — inconclusive, quote pertama tetap dipakai; sanity ±10%
+-      di validator tetap berlaku). Probe TIDAK BOLEH menggagalkan quote
+-      valid karena RPC probe-nya sendiri bermasalah.
++    - probe_ok=True bila panggilan probe RPC berhasil dan mengembalikan
++      output positif yang valid; False bila probe gagal RPC / output
++      tidak valid (inconclusive). M2 (re-audit v7): bila REQUIRE_PROBE_SUCCESS
++      True, probe_ok=False membuat quote TIDAK usable (lihat
++      _probe_quote_usable) — pool ditolak, bukan dipakai inconclusive.
+     `info` = {"probe_amount_in_wei", "probe_amount_out_usd", "ratio",
+-    "capped", "error"} untuk transparansi di snapshot.
++    "capped", "probe_ok", "error"} untuk transparansi di snapshot.
+     """
+     mult = config.PARTIAL_FILL_PROBE_MULTIPLIER
+     probe_in_wei = int(amount_in_wei * mult)
+     info = {"probe_amount_in_wei": probe_in_wei,
+             "probe_amount_out_usd": None, "ratio": None,
+-            "capped": False, "error": None}
++            "capped": False, "probe_ok": False, "error": None}
+     if not base_amount_out_usd or base_amount_out_usd <= 0:
+         info["error"] = "base_amount_out_invalid"
+-        return {"capped": False, "ratio": None, "info": info}
++        return {"capped": False, "probe_ok": False, "ratio": None,
++                "info": info}
+     q = adapter.fetch_sell_quote(pool_address, token_address, probe_in_wei,
+                                  block=block)
+     if not q["ok"]:
+         info["error"] = str(q.get("error"))[:120]
+-        return {"capped": False, "ratio": None, "info": info}
++        return {"capped": False, "probe_ok": False, "ratio": None,
++                "info": info}
+     probe_out = q["amount_out_usd"]
+     info["probe_amount_out_usd"] = probe_out
+     if not probe_out or probe_out <= 0:
+         info["error"] = "probe_amount_out_invalid"
+-        return {"capped": False, "ratio": None, "info": info}
++        return {"capped": False, "probe_ok": False, "ratio": None,
++                "info": info}
+     ratio = probe_out / base_amount_out_usd
+     info["ratio"] = ratio
+     capped = ratio < config.PARTIAL_FILL_PROBE_RATIO_MIN
+     info["capped"] = capped
+-    return {"capped": capped, "ratio": ratio, "info": info}
++    info["probe_ok"] = True
++    return {"capped": capped, "probe_ok": True, "ratio": ratio, "info": info}
++
++
++def _probe_quote_usable(probe):
++    """Apakah quote pertama boleh dipakai sebagai bukti exit (M2)?
++
++    Usable bila probe TIDAK capped DAN probe berhasil (probe_ok). Bila
++    REQUIRE_PROBE_SUCCESS True (default, M2 re-audit v7), probe yang gagal
++    RPC membuat quote TIDAK usable — pool ditolak, bukan dipakai
++    inconclusive (pool tipis + kegagalan probe transien tidak boleh lolos
++    hanya dengan sanity ±10%). Bila REQUIRE_PROBE_SUCCESS False
++    (kebijakan lama v0.3.2), probe gagal = inconclusive, quote tetap
++    dipakai (sanity ±10% di validator tetap berlaku).
++    """
++    if probe.get("capped"):
++        return False
++    if config.REQUIRE_PROBE_SUCCESS and not probe.get("probe_ok"):
++        return False
++    return True
+ 
+ 
+ # ------------------------------------------------------------------ ingest
+@@ -720,18 +744,22 @@
+             # yang BENAR. Quote kedua dengan amount_in x MULTIPLIER di pool
+             # yang sama (block sama). Bila output probe / output pertama <
+             # RATIO_MIN, quote pertama sudah di kapasitas pool (partial
+-            # fill) -> tolak pool ini, coba pool berikutnya. Bila probe
+-            # gagal (RPC error), probe inconclusive — quote pertama tetap
+-            # dipakai (sanity ±10% di validator tetap berlaku); probe TIDAK
+-            # BOLEH menggagalkan quote valid karena RPC probe-nya sendiri
+-            # bermasalah. Hasil probe disimpan di sell_quote (transparan).
++            # fill) -> tolak pool ini, coba pool berikutnya. M2 (re-audit
++            # v7): probe WAJIB sukses (REQUIRE_PROBE_SUCCESS) — probe yang
++            # gagal RPC juga menolak pool ini (quote tidak usable), bukan
++            # dipakai inconclusive. Hasil probe disimpan di sell_quote
++            # (transparan).
+             probe = _partial_fill_probe(
+                 pool_addr, tok["token_address"], amount_in_wei,
+                 q["amount_out_usd"], block=block_pin)
+-            if probe["capped"]:
+-                meta["errors"]["quoter_partial_fill_probe:" + pool_addr.lower()] = (
+-                    "probe_ratio=%.3f<%.2f" % (
+-                        probe["ratio"], config.PARTIAL_FILL_PROBE_RATIO_MIN))
++            if not _probe_quote_usable(probe):
++                if probe["capped"]:
++                    meta["errors"]["quoter_partial_fill_probe:" + pool_addr.lower()] = (
++                        "probe_ratio=%.3f<%.2f" % (
++                            probe["ratio"], config.PARTIAL_FILL_PROBE_RATIO_MIN))
++                else:
++                    meta["errors"]["quoter_probe_failed:" + pool_addr.lower()] = (
++                        "probe_error=%s" % (probe["info"].get("error") or "unknown"))
+                 continue
+             sell_quote = {
+                 "ok": True, "amount_out_usd": q["amount_out_usd"],
+@@ -1015,6 +1043,7 @@
+             # (harga yang dipakai untuk mengukur jumlah quote).
+             "notional_usd": sq["amount_in"] * sq["top_price_usd"],
+             "pool": sq["top_pool"],
++            "factory": sq.get("factory"),
+             "sqrt_price_x96_after": sq.get("sqrt_price_x96_after"),
+             "ticks_crossed": sq.get("ticks_crossed"),
+             "token0": sq.get("token0"),
+Only in /tmp/v8code/base-prototype: verify_rpc_replay.py

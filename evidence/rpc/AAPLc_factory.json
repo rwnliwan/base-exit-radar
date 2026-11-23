@@ -1,0 +1,24 @@
+{
+  "block_number": 60868044,
+  "fetched_at": "2026-11-22T16:14:22Z",
+  "note": "factory() pool teratas pada block snapshot; harus cocok dengan snapshot pools[0].factory.",
+  "request": {
+    "id": 1,
+    "jsonrpc": "2.0",
+    "method": "eth_call",
+    "params": [
+      {
+        "data": "0xc45a0155",
+        "to": "0xF5FCB9CDAFcE67d50AfEf298F88E709d2B946BA6"
+      },
+      "0x3a0c5cc"
+    ]
+  },
+  "response": {
+    "id": 1,
+    "jsonrpc": "2.0",
+    "result": "0x0000000000000000000000009cb220581b91b0c83223012fe69688b92ad07a76"
+  },
+  "rpc_url": "https://mainnet.base.org",
+  "token": "AAPLc"
+}

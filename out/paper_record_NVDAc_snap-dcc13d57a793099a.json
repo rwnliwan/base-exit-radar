@@ -1,0 +1,170 @@
+{
+  "assessment": {
+    "confidence_basis": "pools=11 venues=6 fresh_pools=11 nav_age=39.9h session=off_hours exit_quote=simulated_verified proxy=present",
+    "coverage_recomputed": {
+      "canonical_venues": [
+        "aerodrome",
+        "equalizer",
+        "hydrex",
+        "nami",
+        "topaz",
+        "uniswap"
+      ],
+      "fallback_pool_count": 0,
+      "has_factory_data": true,
+      "recomputed_pool_count": 11,
+      "recomputed_venue_count": 6,
+      "stored_pool_count": 11,
+      "stored_venue_count": 6,
+      "verified_venue_count": 6,
+      "verified_venues": [
+        "aerodrome",
+        "equalizer",
+        "hydrex",
+        "nami",
+        "topaz",
+        "uniswap"
+      ]
+    },
+    "freshness": {
+      "eval_at": "2026-11-22T15:38:41Z",
+      "eval_context": "live",
+      "nav": {
+        "age_seconds": 143761,
+        "market_session": "closed",
+        "status": "stale"
+      },
+      "pool": {
+        "fresh_count": 11,
+        "max_age_min": 60,
+        "price_timestamp_unknown": true,
+        "stale_count": 0,
+        "unknown_timestamp_count": 0
+      },
+      "quote": {
+        "reason_codes": [],
+        "status": "simulated_verified"
+      }
+    },
+    "layer_a": {
+      "median_price_usd": 132.97,
+      "nav_gap_pct_labeled": {
+        "label": "dex_median_vs_last_published_nav",
+        "nav_age_seconds": 143761,
+        "note": "labeled_description_only_cause_and_exploitability_unproven",
+        "session_status": "off_hours",
+        "value_pct": 2.4226
+      },
+      "note": "",
+      "per_venue_deviation_pct": {
+        "0x19cCE0486BB8b36C525E74445A28A2449EE4b2BD": -2.5194,
+        "0x20E5fAd2661Ee9Eb0c04824524030AF31943B62D": -0.0752,
+        "0x337beA70489CD71a8C3951C1Aa49C637b4b9B122": 0.0,
+        "0x345D4337134A718B0F62C56ed5b82aF033e4237D": -1.6996,
+        "0x3e8126A4a5DF68DD9cCA675E8dc925B5FED70CA9": 0.0805,
+        "0x60661b315553EB81872deEA9a66d567Cf0CCd33B": 0.015,
+        "0x853F5f1B92b16714Fe6CDA67CAad0856B83C7ab9": 0.0,
+        "0x8e740D5Fa742B763cD82159894b9919eD57E4f70": -0.0226,
+        "0xCe56168C09f4B7FCa30523822C48008705C01156": 0.0308,
+        "0xF668e21993f0ACd7ab00BB1cFbAeD0df28A3C8EC": 0.0075,
+        "0xaf37c58BAaD0dF59bBAe19B7Ee17afC93Db8bDF5": -1.5492
+      }
+    },
+    "layer_b": {
+      "exit_quote": {
+        "amount_in": 78.95924199,
+        "amount_in_wei": 7895924199,
+        "amount_out_estimate": 10499.367432,
+        "block_hash": "0x46b82964349e5c62db81567902647d916558146bee9fccf506bc7db537354251",
+        "block_number": 60857668,
+        "chain": "base",
+        "kind": "onchain_simulation",
+        "max_age_sec": 300,
+        "notional_usd": 10499.9999998302,
+        "observed_at": "2026-11-22T15:38:40Z",
+        "partial_fill_probe": {
+          "capped": false,
+          "error": null,
+          "probe_amount_in_wei": 15791848398,
+          "probe_amount_out_usd": 20997.402924,
+          "ratio": 1.9998731409288586
+        },
+        "pool": "0xF668e21993f0ACd7ab00BB1cFbAeD0df28A3C8EC",
+        "side": "SELL",
+        "source": "aero-metaquoter-v3",
+        "sqrt_price_x96_after": 68699393232887746201348381122,
+        "ticks_crossed": 1,
+        "token0": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
+        "token1": "0xb20000000000000000000078ee7ce2fe4908108c",
+        "token_in": "0xb20000000000000000000078ee7ce2fE4908108C",
+        "token_out": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
+        "venue": "aerodrome"
+      },
+      "note": "onchain_simulation_validated_not_an_execution_commitment",
+      "quote_validation": {
+        "details": {
+          "block_hash": "0x46b82964349e5c62db81567902647d916558146bee9fccf506bc7db537354251",
+          "block_number": 60857668,
+          "computed_notional_usd": 10499.210407410299,
+          "evidence_class": "onchain_simulation",
+          "implied_price_usd": 132.97198867904177,
+          "kind": "onchain_simulation",
+          "max_age_claimed_sec": 300,
+          "max_age_sec": 300.0,
+          "median_price_usd": 132.97,
+          "note": "onchain_simulation_not_an_execution_commitment",
+          "notional_usd": 10499.9999998302,
+          "observed_at": "2026-11-22T15:38:40Z",
+          "venue": "aerodrome"
+        },
+        "reason_codes": [],
+        "status": "simulated_verified"
+      },
+      "status": "simulated_exit_quote_verified"
+    },
+    "layer_c": {
+      "note": "proxy_displayed_separately_does_not_trigger_token_exit_alert",
+      "proxy": {
+        "dex": "xyz",
+        "funding_raw": 8.8087e-06,
+        "funding_unit": "fraction/1h",
+        "instrument": "xyz:NVDA",
+        "label": "UNDERLYING EQUITY PERP PROXY",
+        "oi_change_24h": null,
+        "oi_unit": "base_asset_units",
+        "open_interest_raw": 3847118.217999999
+      }
+    },
+    "reason_codes": [
+      "dex_price_timestamp_unknown",
+      "dex_deviation_watch",
+      "nav_stale_off_hours"
+    ],
+    "snapshot_identity": {
+      "matches": true,
+      "recomputed_id": "snap-dcc13d57a793099a",
+      "stored_id": "snap-dcc13d57a793099a"
+    },
+    "status": "degraded"
+  },
+  "asset": "NVDAc",
+  "decision": "WATCH",
+  "decision_reasons": [
+    "dex_deviation_watch",
+    "nav_stale_off_hours"
+  ],
+  "explanation": "Decision WATCH under base-proto-policy v0.3.2 for NVDAc (chain base, contract 0xb20000000000000000000078ee7ce2fE4908108C). Reason codes: dex_deviation_watch, nav_stale_off_hours. Reference NAV (already multiplier-adjusted, NOT multiplied again): 129.82480034, updated 2026-11-20T23:42:40Z, age 143761 seconds, session off_hours. DEX median (independent pools=11, venues=6): 132.97 USD. Labeled description: DEX median is 2.4226% vs last published NAV (age 143761 seconds, session off_hours). Cause and exploitability unproven; not labeled a discount, mispricing, or arbitrage. Exit evidence: simulated_exit_quote_verified (sell quote from Aero Metaquoter V3, read-only eth_call; liquidity/TVL is not used as exit evidence). Oracle registry: multiplier 1.0005379395763696, paused False (read-only getOracleParams; paused = oracle feed frozen, not a transfer pause). Underlying context (UNDERLYING EQUITY PERP PROXY, separate): xyz:NVDA funding 8.8087e-06 fraction/1h, OI raw 3847118.217999999 base_asset_units. Proxy does not trigger a token-exit alert. Paper record: all simulated cash (cash_weight 1.0), no buy proposed. Holding cash is a valid outcome.",
+  "fetched_at": "2026-11-22T15:38:41Z",
+  "methodology_version": "base-proto-method v0.3.2",
+  "note": "Paper (simulated) decision only. No transaction, no fill, no return claim. Indicative prices only.",
+  "policy_version": "base-proto-policy v0.3.2",
+  "proposal": {
+    "cash_weight": 1.0,
+    "expiry_days": 7,
+    "horizon_days": 7,
+    "reason": "holding_all_simulated_cash_watch",
+    "simulation_notional": 10000.0,
+    "weights": {}
+  },
+  "snapshot_id": "snap-dcc13d57a793099a"
+}

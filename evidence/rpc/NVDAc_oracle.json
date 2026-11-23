@@ -1,0 +1,24 @@
+{
+  "block_number": 60867888,
+  "fetched_at": "2026-11-22T16:14:09Z",
+  "note": "getOracleParams(token) pada block snapshot; multiplier/paused harus cocok dengan snapshot oracle.",
+  "request": {
+    "id": 1,
+    "jsonrpc": "2.0",
+    "method": "eth_call",
+    "params": [
+      {
+        "data": "0xd4197e82000000000000000000000000b20000000000000000000078ee7ce2fe4908108c",
+        "to": "0x3f3E8cf41cdd3b1D118c16471aB0113DfDDd5CaD"
+      },
+      "0x3a0c530"
+    ]
+  },
+  "response": {
+    "id": 1,
+    "jsonrpc": "2.0",
+    "result": "0x0000000000000000000000000000000000000000000000000de29ff478c031490000000000000000000000000000000000000000000000000000000000000000"
+  },
+  "rpc_url": "https://mainnet.base.org",
+  "token": "NVDAc"
+}

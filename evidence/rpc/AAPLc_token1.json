@@ -1,0 +1,24 @@
+{
+  "block_number": 60868044,
+  "fetched_at": "2026-11-22T16:14:25Z",
+  "note": "token1() pool teratas pada block snapshot (G2 guard).",
+  "request": {
+    "id": 1,
+    "jsonrpc": "2.0",
+    "method": "eth_call",
+    "params": [
+      {
+        "data": "0xd21220a7",
+        "to": "0xF5FCB9CDAFcE67d50AfEf298F88E709d2B946BA6"
+      },
+      "0x3a0c5cc"
+    ]
+  },
+  "response": {
+    "id": 1,
+    "jsonrpc": "2.0",
+    "result": "0x000000000000000000000000b200000000000000000000c2e324d24d7eecd1fb"
+  },
+  "rpc_url": "https://mainnet.base.org",
+  "token": "AAPLc"
+}

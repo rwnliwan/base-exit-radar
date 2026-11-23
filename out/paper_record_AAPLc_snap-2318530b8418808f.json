@@ -1,0 +1,67 @@
+{
+  "assessment": {
+    "confidence_basis": "pools=6 venues=5 nav_age=34.5h session=off_hours exit_quote=absent proxy=present",
+    "layer_a": {
+      "median_price_usd": 348.855,
+      "nav_gap_pct_labeled": {
+        "label": "dex_median_vs_last_published_nav",
+        "nav_age_seconds": 124055,
+        "note": "labeled_description_only_cause_and_exploitability_unproven",
+        "session_status": "off_hours",
+        "value_pct": 1.0302
+      },
+      "note": "",
+      "per_venue_deviation_pct": {
+        "0x5D8a9bf50e2270C0C051Ef4A79a6Aa376A611E72": -0.3569,
+        "0x97F35d1E92795327614BE000cd18cba1Be2c1931": -0.096,
+        "0xA3b1E3f9747065e2073722Ff4c9027d3eA4994F0": 0.0989,
+        "0xBc9050D78d2D8d88F7536AF49d4007aEf469d7B4": 0.1276,
+        "0xF5FCB9CDAFcE67d50AfEf298F88E709d2B946BA6": 0.096,
+        "0xb75C6AEa6560eb5A649284eEa5CfF67F12639bB5": -1.5236
+      }
+    },
+    "layer_b": {
+      "exit_quote": null,
+      "note": "no_sell_quote_adapter_in_prototype",
+      "status": "indicative_only/exit_quality_unverified"
+    },
+    "layer_c": {
+      "note": "proxy_displayed_separately_does_not_trigger_token_exit_alert",
+      "proxy": {
+        "dex": "xyz",
+        "funding_raw": 6.70559e-05,
+        "funding_unit": "fraction/1h",
+        "instrument": "xyz:AAPL",
+        "label": "UNDERLYING EQUITY PERP PROXY",
+        "oi_change_24h": null,
+        "oi_unit": "base_asset_units",
+        "open_interest_raw": 294864.276
+      }
+    },
+    "reason_codes": [
+      "no_exit_quote_adapter",
+      "nav_stale_off_hours"
+    ],
+    "status": "degraded"
+  },
+  "asset": "AAPLc",
+  "decision": "WATCH",
+  "decision_reasons": [
+    "no_exit_quote_adapter",
+    "nav_stale_off_hours"
+  ],
+  "explanation": "Decision WATCH under base-proto-policy v0.1.0 for AAPLc (chain base, contract 0xb200000000000000000000C2e324d24d7eEcd1fb). Reason codes: no_exit_quote_adapter, nav_stale_off_hours. Reference NAV (already multiplier-adjusted, NOT multiplied again): 345.29769685, updated 2026-11-20T23:12:02Z, age 124055 seconds, session off_hours. DEX median (independent pools=6, venues=5): 348.855 USD. Labeled description: DEX median is 1.0302% vs last published NAV (age 124055 seconds, session off_hours). Cause and exploitability unproven; not labeled a discount, mispricing, or arbitrage. Exit evidence: indicative_only/exit_quality_unverified (no sell quote adapter in this prototype; liquidity/TVL is not used as exit evidence). Underlying context (UNDERLYING EQUITY PERP PROXY, separate): xyz:AAPL funding 6.70559e-05 fraction/1h, OI raw 294864.276 base_asset_units. Proxy does not trigger a token-exit alert. Paper record: all simulated cash (cash_weight 1.0), no buy proposed. Holding cash is a valid outcome.",
+  "fetched_at": "2026-11-22T09:39:37Z",
+  "methodology_version": "base-proto-method v0.1.0",
+  "note": "Paper (simulated) decision only. No transaction, no fill, no return claim. Indicative prices only.",
+  "policy_version": "base-proto-policy v0.1.0",
+  "proposal": {
+    "cash_weight": 1.0,
+    "expiry_days": 7,
+    "horizon_days": 7,
+    "reason": "holding_all_simulated_cash_watch",
+    "simulation_notional": 10000.0,
+    "weights": {}
+  },
+  "snapshot_id": "snap-2318530b8418808f"
+}

@@ -1,0 +1,131 @@
+{
+  "fetched_at": "2026-11-22T16:14:30Z",
+  "files": [
+    {
+      "block_number": 60867888,
+      "bytes": 1044,
+      "fetched_at": "2026-11-22T16:14:14Z",
+      "file": "NVDAc_quote.json",
+      "sha256": "df934dcba39b138fb14e2aa0df016c4d4e16a9ac82b3cce8823fc739b56b3a21"
+    },
+    {
+      "block_number": 60867888,
+      "bytes": 1054,
+      "fetched_at": "2026-11-22T16:14:14Z",
+      "file": "NVDAc_quote_probe.json",
+      "sha256": "7749d431b54892756e04cc537eda8fd327e51fbd3a345eed3a2253651fe73ac7"
+    },
+    {
+      "block_number": 60867888,
+      "bytes": 737,
+      "fetched_at": "2026-11-22T16:14:14Z",
+      "file": "NVDAc_oracle.json",
+      "sha256": "89fd9563e3f3de6865e99043af87eaa7cc344098c3fff424ddb6c7a9ebd0cb93"
+    },
+    {
+      "block_number": 60867888,
+      "bytes": 601,
+      "fetched_at": "2026-11-22T16:14:14Z",
+      "file": "NVDAc_factory.json",
+      "sha256": "49f63e07cc2d78dbfb0caf954116715ba508749ade4de1d2a7b447e1bdc4ff69"
+    },
+    {
+      "block_number": 60867888,
+      "bytes": 565,
+      "fetched_at": "2026-11-22T16:14:14Z",
+      "file": "NVDAc_token0.json",
+      "sha256": "6054b71cd86469a1075fefbc95c4a6657206700635c65162936b2b4df37b2e91"
+    },
+    {
+      "block_number": 60867888,
+      "bytes": 565,
+      "fetched_at": "2026-11-22T16:14:14Z",
+      "file": "NVDAc_token1.json",
+      "sha256": "a7eecfe855fa14df5e435f1a8682b328a6a441b36df22b5d2e5e3307ddd65627"
+    },
+    {
+      "block_number": 60867888,
+      "bytes": 572,
+      "fetched_at": "2026-11-22T16:14:14Z",
+      "file": "NVDAc_decimals_token_in.json",
+      "sha256": "f07b1b855c5d3149285237c9a10f7e945b2080e8be2c3eee122a38557ebd8fd3"
+    },
+    {
+      "block_number": 60867888,
+      "bytes": 573,
+      "fetched_at": "2026-11-22T16:14:14Z",
+      "file": "NVDAc_decimals_token_out.json",
+      "sha256": "84f335e417197a900a2de0e7e187784b230f8c1da27d25dc574ba64f79753578"
+    },
+    {
+      "block_number": 60867888,
+      "bytes": 3003,
+      "fetched_at": "2026-11-22T16:14:14Z",
+      "file": "NVDAc_block.json",
+      "sha256": "06476ae2e91398afdf0be60194a41ab3a16762062a332c1f8921fc22b7ee4c0e"
+    },
+    {
+      "block_number": 60868044,
+      "bytes": 1044,
+      "fetched_at": "2026-11-22T16:14:30Z",
+      "file": "AAPLc_quote.json",
+      "sha256": "629f9fc4071f8db97590a65f57506d93c9688d6fbff1aaf9e59182c628181d4b"
+    },
+    {
+      "block_number": 60868044,
+      "bytes": 1054,
+      "fetched_at": "2026-11-22T16:14:30Z",
+      "file": "AAPLc_quote_probe.json",
+      "sha256": "c84f55409ed36744ffe3ca0f405f553acbc9bffd57ae7454e6db606d40d82004"
+    },
+    {
+      "block_number": 60868044,
+      "bytes": 737,
+      "fetched_at": "2026-11-22T16:14:30Z",
+      "file": "AAPLc_oracle.json",
+      "sha256": "74712845bd7d5f3db53e02f082b0636be316e7f5fc34cb7ce7ff6c420ab1df4c"
+    },
+    {
+      "block_number": 60868044,
+      "bytes": 601,
+      "fetched_at": "2026-11-22T16:14:30Z",
+      "file": "AAPLc_factory.json",
+      "sha256": "74868169010ec883b17bdca5edb1659777baf9d48b0bbdc61d9a0866c4082455"
+    },
+    {
+      "block_number": 60868044,
+      "bytes": 565,
+      "fetched_at": "2026-11-22T16:14:30Z",
+      "file": "AAPLc_token0.json",
+      "sha256": "073b450ab46ad3e19a05ef2f1499878d378481fe4d1534f14ab1d698ca0b7223"
+    },
+    {
+      "block_number": 60868044,
+      "bytes": 565,
+      "fetched_at": "2026-11-22T16:14:30Z",
+      "file": "AAPLc_token1.json",
+      "sha256": "75dd0d07bb9f6b909a152000b2db6575afb6c9c1db584be84f8cea9dfb0b1893"
+    },
+    {
+      "block_number": 60868044,
+      "bytes": 572,
+      "fetched_at": "2026-11-22T16:14:30Z",
+      "file": "AAPLc_decimals_token_in.json",
+      "sha256": "9e2a7728d76ff9bc5e929cda18814aee251053c062a4e58df21b8bbed301b321"
+    },
+    {
+      "block_number": 60868044,
+      "bytes": 573,
+      "fetched_at": "2026-11-22T16:14:30Z",
+      "file": "AAPLc_decimals_token_out.json",
+      "sha256": "8cb1b7d0d7ac6a03c4454aca0bcf70f17b4973c75307f6e7c29c6fcdfba9c944"
+    },
+    {
+      "block_number": 60868044,
+      "bytes": 3315,
+      "fetched_at": "2026-11-22T16:14:30Z",
+      "file": "AAPLc_block.json",
+      "sha256": "e86ae63b50554b05fad63f3069761e0ef19e37d9c5be8c79813332c985d96176"
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "alert_id": "alert-22d4f481d0e206bb",
+  "assessment_status": "degraded",
+  "asset": "NVDAc",
+  "decision": "WATCH",
+  "emitted_at": "2026-11-22T13:45:28Z",
+  "exit_evidence": "indicative_only/exit_quality_unverified",
+  "median_price_usd": 132.94,
+  "mode": "live",
+  "nav_gap_pct_labeled": {
+    "label": "dex_median_vs_last_published_nav",
+    "nav_age_seconds": 136961,
+    "note": "labeled_description_only_cause_and_exploitability_unproven",
+    "session_status": "off_hours",
+    "value_pct": 2.3995
+  },
+  "note": "Local alert only. Not sent to any production channel.",
+  "proxy_label": "UNDERLYING EQUITY PERP PROXY",
+  "reasons": [
+    "dex_deviation_watch",
+    "exit_quote_missing",
+    "nav_stale_off_hours",
+    "no_exit_quote_adapter"
+  ],
+  "rule_version": "base-proto-policy v0.2.1",
+  "snapshot_id": "snap-1d3c5a93307a9972"
+}

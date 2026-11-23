@@ -1,0 +1,136 @@
+{
+  "assessment": {
+    "confidence_basis": "pools=6 venues=5 fresh_pools=6 nav_age=39.4h session=off_hours exit_quote=verified proxy=present",
+    "coverage_recomputed": {
+      "canonical_venues": [
+        "aerodrome",
+        "dromos",
+        "equalizer",
+        "hydrex",
+        "uniswap"
+      ],
+      "recomputed_pool_count": 6,
+      "recomputed_venue_count": 5,
+      "stored_pool_count": 6,
+      "stored_venue_count": 5
+    },
+    "freshness": {
+      "eval_at": "2026-11-22T14:35:35Z",
+      "eval_context": "live",
+      "nav": {
+        "age_seconds": 141813,
+        "market_session": "closed",
+        "status": "stale"
+      },
+      "pool": {
+        "fresh_count": 6,
+        "max_age_min": 60,
+        "price_timestamp_unknown": true,
+        "stale_count": 0,
+        "unknown_timestamp_count": 0
+      },
+      "quote": {
+        "reason_codes": [],
+        "status": "verified"
+      }
+    },
+    "layer_a": {
+      "median_price_usd": 349.80150000000003,
+      "nav_gap_pct_labeled": {
+        "label": "dex_median_vs_last_published_nav",
+        "nav_age_seconds": 141813,
+        "note": "labeled_description_only_cause_and_exploitability_unproven",
+        "session_status": "off_hours",
+        "value_pct": 1.3043
+      },
+      "note": "",
+      "per_venue_deviation_pct": {
+        "0x5D8a9bf50e2270C0C051Ef4A79a6Aa376A611E72": 2.055,
+        "0x97F35d1E92795327614BE000cd18cba1Be2c1931": 0.0968,
+        "0xA3b1E3f9747065e2073722Ff4c9027d3eA4994F0": -0.0748,
+        "0xBc9050D78d2D8d88F7536AF49d4007aEf469d7B4": 0.0748,
+        "0xF5FCB9CDAFcE67d50AfEf298F88E709d2B946BA6": -0.0833,
+        "0xb75C6AEa6560eb5A649284eEa5CfF67F12639bB5": -1.79
+      }
+    },
+    "layer_b": {
+      "exit_quote": {
+        "amount_in": 30.04205888243541,
+        "amount_out_min": 10497.6988,
+        "chain": "base",
+        "expires_at": "2026-11-22T14:40:52Z",
+        "kind": "firm",
+        "notional_usd": 10500.0,
+        "pool": "0xF5FCB9CDAFcE67d50AfEf298F88E709d2B946BA6",
+        "quoted_at": "2026-11-22T14:35:52Z",
+        "side": "SELL",
+        "source": "dromos-metaquoter-v3",
+        "sqrt_price_x96_after": 42381684975185648734804470632,
+        "ticks_crossed": 1,
+        "token_in": "0xb200000000000000000000C2e324d24d7eEcd1fb",
+        "token_out": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+        "venue": "dromos"
+      },
+      "note": "sell_quote_validated",
+      "quote_validation": {
+        "details": {
+          "computed_notional_usd": 10508.757260164231,
+          "expires_at": "2026-11-22T14:40:52Z",
+          "implied_price_usd": 349.4334007226667,
+          "kind": "firm",
+          "median_price_usd": 349.80150000000003,
+          "notional_usd": 10500.0,
+          "quoted_at": "2026-11-22T14:35:52Z",
+          "venue": "dromos"
+        },
+        "reason_codes": [],
+        "status": "verified"
+      },
+      "status": "verified"
+    },
+    "layer_c": {
+      "note": "proxy_displayed_separately_does_not_trigger_token_exit_alert",
+      "proxy": {
+        "dex": "xyz",
+        "funding_raw": -2.47551e-05,
+        "funding_unit": "fraction/1h",
+        "instrument": "xyz:AAPL",
+        "label": "UNDERLYING EQUITY PERP PROXY",
+        "oi_change_24h": null,
+        "oi_unit": "base_asset_units",
+        "open_interest_raw": 294760.37
+      }
+    },
+    "reason_codes": [
+      "dex_price_timestamp_unknown",
+      "dex_deviation_watch",
+      "nav_stale_off_hours"
+    ],
+    "snapshot_identity": {
+      "matches": true,
+      "recomputed_id": "snap-96074cc749c662b8",
+      "stored_id": "snap-96074cc749c662b8"
+    },
+    "status": "degraded"
+  },
+  "asset": "AAPLc",
+  "decision": "WATCH",
+  "decision_reasons": [
+    "dex_deviation_watch",
+    "nav_stale_off_hours"
+  ],
+  "explanation": "Decision WATCH under base-proto-policy v0.3.0 for AAPLc (chain base, contract 0xb200000000000000000000C2e324d24d7eEcd1fb). Reason codes: dex_deviation_watch, nav_stale_off_hours. Reference NAV (already multiplier-adjusted, NOT multiplied again): 345.29769685, updated 2026-11-20T23:12:02Z, age 141813 seconds, session off_hours. DEX median (independent pools=6, venues=5): 349.80150000000003 USD. Labeled description: DEX median is 1.3043% vs last published NAV (age 141813 seconds, session off_hours). Cause and exploitability unproven; not labeled a discount, mispricing, or arbitrage. Exit evidence: verified (sell quote from Dromos Metaquoter V3, read-only eth_call; liquidity/TVL is not used as exit evidence). Oracle registry: multiplier 1.0005003893019802, paused False (read-only getOracleParams; paused = oracle feed frozen, not a transfer pause). Underlying context (UNDERLYING EQUITY PERP PROXY, separate): xyz:AAPL funding -2.47551e-05 fraction/1h, OI raw 294760.37 base_asset_units. Proxy does not trigger a token-exit alert. Paper record: all simulated cash (cash_weight 1.0), no buy proposed. Holding cash is a valid outcome.",
+  "fetched_at": "2026-11-22T14:35:35Z",
+  "methodology_version": "base-proto-method v0.3.0",
+  "note": "Paper (simulated) decision only. No transaction, no fill, no return claim. Indicative prices only.",
+  "policy_version": "base-proto-policy v0.3.0",
+  "proposal": {
+    "cash_weight": 1.0,
+    "expiry_days": 7,
+    "horizon_days": 7,
+    "reason": "holding_all_simulated_cash_watch",
+    "simulation_notional": 10000.0,
+    "weights": {}
+  },
+  "snapshot_id": "snap-96074cc749c662b8"
+}
