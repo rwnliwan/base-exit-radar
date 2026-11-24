@@ -2,7 +2,7 @@
   "failed": 0,
   "gate": "base-prototype \u00a77 + audit regression A-D",
   "methodology_version": "base-proto-method v0.3.3",
-  "passed": 19,
+  "passed": 27,
   "policy_version": "base-proto-policy v0.3.3",
   "results": [
     {
@@ -137,17 +137,73 @@
       "expected": "follow-up F1+F2+F3 re-audit v6 + minor M1-M3 re-audit v7: MAX kontrak TickMath, double-quote probe, validator cap max_age, factory Aero V2, probe wajib sukses, factory di exit_quote",
       "pass": true,
       "test": "quoter_f1_f2_m1_m3"
+    },
+    {
+      "actual": "7/7 quotes blocked; failed: none",
+      "details": "rule 3 decide(): gate OFF holds every quote",
+      "expected": "gate OFF: firm valid + simulasi valid + indikatif + null/empty -> bukan PAPER_PROPOSAL; kasus bersih ditahan aturan 3 (paper_proposals_disabled)",
+      "pass": true,
+      "test": "s1g_gate_off_blocks_all_quotes"
+    },
+    {
+      "actual": "6/6 sim cases blocked by rule 4 + control firm PAPER_PROPOSAL; failed: none",
+      "details": "rule 4 decide(): simulated evidence never activates a proposal",
+      "expected": "gate ON (isolated): simulasi valid -> WATCH exit_evidence_simulated_not_firm; kontrol firm valid -> PAPER_PROPOSAL; gate dipulihkan ke False",
+      "pass": true,
+      "test": "s1g_gate_on_isolated_blocks_simulation"
+    },
+    {
+      "actual": "4/4 checks pass; live=False assignments=1; failed: none",
+      "details": "config.py:269 PAPER_PROPOSALS_ENABLED = False",
+      "expected": "PAPER_PROPOSALS_ENABLED is False (live value + single literal False assignment in config.py source)",
+      "pass": true,
+      "test": "s1g_paper_proposals_enabled_false"
+    },
+    {
+      "actual": "18/18 variant x gate-state runs never PAPER_PROPOSAL; failed: none",
+      "details": "9 simulation variants x 2 gate states = 18 runs",
+      "expected": "every simulation variant (any content) -> never PAPER_PROPOSAL, cash_weight 1.0, under gate OFF and gate ON (isolated)",
+      "pass": true,
+      "test": "s1g_simulation_never_paper_proposal"
+    },
+    {
+      "actual": "source_sha256=9fbaae011f040bbc317acf7b51f4a8c08bd3340a12c597a8fa25b57eff2d12c4 (recorded 9fbaae011f040bbc317acf7b51f4a8c08bd3340a12c597a8fa25b57eff2d12c4); ast_sha256=2d8b5447749c438870d4b47fcd76f4ef38c77701686de8a13e32d1d75a3afc5f (informational only \u2014 ast.dump varies by Python version); module=pipeline; lines=71",
+      "details": "guard: source_sha256 of inspect.getsource(decide) + module check",
+      "expected": "decide() source_sha256 matches the S1-G recording (no change since 24 Nov 2026)",
+      "pass": true,
+      "test": "s1g_decide_source_guard"
+    },
+    {
+      "actual": "43/43 checks pass; failed: none",
+      "details": "S1-B: venue census method + per-pool filter \u00a71.2b + session \u00a71.4b",
+      "expected": "V3/V4 classification agrees (labels+length); quote USDC by address; thin pools excluded from median + counted separately; early-close calendar + strata; market_session separate from NAV freshness",
+      "pass": true,
+      "test": "s1b_venue_filter_session"
+    },
+    {
+      "actual": "25/25 checks pass; failed: none",
+      "details": "S1-D: manifest run harian + verify_daily_runs.py + ketahanan run",
+      "expected": "manifest harian \u00a71.4 lolos verify_daily_runs (aturan (b) sesi-aware); tiap mutasi tunggal gagal (fail-closed); strata 26-30 Nov benar; helper run.py benar",
+      "pass": true,
+      "test": "s1d_daily_manifest_verify"
+    },
+    {
+      "actual": "46/46 checks pass; failed: none",
+      "details": "v4 poolId fixture NVDAc; StateView 0xA3c0c9b65baD0b08107Aa264b0f3dB444b867A71; PoolManager 0x498581fF718922c3f8e6A244956aF099B2652b2b",
+      "expected": "S1-C \u00a71.3 v1.1: fixture poolId V4 lolos build->assess->decide->public->replay->feed tanpa KeyError; dedup/count/deviasi benar; venue_verified TIDAK PERNAH true untuk poolId; validasi StateView (sqrtPriceX96 initialize + PoolKey keccak256) lolos; decide() tidak disentuh",
+      "pass": true,
+      "test": "s1c_v4_canonical_identity"
     }
   ],
-  "run_at": "2026-11-22T16:12:17Z",
+  "run_at": "2026-11-24T03:56:00Z",
   "schema_version": "base-proto-schema v0.3.3",
   "source_identity": {
-    "adapter.py": "083b1342acea92d0c5aa399e7af0962db9e4b21e4be0a6613b90553cbe591abf",
+    "adapter.py": "bcb745f731771c1bb1ffe2c8d0f5adf104e9f968318c504125400f0ed887ec20",
     "capture_evidence.py": "601386c52863e21c3102d2875a3be14b9011c357c337a971cbbbb833daff5853",
-    "config.py": "bd863b8aeaccfb494b34cb0db0e560556882afed782f3cdc1aeb013313b805f2",
-    "gate.py": "0eaefa0651415b014df73a999e5980d6ff75ff9c0b53cc2faed1741bc8dcba35",
-    "pipeline.py": "e891f228663d60414508a1ce63c74392ee6bcbc8f652ce79fd605a83b47c6b8e",
-    "run.py": "9820fa43fb97527383086c651731a2a793f67acdeddefea1624114f4af393cb5"
+    "config.py": "cbda38b83b23849f7fbdf9615da4fed6d7f91d3a7a7f8b2e4ba63ec8c56e60bc",
+    "gate.py": "2c651118519f0ad1d9c4f67ba96ea8670783cce6ddb5699284c2f1adbda81d29",
+    "pipeline.py": "f02fbb0e2e5793f0b09f0061799fbf103149643c0488ee892e75e771133fc709",
+    "run.py": "933dc812a51f40032052d96758d2f983d923cec8feb82d0b47290117f6a1849e"
   },
   "test_config": {
     "dev_abstain_pct": 5.0,
@@ -162,5 +218,5 @@
     "quote_max_age_sec": 300,
     "simulation_notional_usd": 10000.0
   },
-  "total": 19
+  "total": 27
 }

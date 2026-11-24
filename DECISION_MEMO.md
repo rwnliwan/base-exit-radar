@@ -8,6 +8,24 @@ exit_quote, replay RPC byte-exact 18/18). Memo ini untuk keputusan ACC
 Alex (Septian) atas fase berikutnya. **Lolos gate bukan izin otomatis
 melanjutkan.**
 
+## UPDATE — 24 Nov 2026 (~12:00 WITA)
+
+**Gate 27/27 PASS** (19 lama + 8 baru Scope 1: S1-B 43/43, S1-C 46/46,
+S1-D 25/25, S1-G 5 tes integritas). Scope 1 S1-A–S1-D selesai; cron
+harian `base-exit-radar-daily-run` terpasang (23:00 WITA, run pertama
+yang dihitung 26 Nov; run 24–25 Nov rehearsal). **Re-audit Instinct
+24 Nov 11:47 WITA: 8,5/10, 2 must-fix — keduanya diperbaiki dan
+di-commit hari yang sama:** (1) guard decide() kini source-sha saja
+(hash AST dihapus dari guard — ast.dump bergantung versi Python,
+gate 26/27 di 3.10); (2) hasil gate diregenerasi (27/27) dan README
+diperbarui. Bukti firm tetap 0/8 (0x 422 legal restriction, 1inch
+swap 400); Uniswap Trading API di-skip (ACC 24 Nov). `decide()` TIDAK
+berubah (source-sha 9fbaae01... cocok); `PAPER_PROPOSALS_ENABLED`
+TETAP False. Deadline submit: halaman resmi Base menyebut 12 Des
+2026 (submit), sementara rencana ini menarget 5 Des — Instinct sedang
+memverifikasi; rencana TIDAK diubah sampai ada kabar (target 5 Des
+lebih awal = aman).
+
 ## CURRENT_STATUS (23 Nov 00:15 WITA — v0.3.3, BELUM ACC)
 
 **Re-audit v7 Instinct (22 Nov 23:52 WITA): 9,5/10 — ACC v0.3.2 untuk tahap

@@ -2442,23 +2442,34 @@ def test_quoter_f1_f2_m1_m3():
 # S1-G (rencana eksekusi Scope 1 v1.1 §5, kill-switch kriteria 5):
 # tes integritas gate — dikerjakan SEBELUM merge pertama, gerbang untuk
 # semua merge berikutnya. Dua penahan diuji TERPISAH (aturan 3 decide():
-# gate OFF; aturan 4: bukti simulasi bukan firm), guard hash/AST untuk
+# gate OFF; aturan 4: bukti simulasi bukan firm), guard hash untuk
 # decide(), nilai PAPER_PROPOSALS_ENABLED dibaca dari config, dan quote
 # simulasi (apa pun isinya) TIDAK PERNAH -> PAPER_PROPOSAL.
 #
 # Rekaman decide() saat ini (pipeline.py, HEAD 4a47a4c, 24 Nov 2026):
-# dihitung dari inspect.getsource(pipeline.decide) — sha256 teks sumber
-# + sha256 ast.dump(ast.parse(sumber)). Bila source decide() berubah
-# (edit, rename, monkeypatch saat import), tes guard GAGAL.
+# dihitung dari inspect.getsource(pipeline.decide) — sha256 teks sumber.
+# Bila source decide() berubah (edit, rename, monkeypatch saat import),
+# tes guard GAGAL. Perubahan semantik SELALU mengubah byte sumber, jadi
+# source-sha menangkap setiap perubahan decide() — tidak ada celah yang
+# ditutup oleh hash AST.
+# Catatan 24 Nov 2026 (re-audit Instinct, 8,5/10): hash AST DIHAPUS dari
+# guard. ast.dump() BERBEDA antar versi Python (3.12 menambah node
+# type_params dkk. pada FunctionDef), jadi hash AST yang direkam di 3.12
+# (2d8b5447...) gagal di 3.10 (ec2ae18a...) padahal source byte-identik —
+# gate 26/27 di 3.10. Hash AST masih dihitung dan ditampilkan sebagai
+# INFO diagnostik saja, bukan input lulus/gagal. Tidak dipakai himpunan
+# hash per versi: juri di 3.11/3.13 tetap akan gagal.
 _DECIDE_SOURCE_SHA256 = (
     "9fbaae011f040bbc317acf7b51f4a8c08bd3340a12c597a8fa25b57eff2d12c4")
-_DECIDE_AST_SHA256 = (
-    "2d8b5447749c438870d4b47fcd76f4ef38c77701686de8a13e32d1d75a3afc5f")
 
 
 def _decide_guard():
-    """Bandingkan source + AST live pipeline.decide() dengan rekaman S1-G.
-    Return (ok, detail). Dipakai tes gate dan scripts/guard_decide.py."""
+    """Bandingkan source live pipeline.decide() dengan rekaman S1-G.
+    Guard = source_sha256 + modul. Hash AST dihitung dan ditampilkan
+    sebagai INFO diagnostik saja — ast.dump() berbeda antar versi
+    Python, jadi TIDAK dipakai sebagai input lulus/gagal (lihat catatan
+    di atas _DECIDE_SOURCE_SHA256). Return (ok, detail). Dipakai tes
+    gate dan scripts/guard_decide.py."""
     import ast as _ast
     import inspect as _inspect
     try:
@@ -2473,12 +2484,12 @@ def _decide_guard():
     except SyntaxError as e:
         return False, "decide() source unparseable: %s" % e
     ok = (src_hash == _DECIDE_SOURCE_SHA256
-          and ast_hash == _DECIDE_AST_SHA256
           and pipeline.decide.__module__ == "pipeline")
-    return ok, ("source_sha256=%s (recorded %s); ast_sha256=%s (recorded %s); "
+    return ok, ("source_sha256=%s (recorded %s); ast_sha256=%s "
+                "(informational only — ast.dump varies by Python version); "
                 "module=%s; lines=%d"
                 % (src_hash, _DECIDE_SOURCE_SHA256, ast_hash,
-                   _DECIDE_AST_SHA256, pipeline.decide.__module__,
+                   pipeline.decide.__module__,
                    len(src.splitlines())))
 
 
@@ -2739,17 +2750,19 @@ def test_s1g_simulation_never_paper_proposal():
 
 
 def test_s1g_decide_source_guard():
-    """S1-G: guard hash/AST decide() — GAGAL bila source decide() berubah
+    """S1-G: guard hash decide() — GAGAL bila source decide() berubah
     dari rekaman (edit, rename, monkeypatch). Hash direkam 24 Nov 2026
-    dari pipeline.py HEAD 4a47a4c; perbandingan dihitung tiap run gate."""
+    dari pipeline.py HEAD 4a47a4c; perbandingan dihitung tiap run gate.
+    Guard = source_sha256 saja (hash AST hanya info diagnostik — ia
+    berbeda antar versi Python, lihat catatan di _decide_guard)."""
     ok, detail = _decide_guard()
     return _result(
         "s1g_decide_source_guard",
-        "decide() source + AST hashes match the S1-G recording "
+        "decide() source_sha256 matches the S1-G recording "
         "(no change since 24 Nov 2026)",
         detail,
         ok,
-        "guard: source_sha256 + ast_sha256 of inspect.getsource(decide)")
+        "guard: source_sha256 of inspect.getsource(decide) + module check")
 
 
 def test_s1b_venue_filter_session():

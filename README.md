@@ -32,8 +32,8 @@ python3 run.py --token NVDAc
 # Replay snapshot tersimpan (mode TEST/REPLAY, tanpa fetch)
 python3 run.py --replay fixtures/snapshot_live_20261122_NVDAc.json
 
-# Gate alert end-to-end (§7 brief + regression pasca-audit): 19 tes,
-# harus 19/19 PASS. Gate memakai evidence/ sebagai sumber mock adapter —
+# Gate alert end-to-end (§7 brief + regression pasca-audit): 27 tes,
+# harus 27/27 PASS. Gate memakai evidence/ sebagai sumber mock adapter —
 # folder evidence/ ikut di dalam zip code, jadi gate jalan dari code zip
 # saja tanpa perlu merge zip evidence terpisah.
 python3 gate.py
@@ -58,8 +58,8 @@ Output ditulis ke `out/` (lokal saja):
 | `out/paper_record_<symbol>_<snapshot_id>.json` | Paper record + snapshot yang mendasarinya |
 | `out/alert_<alert_id>.json` | Payload alert (hanya bila alert baru) |
 | `out/alerts_seen.json` | Dedup store lokal (ID alert yang sudah emitido) |
-| `out/gate_results.json` | Hasil 19 tes gate (JSON, memuat run time, sha256 source, test config) |
-| `out/gate_log.md` | Hasil 19 tes gate (Markdown, ringkas) |
+| `out/gate_results.json` | Hasil 27 tes gate (JSON, memuat run time, sha256 source, test config) |
+| `out/gate_log.md` | Hasil 27 tes gate (Markdown, ringkas) |
 
 Tidak ada yang dikirim ke Telegram produksi, tidak ada post publik, tidak ada
 perubahan ke Radar produksi. Semua alert hanya file/console lokal.
@@ -72,7 +72,7 @@ perubahan ke Radar produksi. Semua alert hanya file/console lokal.
 | `adapter.py` | Adapter data publik read-only (Coinbase, DexScreener, GeckoTerminal, Hyperliquid) |
 | `pipeline.py` | Ingest → validate → assess → decide → explain → alert → paper record |
 | `run.py` | Runner live / replay |
-| `gate.py` | Gate 19 tes (§7 + regression pasca-audit A-D + quoter v0.3.0 + G1-G6 v0.3.1 + F1/F2/F3 v0.3.2 + M1/M2/M3 v0.3.3: quote validation, freshness, coverage recomputed, dedup persistence, happy-path kedua token, NAV/multiplier build, quoter adapter, quoter_g1_g6, quoter_f1_f2_m1_m3) |
+| `gate.py` | Gate 27 tes (§7 + regression pasca-audit A-D + quoter v0.3.0 + G1-G6 v0.3.1 + F1/F2/F3 v0.3.2 + M1/M2/M3 v0.3.3 + Scope 1 S1-B/S1-C/S1-D/S1-G: quote validation, freshness, coverage recomputed, dedup persistence, happy-path kedua token, NAV/multiplier build, quoter adapter, quoter_g1_g6, quoter_f1_f2_m1_m3, venue/session, identitas kanonis, verifikasi manifest harian, integritas gate) |
 | `capture_evidence.py` | Capture evidence mentah + manifest hash (manual, bukan bagian gate) |
 | `capture_rpc_evidence.py` | Capture RPC transcript (raw eth_call + block + calldata) + manifest hash (manual, bukan bagian gate) |
 | `fixtures/` | Snapshot live 22 Nov 2026 + 5 fixture uji terkontrol |
@@ -81,7 +81,23 @@ perubahan ke Radar produksi. Semua alert hanya file/console lokal.
 | `DESIGN.md` | Design note (flow, data mapping, policy, threshold, coverage, asumsi) |
 | `DECISION_MEMO.md` | Decision memo (lulus/gagal/unknown, sisa pekerjaan, GO terbatas atau STOP) |
 
-## Status terakhir (terverifikasi 23 Nov 2026 ~00:15 WITA, run live v0.3.3)
+## Status terakhir (terverifikasi 24 Nov 2026 ~12:00 WITA, Scope 1 S1-D + fix guard)
+
+- Gate: **27/27 PASS** (`python3 gate.py`) — 19 lama + 8 baru Scope 1
+  (S1-B venue/session 43/43, S1-C identitas kanonis 46/46, S1-D verifikasi
+  manifest harian 25/25, S1-G integritas gate 5 tes). Versi
+  policy/method/schema v0.3.3 (tidak berubah).
+- **Re-audit Instinct (24 Nov 11:47 WITA, skor 8,5/10 — 2 must-fix,
+  keduanya diperbaiki dan di-commit hari yang sama):** (1) guard decide()
+  gagal di Python 3.10 karena hash AST bergantung versi — guard kini
+  source-sha saja (hash AST hanya info diagnostik); (2)
+  `out/gate_results.json` dan README masih 19/19 tanggal 22 Nov —
+  diregenerasi dan di-commit sesudah fix (1), kini 27/27. Sensus live
+  24 Nov: 415/415 token tanpa error; bukti firm 0/8 konsisten; cron
+  harian 23:00 WITA terpasang (run pertama yang dihitung 26 Nov);
+  gate proposal tetap mati.
+
+### Arsip — status 23 Nov 2026 (run live v0.3.3)
 
 - Gate: **19/19 PASS** (`python3 gate.py`) — 18 lama + 1 baru
   `quoter_f1_f2_m1_m3` (22/22: follow-up F1+F2+F3 re-audit v6 + minor

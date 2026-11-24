@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """Guard standalone untuk decide() (S1-G, rencana Scope 1 v1.1 §5).
 
-Membandingkan source + AST live pipeline.decide() dengan hash yang
-direkam di gate.py (_DECIDE_SOURCE_SHA256 / _DECIDE_AST_SHA256).
+Membandingkan source live pipeline.decide() dengan hash yang direkam di
+gate.py (_DECIDE_SOURCE_SHA256). Guard = source_sha256 + modul; hash AST
+hanya info diagnostik (ast.dump berbeda antar versi Python).
 Keluar 0 bila cocok, 1 bila decide() berubah (atau tidak terbaca).
 
 Penggunaan:
