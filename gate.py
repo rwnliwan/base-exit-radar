@@ -2699,6 +2699,286 @@ def test_s1g_decide_source_guard():
         "guard: source_sha256 + ast_sha256 of inspect.getsource(decide)")
 
 
+def test_s1b_venue_filter_session():
+    """S1-B: sensus venue + filter per-pool §1.2b + _market_session early-close.
+
+    (a) Klasifikasi V3/V4: labels + panjang pairAddress harus cocok;
+    konflik ditandai, bukan ditebak; venue non-Uniswap = not_applicable.
+    (b) Filter per-pool: quote USDC by ALAMAT (literal, bukan config —
+    pola F1); pool tipis (<$1.000) dilabeli thin_pool, dieksklusi dari
+    median, dihitung terpisah. (c) _market_session: early close 27 Nov +
+    24 Des tutup 13:00 ET; strata active/off_hours; market_session
+    kalender TERPISAH dari session_status (freshness NAV)."""
+    import adapter as _adapter
+    checks = []
+
+    # ---- (a) classifier unit cases (literal, tanpa config)
+    def _pair(dex, labels, n):
+        # n = panjang TOTAL pairAddress termasuk "0x" (42 alamat / 66 poolId).
+        return {"dexId": dex, "labels": labels,
+                "pairAddress": "0x" + "ab" * ((n - 2) // 2)}
+    checks.append(("classify_v4",
+                   _adapter.classify_dexscreener_pair(
+                       _pair("uniswap", ["v4"], 66))["protocol_version"] == "v4"))
+    checks.append(("classify_v3",
+                   _adapter.classify_dexscreener_pair(
+                       _pair("uniswap", ["v3"], 42))["protocol_version"] == "v3"))
+    c = _adapter.classify_dexscreener_pair(_pair("uniswap", ["v4"], 42))
+    checks.append(("conflict_label_v4_addr_42",
+                   c["protocol_version"] == "conflict"
+                   and c["classification_conflict"] is True))
+    c = _adapter.classify_dexscreener_pair(_pair("uniswap", ["v3"], 66))
+    checks.append(("conflict_label_v3_pool_id_66",
+                   c["protocol_version"] == "conflict"
+                   and c["classification_conflict"] is True))
+    c = _adapter.classify_dexscreener_pair(_pair("uniswap", None, 42))
+    checks.append(("conflict_missing_label",
+                   c["protocol_version"] == "conflict"))
+    c = _adapter.classify_dexscreener_pair(_pair("aerodrome", None, 42))
+    checks.append(("non_uniswap_not_applicable",
+                   c["protocol_version"] == "not_applicable"
+                   and c["classification_conflict"] is False
+                   and c["venue_family"] == "aerodrome"))
+    c = _adapter.classify_dexscreener_pair(_pair("hydrex", ["CLAMM"], 42))
+    checks.append(("hydrex_clamm_not_applicable",
+                   c["protocol_version"] == "not_applicable"))
+
+    # ---- (a2) bukti angka dari evidence 22 Nov (literal): likuiditas V4
+    # NVDAc/USDC yang material = 50.731,79 + 41.314,08 = 92.045,87 dari
+    # 2 pool; pool 130.384,02 (0x41084f2d…) adalah BLUECHIP/NVDAc (NVDAc
+    # sebagai QUOTE) dan TIDAK BOLEH dihitung sebagai likuiditas NVDAc/USDC.
+    evid = os.path.join(BASE, "evidence")
+    with open(os.path.join(evid, "dexscreener_nvdac.json"),
+              encoding="utf-8") as f:
+        ds_nvda = json.load(f)
+    pairs = ds_nvda.get("pairs", [])
+    v4_usdc = [p for p in pairs
+               if (p.get("dexId") or "") == "uniswap"
+               and (p.get("labels") or []) == ["v4"]
+               and len(p.get("pairAddress") or "") == 66
+               and ((p.get("baseToken") or {}).get("symbol") == "NVDAc")
+               and ((p.get("quoteToken") or {}).get("address") or "").lower()
+               == _REAL_USDC_NATIVE.lower()
+               and float((p.get("liquidity") or {}).get("usd") or 0) > 1000]
+    v4_liq = round(sum(float((p.get("liquidity") or {}).get("usd") or 0)
+                       for p in v4_usdc), 2)
+    checks.append(("nvdac_v4_usdc_two_pools_92k",
+                   len(v4_usdc) == 2 and v4_liq == 92045.87))
+    bluechip = [p for p in pairs
+                if (p.get("pairAddress") or "").lower().startswith("0x41084f2d")]
+    checks.append(("bluechip_pool_not_nvdac_base",
+                   len(bluechip) == 1
+                   and (bluechip[0].get("baseToken") or {}).get("symbol")
+                   == "BLUECHIP"
+                   and (bluechip[0].get("quoteToken") or {}).get("symbol")
+                   == "NVDAc"))
+
+    # ---- (b)+(c) build NVDAc + AAPLc dgn mock adapter (pola
+    # test_snapshot_identity_live_build: RPC offline, evidence mentah).
+    def _load(name):
+        with open(os.path.join(evid, name), "r", encoding="utf-8") as f:
+            return json.load(f)
+
+    cb = _load("coinbase_tokenized_stocks_page1.json")
+    hl_xyz = _load("hyperliquid_metaAndAssetCtxs_xyz.json")
+
+    def _hl_instruments(raw):
+        meta, ctxs = raw[0], raw[1]
+        out = {}
+        for i, u in enumerate(meta.get("universe", [])):
+            ctx = ctxs[i] if i < len(ctxs) else {}
+            out[u.get("name")] = {
+                "funding": ctx.get("funding"),
+                "openInterest": ctx.get("openInterest"),
+                "markPx": ctx.get("markPx"),
+                "oraclePx": ctx.get("oraclePx"),
+            }
+        return out
+
+    orig = (_adapter.fetch_coinbase_tokens,
+            _adapter.fetch_dexscreener_pools,
+            _adapter.fetch_geckoterminal_pool,
+            _adapter.fetch_hyperliquid_proxy,
+            _adapter.fetch_oracle_params,
+            _adapter.fetch_pool_factory,
+            _adapter.fetch_sell_quote,
+            _adapter.fetch_pool_tokens,
+            _adapter.fetch_token_decimals,
+            _adapter.fetch_block)
+    try:
+        _adapter.fetch_oracle_params = lambda addr, block=None: {
+            "ok": False, "multiplier": None, "paused": None,
+            "fetched_at": pipeline._iso(pipeline._now()),
+            "source": config.ORACLE_REGISTRY, "error": "mock_rpc_off"}
+        _adapter.fetch_pool_factory = lambda addr, block=None: {
+            "ok": False, "factory": None,
+            "fetched_at": pipeline._iso(pipeline._now()),
+            "source": addr, "error": "mock_rpc_off"}
+        _adapter.fetch_sell_quote = lambda pool, tok, amt, block=None: {
+            "ok": False, "amount_out_usd": None,
+            "fetched_at": pipeline._iso(pipeline._now()),
+            "source": config.AERO_METAQUOTER, "error": "mock_rpc_off"}
+        _adapter.fetch_pool_tokens = lambda addr, block=None: {
+            "ok": False, "token0": None, "token1": None,
+            "fetched_at": pipeline._iso(pipeline._now()),
+            "source": addr, "error": "mock_rpc_off"}
+        _adapter.fetch_token_decimals = lambda addr, block=None: {
+            "ok": False, "decimals": None,
+            "fetched_at": pipeline._iso(pipeline._now()),
+            "source": addr, "error": "mock_rpc_off"}
+        _adapter.fetch_block = lambda: {
+            "ok": False, "block_number": None, "block_hash": None,
+            "fetched_at": pipeline._iso(pipeline._now()),
+            "source": "eth_blockNumber", "error": "mock_rpc_off"}
+        for sym in ("NVDAc", "AAPLc"):
+            ds = _load("dexscreener_%s.json" % sym.lower())
+            gt = _load("geckoterminal_%s_pool.json" % sym.lower())
+            _adapter.fetch_coinbase_tokens = lambda: {
+                "ok": True, "tokens": cb.get("tokens", []),
+                "fetched_at": pipeline._iso(pipeline._now()),
+                "source": config.COINBASE_API_URL, "error": None, "pages": 1}
+            _adapter.fetch_dexscreener_pools = lambda addr: {
+                "ok": True, "pairs": ds.get("pairs", []),
+                "fetched_at": pipeline._iso(pipeline._now()),
+                "source": config.DEXSCREENER_URL.format(address=addr),
+                "error": None}
+            _adapter.fetch_geckoterminal_pool = lambda pool: {
+                "ok": True, "pool": gt.get("data"),
+                "fetched_at": pipeline._iso(pipeline._now()),
+                "source": config.GECKOTERMINAL_POOL_URL.format(pool=pool),
+                "error": None}
+            _adapter.fetch_hyperliquid_proxy = lambda dex="xyz": {
+                "ok": True, "instruments": _hl_instruments(hl_xyz),
+                "fetched_at": pipeline._iso(pipeline._now()),
+                "source": config.HYPERLIQUID_INFO_URL + " dex=" + dex,
+                "error": None}
+            snap = pipeline.build_snapshot(sym)
+            # (b) SEMUA pool lolos punya quote_token_address USDC (literal).
+            usdc_ok = all(
+                (p.get("quote_token_address") or "").lower()
+                in {_REAL_USDC_NATIVE.lower(), _REAL_USDC_E.lower()}
+                for p in snap["pools"])
+            checks.append(("%s_all_pools_quote_usdc_address" % sym, usdc_ok))
+            rej = [r for r in snap["coverage"]["rejected_observations"]
+                   if r.get("reason") == "quote_token_not_usdc_address"]
+            checks.append(("%s_non_usdc_quote_rejected" % sym, len(rej) >= 1))
+            snap = pipeline.assess_snapshot(snap)
+            if sym == "NVDAc":
+                # 9 pool 42-karakter non-USDC ditolak by alamat (bukan simbol).
+                checks.append(("nvdac_non_usdc_quote_rejected_9",
+                               len(rej) == 9))
+                checks.append(("nvdac_thin_pool_count_1",
+                               snap["coverage"]["thin_pool_count"] == 1
+                               and snap["coverage"]["thin_pool_liquidity_usd"]
+                               == 15.14))
+                checks.append(("nvdac_thin_excluded_from_median",
+                               snap["assessment"]["freshness"]["pool"]
+                               ["thin_excluded_from_median_count"] == 1
+                               and snap["assessment"]["layer_a"]
+                               ["thin_pool_excluded_from_median"] == 1))
+                # Median 4 pool non-tipis: (132,87+132,92)/2 = 132,895
+                # (dengan pool tipis $15,14 @130,71 median jadi 132,87).
+                med = snap["assessment"]["layer_a"]["median_price_usd"]
+                checks.append(("nvdac_median_excludes_thin",
+                               med is not None
+                               and abs(med - 132.895) < 1e-9))
+            else:
+                checks.append(("aaplc_thin_pool_count_0",
+                               snap["coverage"]["thin_pool_count"] == 0))
+            # (c) market_session di snapshot, terpisah dari nav_age_seconds.
+            ms = snap.get("market_session") or {}
+            checks.append(("%s_market_session_present" % sym,
+                           ms.get("status") in ("open", "closed", "unknown")
+                           and ms.get("strata")
+                           in ("active", "off_hours", "unknown")
+                           and ms.get("calendar") is not None
+                           and (ms["strata"] == "active") ==
+                           (ms["status"] == "open")))
+            checks.append(("%s_market_session_separate_from_nav_age" % sym,
+                           "market_session" in snap
+                           and "age_seconds" in snap["reference"]
+                           and snap["market_session"] is not
+                           snap["reference"]))
+            stored = pipeline.public_snapshot(snap)
+            checks.append(("%s_public_snapshot_carries_market_session" % sym,
+                           "market_session" in stored))
+            checks.append(("%s_identity_with_market_session" % sym,
+                           pipeline.verify_snapshot_identity(stored)["matches"]))
+    finally:
+        (_adapter.fetch_coinbase_tokens,
+         _adapter.fetch_dexscreener_pools,
+         _adapter.fetch_geckoterminal_pool,
+         _adapter.fetch_hyperliquid_proxy,
+         _adapter.fetch_oracle_params,
+         _adapter.fetch_pool_factory,
+         _adapter.fetch_sell_quote,
+         _adapter.fetch_pool_tokens,
+         _adapter.fetch_token_decimals,
+         _adapter.fetch_block) = orig
+
+    # ---- (c2) _market_session: early close + strata (waktu literal UTC;
+    # ET = UTC-5 di Nov/Des 2026). 27 Nov buka 09:30 ET = 14:30Z, tutup
+    # 13:00 ET = 18:00Z = 28 Nov 02:00 WITA; 30 Nov buka 22:30 WITA.
+    ms_cases = [
+        ("2026-11-23T14:30:00Z", "open"),    # Senin sesi regular
+        ("2026-11-26T15:00:00Z", "closed"),  # Thanksgiving
+        ("2026-11-27T14:30:00Z", "open"),    # Jumat early close 09:30 ET
+        ("2026-11-27T17:59:00Z", "open"),    # 12:59 ET masih buka
+        ("2026-11-27T18:00:00Z", "closed"),  # 13:00 ET tutup
+        ("2026-11-27T20:00:00Z", "closed"),  # 15:00 ET (hari normal: buka)
+        ("2026-11-28T15:00:00Z", "closed"),  # Sabtu
+        ("2026-11-29T15:00:00Z", "closed"),  # Minggu
+        ("2026-11-30T14:30:00Z", "open"),    # Senin 09:30 ET = 22:30 WITA
+        ("2026-12-24T17:59:00Z", "open"),    # Christmas Eve 12:59 ET
+        ("2026-12-24T18:00:00Z", "closed"),  # Christmas Eve 13:00 ET
+        ("2026-12-31T20:00:00Z", "open"),    # NYE sesi PENUH (bukan early)
+    ]
+    for iso, want in ms_cases:
+        got = pipeline._market_session(pipeline._parse_ts(iso))
+        checks.append(("market_session_%s_%s" % (iso[:10], iso[11:16]),
+                       got == want))
+    det = pipeline._market_session_detail(
+        pipeline._parse_ts("2026-11-27T15:00:00Z"))
+    checks.append(("detail_27nov_active_early_close",
+                   det["status"] == "open" and det["strata"] == "active"
+                   and det["calendar"] == "early_close_session"))
+    det = pipeline._market_session_detail(
+        pipeline._parse_ts("2026-11-26T15:00:00Z"))
+    checks.append(("detail_26nov_off_hours_holiday",
+                   det["status"] == "closed" and det["strata"] == "off_hours"
+                   and det["calendar"] == "holiday"))
+    det = pipeline._market_session_detail(
+        pipeline._parse_ts("2026-11-28T15:00:00Z"))
+    checks.append(("detail_28nov_off_hours_weekend",
+                   det["status"] == "closed" and det["strata"] == "off_hours"
+                   and det["calendar"] == "weekend"))
+    det = pipeline._market_session_detail(
+        pipeline._parse_ts("2026-11-30T15:00:00Z"))
+    checks.append(("detail_30nov_active_regular",
+                   det["status"] == "open" and det["strata"] == "active"
+                   and det["calendar"] == "regular_session"))
+
+    # ---- (c3) session_status (NAV freshness) TIDAK sama dgn sesi kalender:
+    # NAV fresh 1 detik tetap "active" saat dievaluasi 27 Nov 19:00Z
+    # (14:00 ET, pasar sudah tutup early close) — kalender bilang closed.
+    s = _fresh_nav_fixture("NVDAc")
+    s = _reassess(s, eval_at=pipeline._parse_ts("2026-11-27T19:00:00Z"))
+    checks.append(("nav_fresh_but_market_closed_separate",
+                   s["reference"]["session_status"] == "active"
+                   and s["assessment"]["freshness"]["nav"]["market_session"]
+                   == "closed"))
+    failed = [c for c, ok in checks if not ok]
+    return _result(
+        "s1b_venue_filter_session",
+        "V3/V4 classification agrees (labels+length); quote USDC by address; "
+        "thin pools excluded from median + counted separately; early-close "
+        "calendar + strata; market_session separate from NAV freshness",
+        "%d/%d checks pass; failed: %s" % (len(checks) - len(failed),
+                                           len(checks), failed or "none"),
+        not failed,
+        "S1-B: venue census method + per-pool filter §1.2b + session §1.4b")
+
+
 # -------------------------------------------------------------------- main
 TESTS = [
     ("happy_path", test_happy_path),
@@ -2733,6 +3013,8 @@ TESTS = [
     ("s1g_simulation_never_paper_proposal",
      test_s1g_simulation_never_paper_proposal),
     ("s1g_decide_source_guard", test_s1g_decide_source_guard),
+    # S1-B sensus venue + filter per-pool + _market_session early-close.
+    ("s1b_venue_filter_session", test_s1b_venue_filter_session),
 ]
 
 

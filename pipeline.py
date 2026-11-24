@@ -176,14 +176,15 @@ def _pool_venue(p):
 
 
 def _market_session(eval_at):
-    """Sesi pasar AS (NYSE) pada `eval_at` (audit B).
+    """Sesi pasar AS (NYSE) pada `eval_at` (audit B; §1.4b S1-B).
 
     Kembalikan "open" / "closed" / "unknown". "open" = Senin-Jumat, bukan
-    libur NYSE 2026, 09:30-16:00 US/Eastern. Di luar itu "closed". Bila
-    tanggal di luar kalender yang tercantum (libur belum terdaftar) maka
-    "unknown" — jangan menyimpulkan tutup hanya karena feed tua.
-    Kalender ini minimal dan wajib diperbarui tiap tahun; early close tidak
-    dimodelkan.
+    libur NYSE 2026, 09:30-16:00 US/Eastern — KECUALI hari early close
+    (`config.US_MARKET_EARLY_CLOSE_2026`, 2026: 27 Nov + 24 Des tutup
+    13:00 ET). Di luar itu "closed". Bila tanggal di luar kalender yang
+    tercantum (libur belum terdaftar) maka "unknown" — jangan menyimpulkan
+    tutup hanya karena feed tua.
+    Kalender ini minimal dan wajib diperbarui tiap tahun.
     """
     if eval_at is None:
         return "unknown"
@@ -200,9 +201,66 @@ def _market_session(eval_at):
     if not day.startswith("2026-"):
         return "unknown"
     minutes = et.hour * 60 + et.minute
+    close = config.US_MARKET_EARLY_CLOSE_2026.get(day)
+    if close is not None:
+        try:
+            ch, cm = (int(x) for x in close.split(":"))
+            close_minutes = ch * 60 + cm
+        except (ValueError, AttributeError):
+            return "unknown"
+        if 9 * 60 + 30 <= minutes < close_minutes:
+            return "open"
+        return "closed"
     if 9 * 60 + 30 <= minutes < 16 * 60:
         return "open"
     return "closed"
+
+
+def _market_session_detail(eval_at):
+    """Detail sesi pasar berbasis kalender (§1.4b, S1-B) — SATU-SATUNYA
+    sumber kebenaran sesi di snapshot: diturunkan dari `_market_session()`
+    + kalender config, bukan jalur paralel.
+
+    Kembalikan {"status", "strata", "calendar", "evaluated_at", "basis"}:
+    - status: "open" / "closed" / "unknown" (sama dgn `_market_session`).
+    - strata: "active" (sesi regular/early-close sedang buka) /
+      "off_hours" (tutup/libur/akhir pekan/di luar jam sesi) / "unknown".
+      Strata inilah yang dipakai kalibrasi §3 (bukan `session_status` lama
+      dari umur NAV).
+    - calendar: "regular_session" / "early_close_session" / "holiday" /
+      "weekend" / "outside_session_hours" / "unknown" — alasan kalendernya.
+    - evaluated_at: waktu evaluasi (ISO); basis: penjelasan singkat.
+    """
+    status = _market_session(eval_at)
+    if eval_at is None:
+        return {"status": "unknown", "strata": "unknown",
+                "calendar": "unknown", "evaluated_at": None,
+                "basis": "no_eval_time"}
+    try:
+        et = eval_at.astimezone(ZoneInfo("America/New_York"))
+    except Exception:
+        return {"status": "unknown", "strata": "unknown",
+                "calendar": "unknown", "evaluated_at": _iso(eval_at),
+                "basis": "timezone_conversion_failed"}
+    day = et.strftime("%Y-%m-%d")
+    if et.weekday() >= 5:
+        calendar = "weekend"
+    elif day in config.US_MARKET_HOLIDAYS_2026:
+        calendar = "holiday"
+    elif day in config.US_MARKET_EARLY_CLOSE_2026:
+        calendar = ("early_close_session" if status == "open"
+                    else "outside_session_hours")
+    elif not day.startswith("2026-"):
+        calendar = "unknown"
+    elif status == "open":
+        calendar = "regular_session"
+    else:
+        calendar = "outside_session_hours"
+    strata = ("active" if status == "open"
+              else "off_hours" if status == "closed" else "unknown")
+    basis = ("nyse_calendar_%s_%s" % (day, calendar))
+    return {"status": status, "strata": strata, "calendar": calendar,
+            "evaluated_at": _iso(eval_at), "basis": basis}
 
 
 def _build_time_payload(snap):
@@ -215,10 +273,15 @@ def _build_time_payload(snap):
     build_keys = ("schema_version", "methodology_version", "fetched_at",
                   "asset", "reference", "multiplier", "pools", "coverage",
                   "exit_quote", "underlying_proxy", "oracle",
-                  "universe_version", "config_hash")
+                  "universe_version", "config_hash", "market_session")
     payload = {k: snap.get(k) for k in build_keys}
     if "oracle" not in snap:
         payload.pop("oracle", None)
+    # Seperti "oracle": snapshot lama (pre-S1-B) tidak punya field ini;
+    # memaksa None akan mengubah hash dan menandai snapshot lama yang sah
+    # sebagai "transformed replay".
+    if "market_session" not in snap:
+        payload.pop("market_session", None)
     # Seperti "oracle": snapshot lama (pre-S1-A) tidak punya field versi;
     # memaksa None akan mengubah hash dan menandai snapshot lama yang sah
     # sebagai "transformed replay".
@@ -926,15 +989,35 @@ def build_snapshot(symbol, ingested=None):
         if not dex or not quote:
             rejected.append({"pool": addr, "reason": "missing_dex_or_quote"})
             continue
+        # §1.2b (a, S1-B): quote asset adalah USDC berdasarkan ALAMAT
+        # terpercaya (config.USDC_BASE_ADDRESSES) — BUKAN simbol
+        # `quoteToken.symbol` saja. Simbol bisa dipalsukan/duplikat;
+        # alamat yang menentukan. Pool tanpa alamat quote = fail-closed.
+        quote_addr = (p.get("quoteToken") or {}).get("address") or ""
+        if not quote_addr:
+            rejected.append({"pool": addr,
+                             "reason": "quote_token_address_missing"})
+            continue
+        if quote_addr.lower() not in {a.lower() for a in
+                                      config.USDC_BASE_ADDRESSES}:
+            rejected.append({"pool": addr,
+                             "reason": "quote_token_not_usdc_address"})
+            continue
         if price is None or price <= 0:
             rejected.append({"pool": addr, "reason": "price_nonpositive_or_missing"})
             continue
         if liq is None or liq <= 0:
             rejected.append({"pool": addr, "reason": "liquidity_nonpositive_or_missing"})
             continue
+        # §1.2b (c, S1-B): pool likuiditas < ambang = thin_pool: TETAP
+        # dicatat di pools (transparan) tapi DIEKSKLUSI dari median di
+        # assess_snapshot dan dihitung terpisah di coverage.
+        thin = liq < config.THIN_POOL_LIQUIDITY_USD
         obs = {"pool_address": p.get("pairAddress"), "dex": dex,
-               "quote_asset": quote, "indicative_price_usd": price,
+               "quote_asset": quote, "quote_token_address": quote_addr,
+               "indicative_price_usd": price,
                "liquidity_usd": liq,
+               "thin_pool": thin,
                # DexScreener tidak memberi timestamp harga -> `unknown`.
                # Jangan klaim harga fresh hanya karena fetch sukses (§5).
                "source_updated_at": "unknown",
@@ -1022,6 +1105,12 @@ def build_snapshot(symbol, ingested=None):
         "fallback_pool_count": len([o for o in pools
                                     if o.get("venue_label_source")
                                     == "dexscreener_fallback"]),
+        # §1.2b (c, S1-B): pool tipis dihitung TERPISAH dari hitungan
+        # coverage utama — bukan hilang, bukan tercampur. Ambang =
+        # config.THIN_POOL_LIQUIDITY_USD (parameter eksperimen 24 Nov 2026).
+        "thin_pool_count": len([o for o in pools if o.get("thin_pool")]),
+        "thin_pool_liquidity_usd": round(sum(
+            o["liquidity_usd"] for o in pools if o.get("thin_pool")), 2),
         "missing_fields": missing,
         "rejected_observations": rejected,
     }
@@ -1088,6 +1177,13 @@ def build_snapshot(symbol, ingested=None):
         "universe_version": config.UNIVERSE_VERSION,
         "config_hash": config.CONFIG_HASH,
         "fetched_at": ingested["meta"]["fetched_at"],
+        # §1.4b (S1-B): market_session kalender (dari _market_session_detail,
+        # SATU-SATUNYA sumber sesi) disimpan TERPISAH dari nav_age_seconds
+        # (reference.age_seconds) — NAV satu jam lalu tetap fresh ketika
+        # pasar sudah tutup. `session_status` di reference tetap label
+        # freshness NAV saja, bukan bukti bursa buka. Field ini masuk hash
+        # snapshot_id (lihat _build_time_payload).
+        "market_session": _market_session_detail(fetched),
         "asset": asset,
         "reference": reference,
         "multiplier": multiplier,
@@ -1232,6 +1328,11 @@ def assess_snapshot(snap, eval_at=None, eval_context="live"):
                 fallback_pools += 1
     n_pool = len(seen_addr)
     n_venue = len(venues)
+    # §1.2b (c, S1-B): pool tipis dihitung terpisah juga di hitung ulang —
+    # snapshot lama tanpa field `thin_pool` dihitung sebagai non-thin.
+    thin_count = len([p for p in pools if p.get("thin_pool")])
+    thin_liq = round(sum((p.get("liquidity_usd") or 0)
+                         for p in pools if p.get("thin_pool")), 2)
     coverage_recomputed = {"stored_pool_count": stored_pool_count,
                            "recomputed_pool_count": n_pool,
                            "stored_venue_count": stored_venue_count,
@@ -1240,6 +1341,8 @@ def assess_snapshot(snap, eval_at=None, eval_context="live"):
                            "verified_venue_count": len(verified_venues),
                            "verified_venues": sorted(verified_venues),
                            "fallback_pool_count": fallback_pools,
+                           "thin_pool_count": thin_count,
+                           "thin_pool_liquidity_usd": thin_liq,
                            "has_factory_data": has_factory_data}
     # G1: bila data factory ADA (build v0.3.1) dan venue terverifikasi di
     # bawah minimum, independensi TIDAK terbukti -> proposal-blocking.
@@ -1257,6 +1360,10 @@ def assess_snapshot(snap, eval_at=None, eval_context="live"):
     fresh_pools = []
     stale_pools = []
     unknown_ts_pools = []
+    # §1.2b (c, S1-B): pool tipis dikeluarkan dari median — observasi tipis
+    # bukan observasi median-grade. Mereka bukan basi (bukan stale) dan
+    # bukan unknown: dicatat terpisah di freshness["pool"] + layer_a.
+    thin_excluded = []
     price_ts_unknown = False
     for p in pools:
         pf = _parse_ts(p.get("fetched_at"))
@@ -1285,6 +1392,9 @@ def assess_snapshot(snap, eval_at=None, eval_context="live"):
             if age_price > config.MAX_POOL_AGE_MIN * 60:
                 stale_pools.append(p.get("pool_address"))
                 continue
+        if p.get("thin_pool"):
+            thin_excluded.append(p.get("pool_address"))
+            continue
         fresh_pools.append(p)
         if (p.get("source_updated_at") or "unknown") == "unknown":
             price_ts_unknown = True
@@ -1298,9 +1408,11 @@ def assess_snapshot(snap, eval_at=None, eval_context="live"):
         "fresh_count": len(fresh_pools),
         "stale_count": len(stale_pools),
         "unknown_timestamp_count": len(unknown_ts_pools),
+        "thin_excluded_from_median_count": len(thin_excluded),
         "max_age_min": config.MAX_POOL_AGE_MIN,
         "price_timestamp_unknown": price_ts_unknown,
     }
+    layer_a["thin_pool_excluded_from_median"] = len(thin_excluded)
 
     # ---- Lapisan A: median + deviasi per-venue (hanya observasi independen
     # yang FRESH). Pool basi tidak ikut median.

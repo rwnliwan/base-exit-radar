@@ -2612,7 +2612,7 @@ TOKENS = {
         "decimals": 8,
         "decimals_source": "rpc_validated",
         "coverage_tier": "covered",
-        "qualifying_pools": 3,
+        "qualifying_pools": 2,
     },
     "PENGc": {
         "chain": CHAIN,
@@ -4200,17 +4200,28 @@ TOKENS = {
 UNIVERSE_VERSION = "2026-11-24-census-v1"
 UNIVERSE_CENSUS_DATE = "2026-11-24"
 UNIVERSE_TOTAL_TOKENS = 415
-# Hitungan tingkat coverage pada sensus (preliminary DexScreener-only;
-# S1-B mengonfirmasi dgn cek factory on-chain).
+# Hitungan tingkat coverage pada sensus (preliminary DexScreener-only S1-A;
+# DIKONFIRMASI S1-B 24 Nov 2026, evidence/venue_census_2026-11-24.json:
+# fetch ulang live 415 token, 0 error, tier TETAP 342/42/31; satu-satunya
+# perubahan per-token: PDDc qualifying 3 -> 2, tier tetap covered).
+# Potongan TAMBAHAN S1-B §1.2b(c) — median-grade (pool non-tipis >= $1.000):
+# decision-eligible 23 / covered 27 / listed 365 (8 token kehilangan
+# decision-eligible + 19 kehilangan covered karena SEMUA pool kualifikasinya
+# tipis; 86 dari 198 pool kualifikasi adalah thin). Potongan ini TIDAK
+# mengubah tier S1-A — dipakai kalibrasi §3, bukan tier universe.
 UNIVERSE_TIERS = {'listed': 342, 'covered': 42, 'decision-eligible': 31, 'unknown': 0}
+UNIVERSE_TIERS_MEDIAN_GRADE = {'listed': 365, 'covered': 27,
+                               'decision-eligible': 23}
 
 # ---------------------------------------------------------------- universe
 UNIVERSE_VERSION = "2026-11-24-census-v1"
 UNIVERSE_CENSUS_DATE = "2026-11-24"
 UNIVERSE_TOTAL_TOKENS = 415
-# Hitungan tingkat coverage pada sensus (preliminary DexScreener-only;
-# S1-B mengonfirmasi dgn cek factory on-chain).
+# (Duplikat blok universe di atas — nilai sama; lihat komentar S1-B di sana.
+# Median-grade: decision-eligible 23 / covered 27 / listed 365.)
 UNIVERSE_TIERS = {'listed': 342, 'covered': 42, 'decision-eligible': 31, 'unknown': 0}
+UNIVERSE_TIERS_MEDIAN_GRADE = {'listed': 365, 'covered': 27,
+                               'decision-eligible': 23}
 
 # ---------------------------------------------------------------- sumber data
 # Semua publik, read-only, tanpa key. Tidak ada pendaftaran/akun.
@@ -4257,6 +4268,17 @@ AERODROME_CL_FACTORY = "0x5e7BB104d84c7CB9B682AaC2F3d509f5F406809A"
 # factory ini (dibaca langsung dari pool saat live run v0.3.0).
 AERODROME_CL_FACTORY_CURRENT = "0xf8f2eb4940cfe7d13603dddd87f123820fc061ef"
 UNISWAP_V3_FACTORY = "0x33128a8fC17869897dcE68Ed026d694621f6FDfD"
+# Uniswap V4 StateView di Base (S1-B spot-check, 24 Nov 2026 — BUKAN S1-C):
+# alamat DIVERIFIKASI ke 3 sumber independen (docs.eco.com deployments,
+# veydrift docs + codehash, umia docs) + eth_getCode live (3.531 byte code).
+# Spot-check getSlot0 atas 3 poolId V4 (NVDAc x2, AAPLc x1): semua
+# ter-initialize (sqrtPriceX96 != 0), harga implisit cocok dgn DexScreener
+# (dev maks 0,71%) — bukti di evidence/venue_census_2026-11-24.json
+# (onchain_spotcheck_stateview). Verifikasi PENUH (PoolKey vs poolId via
+# keccak256 + jalur kode V4) adalah kerja S1-C — konstanta ini hanya
+# mencatat alamat yang sudah terverifikasi agar S1-C tidak mengulang lookup.
+UNISWAP_V4_STATEVIEW_BASE = "0xA3c0c9b65baD0b08107Aa264b0f3dB444b867A71"
+UNISWAP_V4_POOLMANAGER_BASE = "0x498581fF718922c3f8e6A244956aF099B2652b2b"
 # Factory lain yang terverifikasi (G1, re-audit v5, 22 Nov 2026) — SEMUA
 # dicek ke BaseScan SEBELUM ditulis (kontrak + deployer):
 #  - Nami: AlgebraFactory, deployer "nami: Deployer" (BaseScan).
@@ -4422,6 +4444,12 @@ MIN_INDEPENDENT_VENUES = 2   # butuh >=2 venue kanonis (bukan hanya 2 pool)
 NAV_STALE_HOURS = 24         # umur NAV > 24 jam = referensi basi (informasional)
 MAX_FUTURE_SKEW_SEC = 300    # toleransi jam sumber maju (clock skew) 5 menit
 MAX_POOL_AGE_MIN = 60        # observasi pool lebih tua dari ini = basi (informasional)
+# Ambang thin pool (§1.2b, S1-B, 24 Nov 2026): pool dgn likuiditas USD di
+# bawah ini dilabeli `thin_pool`, DIEKSKLUSI dari median, dan dihitung
+# terpisah (sensitivity §3 menguji hasil tanpa pool tipis). Ini PARAMETER
+# EKSPERIMEN bertanggal, BUKAN kalibrasi — jangan diubah di dalam jendela
+# tanpa ADR + distribusi mentah (aturan yang sama dgn threshold §3.3).
+THIN_POOL_LIQUIDITY_USD = 1000.0
 QUOTE_MAX_AGE_SEC = 300      # umur quote > 5 menit = stale (tidak bisa jadi bukti exit)
 # Feature gate proposal (audit A, 22 Nov 2026): PAPER_PROPOSAL TIDAK PERNAH
 # keluar selama gate ini False — apa pun isi exit_quote (null, kosong,
@@ -4476,7 +4504,8 @@ VENUE_ALIASES = {
 # Kalender pasar minimal (audit B): sesi AS (NYSE) untuk membedakan NAV basi
 # saat market aktif vs market tutup. Daftar libur NYSE 2026 (tetap; wajib
 # diperbarui tiap tahun — tanpa ini, sesi libur dibaca `unknown`, bukan tutup).
-# Jam market 09:30-16:00 US/Eastern, Senin-Jumat. Early close tidak dimodelkan.
+# Jam market 09:30-16:00 US/Eastern, Senin-Jumat. Early close dimodelkan
+# di US_MARKET_EARLY_CLOSE_2026 (§1.4b, S1-B).
 US_MARKET_HOLIDAYS_2026 = {
     "2026-01-01",  # New Year's Day
     "2026-01-19",  # Martin Luther King Jr. Day
@@ -4488,6 +4517,21 @@ US_MARKET_HOLIDAYS_2026 = {
     "2026-09-07",  # Labor Day
     "2026-11-26",  # Thanksgiving
     "2026-12-25",  # Christmas Day
+}
+# Early close NYSE 2026 (§1.4b, S1-B, 24 Nov 2026): tanggal -> jam tutup
+# (HH:MM, US/Eastern). NYSE menutup saham pukul 13:00 ET HANYA pada dua hari
+# ini di 2026 (Jumat 27 Nov + Kamis 24 Des) — terverifikasi ke kalender NYSE
+# via 3 sumber independen (Motley Fool, trademomentum, movertap; semua
+# menyebut daftar yang sama). 31 Des 2026 dan 2 Jul 2026 adalah sesi PENUH
+# untuk saham (early close 14:00 ET hari itu hanya untuk obligasi/SIFMA) —
+# JANGAN tambahkan ke daftar ini.
+# Konversi terverifikasi (EST = UTC-5, WITA = UTC+8):
+#  - 27 Nov 2026: buka 09:30 EST = 22:30 WITA, tutup 13:00 EST = 28 Nov 02:00 WITA.
+#  - 24 Des 2026: buka 09:30 EST = 22:30 WITA, tutup 13:00 EST = 25 Des 02:00 WITA.
+#  - Senin 30 Nov 2026 (sesi penuh): buka 09:30 EST = 22:30 WITA.
+US_MARKET_EARLY_CLOSE_2026 = {
+    "2026-11-27": "13:00",  # Day after Thanksgiving (Black Friday)
+    "2026-12-24": "13:00",  # Christmas Eve
 }
 # Parameter paper portfolio (EKSPERIMEN, bukan preferensi investasi Alex).
 SIMULATION_NOTIONAL_USD = 10_000.0

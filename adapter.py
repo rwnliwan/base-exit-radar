@@ -192,6 +192,80 @@ def find_token(tokens, contract_address):
 
 
 # -------------------------------------------------------------- DexScreener
+def classify_dexscreener_pair(pair):
+    """Klasifikasi V3/V4 satu pair DexScreener (§1.3, S1-B).
+
+    Dua sinyal harus COCOK: field `labels` (['v3'] / ['v4']) DAN panjang
+    `pairAddress` (V3 = 42 karakter alamat kontrak, V4 = 66 karakter
+    poolId 32-byte). Klasifikasi V3/V4 HANYA berlaku untuk dexId "uniswap"
+    — DexScreener tidak memisahkan V3/V4 di dexId, dan venue lain
+    (aerodrome, nami, ...) bukan Uniswap V3/V4 sehingga versinya
+    "not_applicable" (bukan v3, bukan konflik).
+
+    Kembalikan {"protocol_version", "classification_conflict",
+    "conflict_reason", "identifier_kind", "venue_family"}:
+    - protocol_version: "v3" / "v4" (kedua sinyal cocok) /
+      "not_applicable" (dexId bukan uniswap) / "conflict" (sinyal tidak
+      cocok atau label versi hilang — JANGAN ditebak).
+    - classification_conflict: True bila protocol_version == "conflict".
+      Pool konflik DIKECUALIKAN dari hitungan V4 dan dilabeli (S1-B);
+      konfirmasi on-chain (StateView) adalah kerja S1-C.
+    - identifier_kind: "address_42" / "pool_id_66" / "other".
+    - venue_family: keluarga protokol kanonis dari dexId (alias dipetakan,
+      mis. "aero" -> "aerodrome"); versi protokol TERPISAH dari family
+      independensi (V3 dan V4 dari family yang sama bukan dua venue).
+    """
+    pair = pair or {}
+    dex = (pair.get("dexId") or "").strip().lower()
+    family = _config.VENUE_ALIASES.get(dex, dex)
+    ident = pair.get("pairAddress") or ""
+    if len(ident) == 42:
+        kind = "address_42"
+    elif len(ident) == 66:
+        kind = "pool_id_66"
+    else:
+        kind = "other"
+    labels = pair.get("labels") or []
+    if not isinstance(labels, list):
+        labels = [labels]
+    lab = {str(x).strip().lower() for x in labels}
+    if family != "uniswap":
+        return {"protocol_version": "not_applicable",
+                "classification_conflict": False,
+                "conflict_reason": None,
+                "identifier_kind": kind,
+                "venue_family": family}
+    has_v3 = "v3" in lab
+    has_v4 = "v4" in lab
+    if has_v3 and has_v4:
+        reason = "labels_contain_both_v3_and_v4"
+    elif has_v4 and kind == "pool_id_66":
+        return {"protocol_version": "v4",
+                "classification_conflict": False,
+                "conflict_reason": None,
+                "identifier_kind": kind,
+                "venue_family": family}
+    elif has_v3 and kind == "address_42":
+        return {"protocol_version": "v3",
+                "classification_conflict": False,
+                "conflict_reason": None,
+                "identifier_kind": kind,
+                "venue_family": family}
+    elif has_v4 and kind == "address_42":
+        reason = "label_v4_but_identifier_is_address_42"
+    elif has_v3 and kind == "pool_id_66":
+        reason = "label_v3_but_identifier_is_pool_id_66"
+    elif not has_v3 and not has_v4:
+        reason = "missing_version_label"
+    else:
+        reason = "unrecognized_identifier_length_%d" % len(ident)
+    return {"protocol_version": "conflict",
+            "classification_conflict": True,
+            "conflict_reason": reason,
+            "identifier_kind": kind,
+            "venue_family": family}
+
+
 def fetch_dexscreener_pools(token_address):
     """Pool observations untuk satu token (DexScreener, tanpa key).
 

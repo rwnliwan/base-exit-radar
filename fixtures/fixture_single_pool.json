@@ -17,6 +17,8 @@
       "recomputed_venue_count": 6,
       "stored_pool_count": 11,
       "stored_venue_count": 7,
+      "thin_pool_count": 0,
+      "thin_pool_liquidity_usd": 0,
       "verified_venue_count": 0,
       "verified_venues": []
     },
@@ -33,6 +35,7 @@
         "max_age_min": 60,
         "price_timestamp_unknown": true,
         "stale_count": 0,
+        "thin_excluded_from_median_count": 0,
         "unknown_timestamp_count": 0
       },
       "quote": {
@@ -64,7 +67,8 @@
         "0xF668e21993f0ACd7ab00BB1cFbAeD0df28A3C8EC": 0.0152,
         "0xFe27C510b1fC9B926c0a144597a62813564a189B": -1.1366,
         "0xaf37c58BAaD0dF59bBAe19B7Ee17afC93Db8bDF5": -0.8032
-      }
+      },
+      "thin_pool_excluded_from_median": 0
     },
     "layer_b": {
       "exit_quote": null,
