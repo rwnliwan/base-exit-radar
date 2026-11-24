@@ -81,6 +81,8 @@ def fetch_coinbase_tokens():
 
     Kembalikan {"ok", "tokens", "fetched_at", "source", "error", "pages"}.
     `tokens` = list record mentah apa adanya (tidak dinormalisasi di sini).
+    Fail-closed: `ok` True HANYA bila tidak ada error — sensus yang
+    terpotong (mis. guard pagination trip) dilaporkan gagal, bukan sukses.
     """
     out = {"ok": False, "tokens": [], "fetched_at": _now_iso(),
            "source": COINBASE_API_URL, "error": None, "pages": 0}
@@ -103,7 +105,10 @@ def fetch_coinbase_tokens():
         if out["pages"] >= 10:  # guard: jangan loop tanpa batas
             out["error"] = "pagination_guard_10_pages"
             break
-    out["ok"] = True
+    # Fail-closed (revisi rencana v1.1, must-fix 5): ok=True HANYA bila
+    # tidak ada error. Sebelumnya baris ini `out["ok"] = True` tanpa syarat,
+    # sehingga sensus terpotong guard dilaporkan sukses (repro Instinct).
+    out["ok"] = out["error"] is None
     return out
 
 
