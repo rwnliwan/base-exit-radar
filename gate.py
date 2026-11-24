@@ -2385,6 +2385,320 @@ def test_quoter_f1_f2_m1_m3():
         "v0.3.3; gate stays off, decision stays WATCH")
 
 
+# ------------------------------------------------------- tes S1-G (Scope 1)
+# S1-G (rencana eksekusi Scope 1 v1.1 §5, kill-switch kriteria 5):
+# tes integritas gate — dikerjakan SEBELUM merge pertama, gerbang untuk
+# semua merge berikutnya. Dua penahan diuji TERPISAH (aturan 3 decide():
+# gate OFF; aturan 4: bukti simulasi bukan firm), guard hash/AST untuk
+# decide(), nilai PAPER_PROPOSALS_ENABLED dibaca dari config, dan quote
+# simulasi (apa pun isinya) TIDAK PERNAH -> PAPER_PROPOSAL.
+#
+# Rekaman decide() saat ini (pipeline.py, HEAD 4a47a4c, 24 Nov 2026):
+# dihitung dari inspect.getsource(pipeline.decide) — sha256 teks sumber
+# + sha256 ast.dump(ast.parse(sumber)). Bila source decide() berubah
+# (edit, rename, monkeypatch saat import), tes guard GAGAL.
+_DECIDE_SOURCE_SHA256 = (
+    "9fbaae011f040bbc317acf7b51f4a8c08bd3340a12c597a8fa25b57eff2d12c4")
+_DECIDE_AST_SHA256 = (
+    "2d8b5447749c438870d4b47fcd76f4ef38c77701686de8a13e32d1d75a3afc5f")
+
+
+def _decide_guard():
+    """Bandingkan source + AST live pipeline.decide() dengan rekaman S1-G.
+    Return (ok, detail). Dipakai tes gate dan scripts/guard_decide.py."""
+    import ast as _ast
+    import inspect as _inspect
+    try:
+        src = _inspect.getsource(pipeline.decide)
+    except (OSError, TypeError) as e:
+        return False, "decide() source unreadable: %s: %s" % (
+            type(e).__name__, e)
+    src_hash = hashlib.sha256(src.encode("utf-8")).hexdigest()
+    try:
+        ast_hash = hashlib.sha256(
+            _ast.dump(_ast.parse(src)).encode("utf-8")).hexdigest()
+    except SyntaxError as e:
+        return False, "decide() source unparseable: %s" % e
+    ok = (src_hash == _DECIDE_SOURCE_SHA256
+          and ast_hash == _DECIDE_AST_SHA256
+          and pipeline.decide.__module__ == "pipeline")
+    return ok, ("source_sha256=%s (recorded %s); ast_sha256=%s (recorded %s); "
+                "module=%s; lines=%d"
+                % (src_hash, _DECIDE_SOURCE_SHA256, ast_hash,
+                   _DECIDE_AST_SHA256, pipeline.decide.__module__,
+                   len(src.splitlines())))
+
+
+def _sim_quote_for_gate(eval_at, **over):
+    """Quote simulasi on-chain yang VALID sebagai simulated_verified
+    (kind=onchain_simulation, amount_out_estimate, block_number ada).
+    Varian apa pun dari quote ini tetap simulasi — bukan komitmen eksekusi.
+    token_out memakai literal _REAL_USDC_NATIVE (bukan konstanta config)."""
+    q = {"chain": config.CHAIN,
+         "token_in": config.TOKENS["NVDAc"]["token_address"],
+         "token_out": _REAL_USDC_NATIVE,
+         "side": "SELL",
+         "amount_in": 79.006772009,
+         "amount_out_estimate": 10500.54,
+         "observed_at": pipeline._iso(eval_at),
+         "max_age_sec": 300,
+         "block_number": 60841377,
+         "block_hash": "0x" + "ab" * 32,
+         "source": "aero-metaquoter-v3",
+         "venue": "aerodrome",
+         "kind": "onchain_simulation",
+         "notional_usd": 10500.54,
+         "pool": "0xF668e21993f0ACd7ab00BB1cFbAeD0df28A3C8EC"}
+    q.update(over)
+    return q
+
+
+def test_s1g_gate_off_blocks_all_quotes():
+    """S1-G (a): penahan 1 — gate OFF menahan SEMUA quote. Quote firm yang
+    valid sekalipun + quote simulasi yang lolos validator TIDAK menghasilkan
+    PAPER_PROPOSAL; penahannya adalah aturan 3 decide()
+    (paper_proposals_disabled), bukan aturan lain. Snapshot_id dihitung
+    ulang sesudah memasang quote agar snapshot tidak ditandai transformed
+    (aturan 2) — isolasi aturan 3 yang diuji."""
+    base = _fresh_nav_fixture("NVDAc")
+    eval_at = pipeline._parse_ts(base["fetched_at"])
+    if config.PAPER_PROPOSALS_ENABLED is not False:
+        return _result("s1g_gate_off_blocks_all_quotes",
+                       "gate OFF by default",
+                       "config.PAPER_PROPOSALS_ENABLED=%r (not False)"
+                       % config.PAPER_PROPOSALS_ENABLED,
+                       False, "precondition failed: gate already on")
+    cases = [
+        ("firm_valid", _valid_quote("NVDAc", eval_at)),
+        ("sim_valid", _sim_quote_for_gate(eval_at)),
+        ("sim_usdc_e", _sim_quote_for_gate(eval_at,
+                                           token_out=_REAL_USDC_E)),
+        ("sim_huge_notional", _sim_quote_for_gate(
+            eval_at, amount_in=7900.6772009, notional_usd=1000000.0,
+            amount_out_estimate=1050054.0)),
+        ("indicative", dict(_valid_quote("NVDAc", eval_at),
+                            kind="indicative")),
+        ("quote_null", None),
+        ("quote_empty", {}),
+    ]
+    failed = []
+    for name, quote in cases:
+        snap = copy.deepcopy(base)
+        snap["exit_quote"] = quote
+        _recompute_snapshot_id(snap)
+        snap = _reassess(snap, eval_at=eval_at)
+        clean = name in ("firm_valid", "sim_valid", "sim_usdc_e",
+                         "sim_huge_notional")
+        ok = (snap["decision"] != "PAPER_PROPOSAL"
+              and snap["proposal"]["cash_weight"] == 1.0
+              and snap["proposal"]["weights"] == {})
+        if clean:
+            # Kasus bersih: aturan 3 HARUS menjadi penahannya (bukan
+            # aturan 2/4) — bukti gate OFF yang menahan, bukan validator.
+            ok = ok and snap["decision_reasons"] == ["paper_proposals_disabled"]
+        if not ok:
+            failed.append("%s: decision=%s reasons=%s layer_b=%s" % (
+                name, snap["decision"], snap["decision_reasons"],
+                snap["assessment"]["layer_b"]["status"]))
+    return _result(
+        "s1g_gate_off_blocks_all_quotes",
+        "gate OFF: firm valid + simulasi valid + indikatif + null/empty "
+        "-> bukan PAPER_PROPOSAL; kasus bersih ditahan aturan 3 "
+        "(paper_proposals_disabled)",
+        "%d/%d quotes blocked; failed: %s"
+        % (len(cases) - len(failed), len(cases), failed or "none"),
+        not failed,
+        "rule 3 decide(): gate OFF holds every quote")
+
+
+def test_s1g_gate_on_isolated_blocks_simulation():
+    """S1-G (b): penahan 2 — gate ON DALAM TES TERISOLASI tetap menahan
+    simulasi. Gate dinyalakan sementara (try/finally, dipulihkan ke False)
+    HANYA di dalam tes ini. Simulasi yang lolos validator
+    (simulated_verified) -> WATCH exit_evidence_simulated_not_firm
+    (aturan 4). Kontrol: quote firm valid + gate ON -> PAPER_PROPOSAL —
+    membuktikan gate ON benar-benar membuka jalur aturan 5, jadi yang
+    menahan simulasi adalah aturan 4, bukan gate atau validator."""
+    base = _fresh_nav_fixture("NVDAc")
+    eval_at = pipeline._parse_ts(base["fetched_at"])
+    sim_cases = [
+        ("sim_valid", _sim_quote_for_gate(eval_at)),
+        ("sim_usdc_e", _sim_quote_for_gate(eval_at,
+                                           token_out=_REAL_USDC_E)),
+        ("sim_other_venue", _sim_quote_for_gate(eval_at, venue="uniswap")),
+        ("sim_other_source", _sim_quote_for_gate(
+            eval_at, source="other-quoter")),
+        ("sim_huge_notional", _sim_quote_for_gate(
+            eval_at, amount_in=7900.6772009, notional_usd=1000000.0,
+            amount_out_estimate=1050054.0)),
+    ]
+    failed = []
+    old_gate = config.PAPER_PROPOSALS_ENABLED
+    try:
+        config.PAPER_PROPOSALS_ENABLED = True
+        for name, quote in sim_cases:
+            snap = copy.deepcopy(base)
+            snap["exit_quote"] = quote
+            _recompute_snapshot_id(snap)
+            snap = _reassess(snap, eval_at=eval_at)
+            ok = (snap["decision"] == "WATCH"
+                  and snap["decision_reasons"]
+                  == ["exit_evidence_simulated_not_firm"]
+                  and snap["assessment"]["layer_b"]["status"]
+                  == "simulated_exit_quote_verified"
+                  and snap["proposal"]["cash_weight"] == 1.0)
+            if not ok:
+                failed.append("%s: decision=%s reasons=%s layer_b=%s" % (
+                    name, snap["decision"], snap["decision_reasons"],
+                    snap["assessment"]["layer_b"]["status"]))
+        # Kontrol: firm valid + gate ON HARUS PAPER_PROPOSAL (jalur
+        # aturan 5 terbuka — isolasi membuktikan aturan 4 yang menahan
+        # simulasi, bukan gate yang masih mati).
+        snap = copy.deepcopy(base)
+        snap["exit_quote"] = _valid_quote("NVDAc", eval_at)
+        _recompute_snapshot_id(snap)
+        snap = _reassess(snap, eval_at=eval_at)
+        if snap["decision"] != "PAPER_PROPOSAL":
+            failed.append("control_firm_gate_on: decision=%s reasons=%s "
+                          "layer_b=%s (expected PAPER_PROPOSAL)"
+                          % (snap["decision"], snap["decision_reasons"],
+                             snap["assessment"]["layer_b"]["status"]))
+    finally:
+        config.PAPER_PROPOSALS_ENABLED = old_gate
+    if config.PAPER_PROPOSALS_ENABLED is not False:
+        failed.append("gate_not_restored: PAPER_PROPOSALS_ENABLED=%r"
+                      % config.PAPER_PROPOSALS_ENABLED)
+    return _result(
+        "s1g_gate_on_isolated_blocks_simulation",
+        "gate ON (isolated): simulasi valid -> WATCH "
+        "exit_evidence_simulated_not_firm; kontrol firm valid -> "
+        "PAPER_PROPOSAL; gate dipulihkan ke False",
+        "%d/%d sim cases blocked by rule 4 + control firm PAPER_PROPOSAL; "
+        "failed: %s" % (len(sim_cases) + 1 - len(failed),
+                        len(sim_cases) + 1, failed or "none"),
+        not failed,
+        "rule 4 decide(): simulated evidence never activates a proposal")
+
+
+def test_s1g_paper_proposals_enabled_false():
+    """S1-G: PAPER_PROPOSALS_ENABLED tetap False — dibaca dari nilai config
+    yang hidup DAN dari teks sumber config.py (AST), bukan asumsi. Tes
+    gagal bila nilainya True, bila bukan literal False di sumber, atau
+    bila ada lebih dari satu assignment di config.py."""
+    import ast as _ast
+    checks = []
+    # (a) Nilai live di modul config yang diimpor gate.
+    checks.append(("live_value_is_False",
+                   config.PAPER_PROPOSALS_ENABLED is False))
+    # (b) Teks sumber config.py: tepat satu assignment, literal False.
+    with open(os.path.join(BASE, "config.py"), "r", encoding="utf-8") as f:
+        tree = _ast.parse(f.read())
+    assigns = []
+    for node in _ast.walk(tree):
+        if isinstance(node, _ast.Assign):
+            for t in node.targets:
+                if isinstance(t, _ast.Name) \
+                        and t.id == "PAPER_PROPOSALS_ENABLED":
+                    assigns.append(node.value)
+    checks.append(("source_single_assignment", len(assigns) == 1))
+    checks.append(("source_literal_False",
+                   len(assigns) == 1
+                   and isinstance(assigns[0], _ast.Constant)
+                   and assigns[0].value is False))
+    # (c) Nilai yang dipakai decide() adalah nilai config yang sama
+    # (bukan salinan lokal): baca ulang atribut modul.
+    checks.append(("decide_reads_same_config_value",
+                   getattr(config, "PAPER_PROPOSALS_ENABLED") is False))
+    failed = [c for c, ok in checks if not ok]
+    return _result(
+        "s1g_paper_proposals_enabled_false",
+        "PAPER_PROPOSALS_ENABLED is False (live value + single literal "
+        "False assignment in config.py source)",
+        "%d/%d checks pass; live=%r assignments=%d; failed: %s"
+        % (len(checks) - len(failed), len(checks),
+           config.PAPER_PROPOSALS_ENABLED, len(assigns),
+           failed or "none"),
+        not failed,
+        "config.py:269 PAPER_PROPOSALS_ENABLED = False")
+
+
+def test_s1g_simulation_never_paper_proposal():
+    """S1-G: quote simulasi (APA PUN isinya) -> keputusan TIDAK PERNAH
+    PAPER_PROPOSAL — diuji pada KEDUA keadaan gate (OFF default dan ON
+    terisolasi). Matriks mencakup simulasi valid, simulasi yang memakai
+    field kelas firm (amount_out_min), label kind kabur, tanpa block,
+    max_age raksasa, observasi basi, dan estimate ngawur. Setiap varian:
+    decision != PAPER_PROPOSAL dan cash_weight == 1.0."""
+    base = _fresh_nav_fixture("NVDAc")
+    eval_at = pipeline._parse_ts(base["fetched_at"])
+    old_obs = pipeline._iso(eval_at - timedelta(hours=5))
+    variants = [
+        ("sim_valid", _sim_quote_for_gate(eval_at)),
+        ("sim_usdc_e", _sim_quote_for_gate(eval_at,
+                                           token_out=_REAL_USDC_E)),
+        ("sim_with_amount_out_min", dict(
+            _sim_quote_for_gate(eval_at), amount_out_min=10500.54)),
+        ("sim_kind_simulation_label", _sim_quote_for_gate(
+            eval_at, kind="simulation")),
+        ("sim_no_block", dict(_sim_quote_for_gate(eval_at),
+                              block_number=None)),
+        ("sim_giant_max_age", _sim_quote_for_gate(
+            eval_at, max_age_sec=999999)),
+        ("sim_stale_observation", _sim_quote_for_gate(
+            eval_at, observed_at=old_obs)),
+        ("sim_tiny_estimate", _sim_quote_for_gate(
+            eval_at, amount_out_estimate=1.0, notional_usd=1.0)),
+        ("sim_zero_estimate", _sim_quote_for_gate(
+            eval_at, amount_out_estimate=0.0, notional_usd=0.0)),
+    ]
+    # Hapus kunci block_number (bukan None) untuk varian tanpa block.
+    del variants[4][1]["block_number"]
+    failed = []
+    for gate_state in (False, True):
+        old_gate = config.PAPER_PROPOSALS_ENABLED
+        try:
+            config.PAPER_PROPOSALS_ENABLED = gate_state
+            for name, quote in variants:
+                snap = copy.deepcopy(base)
+                snap["exit_quote"] = quote
+                _recompute_snapshot_id(snap)
+                snap = _reassess(snap, eval_at=eval_at)
+                ok = (snap["decision"] != "PAPER_PROPOSAL"
+                      and snap["proposal"]["cash_weight"] == 1.0
+                      and snap["proposal"]["weights"] == {})
+                if not ok:
+                    failed.append("gate_%s/%s: decision=%s reasons=%s" % (
+                        "on" if gate_state else "off", name,
+                        snap["decision"], snap["decision_reasons"]))
+        finally:
+            config.PAPER_PROPOSALS_ENABLED = old_gate
+    if config.PAPER_PROPOSALS_ENABLED is not False:
+        failed.append("gate_not_restored_after_matrix")
+    return _result(
+        "s1g_simulation_never_paper_proposal",
+        "every simulation variant (any content) -> never PAPER_PROPOSAL, "
+        "cash_weight 1.0, under gate OFF and gate ON (isolated)",
+        "%d/%d variant x gate-state runs never PAPER_PROPOSAL; failed: %s"
+        % (len(variants) * 2 - len(failed), len(variants) * 2,
+           failed or "none"),
+        not failed,
+        "9 simulation variants x 2 gate states = 18 runs")
+
+
+def test_s1g_decide_source_guard():
+    """S1-G: guard hash/AST decide() — GAGAL bila source decide() berubah
+    dari rekaman (edit, rename, monkeypatch). Hash direkam 24 Nov 2026
+    dari pipeline.py HEAD 4a47a4c; perbandingan dihitung tiap run gate."""
+    ok, detail = _decide_guard()
+    return _result(
+        "s1g_decide_source_guard",
+        "decide() source + AST hashes match the S1-G recording "
+        "(no change since 24 Nov 2026)",
+        detail,
+        ok,
+        "guard: source_sha256 + ast_sha256 of inspect.getsource(decide)")
+
+
 # -------------------------------------------------------------------- main
 TESTS = [
     ("happy_path", test_happy_path),
@@ -2410,6 +2724,15 @@ TESTS = [
     ("quoter_g1_g6", test_quoter_g1_g6),
     # Follow-up F1+F2+F3 re-audit v6 + minor M1-M3 re-audit v7 (v0.3.3).
     ("quoter_f1_f2_m1_m3", test_quoter_f1_f2_m1_m3),
+    # S1-G tes integritas gate (rencana Scope 1 v1.1 §5, 25 Nov 2026).
+    ("s1g_gate_off_blocks_all_quotes", test_s1g_gate_off_blocks_all_quotes),
+    ("s1g_gate_on_isolated_blocks_simulation",
+     test_s1g_gate_on_isolated_blocks_simulation),
+    ("s1g_paper_proposals_enabled_false",
+     test_s1g_paper_proposals_enabled_false),
+    ("s1g_simulation_never_paper_proposal",
+     test_s1g_simulation_never_paper_proposal),
+    ("s1g_decide_source_guard", test_s1g_decide_source_guard),
 ]
 
 
