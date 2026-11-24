@@ -1,0 +1,1024 @@
+{
+  "probe": "S2 keyed firm-quote probes 0x + 1inch",
+  "date": "2026-11-24",
+  "generated_at_utc": "2026-11-24T01:12:30Z",
+  "plan": "docs/scope1-rencana-eksekusi-2026-11-24.md \u00a72.1, \u00a72.1b, \u00a72.3, \u00a72.4, \u00a72.5",
+  "definition_doc": "docs/firm-quote-definition-2026-11-24.md",
+  "direction": "SELL",
+  "notional_usd": 10000.0,
+  "chain": "base (8453)",
+  "usdc_address": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+  "usdc_address_note": "native Circle; alamat lama bd029029 SALAH, tidak dipakai",
+  "weth_address": "0x4200000000000000000000000000000000000006",
+  "taker": "0x7164463c4f01128a3824ea7580ad59455604b9f3",
+  "taker_note": "wallet EVM Septian; quote read-only, tidak ada signing/broadcast/dana bergerak",
+  "slippage_requested_pct": 0.5,
+  "slippage_requested_bps_0x": 50,
+  "cross_check_predeclared": {
+    "primary": "quote vendor LAIN untuk pair/arah/ukuran sama (0x <-> 1inch)",
+    "fallback": "NAV-implied (Coinbase nav_price, sudah multiplier-adjusted) + proxy Hyperliquid xyz",
+    "formula": "|P_implied_execution - P_ref| / P_ref * 100 <= 1%",
+    "p_implied_execution": "min-out / amount_in"
+  },
+  "samples": [
+    {
+      "vendor": "0x",
+      "call": "price",
+      "symbol": "NVDAc",
+      "http_status": 422,
+      "error": "http_422",
+      "attempts": [
+        {
+          "http_status": 422,
+          "error": "http_422",
+          "elapsed_sec": 1.09
+        }
+      ],
+      "amount_in_base_units": 5942829976,
+      "amount_in_tokens": 59.42829976,
+      "median_dexscreener_usd": 168.27,
+      "notional_calc_usd": 10000.0000006152,
+      "raw_response": {
+        "name": "SELL_TOKEN_NOT_AUTHORIZED_FOR_TRADE",
+        "message": "The sell token is not authorized for trade due to legal restrictions",
+        "data": {
+          "zid": "0x82533a181f750f2c1cd4579f"
+        }
+      },
+      "raw_text_truncated": "{\"name\":\"SELL_TOKEN_NOT_AUTHORIZED_FOR_TRADE\",\"message\":\"The sell token is not authorized for trade due to legal restrictions\",\"data\":{\"zid\":\"0x82533a181f750f2c1cd4579f\"}}",
+      "expiry_keys_found": [],
+      "kind_vendor_label": null,
+      "expected_out_usdc": null,
+      "expected_out_field": null,
+      "min_out_usdc": null,
+      "min_out_field": null,
+      "price_impact_pct": null,
+      "price_impact_field": null,
+      "slippage_requested_pct": 0.5,
+      "slippage_field": null,
+      "implied_price_expected": null,
+      "implied_price_min_out": null,
+      "fee_note": null,
+      "route": null,
+      "expires_at": null,
+      "expires_at_provenance": null,
+      "verdict": "TIDAK_FIRM",
+      "verdict_reason": "http_422",
+      "validator_faithful": null,
+      "cross_check": null,
+      "error_body": {
+        "name": "SELL_TOKEN_NOT_AUTHORIZED_FOR_TRADE",
+        "message": "The sell token is not authorized for trade due to legal restrictions",
+        "data": {
+          "zid": "0x82533a181f750f2c1cd4579f"
+        }
+      }
+    },
+    {
+      "vendor": "0x",
+      "call": "quote",
+      "symbol": "NVDAc",
+      "http_status": 422,
+      "error": "http_422",
+      "attempts": [
+        {
+          "http_status": 422,
+          "error": "http_422",
+          "elapsed_sec": 1.25
+        }
+      ],
+      "amount_in_base_units": 5942829976,
+      "amount_in_tokens": 59.42829976,
+      "median_dexscreener_usd": 168.27,
+      "notional_calc_usd": 10000.0000006152,
+      "raw_response": {
+        "name": "SELL_TOKEN_NOT_AUTHORIZED_FOR_TRADE",
+        "message": "The sell token is not authorized for trade due to legal restrictions",
+        "data": {
+          "zid": "0xc8fda89f3a18eaa30e765d6a"
+        }
+      },
+      "raw_text_truncated": "{\"name\":\"SELL_TOKEN_NOT_AUTHORIZED_FOR_TRADE\",\"message\":\"The sell token is not authorized for trade due to legal restrictions\",\"data\":{\"zid\":\"0xc8fda89f3a18eaa30e765d6a\"}}",
+      "expiry_keys_found": [],
+      "kind_vendor_label": null,
+      "expected_out_usdc": null,
+      "expected_out_field": null,
+      "min_out_usdc": null,
+      "min_out_field": null,
+      "price_impact_pct": null,
+      "price_impact_field": null,
+      "slippage_requested_pct": 0.5,
+      "slippage_field": null,
+      "implied_price_expected": null,
+      "implied_price_min_out": null,
+      "fee_note": null,
+      "route": null,
+      "expires_at": null,
+      "expires_at_provenance": null,
+      "verdict": "TIDAK_FIRM",
+      "verdict_reason": "http_422",
+      "validator_faithful": null,
+      "cross_check": null,
+      "error_body": {
+        "name": "SELL_TOKEN_NOT_AUTHORIZED_FOR_TRADE",
+        "message": "The sell token is not authorized for trade due to legal restrictions",
+        "data": {
+          "zid": "0xc8fda89f3a18eaa30e765d6a"
+        }
+      }
+    },
+    {
+      "vendor": "1inch",
+      "call": "quote",
+      "symbol": "NVDAc",
+      "http_status": 200,
+      "error": null,
+      "attempts": [
+        {
+          "http_status": 200,
+          "error": null,
+          "elapsed_sec": 1.16
+        }
+      ],
+      "amount_in_base_units": 5942829976,
+      "amount_in_tokens": 59.42829976,
+      "median_dexscreener_usd": 168.27,
+      "notional_calc_usd": 10000.0000006152,
+      "raw_response": {
+        "dstAmount": "9941235611"
+      },
+      "raw_text_truncated": "{\"dstAmount\":\"9941235611\"}",
+      "expiry_keys_found": [],
+      "kind_vendor_label": null,
+      "expected_out_usdc": 9941.235611,
+      "expected_out_field": "dstAmount",
+      "min_out_usdc": null,
+      "min_out_field": null,
+      "price_impact_pct": -0.5876438961158515,
+      "price_impact_field": null,
+      "slippage_requested_pct": 0.5,
+      "slippage_field": null,
+      "implied_price_expected": 167.28117161600585,
+      "implied_price_min_out": null,
+      "fee_note": "dstAmount = expected output indikatif; /quote tidak memberi min-out, expiry, atau tx",
+      "route": null,
+      "expires_at": null,
+      "expires_at_provenance": "ABSENT: tidak ada field expiry/deadline/valid-until di respons mentah (pencarian rekursif: []). Endpoint /quote 1inch bersifat indikatif menurut dokumentasi vendor.",
+      "verdict": "TIDAK_FIRM",
+      "verdict_reason": "missing_fields: kind (tidak ada label firm/executable/guaranteed di respons vendor); amount_out_min; expires_at (tidak ada semantik expiry vendor)",
+      "validator_faithful": {
+        "status": "invalid",
+        "reason_codes": [
+          "exit_quote_kind_missing"
+        ],
+        "details": {
+          "note": "no vendor min-out and no vendor kind label; no faithful firm mapping exists"
+        }
+      },
+      "cross_check": {
+        "formula": "|P_implied_execution - P_ref| / P_ref * 100 <= 1%",
+        "p_implied_execution": null,
+        "p_implied_execution_basis": "min-out / amount_in (harga terburuk yang dikomitmenkan vendor)",
+        "primary_other_vendor": null,
+        "nav_implied": null,
+        "proxy_hyperliquid_xyz": null,
+        "commitment_cross_check_pct": null,
+        "commitment_cross_check_pass": null,
+        "indicative_cross_check": {
+          "nav_implied": {
+            "ref_price": 168.18363844,
+            "diff_pct": 0.5365960876843071
+          },
+          "proxy_hyperliquid_xyz": {
+            "ref_price": 168.15,
+            "diff_pct": 0.5166984145073781
+          }
+        }
+      },
+      "price_impact_basis": "expected-out vs median DexScreener (spot)",
+      "slippage_realised_pct": null,
+      "slippage_note": "toleransi yang diminta klien (0.5%) adalah parameter permintaan, BUKAN realisasi dan BUKAN komitmen vendor",
+      "client_derived_floor_usdc": 9891.529432945,
+      "client_derived_floor_note": "expected-out x (1 - 0,5%) \u2014 lantai hitung klien, BUKAN min-out yang dikomitmenkan vendor"
+    },
+    {
+      "vendor": "1inch",
+      "call": "swap",
+      "symbol": "NVDAc",
+      "http_status": 400,
+      "error": "http_400",
+      "attempts": [
+        {
+          "http_status": 400,
+          "error": "http_400",
+          "elapsed_sec": 1.31
+        }
+      ],
+      "amount_in_base_units": 5942829976,
+      "amount_in_tokens": 59.42829976,
+      "median_dexscreener_usd": 168.27,
+      "notional_calc_usd": 10000.0000006152,
+      "raw_response": {
+        "error": "Bad Request",
+        "description": "Not enough 0xb20000000000000000000078ee7ce2fe4908108c balance. Amount: 5942829976. Balance: 0",
+        "statusCode": 400,
+        "code": "NOT_ENOUGH_BALANCE",
+        "meta": [
+          {
+            "type": "fromTokenAddress",
+            "value": "0xb20000000000000000000078ee7ce2fe4908108c"
+          },
+          {
+            "type": "amount",
+            "value": "5942829976"
+          },
+          {
+            "type": "fromTokenBalance",
+            "value": "0"
+          }
+        ],
+        "requestId": "a2231395b558ac4431e978c32c954cc4"
+      },
+      "raw_text_truncated": "{\"error\":\"Bad Request\",\"description\":\"Not enough 0xb20000000000000000000078ee7ce2fe4908108c balance. Amount: 5942829976. Balance: 0\",\"statusCode\":400,\"code\":\"NOT_ENOUGH_BALANCE\",\"meta\":[{\"type\":\"fromTokenAddress\",\"value\":\"0xb20000000000000000000078ee7ce2fe4908108c\"},{\"type\":\"amount\",\"value\":\"5942829976\"},{\"type\":\"fromTokenBalance\",\"value\":\"0\"}],\"requestId\":\"a2231395b558ac4431e978c32c954cc4\"}",
+      "expiry_keys_found": [],
+      "kind_vendor_label": null,
+      "expected_out_usdc": null,
+      "expected_out_field": null,
+      "min_out_usdc": null,
+      "min_out_field": null,
+      "price_impact_pct": null,
+      "price_impact_field": null,
+      "slippage_requested_pct": 0.5,
+      "slippage_field": null,
+      "implied_price_expected": null,
+      "implied_price_min_out": null,
+      "fee_note": null,
+      "route": null,
+      "expires_at": null,
+      "expires_at_provenance": null,
+      "verdict": "TIDAK_FIRM",
+      "verdict_reason": "http_400",
+      "validator_faithful": null,
+      "cross_check": null,
+      "error_body": {
+        "error": "Bad Request",
+        "description": "Not enough 0xb20000000000000000000078ee7ce2fe4908108c balance. Amount: 5942829976. Balance: 0",
+        "statusCode": 400,
+        "code": "NOT_ENOUGH_BALANCE",
+        "meta": [
+          {
+            "type": "fromTokenAddress",
+            "value": "0xb20000000000000000000078ee7ce2fe4908108c"
+          },
+          {
+            "type": "amount",
+            "value": "5942829976"
+          },
+          {
+            "type": "fromTokenBalance",
+            "value": "0"
+          }
+        ],
+        "requestId": "a2231395b558ac4431e978c32c954cc4"
+      }
+    },
+    {
+      "vendor": "0x",
+      "call": "price",
+      "symbol": "AAPLc",
+      "http_status": 422,
+      "error": "http_422",
+      "attempts": [
+        {
+          "http_status": 422,
+          "error": "http_422",
+          "elapsed_sec": 1.13
+        }
+      ],
+      "amount_in_base_units": 2858694720,
+      "amount_in_tokens": 28.5869472,
+      "median_dexscreener_usd": 349.81,
+      "notional_calc_usd": 10000.000000032,
+      "raw_response": {
+        "name": "SELL_TOKEN_NOT_AUTHORIZED_FOR_TRADE",
+        "message": "The sell token is not authorized for trade due to legal restrictions",
+        "data": {
+          "zid": "0xcb7ce8affc7d3d34eeca38a1"
+        }
+      },
+      "raw_text_truncated": "{\"name\":\"SELL_TOKEN_NOT_AUTHORIZED_FOR_TRADE\",\"message\":\"The sell token is not authorized for trade due to legal restrictions\",\"data\":{\"zid\":\"0xcb7ce8affc7d3d34eeca38a1\"}}",
+      "expiry_keys_found": [],
+      "kind_vendor_label": null,
+      "expected_out_usdc": null,
+      "expected_out_field": null,
+      "min_out_usdc": null,
+      "min_out_field": null,
+      "price_impact_pct": null,
+      "price_impact_field": null,
+      "slippage_requested_pct": 0.5,
+      "slippage_field": null,
+      "implied_price_expected": null,
+      "implied_price_min_out": null,
+      "fee_note": null,
+      "route": null,
+      "expires_at": null,
+      "expires_at_provenance": null,
+      "verdict": "TIDAK_FIRM",
+      "verdict_reason": "http_422",
+      "validator_faithful": null,
+      "cross_check": null,
+      "error_body": {
+        "name": "SELL_TOKEN_NOT_AUTHORIZED_FOR_TRADE",
+        "message": "The sell token is not authorized for trade due to legal restrictions",
+        "data": {
+          "zid": "0xcb7ce8affc7d3d34eeca38a1"
+        }
+      }
+    },
+    {
+      "vendor": "0x",
+      "call": "quote",
+      "symbol": "AAPLc",
+      "http_status": 422,
+      "error": "http_422",
+      "attempts": [
+        {
+          "http_status": 422,
+          "error": "http_422",
+          "elapsed_sec": 1.09
+        }
+      ],
+      "amount_in_base_units": 2858694720,
+      "amount_in_tokens": 28.5869472,
+      "median_dexscreener_usd": 349.81,
+      "notional_calc_usd": 10000.000000032,
+      "raw_response": {
+        "name": "SELL_TOKEN_NOT_AUTHORIZED_FOR_TRADE",
+        "message": "The sell token is not authorized for trade due to legal restrictions",
+        "data": {
+          "zid": "0x025640b50885107284813e8d"
+        }
+      },
+      "raw_text_truncated": "{\"name\":\"SELL_TOKEN_NOT_AUTHORIZED_FOR_TRADE\",\"message\":\"The sell token is not authorized for trade due to legal restrictions\",\"data\":{\"zid\":\"0x025640b50885107284813e8d\"}}",
+      "expiry_keys_found": [],
+      "kind_vendor_label": null,
+      "expected_out_usdc": null,
+      "expected_out_field": null,
+      "min_out_usdc": null,
+      "min_out_field": null,
+      "price_impact_pct": null,
+      "price_impact_field": null,
+      "slippage_requested_pct": 0.5,
+      "slippage_field": null,
+      "implied_price_expected": null,
+      "implied_price_min_out": null,
+      "fee_note": null,
+      "route": null,
+      "expires_at": null,
+      "expires_at_provenance": null,
+      "verdict": "TIDAK_FIRM",
+      "verdict_reason": "http_422",
+      "validator_faithful": null,
+      "cross_check": null,
+      "error_body": {
+        "name": "SELL_TOKEN_NOT_AUTHORIZED_FOR_TRADE",
+        "message": "The sell token is not authorized for trade due to legal restrictions",
+        "data": {
+          "zid": "0x025640b50885107284813e8d"
+        }
+      }
+    },
+    {
+      "vendor": "1inch",
+      "call": "quote",
+      "symbol": "AAPLc",
+      "http_status": 200,
+      "error": null,
+      "attempts": [
+        {
+          "http_status": 200,
+          "error": null,
+          "elapsed_sec": 1.45
+        }
+      ],
+      "amount_in_base_units": 2858694720,
+      "amount_in_tokens": 28.5869472,
+      "median_dexscreener_usd": 349.81,
+      "notional_calc_usd": 10000.000000032,
+      "raw_response": {
+        "dstAmount": "9967307179"
+      },
+      "raw_text_truncated": "{\"dstAmount\":\"9967307179\"}",
+      "expiry_keys_found": [],
+      "kind_vendor_label": null,
+      "expected_out_usdc": 9967.307179,
+      "expected_out_field": "dstAmount",
+      "min_out_usdc": null,
+      "min_out_field": null,
+      "price_impact_pct": -0.3269282103189559,
+      "price_impact_field": null,
+      "slippage_requested_pct": 0.5,
+      "slippage_field": null,
+      "implied_price_expected": 348.6663724274832,
+      "implied_price_min_out": null,
+      "fee_note": "dstAmount = expected output indikatif; /quote tidak memberi min-out, expiry, atau tx",
+      "route": null,
+      "expires_at": null,
+      "expires_at_provenance": "ABSENT: tidak ada field expiry/deadline/valid-until di respons mentah (pencarian rekursif: []). Endpoint /quote 1inch bersifat indikatif menurut dokumentasi vendor.",
+      "verdict": "TIDAK_FIRM",
+      "verdict_reason": "missing_fields: kind (tidak ada label firm/executable/guaranteed di respons vendor); amount_out_min; expires_at (tidak ada semantik expiry vendor)",
+      "validator_faithful": {
+        "status": "invalid",
+        "reason_codes": [
+          "exit_quote_kind_missing"
+        ],
+        "details": {
+          "note": "no vendor min-out and no vendor kind label; no faithful firm mapping exists"
+        }
+      },
+      "cross_check": {
+        "formula": "|P_implied_execution - P_ref| / P_ref * 100 <= 1%",
+        "p_implied_execution": null,
+        "p_implied_execution_basis": "min-out / amount_in (harga terburuk yang dikomitmenkan vendor)",
+        "primary_other_vendor": null,
+        "nav_implied": null,
+        "proxy_hyperliquid_xyz": null,
+        "commitment_cross_check_pct": null,
+        "commitment_cross_check_pass": null,
+        "indicative_cross_check": {
+          "nav_implied": {
+            "ref_price": 350.49029387,
+            "diff_pct": 0.5203914272140444
+          },
+          "proxy_hyperliquid_xyz": {
+            "ref_price": 349.68,
+            "diff_pct": 0.2898729045174966
+          }
+        }
+      },
+      "price_impact_basis": "expected-out vs median DexScreener (spot)",
+      "slippage_realised_pct": null,
+      "slippage_note": "toleransi yang diminta klien (0.5%) adalah parameter permintaan, BUKAN realisasi dan BUKAN komitmen vendor",
+      "client_derived_floor_usdc": 9917.470643105,
+      "client_derived_floor_note": "expected-out x (1 - 0,5%) \u2014 lantai hitung klien, BUKAN min-out yang dikomitmenkan vendor"
+    },
+    {
+      "vendor": "1inch",
+      "call": "swap",
+      "symbol": "AAPLc",
+      "http_status": 400,
+      "error": "http_400",
+      "attempts": [
+        {
+          "http_status": 400,
+          "error": "http_400",
+          "elapsed_sec": 1.64
+        }
+      ],
+      "amount_in_base_units": 2858694720,
+      "amount_in_tokens": 28.5869472,
+      "median_dexscreener_usd": 349.81,
+      "notional_calc_usd": 10000.000000032,
+      "raw_response": {
+        "error": "Bad Request",
+        "description": "Not enough 0xb200000000000000000000c2e324d24d7eecd1fb balance. Amount: 2858694720. Balance: 0",
+        "statusCode": 400,
+        "code": "NOT_ENOUGH_BALANCE",
+        "meta": [
+          {
+            "type": "fromTokenAddress",
+            "value": "0xb200000000000000000000c2e324d24d7eecd1fb"
+          },
+          {
+            "type": "amount",
+            "value": "2858694720"
+          },
+          {
+            "type": "fromTokenBalance",
+            "value": "0"
+          }
+        ],
+        "requestId": "8bc44c9691384d9b6f86086e2d7a1a1f"
+      },
+      "raw_text_truncated": "{\"error\":\"Bad Request\",\"description\":\"Not enough 0xb200000000000000000000c2e324d24d7eecd1fb balance. Amount: 2858694720. Balance: 0\",\"statusCode\":400,\"code\":\"NOT_ENOUGH_BALANCE\",\"meta\":[{\"type\":\"fromTokenAddress\",\"value\":\"0xb200000000000000000000c2e324d24d7eecd1fb\"},{\"type\":\"amount\",\"value\":\"2858694720\"},{\"type\":\"fromTokenBalance\",\"value\":\"0\"}],\"requestId\":\"8bc44c9691384d9b6f86086e2d7a1a1f\"}",
+      "expiry_keys_found": [],
+      "kind_vendor_label": null,
+      "expected_out_usdc": null,
+      "expected_out_field": null,
+      "min_out_usdc": null,
+      "min_out_field": null,
+      "price_impact_pct": null,
+      "price_impact_field": null,
+      "slippage_requested_pct": 0.5,
+      "slippage_field": null,
+      "implied_price_expected": null,
+      "implied_price_min_out": null,
+      "fee_note": null,
+      "route": null,
+      "expires_at": null,
+      "expires_at_provenance": null,
+      "verdict": "TIDAK_FIRM",
+      "verdict_reason": "http_400",
+      "validator_faithful": null,
+      "cross_check": null,
+      "error_body": {
+        "error": "Bad Request",
+        "description": "Not enough 0xb200000000000000000000c2e324d24d7eecd1fb balance. Amount: 2858694720. Balance: 0",
+        "statusCode": 400,
+        "code": "NOT_ENOUGH_BALANCE",
+        "meta": [
+          {
+            "type": "fromTokenAddress",
+            "value": "0xb200000000000000000000c2e324d24d7eecd1fb"
+          },
+          {
+            "type": "amount",
+            "value": "2858694720"
+          },
+          {
+            "type": "fromTokenBalance",
+            "value": "0"
+          }
+        ],
+        "requestId": "8bc44c9691384d9b6f86086e2d7a1a1f"
+      }
+    }
+  ],
+  "references": {
+    "nav_implied": {
+      "ok": true,
+      "fetch_method": "adapter",
+      "per_token": {
+        "NVDAc": {
+          "nav_price": 168.18363844,
+          "nav_price_updated_at": "2026-11-24T01:08:20Z",
+          "note": "nav_price SUDAH multiplier-adjusted (\u00a73 koreksi 1)"
+        },
+        "AAPLc": {
+          "nav_price": 350.49029387,
+          "nav_price_updated_at": "2026-11-23T19:31:58Z",
+          "note": "nav_price SUDAH multiplier-adjusted (\u00a73 koreksi 1)"
+        }
+      },
+      "error": null
+    },
+    "hyperliquid_proxy_xyz": {
+      "ok": true,
+      "fetch_method": "adapter",
+      "per_token": {
+        "NVDAc": {
+          "instrument": "xyz:NVDA",
+          "markPx": "168.15",
+          "oraclePx": "168.15"
+        },
+        "AAPLc": {
+          "instrument": "xyz:AAPL",
+          "markPx": "349.68",
+          "oraclePx": "349.74"
+        }
+      },
+      "error": null,
+      "note": "proxy underlying equity perp, BUKAN harga token Base"
+    }
+  },
+  "block_pin": {
+    "ok": true,
+    "block_number": 61461903,
+    "block_hash": "0x9269ebf0e13db66a65ae8d5e067e92207212bb53cc1a5527b6789b46281f6d80",
+    "fetched_at": "2026-11-24T01:12:30Z",
+    "source": "eth_blockNumber",
+    "error": null,
+    "fetch_method": "adapter"
+  },
+  "summary": {
+    "total_samples": 8,
+    "firm_candidates": 0,
+    "not_firm": 8,
+    "per_vendor": {
+      "0x": {
+        "total": 4,
+        "firm": 0
+      },
+      "1inch": {
+        "total": 4,
+        "firm": 0
+      }
+    },
+    "fallback_references": {
+      "nav_implied_ok": true,
+      "nav_tokens_ok": [
+        "NVDAc",
+        "AAPLc"
+      ],
+      "proxy_ok": true,
+      "proxy_tokens_ok": [
+        "NVDAc",
+        "AAPLc"
+      ]
+    },
+    "verdict_overall": "TIDAK ADA kandidat yang lolos \u2014 hasil sah (\u00a72.5)"
+  },
+  "spot_and_amount_in": {
+    "NVDAc": {
+      "token_address": "0xb20000000000000000000078ee7ce2fE4908108C",
+      "decimals": 8,
+      "median_dexscreener_usdc": 168.27,
+      "median_pool_prices_usd": [
+        163.023,
+        166.082,
+        167.049,
+        167.57,
+        168.27,
+        168.27,
+        168.31,
+        168.34,
+        168.45,
+        168.67,
+        168.67
+      ],
+      "amount_in_base_units": 5942829976,
+      "amount_in_tokens": 59.42829976,
+      "amount_in_method": "ceil(10000 / median_spot * 10^decimals) agar notional hitung >= $10.000",
+      "notional_calc_usd": 10000.0000006152
+    },
+    "AAPLc": {
+      "token_address": "0xb200000000000000000000C2e324d24d7eEcd1fb",
+      "decimals": 8,
+      "median_dexscreener_usdc": 349.81,
+      "median_pool_prices_usd": [
+        349.3,
+        349.8,
+        349.8,
+        349.82,
+        349.85,
+        349.92
+      ],
+      "amount_in_base_units": 2858694720,
+      "amount_in_tokens": 28.5869472,
+      "amount_in_method": "ceil(10000 / median_spot * 10^decimals) agar notional hitung >= $10.000",
+      "notional_calc_usd": 10000.000000032
+    }
+  },
+  "permit2_fallback": {
+    "NVDAc": {
+      "used": true,
+      "http_status": 422,
+      "raw_response": {
+        "name": "SELL_TOKEN_NOT_AUTHORIZED_FOR_TRADE",
+        "message": "The sell token is not authorized for trade due to legal restrictions",
+        "data": {
+          "zid": "0x349fe0927ae435d9009cf8cd"
+        }
+      },
+      "error": "http_422"
+    },
+    "AAPLc": {
+      "used": true,
+      "http_status": 422,
+      "raw_response": {
+        "name": "SELL_TOKEN_NOT_AUTHORIZED_FOR_TRADE",
+        "message": "The sell token is not authorized for trade due to legal restrictions",
+        "data": {
+          "zid": "0xfb097b47ac8fb0c184e34b31"
+        }
+      },
+      "error": "http_422"
+    }
+  },
+  "round2_characterization": {
+    "generated_at_utc": "2026-11-24T01:13:48Z",
+    "purpose": "karakterisasi penolakan round 1 (ukuran? arah? saldo taker? skema /swap?)",
+    "probes": [
+      {
+        "id": "0x_price_tiny_NVDAc",
+        "question": "Apakah 422 0x disebabkan ukuran $10rb?",
+        "sell_amount_base_units": 1000000,
+        "sell_amount_tokens": 0.01,
+        "http_status": 422,
+        "raw_response": {
+          "name": "SELL_TOKEN_NOT_AUTHORIZED_FOR_TRADE",
+          "message": "The sell token is not authorized for trade due to legal restrictions",
+          "data": {
+            "zid": "0x73c60d2bbc26064e3e9e83d2"
+          }
+        },
+        "error": "http_422"
+      },
+      {
+        "id": "0x_price_buy_USDC_to_NVDAc",
+        "question": "Apakah 0x mengizinkan arah BELI (USDC->token $10rb)?",
+        "sell_amount_usdc_base_units": 10000000,
+        "http_status": 422,
+        "raw_response": {
+          "name": "BUY_TOKEN_NOT_AUTHORIZED_FOR_TRADE",
+          "message": "The buy token is not authorized for trade due to legal restrictions",
+          "data": {
+            "zid": "0x0066ff24e9fdcd727c7e36bf"
+          }
+        },
+        "error": "http_422",
+        "buy_summary": null
+      },
+      {
+        "id": "1inch_swap_holder_from_NVDAc",
+        "question": "Apakah skema /swap 1inch punya min-out/expiry bila from memegang token?",
+        "from": "0xF668e21993f0ACd7ab00BB1cFbAeD0df28A3C8EC",
+        "http_status": 400,
+        "raw_response": {
+          "error": "Bad Request",
+          "description": "Not enough allowance. Amount: 5942829976. Allowance: 0. Spender: 0x111111125421ca6dc452d289314280a0f8842a65",
+          "statusCode": 400,
+          "code": "NOT_ENOUGH_ALLOWANCE",
+          "meta": [
+            {
+              "type": "amount",
+              "value": "5942829976"
+            },
+            {
+              "type": "allowance",
+              "value": "0"
+            }
+          ],
+          "requestId": "d9aba0037f5a911b17f708fe165f2451"
+        },
+        "error": "http_400",
+        "swap_summary": null,
+        "assessment": {
+          "vendor": "1inch",
+          "call": "swap_holder_from_schema_probe",
+          "symbol": "NVDAc",
+          "http_status": 400,
+          "error": "http_400",
+          "attempts": [
+            {
+              "http_status": 400,
+              "error": "http_400",
+              "elapsed_sec": 1.49
+            }
+          ],
+          "amount_in_base_units": 5942829976,
+          "amount_in_tokens": 59.42829976,
+          "median_dexscreener_usd": 168.27,
+          "notional_calc_usd": 10000.0000006152,
+          "raw_response": {
+            "error": "Bad Request",
+            "description": "Not enough allowance. Amount: 5942829976. Allowance: 0. Spender: 0x111111125421ca6dc452d289314280a0f8842a65",
+            "statusCode": 400,
+            "code": "NOT_ENOUGH_ALLOWANCE",
+            "meta": [
+              {
+                "type": "amount",
+                "value": "5942829976"
+              },
+              {
+                "type": "allowance",
+                "value": "0"
+              }
+            ],
+            "requestId": "d9aba0037f5a911b17f708fe165f2451"
+          },
+          "raw_text_truncated": "{\"error\":\"Bad Request\",\"description\":\"Not enough allowance. Amount: 5942829976. Allowance: 0. Spender: 0x111111125421ca6dc452d289314280a0f8842a65\",\"statusCode\":400,\"code\":\"NOT_ENOUGH_ALLOWANCE\",\"meta\":[{\"type\":\"amount\",\"value\":\"5942829976\"},{\"type\":\"allowance\",\"value\":\"0\"}],\"requestId\":\"d9aba0037f5a911b17f708fe165f2451\"}",
+          "expiry_keys_found": [],
+          "kind_vendor_label": null,
+          "expected_out_usdc": null,
+          "expected_out_field": null,
+          "min_out_usdc": null,
+          "min_out_field": null,
+          "price_impact_pct": null,
+          "price_impact_field": null,
+          "slippage_requested_pct": 0.5,
+          "slippage_field": null,
+          "implied_price_expected": null,
+          "implied_price_min_out": null,
+          "fee_note": null,
+          "route": null,
+          "expires_at": null,
+          "expires_at_provenance": null,
+          "verdict": "TIDAK_FIRM",
+          "verdict_reason": "http_400",
+          "validator_faithful": null,
+          "cross_check": null,
+          "error_body": {
+            "error": "Bad Request",
+            "description": "Not enough allowance. Amount: 5942829976. Allowance: 0. Spender: 0x111111125421ca6dc452d289314280a0f8842a65",
+            "statusCode": 400,
+            "code": "NOT_ENOUGH_ALLOWANCE",
+            "meta": [
+              {
+                "type": "amount",
+                "value": "5942829976"
+              },
+              {
+                "type": "allowance",
+                "value": "0"
+              }
+            ],
+            "requestId": "d9aba0037f5a911b17f708fe165f2451"
+          },
+          "schema_probe_only": true,
+          "schema_probe_note": "from = alamat pool Aerodrome pemegang token, dipakai HANYA sebagai parameter read-only untuk mengungkap skema respons /swap. BUKAN quote untuk wallet Septian; TIDAK dihitung sebagai sampel firm (taker != Septian, saldo taker Septian tetap 0 sehingga /swap untuk taker itu tetap 400).",
+          "holder_from": "0xF668e21993f0ACd7ab00BB1cFbAeD0df28A3C8EC"
+        }
+      },
+      {
+        "id": "0x_price_tiny_AAPLc",
+        "question": "Apakah 422 0x disebabkan ukuran $10rb?",
+        "sell_amount_base_units": 1000000,
+        "sell_amount_tokens": 0.01,
+        "http_status": 422,
+        "raw_response": {
+          "name": "SELL_TOKEN_NOT_AUTHORIZED_FOR_TRADE",
+          "message": "The sell token is not authorized for trade due to legal restrictions",
+          "data": {
+            "zid": "0x4bf550423636350765cd655f"
+          }
+        },
+        "error": "http_422"
+      },
+      {
+        "id": "0x_price_buy_USDC_to_AAPLc",
+        "question": "Apakah 0x mengizinkan arah BELI (USDC->token $10rb)?",
+        "sell_amount_usdc_base_units": 10000000,
+        "http_status": 422,
+        "raw_response": {
+          "name": "BUY_TOKEN_NOT_AUTHORIZED_FOR_TRADE",
+          "message": "The buy token is not authorized for trade due to legal restrictions",
+          "data": {
+            "zid": "0x117f524c4439192bd546e76b"
+          }
+        },
+        "error": "http_422",
+        "buy_summary": null
+      },
+      {
+        "id": "1inch_swap_holder_from_AAPLc",
+        "question": "Apakah skema /swap 1inch punya min-out/expiry bila from memegang token?",
+        "from": "0xF5FCB9CDAFcE67d50AfEf298F88E709d2B946BA6",
+        "http_status": 400,
+        "raw_response": {
+          "error": "Bad Request",
+          "description": "Not enough allowance. Amount: 2858694720. Allowance: 0. Spender: 0x111111125421ca6dc452d289314280a0f8842a65",
+          "statusCode": 400,
+          "code": "NOT_ENOUGH_ALLOWANCE",
+          "meta": [
+            {
+              "type": "amount",
+              "value": "2858694720"
+            },
+            {
+              "type": "allowance",
+              "value": "0"
+            }
+          ],
+          "requestId": "348aa3141a1d9fbdec807b0cb952d328"
+        },
+        "error": "http_400",
+        "swap_summary": null,
+        "assessment": {
+          "vendor": "1inch",
+          "call": "swap_holder_from_schema_probe",
+          "symbol": "AAPLc",
+          "http_status": 400,
+          "error": "http_400",
+          "attempts": [
+            {
+              "http_status": 400,
+              "error": "http_400",
+              "elapsed_sec": 1.32
+            }
+          ],
+          "amount_in_base_units": 2858694720,
+          "amount_in_tokens": 28.5869472,
+          "median_dexscreener_usd": 349.81,
+          "notional_calc_usd": 10000.000000032,
+          "raw_response": {
+            "error": "Bad Request",
+            "description": "Not enough allowance. Amount: 2858694720. Allowance: 0. Spender: 0x111111125421ca6dc452d289314280a0f8842a65",
+            "statusCode": 400,
+            "code": "NOT_ENOUGH_ALLOWANCE",
+            "meta": [
+              {
+                "type": "amount",
+                "value": "2858694720"
+              },
+              {
+                "type": "allowance",
+                "value": "0"
+              }
+            ],
+            "requestId": "348aa3141a1d9fbdec807b0cb952d328"
+          },
+          "raw_text_truncated": "{\"error\":\"Bad Request\",\"description\":\"Not enough allowance. Amount: 2858694720. Allowance: 0. Spender: 0x111111125421ca6dc452d289314280a0f8842a65\",\"statusCode\":400,\"code\":\"NOT_ENOUGH_ALLOWANCE\",\"meta\":[{\"type\":\"amount\",\"value\":\"2858694720\"},{\"type\":\"allowance\",\"value\":\"0\"}],\"requestId\":\"348aa3141a1d9fbdec807b0cb952d328\"}",
+          "expiry_keys_found": [],
+          "kind_vendor_label": null,
+          "expected_out_usdc": null,
+          "expected_out_field": null,
+          "min_out_usdc": null,
+          "min_out_field": null,
+          "price_impact_pct": null,
+          "price_impact_field": null,
+          "slippage_requested_pct": 0.5,
+          "slippage_field": null,
+          "implied_price_expected": null,
+          "implied_price_min_out": null,
+          "fee_note": null,
+          "route": null,
+          "expires_at": null,
+          "expires_at_provenance": null,
+          "verdict": "TIDAK_FIRM",
+          "verdict_reason": "http_400",
+          "validator_faithful": null,
+          "cross_check": null,
+          "error_body": {
+            "error": "Bad Request",
+            "description": "Not enough allowance. Amount: 2858694720. Allowance: 0. Spender: 0x111111125421ca6dc452d289314280a0f8842a65",
+            "statusCode": 400,
+            "code": "NOT_ENOUGH_ALLOWANCE",
+            "meta": [
+              {
+                "type": "amount",
+                "value": "2858694720"
+              },
+              {
+                "type": "allowance",
+                "value": "0"
+              }
+            ],
+            "requestId": "348aa3141a1d9fbdec807b0cb952d328"
+          },
+          "schema_probe_only": true,
+          "schema_probe_note": "from = alamat pool Aerodrome pemegang token, dipakai HANYA sebagai parameter read-only untuk mengungkap skema respons /swap. BUKAN quote untuk wallet Septian; TIDAK dihitung sebagai sampel firm (taker != Septian, saldo taker Septian tetap 0 sehingga /swap untuk taker itu tetap 400).",
+          "holder_from": "0xF5FCB9CDAFcE67d50AfEf298F88E709d2B946BA6"
+        }
+      },
+      {
+        "id": "0x_price_sell_GOOGLc_generality",
+        "question": "Apakah blokir 0x berlaku umum untuk tokenized stock lain (GOOGLc)?",
+        "http_status": 422,
+        "raw_response": {
+          "name": "SELL_TOKEN_NOT_AUTHORIZED_FOR_TRADE",
+          "message": "The sell token is not authorized for trade due to legal restrictions",
+          "data": {
+            "zid": "0x79b7d16a64de1fa6276c2ec6"
+          }
+        },
+        "error": "http_422"
+      },
+      {
+        "id": "0x_price_buy_USDC_to_GOOGLc_generality",
+        "question": "Apakah arah BELI GOOGLc juga diblokir 0x?",
+        "http_status": 422,
+        "raw_response": {
+          "name": "BUY_TOKEN_NOT_AUTHORIZED_FOR_TRADE",
+          "message": "The buy token is not authorized for trade due to legal restrictions",
+          "data": {
+            "zid": "0xb953c055e265f6bdc4e8416e"
+          }
+        },
+        "error": "http_422"
+      }
+    ]
+  },
+  "round2_summary": {
+    "0x_tiny_amount_still_422": true,
+    "0x_tiny_error_names": [
+      "SELL_TOKEN_NOT_AUTHORIZED_FOR_TRADE"
+    ],
+    "0x_buy_direction": {
+      "0x_price_buy_USDC_to_NVDAc": {
+        "http": 422,
+        "error_name": "BUY_TOKEN_NOT_AUTHORIZED_FOR_TRADE",
+        "buy_summary": null
+      },
+      "0x_price_buy_USDC_to_AAPLc": {
+        "http": 422,
+        "error_name": "BUY_TOKEN_NOT_AUTHORIZED_FOR_TRADE",
+        "buy_summary": null
+      }
+    },
+    "1inch_swap_holder_from": {
+      "1inch_swap_holder_from_NVDAc": {
+        "http": 400,
+        "verdict": "TIDAK_FIRM",
+        "reason": "http_400",
+        "expected_out_usdc": null,
+        "min_out_usdc": null,
+        "expiry_keys": []
+      },
+      "1inch_swap_holder_from_AAPLc": {
+        "http": 400,
+        "verdict": "TIDAK_FIRM",
+        "reason": "http_400",
+        "expected_out_usdc": null,
+        "min_out_usdc": null,
+        "expiry_keys": []
+      }
+    },
+    "0x_googlc_generality": {
+      "sell_http": 422,
+      "sell_error": "SELL_TOKEN_NOT_AUTHORIZED_FOR_TRADE",
+      "buy_http": 422,
+      "buy_error": "BUY_TOKEN_NOT_AUTHORIZED_FOR_TRADE"
+    }
+  }
+}

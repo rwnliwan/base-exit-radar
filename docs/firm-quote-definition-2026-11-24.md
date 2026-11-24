@@ -4,6 +4,11 @@
 (00:35–00:44 UTC). **Status: TIDAK ADA kandidat yang lolos — hasil sah (§2.5).**
 **Skrip:** `probe_firm_quotes.py` · **Evidence mentah:**
 `evidence/firm_quote_probes_2026-11-24.json` (12 sampel, 2 round).
+**Probe ber-key 24 Nov 2026 ~09:10–09:15 WITA (01:10–01:15 UTC): 0x + 1inch — JUGA
+TIDAK ADA yang lolos (lihat §8).** Skrip: `probe_firm_quotes_keyed.py` +
+`probe_firm_quotes_keyed_round2.py` · Evidence:
+`evidence/firm_quote_probes_keyed_2026-11-24.json` (8 sampel round 1 + 8 probe
+karakterisasi round 2).
 **Rencana yang dipakai:** `docs/scope1-rencana-eksekusi-2026-11-24.md` §2.1, §2.1b, §2.3, §2.4, §2.5.
 **Tidak ada kode produsen yang ditulis** (sesuai §2.4: bila tidak ada yang lolos, hanya laporan + keputusan).
 
@@ -361,6 +366,132 @@ di luar tugas ini):
   sendiri — §2.1b), maka bar 26 Nov diputuskan gagal pada review 26 Nov dan
   paket dikunci ke (a2). Keputusan itu diambil dari bukti, bukan dari
   asumsi.
+
+## 8. Probe ber-key 0x + 1inch (S2, 24 Nov 2026 ~09:10–09:15 WITA / 01:10–01:15 UTC)
+
+**Key SUDAH terverifikasi jalan di Base hari ini oleh chief sebelum probe**
+(helper read-only: 0x price 1 USDC→WETH HTTP 200 `liquidityAvailable: true`;
+1inch quote 10 USDC→WETH HTTP 200 `dstAmount: 5839361162514238`). Key via
+konektor terdaftar (`custom.0x` / `custom.1inch`, surrogate — tidak ada key di
+repo/log/chat/evidence; grep `hsurr` di evidence = 0). Taker: wallet EVM
+Septian `0x7164463c4f01128a3824ea7580ad59455604b9f3` (quote read-only; tidak ada
+signing/broadcast/dana bergerak). Slippage yang diminta: 0,5% seragam
+(0x `slippageBps: 50`, 1inch `slippage: 0.5`). Block pin:
+**61461903** (`0x9269ebf0…f6d80`, 01:12:30Z). Spot median DexScreener saat
+probe: NVDAc **$168,27** (11 pool USDC), AAPLc **$349,81** (6 pool USDC).
+`amount_in` = `ceil(10000 / median_spot × 10^8)`: NVDAc **59,42829976 token**
+(5.942.829.976 base units), AAPLc **28,5869472 token** (2.858.694.720 base
+units); notional hitung **$10.000,00** keduanya. Waktu probe di luar regular
+session NYSE (Senin 23 Nov 19:10–19:15 EST); NAV AAPLc berumur ±5,7 jam (lihat
+§8.3). **Hasil: 0 dari 8 sampel firm; 0 dari 2 vendor lolos.**
+
+### 8.1 0x Swap API v2 — TIDAK FIRM: token diblokir vendor (422, kedua arah, semua endpoint, bukan ukuran)
+
+| Panggilan | NVDAc | AAPLc |
+|---|---|---|
+| `price` allowance-holder | 422 | 422 |
+| `quote` allowance-holder (taker + slippageBps 50) | 422 | 422 |
+| `quote` permit2 (fallback) | 422 | 422 |
+
+Semua 422 bernama **`SELL_TOKEN_NOT_AUTHORIZED_FOR_TRADE`** — *"The sell
+token is not authorized for trade due to legal restrictions"* (zid tercatat
+per respons di evidence). Karakterisasi round 2 membuktikan ini bukan soal
+ukuran, arah, atau token spesifik:
+
+- **Bukan ukuran:** price dengan sellAmount 0,01 token tetap 422, nama error
+  yang sama.
+- **Bukan hanya SELL:** arah BELI (USDC→token, $10rb) juga 422 —
+  **`BUY_TOKEN_NOT_AUTHORIZED_FOR_TRADE`** — *"The buy token is not
+  authorized for trade due to legal restrictions"*.
+- **Bukan hanya NVDAc/AAPLc:** GOOGLc (token ketiga, `0xb200…2D0BA3164cc74f58B7`)
+  SELL dan BUY juga 422 dengan nama error yang sama. Blokir berlaku umum
+  untuk tokenized stock Coinbase di 0x.
+
+**Konsekuensi:** TIDAK ADA satu pun respons quote 0x yang dapat dinilai —
+tidak ada `buyAmount`, tidak ada `minBuyAmount`, tidak ada expiry, tidak ada
+rute. Semantik `minBuyAmount` (batas revert vs jaminan fill, §2.1b) **TIDAK
+DAPAT dikonfirmasi dari respons mentah**, karena tidak ada satu pun respons
+sukses yang mengandung field itu; pernyataan docs 0x (§2.1b) tetap berdiri
+sebagai dokumentasi vendor yang belum terkonfirmasi respons. Jalur 0x untuk
+tokenized stock Base = **MATI di level vendor (legal restriction)**, bukan di
+level key/kuota/routing — key-nya sendiri terbukti jalan (USDC→WETH 200).
+Validator: tidak ada pemetaan jujur yang dapat dibangun (alasan `http_422` /
+`no_parseable_response`).
+
+### 8.2 1inch Swap API v6 — TIDAK FIRM: `/quote` indikatif saja; `/swap` tak dapat dibangun untuk taker ini
+
+| Panggilan | NVDAc | AAPLc |
+|---|---|---|
+| `GET /swap/v6.0/8453/quote` | 200, `dstAmount: 9941235611` (= **$9.941,24**, implied **$167,28**) | 200, `dstAmount: 9967307179` (= **$9.967,31**, implied **$348,67**) |
+| `GET /swap/v6.0/8453/swap` (from = taker Septian) | 400 `NOT_ENOUGH_BALANCE` (saldo taker 0 token) | 400 `NOT_ENOUGH_BALANCE` (saldo taker 0 token) |
+
+- **`/quote`:** respons hanya berisi `dstAmount` — tidak ada min-out, tidak
+  ada expiry, tidak ada label `kind`. Validator (pemetaan jujur): `invalid /
+  exit_quote_kind_missing` (kedua token). Ini sesuai dokumentasi vendor:
+  `/quote` bersifat indikatif.
+- **`/swap` (taker Septian):** 1inch memvalidasi saldo `from` SEBELUM
+  membangun tx — taker memegang 0 NVDAc/AAPLc, jadi tidak ada tx yang
+  dikembalikan untuk taker ini.
+- **Schema probe round 2** (`from` = alamat pool Aerodrome pemegang token,
+  parameter read-only untuk mengungkap skema respons — BUKAN quote untuk
+  wallet Septian, TIDAK dihitung sebagai sampel firm): lolos cek saldo, lalu
+  400 **`NOT_ENOUGH_ALLOWANCE`** (pool tidak pernah approve router 1inch
+  `0x111111125421ca6dc452d289314280a0f8842a65`). Jadi skema `/swap` untuk pair
+  ini tidak dapat diobservasi lewat respons sukses dari jalur mana pun; yang
+  teramati adalah `/swap` memvalidasi saldo + allowance dulu. Catatan skema
+  dari dokumentasi vendor: respons `/swap` berisi `dstAmount` + `tx` +
+  `protocols` — **tidak ada field min-out/expiry top-level**; minimum
+  eksekusi hanya terkode di dalam calldata router (`minReturnAmount`), bukan
+  sebagai field respons. Itu BUKAN `amount_out_min` vendor dalam arti §2.1
+  (tidak ada expiry yang menyertainya; dan untuk pair ini calldata itu
+  sendiri tidak pernah terbit).
+- **Cross-check §2.1b:** KOMITMEN **tidak dapat dihitung** (tidak ada min-out
+  → tidak ada `P_implied_execution`). Perbandingan **INDIKATIF**
+  (expected-price 1inch vs referensi): vs NAV NVDAc **0,537%**, AAPLc
+  **0,520%**; vs proxy xyz NVDAc **0,517%**, AAPLc **0,290%** — semuanya dalam
+  ±1%, tetapi ini harga indikatif, BUKAN cross-check §2.1b, dan **tidak dapat
+  meloloskan sampel ke bar 10**. Cross-check primer 0x vs 1inch tidak dapat
+  dihitung: 0x tidak memberi harga apa pun (422).
+
+### 8.3 Referensi fallback sesi ini (sesi sampling ke-3)
+
+NAV-implied ok 2/2: NVDAc **$168,18363844** (update 24 Nov 01:08:20Z, umur
+±4 mnt saat probe); AAPLc **$350,49029387** (update 23 Nov 19:31:58Z, umur
+±5,7 jam — sesi Senin, pasar tutup saat probe; NAV basi tetap REFERENSI sah
+dengan caveat itu). Proxy Hyperliquid xyz ok 2/2: NVDAc markPx **$168,15**,
+AAPLc **$349,68**. Kumulatif sesi sampling sampai kini: **3 sesi** (2 tanpa
+key + 1 ber-key): NAV ok 3/3, proxy usable 2/3 (round 1 tanpa key gagal
+ekstrak karena bug skrip, bukan outage). Ambang §2.1 (≥8/10 sesi, tanpa 2
+sesi gagal total berurutan) **belum teruji (n=3)** — status "berjalan sebagian,
+belum memenuhi ambang". Moot terhadap T2(b) untuk sementara: tanpa kandidat
+firm, tidak ada cross-check yang sah untuk dihidupkan.
+
+### 8.4 Keputusan (§2.5) — diperbarui atas probe ber-key
+
+1. **0x — TIDAK FIRM, dan lebih kuat dari "tidak ada field":** vendor
+   MENOLAK token ini (legal restriction), kedua arah, semua endpoint, semua
+   ukuran yang diuji, tiga token. Jalur 0x untuk tokenized stock Base
+   tertutup sampai 0x mengubah kebijakan — bukan sesuatu yang bisa diperbaiki
+   dari sisi kita.
+2. **1inch — TIDAK FIRM.** `/quote` indikatif sehat (dalam 0,54% dari NAV)
+   tetapi tanpa min-out/expiry/kind; `/swap` tidak dapat dibangun untuk
+   taker tanpa saldo + allowance (dan skema `/swap`-nya sendiri tidak
+   mengenal field min-out/expiry).
+3. **Tidak ada produsen `adapter.fetch_firm_quote` yang ditulis**, dan tidak
+   ada tes gate untuk firm yang ditambahkan — sesuai §2.4.
+4. **Implikasi terhadap bar 26 Nov (T2):** bar (a) SATU jalur memenuhi
+   definisi beku — **tidak terpenuhi** dari jalur ber-key; bar (b) sumber
+   cross-check yang sah berjalan — **tidak terpenuhi** (tidak ada quote firm
+   untuk dibandingkan; primer 0x vs 1inch mati di sisi 0x); bar (c) rencana
+   sampling yang bisa dijalankan — **ada, tetapi tidak ada jalur yang dapat
+   di-sample**. Bila tidak ada jalur baru, keputusan §2.5 adalah **kunci
+   paket ke (a2)** pada review early exit 26 Nov. Satu-satunya pintu yang
+   belum diuji ber-key adalah Uniswap Trading API (butuh `x-api-key`,
+   registrasi terpisah yang belum di-ACC Septian) — dan skema responsnya
+   menurut dokumentasi juga tidak mengenal expiry; peluangnya kecil, tetapi
+   itu satu-satunya jalur tersisa bila Septian mau dicoba.
+5. **Definisi FIRM tidak diubah.** Hasil "tidak ada yang lolos" adalah hasil
+   yang sah, bukan kegagalan probe.
 
 ## Lampiran — bukti yang dapat diverifikasi ulang
 
