@@ -4268,16 +4268,18 @@ AERODROME_CL_FACTORY = "0x5e7BB104d84c7CB9B682AaC2F3d509f5F406809A"
 # factory ini (dibaca langsung dari pool saat live run v0.3.0).
 AERODROME_CL_FACTORY_CURRENT = "0xf8f2eb4940cfe7d13603dddd87f123820fc061ef"
 UNISWAP_V3_FACTORY = "0x33128a8fC17869897dcE68Ed026d694621f6FDfD"
-# Uniswap V4 StateView di Base (S1-B spot-check, 24 Nov 2026 — BUKAN S1-C):
+# Uniswap V4 StateView di Base (S1-B spot-check, 24 Nov 2026; S1-C JALUR KODE):
 # alamat DIVERIFIKASI ke 3 sumber independen (docs.eco.com deployments,
 # veydrift docs + codehash, umia docs) + eth_getCode live (3.531 byte code).
 # Spot-check getSlot0 atas 3 poolId V4 (NVDAc x2, AAPLc x1): semua
 # ter-initialize (sqrtPriceX96 != 0), harga implisit cocok dgn DexScreener
 # (dev maks 0,71%) — bukti di evidence/venue_census_2026-11-24.json
-# (onchain_spotcheck_stateview). Verifikasi PENUH (PoolKey vs poolId via
-# keccak256 + jalur kode V4) adalah kerja S1-C — konstanta ini hanya
-# mencatat alamat yang sudah terverifikasi agar S1-C tidak mengulang lookup.
+# (onchain_spotcheck_stateview). Verifikasi PENUH S1-C (PoolKey vs poolId
+# via keccak256 — PoolKey dari event Initialize PoolManager, karena
+# StateView TIDAK punya getPoolKey) di evidence/v4_stateview_validation_2026-11-24.json.
 UNISWAP_V4_STATEVIEW_BASE = "0xA3c0c9b65baD0b08107Aa264b0f3dB444b867A71"
+# Uniswap V4 PoolManager kanonis di Base — bagian dari identitas pool V4
+# (chain, PoolManager, poolId); dipakai canonical_pool_identity() S1-C.
 UNISWAP_V4_POOLMANAGER_BASE = "0x498581fF718922c3f8e6A244956aF099B2652b2b"
 # Factory lain yang terverifikasi (G1, re-audit v5, 22 Nov 2026) — SEMUA
 # dicek ke BaseScan SEBELUM ditulis (kontrak + deployer):

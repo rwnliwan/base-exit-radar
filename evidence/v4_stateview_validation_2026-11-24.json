@@ -1,0 +1,136 @@
+{
+  "all_ok": false,
+  "checks": [
+    {
+      "anchor_block": 50436435,
+      "dexscreener_price_usd": 164.99,
+      "implied_vs_dexscreener_dev_pct": null,
+      "log_window": [
+        "0x301994e",
+        "0x3019958"
+      ],
+      "pool_id": "0xc8c52ec416fe9d3b6e70a2e4ccde7cece3b8318d109a1aa1bbc7e0980c4fe985",
+      "pool_key_block_number": null,
+      "slot0_implied_price_usd_s1b_orientation": 164.99376825262405,
+      "slot0_implied_vs_dexscreener_dev_pct": 0.0022839278889882292,
+      "symbol": "NVDAc",
+      "verification": {
+        "error": "v4_pool_key_not_found",
+        "fetched_at": "2026-11-24T02:35:35Z",
+        "implied_price_usd": null,
+        "initialized": false,
+        "ok": false,
+        "pool_id": "0xc8c52ec416fe9d3b6e70a2e4ccde7cece3b8318d109a1aa1bbc7e0980c4fe985",
+        "pool_id_matches_pool_key": false,
+        "pool_key": null,
+        "pool_key_block_number": null,
+        "pool_manager": "0x498581fF718922c3f8e6A244956aF099B2652b2b",
+        "slot0": {
+          "lpFee": 1102,
+          "protocolFee": 0,
+          "sqrtPriceX96": "61680205650330723895151219518",
+          "tick": -5008
+        },
+        "source": "0xA3c0c9b65baD0b08107Aa264b0f3dB444b867A71",
+        "stateview": "0xA3c0c9b65baD0b08107Aa264b0f3dB444b867A71"
+      }
+    },
+    {
+      "anchor_block": 53402495,
+      "dexscreener_price_usd": 166.098,
+      "implied_vs_dexscreener_dev_pct": null,
+      "log_window": [
+        "0x32edb7a",
+        "0x32edb84"
+      ],
+      "pool_id": "0xb21769526e3a0814752628ec6c6e08efc883a025a18c64ee3ad376aa67728a18",
+      "pool_key_block_number": null,
+      "slot0_implied_price_usd_s1b_orientation": 166.09844899954618,
+      "slot0_implied_vs_dexscreener_dev_pct": 0.0002703220665904443,
+      "symbol": "NVDAc",
+      "verification": {
+        "error": "v4_pool_key_not_found",
+        "fetched_at": "2026-11-24T02:35:40Z",
+        "implied_price_usd": null,
+        "initialized": false,
+        "ok": false,
+        "pool_id": "0xb21769526e3a0814752628ec6c6e08efc883a025a18c64ee3ad376aa67728a18",
+        "pool_id_matches_pool_key": false,
+        "pool_key": null,
+        "pool_key_block_number": null,
+        "pool_manager": "0x498581fF718922c3f8e6A244956aF099B2652b2b",
+        "slot0": {
+          "lpFee": 9900,
+          "protocolFee": 4097000,
+          "sqrtPriceX96": "61474753387078381393633627982",
+          "tick": -5075
+        },
+        "source": "0xA3c0c9b65baD0b08107Aa264b0f3dB444b867A71",
+        "stateview": "0xA3c0c9b65baD0b08107Aa264b0f3dB444b867A71"
+      }
+    },
+    {
+      "anchor_block": 53402429,
+      "dexscreener_price_usd": 349.64,
+      "implied_vs_dexscreener_dev_pct": null,
+      "log_window": [
+        "0x32edb38",
+        "0x32edb42"
+      ],
+      "pool_id": "0xe48e5351265960ea686a5c6d23fea9897feb4a976206d2390c135d9ceeeabcbb",
+      "pool_key_block_number": null,
+      "slot0_implied_price_usd_s1b_orientation": 349.64660083058425,
+      "slot0_implied_vs_dexscreener_dev_pct": 0.0018878934287442886,
+      "symbol": "AAPLc",
+      "verification": {
+        "error": "v4_pool_key_not_found",
+        "fetched_at": "2026-11-24T02:35:44Z",
+        "implied_price_usd": null,
+        "initialized": false,
+        "ok": false,
+        "pool_id": "0xe48e5351265960ea686a5c6d23fea9897feb4a976206d2390c135d9ceeeabcbb",
+        "pool_id_matches_pool_key": false,
+        "pool_key": null,
+        "pool_key_block_number": null,
+        "pool_manager": "0x498581fF718922c3f8e6A244956aF099B2652b2b",
+        "slot0": {
+          "lpFee": 409,
+          "protocolFee": 0,
+          "sqrtPriceX96": "42370630683707710324324165445",
+          "tick": -12519
+        },
+        "source": "0xA3c0c9b65baD0b08107Aa264b0f3dB444b867A71",
+        "stateview": "0xA3c0c9b65baD0b08107Aa264b0f3dB444b867A71"
+      }
+    }
+  ],
+  "eth_getCode_bytes": 3531,
+  "method": "adapter.verify_v4_pool: StateView.getSlot0(poolId) + PoolKey dari event Initialize PoolManager (StateView TIDAK punya getPoolKey - eth_call ke selector itu revert, terverifikasi 24 Nov 2026); sqrtPriceX96!=0; poolId==keccak256(abi.encode(PoolKey)) recomputed; currency0<currency1; PoolKey berisi token + USDC allowlist; implied price dari slot0 vs DexScreener. Transport: eth_call via curl mainnet.base.org; eth_getLogs via curl dRPC jendela 11 blok di sekitar blok kreasi (RPC publik membatasi rentang eth_getLogs: dRPC 100 blok, BlastAPI 10 blok, 1rpc pruned < blok 52.000.000). Blok kreasi dicari binary search full-range atas timestamp (laju blok Base TIDAK konstan: 5 blok/dtk 14-24 Nov 2026, ~1,4 blok/dtk Okt-14 Nov - estimasi laju tetap SALAH, jangan dipakai).",
+  "pool_key_retrieval": {
+    "consequence": "verify_v4_pool live ok=False untuk ketiga pool (v4_pool_key_not_found) - pool V4 TETAP fail-closed unverified di live run sampai log Initialize bisa diambil (butuh archive node / API key Basescan). Jalur kode PoolKey-vs-poolId terbukti benar di gate (mock, 46/46 checks, termasuk negatif fee-diutak-atik) + keccak256 terverifikasi vs pycryptodome; yang belum terbukti LIVE hanya pengambilan PoolKey 3 pool ini.",
+    "creation_blocks_full_range_binary_search": {
+      "0xb21769526e3a0814752628ec6c6e08efc883a025a18c64ee3ad376aa67728a18": 53402495,
+      "0xc8c52ec416fe9d3b6e70a2e4ccde7cece3b8318d109a1aa1bbc7e0980c4fe985": 50436435,
+      "0xe48e5351265960ea686a5c6d23fea9897feb4a976206d2390c135d9ceeeabcbb": 53402429
+    },
+    "rpc_limits_found_2026_11_24": {
+      "1rpc.io": "eth_getLogs maks 50 blok; pruned history < blok 52.000.000; gateway rate-limit (Nodies -32005, -32001)",
+      "ankr": "API key required",
+      "basescan_v1": "deprecated, V2 butuh API key",
+      "blastapi": "eth_getLogs maks 10 blok; 429 compute-units-per-second saat beban tinggi",
+      "drpc": "eth_getLogs maks 100 blok; free-plan rate limit/timeout saat beban (code 15/30)",
+      "llamarpc": "Cloudflare 525",
+      "mainnet.base.org": "eth_getLogs -32011 request limit reached (shared egress IP)",
+      "publicnode": "archive requests require personal token"
+    },
+    "scanned_windows_7550_blocks": "dRPC 100-block chunks, [creation_block-7500, creation_block+50] per pool, failed_chunks=0 (semua chunk terlayani, 0 log) - 24 Nov 2026",
+    "status": "NOT_FOUND_IN_SCANNED_WINDOWS",
+    "topic0": "0xe13c464935e7788bafe181145f8ab530d7a7a8ed937b0028e08841eaf3c5c71e",
+    "topic0_verified_vs_pycryptodome": true,
+    "wide_scan_pools_2_3": "BERJALAN saat evidence ini ditulis: [53,252,429, 53,402,545], dRPC 100-block chunks, topics[1]=[pid2,pid3] OR - ~/workspace/v4_poolkeys_wide.py"
+  },
+  "pool_manager_address": "0x498581fF718922c3f8e6A244956aF099B2652b2b",
+  "slot0_live_note": "Ketiga pool TER-INITIALIZE live (sqrtPriceX96 != 0 di verification.slot0 per pool; harga implisit orientasi S1-B vs DexScreener dev 0,0003-0,039%). Field verification.initialized=false HANYA berarti langkah PoolKey gagal duluan - di verify_v4_pool, flag initialized diset SETELAH fetch PoolKey berhasil, jadi tidak tercapai - BUKAN berarti pool belum initialize.",
+  "stateview_address": "0xA3c0c9b65baD0b08107Aa264b0f3dB444b867A71",
+  "validated_at": "2026-11-24T02:35:49Z"
+}

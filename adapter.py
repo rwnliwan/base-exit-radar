@@ -96,6 +96,8 @@ from config import (
     MIN_SQRT_RATIO,
     ORACLE_REGISTRY,
     UNISWAP_V3_FACTORY,
+    UNISWAP_V4_POOLMANAGER_BASE,
+    UNISWAP_V4_STATEVIEW_BASE,
     USER_AGENT,
 )
 
@@ -376,6 +378,18 @@ def _is_hex(s):
     return True
 
 
+def _is_address(s):
+    """True bila s alamat kontrak 0x + 40 hex (42 karakter)."""
+    return (isinstance(s, str) and len(s) == 42 and s.startswith("0x")
+            and _is_hex(s[2:]))
+
+
+def _is_pool_id(s):
+    """True bila s poolId V4 0x + 64 hex (66 karakter, bukan alamat)."""
+    return (isinstance(s, str) and len(s) == 66 and s.startswith("0x")
+            and _is_hex(s[2:]))
+
+
 def _eth_call(to, data, rpc_url, block="latest"):
     """Satu eth_call ke satu RPC. Kembalikan (hex_result_or_None, error_or_None).
 
@@ -632,9 +646,14 @@ def fetch_pool_factory(pool_address, rpc_call=None, block=None):
     "dromos". Kembalikan {"ok", "factory", "fetched_at", "source",
     "error"}. Gagal -> error; pemanggil fallback ke label DexScreener.
     Guard G4: alamat harus kanonis (padding nol + nonzero).
+    Guard S1-C: poolId V4 (66 karakter) BUKAN kontrak — tidak ada
+    factory() yang bisa dibaca; kembalikan error tanpa eth_call.
     """
     out = {"ok": False, "factory": None, "fetched_at": _now_iso(),
            "source": pool_address, "error": None}
+    if not _is_address(pool_address):
+        out["error"] = "pool_id_not_a_contract"
+        return out
     result, err = _call_rpc(None, rpc_call, pool_address, "0xc45a0155",
                             block or "latest")
     if err is not None:
@@ -745,5 +764,404 @@ def fetch_block(rpc_json=None):
         return out
     out["block_number"] = block_number
     out["block_hash"] = block["hash"]
+    out["ok"] = True
+    return out
+
+# ------------------------------------------------- Uniswap V4 / StateView (S1-C)
+# Identitas pool V4 = (chain, PoolManager, poolId). PoolManager TIDAK punya
+# fungsi eksternal getSlot0 (StateLibrary.getSlot0 internal, baca via
+# PoolManager.extsload) — verifikasi keberadaan pool V4 dilakukan ke
+# kontrak StateView yang ter-deploy di Base (config.UNISWAP_V4_STATEVIEW_BASE,
+# diverifikasi S1-B: 3 sumber + eth_getCode live 3.531 byte).
+# Respons nonempty TIDAK cukup: validasi sqrtPriceX96 ter-initialize (!= 0)
+# + PoolKey (token0/token1/fee/tickSpacing/hooks) konsisten dengan poolId
+# (poolId = keccak256(abi.encode(PoolKey)) — dihitung ulang, dibandingkan).
+# Bila respons/validasi gagal -> pool `unverified`, bukan dipakai.
+#
+# Keccak-256 diimplementasi murni-Python di bawah (tanpa dependensi baru):
+# hashlib.sha3_256 adalah NIST SHA3 (suffix 0x06), BUKAN Keccak-256
+# (suffix 0x01) yang dipakai Ethereum — keduanya memberi hash berbeda.
+# Implementasi ini diuji gate terhadap vektor yang diketahui (string kosong,
+# selector getSlot0/factory/decimals/token0/token1 yang sudah dipakai kode
+# ini sejak v0.3.0).
+
+_MASK64 = (1 << 64) - 1
+
+_KECCAK_RC = (
+    0x0000000000000001, 0x0000000000008082, 0x800000000000808A,
+    0x8000000080008000, 0x000000000000808B, 0x0000000080000001,
+    0x8000000080008081, 0x8000000000008009, 0x000000000000008A,
+    0x0000000000000088, 0x0000000080008009, 0x000000008000000A,
+    0x000000008000808B, 0x800000000000008B, 0x8000000000008089,
+    0x8000000000008003, 0x8000000000008002, 0x8000000000000080,
+    0x000000000000800A, 0x800000008000000A, 0x8000000080008081,
+    0x8000000000008080, 0x0000000080000001, 0x8000000080008008)
+_KECCAK_ROT = (1, 3, 6, 10, 15, 21, 28, 36, 45, 55, 2, 14, 27, 41, 56, 8,
+               25, 43, 62, 18, 39, 61, 20, 44)
+_KECCAK_PI = (10, 7, 11, 17, 18, 3, 5, 16, 8, 21, 24, 4, 15, 23, 19, 13,
+              12, 2, 20, 14, 22, 9, 6, 1)
+
+
+def _rol64(x, n):
+    return ((x << n) | (x >> (64 - n))) & _MASK64
+
+
+def _keccak_f1600(state):
+    """Satu permutasi Keccak-f[1600] atas 25 lane 64-bit (in place)."""
+    for rnd in range(24):
+        # Theta
+        bc = [0] * 5
+        for x in range(5):
+            bc[x] = (state[x] ^ state[x + 5] ^ state[x + 10]
+                     ^ state[x + 15] ^ state[x + 20])
+        for x in range(5):
+            t = bc[(x + 4) % 5] ^ _rol64(bc[(x + 1) % 5], 1)
+            for y in range(0, 25, 5):
+                state[y + x] ^= t
+        # Rho Pi
+        t = state[1]
+        for i in range(24):
+            j = _KECCAK_PI[i]
+            bc[0] = state[j]
+            state[j] = _rol64(t, _KECCAK_ROT[i])
+            t = bc[0]
+        # Chi
+        for y in range(0, 25, 5):
+            for x in range(5):
+                bc[x] = state[y + x]
+            for x in range(5):
+                state[y + x] ^= (~bc[(x + 1) % 5]) & bc[(x + 2) % 5]
+                state[y + x] &= _MASK64
+        # Iota
+        state[0] ^= _KECCAK_RC[rnd]
+    return state
+
+
+def _keccak_256(data):
+    """Keccak-256 (Ethereum) atas bytes. BUKAN hashlib.sha3_256."""
+    if not isinstance(data, (bytes, bytearray)):
+        raise TypeError("keccak input must be bytes")
+    padded = bytearray(data)
+    padded.append(0x01)
+    while len(padded) % 136 != 0:
+        padded.append(0x00)
+    padded[-1] |= 0x80
+    state = [0] * 25
+    for off in range(0, len(padded), 136):
+        block = padded[off:off + 136]
+        for i in range(17):
+            lane = int.from_bytes(block[i * 8:(i + 1) * 8], "little")
+            state[i] ^= lane
+        _keccak_f1600(state)
+    out = b""
+    for i in range(4):
+        out += state[i].to_bytes(8, "little")
+    return out
+
+
+def _function_selector(signature):
+    """Selector 4 byte (0x...) dari signature fungsi, via keccak-256."""
+    return "0x" + _keccak_256(signature.encode("ascii")).hex()[:8]
+
+
+def _decode_int24(value):
+    """uint 24-bit mentah -> int24 bertanda (two's complement)."""
+    if value >= (1 << 23):
+        return value - (1 << 24)
+    return value
+
+
+def _decode_int24_word(raw):
+    """int24 dari word ABI 32 byte (sign-extended ke 256 bit).
+
+    Kembalikan int bila ekstensi tanda kanonis (232 bit atas semua 0
+    untuk positif / semua 1 untuk negatif), else None (non-kanonis).
+    """
+    if raw >> 24 not in (0, (1 << 232) - 1):
+        return None
+    return _decode_int24(raw & ((1 << 24) - 1))
+
+
+def _address_word_allow_zero(word):
+    """Address ABI dengan padding nol; alamat NOL diizinkan (hooks = no-hook).
+
+    Kembalikan alamat 0x... bila valid, None bila padding bukan nol.
+    """
+    if not isinstance(word, str) or len(word) != 64 or not _is_hex(word):
+        return None
+    if word[:24] != "0" * 24:
+        return None
+    return "0x" + word[24:]
+
+
+def _uint24_word(word):
+    """uint24 ABI: int bila word 32 byte dan nilai < 2**24, else None."""
+    try:
+        v = int(word, 16)
+    except (ValueError, TypeError):
+        return None
+    return v if 0 <= v < (1 << 24) else None
+
+
+def compute_pool_id(currency0, currency1, fee, tick_spacing, hooks):
+    """poolId V4 = keccak256(abi.encode(PoolKey)).
+
+    PoolKey = (address currency0, address currency1, uint24 fee,
+    int24 tickSpacing, address hooks), masing-masing 1 word 32 byte
+    (big-endian; int24 two's complement). Kembalikan "0x" + 64 hex.
+    """
+    def _addr_w(a):
+        return bytes(12) + bytes.fromhex((a or "").lower().replace("0x", ""))
+    def _u24_w(v):
+        return int(v).to_bytes(32, "big")
+    def _i24_w(v):
+        return (int(v) & ((1 << 24) - 1)).to_bytes(32, "big")
+    encoded = (_addr_w(currency0) + _addr_w(currency1) + _u24_w(fee)
+               + _i24_w(tick_spacing) + _addr_w(hooks))
+    return "0x" + _keccak_256(encoded).hex()
+
+
+def slot0_implied_price_usd(sqrt_price_x96, stock_is_token0,
+                            stock_decimals, quote_decimals):
+    """Harga implisit token saham dalam quote (USDC) dari slot0 V4.
+
+    sqrtPriceX96 = sqrt(harga mentah) * 2**96. Bila saham = currency0:
+    harga = (sqrt/2**96)**2 * 10**(dec_stock - dec_quote); bila saham =
+    currency1: harga = (2**96/sqrt)**2 * 10**(dec_stock - dec_quote).
+    Rumus terverifikasi terhadap spot-check S1-B (3 pool: dev 0,048% /
+    0,71% / 0,007% vs DexScreener — cocok sampai 4 desimal).
+    """
+    if not sqrt_price_x96 or sqrt_price_x96 <= 0:
+        return None
+    ratio = sqrt_price_x96 / (1 << 96)
+    if stock_is_token0:
+        price = (ratio ** 2) * (10 ** (stock_decimals - quote_decimals))
+    else:
+        price = ((1.0 / ratio) ** 2) * (10 ** (stock_decimals - quote_decimals))
+    return price if price and price > 0 else None
+
+
+def fetch_v4_pool_state(pool_id, rpc_call=None, block=None):
+    """Baca getSlot0 satu poolId V4 dari StateView (read-only).
+
+    Kembalikan {"ok", "pool_id", "stateview", "pool_manager", "slot0",
+    "fetched_at", "source", "error"}.
+    - slot0: {"sqrtPriceX96" (str, bisa > 2**53), "tick" (int24),
+      "protocolFee" (uint24), "lpFee" (uint24)}.
+    Gagal RPC / panjang hasil tidak tepat / nilai di luar rentang ABI =
+    error (G4 fail-closed). Fungsi ini TIDAK menilai initialized /
+    konsistensi poolId — itu kerja verify_v4_pool. PoolKey didapat dari
+    event Initialize PoolManager (fetch_v4_pool_key), BUKAN dari StateView:
+    StateView yang ter-deploy TIDAK punya getPoolKey(bytes32) — eth_call
+    ke selector itu revert di kedua RPC (terverifikasi 24 Nov 2026).
+    `rpc_call` = callable(to, data) -> (hex_or_None, error_or_None) untuk
+    tes; bila None, dipakai _eth_call_with_fallback. `block` = pin block.
+    """
+    pid = (pool_id or "").lower()
+    out = {"ok": False, "pool_id": pid,
+           "stateview": UNISWAP_V4_STATEVIEW_BASE,
+           "pool_manager": UNISWAP_V4_POOLMANAGER_BASE,
+           "slot0": None,
+           "fetched_at": _now_iso(), "source": UNISWAP_V4_STATEVIEW_BASE,
+           "error": None}
+    if not _is_pool_id(pool_id):
+        out["error"] = "v4_pool_id_malformed"
+        return out
+    data_slot0 = (_function_selector("getSlot0(bytes32)")
+                  + pid.replace("0x", ""))
+    result, err = _call_rpc(None, rpc_call, UNISWAP_V4_STATEVIEW_BASE,
+                            data_slot0, block or "latest")
+    if err is not None:
+        out["error"] = err
+        return out
+    words = _words(result, 4)
+    if words is None:
+        out["error"] = "stateview_slot0_malformed_result"
+        return out
+    try:
+        sqrt = int(words[0], 16)
+        tick_raw = int(words[1], 16)
+        proto_fee = int(words[2], 16)
+        lp_fee = int(words[3], 16)
+    except ValueError:
+        out["error"] = "stateview_slot0_malformed_result"
+        return out
+    # tick int24 di-encode ABI sebagai sign-extended 256 bit (tick negatif
+    # = word 0xffff...); yang dicek kanonisitas ekstensi + rentang uint24
+    # fee, bukan tick_raw < 2**24.
+    tick = _decode_int24_word(tick_raw)
+    if tick is None or proto_fee >= (1 << 24) or lp_fee >= (1 << 24):
+        out["error"] = "stateview_slot0_bad_range"
+        return out
+    out["slot0"] = {"sqrtPriceX96": str(sqrt),
+                    "tick": tick,
+                    "protocolFee": proto_fee, "lpFee": lp_fee}
+    out["ok"] = True
+    return out
+
+
+def fetch_v4_pool_key(pool_id, rpc_json=None, from_block=None,
+                      to_block=None):
+    """Baca PoolKey satu poolId V4 dari event Initialize PoolManager.
+
+    PoolManager TIDAK menyimpan pemetaan poolId -> PoolKey yang bisa
+    dibaca (tidak ada getPool/getPoolKey), dan StateView tidak punya
+    getPoolKey — satu-satunya sumber on-chain PoolKey adalah event
+    `Initialize(PoolId indexed id, Currency indexed currency0, Currency
+    indexed currency1, uint24 fee, int24 tickSpacing, IHooks hooks,
+    int24 tick)` yang di-emit PoolManager saat pool dibuat (dokumen
+    Uniswap: PoolKey didapat dari event Initialize).
+    Kembalikan {"ok", "pool_id", "pool_manager", "pool_key",
+    "block_number", "transaction_hash", "fetched_at", "source", "error"}.
+    - pool_key: {"currency0", "currency1", "fee", "tickSpacing", "hooks"}.
+    - 0 log = error "v4_pool_key_not_found" (pool tidak pernah
+      di-initialize di PoolManager ini; dibedakan dari error RPC).
+    `rpc_json` = callable(method, params) -> (result, error) untuk tes;
+    bila None, dipakai _rpc_json_with_fallback. `from_block` = batas bawah
+    ("0x..." / "0x0" default = seluruh riwayat); `to_block` = batas atas
+    ("latest" default). CATATAN 24 Nov 2026: RPC publik membatasi rentang
+    eth_getLogs (BlastAPI maks 10 blok, 1rpc maks 50 blok) — pemanggil yang
+    tahu blok kreasi WAJIB memakai jendela sempit from_block/to_block;
+    tanpa jendela, RPC akan menolak (fail-closed, pool unverified).
+    """
+    pid = (pool_id or "").lower()
+    out = {"ok": False, "pool_id": pid,
+           "pool_manager": UNISWAP_V4_POOLMANAGER_BASE,
+           "pool_key": None, "block_number": None,
+           "transaction_hash": None,
+           "fetched_at": _now_iso(), "source": UNISWAP_V4_POOLMANAGER_BASE,
+           "error": None}
+    if not _is_pool_id(pool_id):
+        out["error"] = "v4_pool_id_malformed"
+        return out
+    topic0 = "0x" + _keccak_256(
+        b"Initialize(bytes32,address,address,uint24,int24,address,int24)"
+    ).hex()
+    call = rpc_json or _rpc_json_with_fallback
+    params = [{"address": UNISWAP_V4_POOLMANAGER_BASE,
+               "fromBlock": from_block or "0x0",
+               "toBlock": to_block or "latest",
+               "topics": [topic0, pid]}]
+    logs, err = call("eth_getLogs", params)
+    if err is not None:
+        out["error"] = err
+        return out
+    if not isinstance(logs, list) or not logs:
+        out["error"] = "v4_pool_key_not_found"
+        return out
+    log = logs[0]
+    topics = log.get("topics") or []
+    data = log.get("data") or ""
+    if len(topics) != 4:
+        out["error"] = "v4_initialize_log_malformed"
+        return out
+    c0 = _address_word_allow_zero(topics[2][-64:])
+    c1 = _address_word_allow_zero(topics[3][-64:])
+    words = _words(data.replace("0x", ""), 4)
+    if words is None:
+        out["error"] = "v4_initialize_log_malformed"
+        return out
+    fee = _uint24_word(words[0])
+    try:
+        ts_raw = int(words[1], 16)
+    except ValueError:
+        out["error"] = "v4_initialize_log_malformed"
+        return out
+    hooks = _address_word_allow_zero(words[2])
+    tick_spacing = _decode_int24_word(ts_raw)
+    if c0 is None or c1 is None or fee is None or hooks is None \
+            or tick_spacing is None:
+        out["error"] = "v4_initialize_log_bad_value"
+        return out
+    out["pool_key"] = {"currency0": c0, "currency1": c1, "fee": fee,
+                       "tickSpacing": tick_spacing, "hooks": hooks}
+    try:
+        out["block_number"] = int(log.get("blockNumber"), 16)
+    except (TypeError, ValueError):
+        out["block_number"] = None
+    out["transaction_hash"] = log.get("transactionHash")
+    out["ok"] = True
+    return out
+
+def verify_v4_pool(pool_id, expected_token=None,
+                   expected_quote_addresses=None, token_decimals=8,
+                   quote_decimals=6, rpc_call=None, rpc_json=None,
+                   block=None, from_block=None, to_block=None):
+    """Verifikasi penuh keberadaan pool V4 (S1-C, fail-closed).
+
+    Langkah: (1) getSlot0 dari StateView + PoolKey dari event Initialize
+    PoolManager; (2) sqrtPriceX96 ter-initialize (!= 0); (3) PoolKey
+    konsisten dengan poolId (keccak256(abi.encode(PoolKey)) == poolId,
+    dihitung ulang); (4) currency0 < currency1 (urutan kanonis V4);
+    (5) bila expected_token diberi: salah satu currency = token itu dan
+    currency lainnya anggota expected_quote_addresses (allowlist USDC).
+    Kembalikan {"ok", "pool_id", "stateview", "pool_manager", "slot0",
+    "pool_key", "pool_key_block_number", "pool_id_matches_pool_key",
+    "initialized", "implied_price_usd", "fetched_at", "source", "error"}.
+    `ok` False = pool `unverified` — pemanggil TIDAK boleh memakainya
+    sebagai observasi harga. `implied_price_usd` = harga token dalam
+    quote dari slot0 (None bila expected_token tidak diberi / bukan
+    anggota PoolKey).
+    `rpc_call` = mock eth_call (to, data); `rpc_json` = mock JSON-RPC
+    (method, params) untuk eth_getLogs; `block` = pin block getSlot0.
+    `from_block`/`to_block` diteruskan ke fetch_v4_pool_key (jendela
+    sempit wajib bila RPC membatasi rentang eth_getLogs — lihat di atas).
+    """
+    pid = (pool_id or "").lower()
+    out = {"ok": False, "pool_id": pid,
+           "stateview": UNISWAP_V4_STATEVIEW_BASE,
+           "pool_manager": UNISWAP_V4_POOLMANAGER_BASE,
+           "slot0": None, "pool_key": None,
+           "pool_key_block_number": None,
+           "pool_id_matches_pool_key": False, "initialized": False,
+           "implied_price_usd": None,
+           "fetched_at": _now_iso(), "source": UNISWAP_V4_STATEVIEW_BASE,
+           "error": None}
+    state = fetch_v4_pool_state(pool_id, rpc_call=rpc_call, block=block)
+    out["fetched_at"] = state["fetched_at"]
+    if not state["ok"]:
+        out["error"] = state["error"]
+        return out
+    out["slot0"] = state["slot0"]
+    key = fetch_v4_pool_key(pool_id, rpc_json=rpc_json,
+                            from_block=from_block, to_block=to_block)
+    if not key["ok"]:
+        out["error"] = key["error"]
+        return out
+    out["pool_key"] = key["pool_key"]
+    out["pool_key_block_number"] = key["block_number"]
+    sqrt = int(state["slot0"]["sqrtPriceX96"])
+    if sqrt == 0:
+        out["error"] = "v4_pool_not_initialized"
+        return out
+    out["initialized"] = True
+    pk = key["pool_key"]
+    recomputed = compute_pool_id(pk["currency0"], pk["currency1"],
+                                 pk["fee"], pk["tickSpacing"], pk["hooks"])
+    if recomputed.lower() != pid:
+        out["error"] = "v4_pool_id_pool_key_mismatch"
+        return out
+    out["pool_id_matches_pool_key"] = True
+    if pk["currency0"].lower() >= pk["currency1"].lower():
+        out["error"] = "v4_pool_key_tokens_not_ordered"
+        return out
+    if expected_token is not None:
+        want = (expected_token or "").lower()
+        c0 = pk["currency0"].lower()
+        c1 = pk["currency1"].lower()
+        if want == c0:
+            other, stock_is_token0 = c1, True
+        elif want == c1:
+            other, stock_is_token0 = c0, False
+        else:
+            out["error"] = "v4_pool_key_token_mismatch"
+            return out
+        if expected_quote_addresses is not None:
+            allowed = {a.lower() for a in expected_quote_addresses}
+            if other not in allowed:
+                out["error"] = "v4_pool_key_quote_not_allowlisted"
+                return out
+        out["implied_price_usd"] = slot0_implied_price_usd(
+            sqrt, stock_is_token0, token_decimals, quote_decimals)
     out["ok"] = True
     return out

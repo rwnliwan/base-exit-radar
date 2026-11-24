@@ -19,6 +19,7 @@ import copy
 import hashlib
 import json
 import os
+import re
 import sys
 import tempfile
 from datetime import timedelta
@@ -571,7 +572,19 @@ def test_snapshot_identity_live_build():
             _adapter.fetch_sell_quote,
             _adapter.fetch_pool_tokens,
             _adapter.fetch_token_decimals,
-            _adapter.fetch_block)
+            _adapter.fetch_block,
+            _adapter.verify_v4_pool)
+    # S1-C: gate offline — verifikasi V4 dimock GAGAL (mock_rpc_off) agar
+    # tidak ada eth_call live; pool V4 ditolak sebagai unverified dan
+    # semua asersi lama (yang ditulis saat V4 ditolak invalid_address)
+    # tetap berlaku. Tes S1-C memock-nya sukses secara terpisah.
+    _adapter.verify_v4_pool = lambda *a, **k: {
+        "ok": False, "pool_id": None, "stateview": None,
+        "pool_manager": None, "slot0": None, "pool_key": None,
+        "pool_key_block_number": None, "pool_id_matches_pool_key": False,
+        "initialized": False, "implied_price_usd": None,
+        "fetched_at": pipeline._iso(pipeline._now()),
+        "source": "mock_rpc_off", "error": "mock_rpc_off"}
     checks = []
     try:
         # RPC quoter dimatikan di tes ini (offline): oracle/factory/quote
@@ -656,7 +669,8 @@ def test_snapshot_identity_live_build():
          _adapter.fetch_sell_quote,
          _adapter.fetch_pool_tokens,
          _adapter.fetch_token_decimals,
-         _adapter.fetch_block) = orig
+         _adapter.fetch_block,
+         _adapter.verify_v4_pool) = orig
     failed = [c for c, ok in checks if not ok]
     return _result(
         "snapshot_identity_live_build",
@@ -830,7 +844,19 @@ def test_happy_path_both_tokens():
             _adapter.fetch_sell_quote,
             _adapter.fetch_pool_tokens,
             _adapter.fetch_token_decimals,
-            _adapter.fetch_block)
+            _adapter.fetch_block,
+            _adapter.verify_v4_pool)
+    # S1-C: gate offline — verifikasi V4 dimock GAGAL (mock_rpc_off) agar
+    # tidak ada eth_call live; pool V4 ditolak sebagai unverified dan
+    # semua asersi lama (yang ditulis saat V4 ditolak invalid_address)
+    # tetap berlaku. Tes S1-C memock-nya sukses secara terpisah.
+    _adapter.verify_v4_pool = lambda *a, **k: {
+        "ok": False, "pool_id": None, "stateview": None,
+        "pool_manager": None, "slot0": None, "pool_key": None,
+        "pool_key_block_number": None, "pool_id_matches_pool_key": False,
+        "initialized": False, "implied_price_usd": None,
+        "fetched_at": pipeline._iso(pipeline._now()),
+        "source": "mock_rpc_off", "error": "mock_rpc_off"}
     checks = []
     try:
         # RPC quoter dimatikan di tes ini (offline) — lihat
@@ -930,7 +956,8 @@ def test_happy_path_both_tokens():
          _adapter.fetch_sell_quote,
          _adapter.fetch_pool_tokens,
          _adapter.fetch_token_decimals,
-         _adapter.fetch_block) = orig
+         _adapter.fetch_block,
+         _adapter.verify_v4_pool) = orig
     failed = [c for c, ok in checks if not ok]
     return _result(
         "happy_path_both_tokens",
@@ -980,7 +1007,19 @@ def test_nav_multiplier_build():
             _adapter.fetch_sell_quote,
             _adapter.fetch_pool_tokens,
             _adapter.fetch_token_decimals,
-            _adapter.fetch_block)
+            _adapter.fetch_block,
+            _adapter.verify_v4_pool)
+    # S1-C: gate offline — verifikasi V4 dimock GAGAL (mock_rpc_off) agar
+    # tidak ada eth_call live; pool V4 ditolak sebagai unverified dan
+    # semua asersi lama (yang ditulis saat V4 ditolak invalid_address)
+    # tetap berlaku. Tes S1-C memock-nya sukses secara terpisah.
+    _adapter.verify_v4_pool = lambda *a, **k: {
+        "ok": False, "pool_id": None, "stateview": None,
+        "pool_manager": None, "slot0": None, "pool_key": None,
+        "pool_key_block_number": None, "pool_id_matches_pool_key": False,
+        "initialized": False, "implied_price_usd": None,
+        "fetched_at": pipeline._iso(pipeline._now()),
+        "source": "mock_rpc_off", "error": "mock_rpc_off"}
     checks = []
     try:
         # RPC quoter dimatikan di tes ini (offline) — lihat
@@ -1058,7 +1097,8 @@ def test_nav_multiplier_build():
          _adapter.fetch_sell_quote,
          _adapter.fetch_pool_tokens,
          _adapter.fetch_token_decimals,
-         _adapter.fetch_block) = orig
+         _adapter.fetch_block,
+         _adapter.verify_v4_pool) = orig
     failed = [c for c, ok in checks if not ok]
     return _result(
         "nav_multiplier_build",
@@ -1264,7 +1304,19 @@ def test_quoter_adapter():
             _adapter.fetch_sell_quote,
             _adapter.fetch_pool_tokens,
             _adapter.fetch_token_decimals,
-            _adapter.fetch_block)
+            _adapter.fetch_block,
+            _adapter.verify_v4_pool)
+    # S1-C: gate offline — verifikasi V4 dimock GAGAL (mock_rpc_off) agar
+    # tidak ada eth_call live; pool V4 ditolak sebagai unverified dan
+    # semua asersi lama (yang ditulis saat V4 ditolak invalid_address)
+    # tetap berlaku. Tes S1-C memock-nya sukses secara terpisah.
+    _adapter.verify_v4_pool = lambda *a, **k: {
+        "ok": False, "pool_id": None, "stateview": None,
+        "pool_manager": None, "slot0": None, "pool_key": None,
+        "pool_key_block_number": None, "pool_id_matches_pool_key": False,
+        "initialized": False, "implied_price_usd": None,
+        "fetched_at": pipeline._iso(pipeline._now()),
+        "source": "mock_rpc_off", "error": "mock_rpc_off"}
     try:
         _adapter.fetch_coinbase_tokens = lambda: {
             "ok": True, "tokens": cb.get("tokens", []),
@@ -1380,7 +1432,8 @@ def test_quoter_adapter():
          _adapter.fetch_sell_quote,
          _adapter.fetch_pool_tokens,
          _adapter.fetch_token_decimals,
-         _adapter.fetch_block) = orig
+         _adapter.fetch_block,
+         _adapter.verify_v4_pool) = orig
     failed = [c for c, ok in checks if not ok]
     return _result(
         "quoter_adapter",
@@ -2804,7 +2857,19 @@ def test_s1b_venue_filter_session():
             _adapter.fetch_sell_quote,
             _adapter.fetch_pool_tokens,
             _adapter.fetch_token_decimals,
-            _adapter.fetch_block)
+            _adapter.fetch_block,
+            _adapter.verify_v4_pool)
+    # S1-C: gate offline — verifikasi V4 dimock GAGAL (mock_rpc_off) agar
+    # tidak ada eth_call live; pool V4 ditolak sebagai unverified dan
+    # semua asersi lama (yang ditulis saat V4 ditolak invalid_address)
+    # tetap berlaku. Tes S1-C memock-nya sukses secara terpisah.
+    _adapter.verify_v4_pool = lambda *a, **k: {
+        "ok": False, "pool_id": None, "stateview": None,
+        "pool_manager": None, "slot0": None, "pool_key": None,
+        "pool_key_block_number": None, "pool_id_matches_pool_key": False,
+        "initialized": False, "implied_price_usd": None,
+        "fetched_at": pipeline._iso(pipeline._now()),
+        "source": "mock_rpc_off", "error": "mock_rpc_off"}
     try:
         _adapter.fetch_oracle_params = lambda addr, block=None: {
             "ok": False, "multiplier": None, "paused": None,
@@ -2914,7 +2979,8 @@ def test_s1b_venue_filter_session():
          _adapter.fetch_sell_quote,
          _adapter.fetch_pool_tokens,
          _adapter.fetch_token_decimals,
-         _adapter.fetch_block) = orig
+         _adapter.fetch_block,
+         _adapter.verify_v4_pool) = orig
 
     # ---- (c2) _market_session: early close + strata (waktu literal UTC;
     # ET = UTC-5 di Nov/Des 2026). 27 Nov buka 09:30 ET = 14:30Z, tutup
@@ -2979,7 +3045,558 @@ def test_s1b_venue_filter_session():
         "S1-B: venue census method + per-pool filter §1.2b + session §1.4b")
 
 
+def test_s1d_daily_manifest_verify():
+    """S1-D: manifest run harian + verify_daily_runs.py (rencana §1.4 v1.1).
+
+    (a) Manifest sintetis yang valid lolos verify_daily_runs (23 cek);
+    mutasi tunggal (fetched_at hilang / manual_input True / tokens kosong
+    / selesai lewat cut-off 23:59 WITA / config_hash salah / trigger tak
+    dikenal) masing-masing MENGGAGALKAN verifikasi (fail-closed).
+    (b) market_session di manifest: 26 Nov (Thanksgiving) + 28-29 Nov
+    (akhir pekan) = off_hours; 27 Nov 23:00 WITA = active early-close;
+    30 Nov 23:00 WITA = active regular.
+    (c) Helper run.py: _sha256_file, _git_commit (40-hex), _atomic_write
+    (tulis + rename, tanpa sisa .tmp). Semua offline — tanpa network."""
+    import shutil
+    import tempfile
+    import verify_daily_runs as _vdr
+    import run as _run
+    checks = []
+
+    def _base_manifest():
+        ms = pipeline._market_session_detail(
+            pipeline._parse_ts("2026-11-27T15:00:00Z"))
+        return {
+            "manifest_schema_version": "1",
+            "run_id": "daily-20261127-230000-a1-deadbeef",
+            "run_date_wita": "2026-11-27",
+            "trigger": "cron",
+            "dry_run": False,
+            "manual_input": False,
+            "input_mode": "automated",
+            "scheduler": {"cron_line": "0 23 * * *",
+                          "timezone": "Asia/Makassar",
+                          "command": "cd ~/workspace/base-exit-radar && "
+                                     "bash run_daily.sh",
+                          "log_excerpt": "=== S1-D daily run mulai ==="},
+            "git_commit": "a" * 40,
+            "schema_version": config.SCHEMA_VERSION,
+            "methodology_version": config.METHODOLOGY_VERSION,
+            "policy_version": config.POLICY_VERSION,
+            "config_hash": config.CONFIG_HASH,
+            "universe_version": config.UNIVERSE_VERSION,
+            "universe_total_tokens": config.UNIVERSE_TOTAL_TOKENS,
+            "input_hashes": {
+                "universe_manifest": "b" * 64,
+                "universe_evidence": "c" * 64,
+                "venue_census": "d" * 64,
+                "evidence_files": {"universe_manifest": "b" * 64,
+                                   "universe_evidence": "c" * 64,
+                                   "venue_census": "d" * 64}},
+            "run_started_at": "2026-11-27T15:00:00Z",
+            "run_finished_at": "2026-11-27T15:05:00Z",
+            "run_started_at_wita": "2026-11-27T23:00:00+08:00",
+            "run_finished_at_wita": "2026-11-27T23:05:00+08:00",
+            "run_market_session": ms,
+            "attempt": 1,
+            "max_attempts": 3,
+            "retry_delay_sec": 1800,
+            "symbols_attempted": ["NVDAc"],
+            "successes": ["NVDAc"],
+            "failures": [],
+            "coinbase_shared": True,
+            "coinbase_error": None,
+            "tokens": {
+                "NVDAc": {
+                    "symbol": "NVDAc", "status": "ok",
+                    "snapshot_id": "snap-deadbeef",
+                    "decision": "WATCH", "decision_reasons": [],
+                    "fetched_at": "2026-11-27T15:04:00Z",
+                    "source": {"coinbase": config.COINBASE_API_URL,
+                               "dexscreener": "https://api.dexscreener.com"},
+                    "sources": {
+                        "coinbase": {"status": "ok",
+                                     "source": config.COINBASE_API_URL,
+                                     "error": None},
+                        "dexscreener": {"status": "ok",
+                                        "source": "https://api.dexscreener.com",
+                                        "error": None}},
+                    "market_session": ms,
+                    "coverage": {"independent_pool_count": 6,
+                                 "independent_venue_count": 4},
+                    "files": {}, "error": None, "complete": True}},
+            "summary": {"attempted": 1, "ok": 1, "error": 0,
+                        "complete_snapshots": 1,
+                        "complete_symbols": ["NVDAc"], "usable": True},
+        }
+
+    tmp = tempfile.mkdtemp(prefix="s1d_gate_")
+    try:
+        def _verify(mani):
+            p = os.path.join(tmp, "m.json")
+            with open(p, "w", encoding="utf-8") as f:
+                json.dump(mani, f)
+            return _vdr.verify_manifest_file(p)[0]
+
+        checks.append(("valid_manifest_passes", _verify(_base_manifest())))
+        m = _base_manifest()
+        del m["tokens"]["NVDAc"]["fetched_at"]
+        checks.append(("missing_fetched_at_fails", not _verify(m)))
+        m = _base_manifest()
+        m["manual_input"] = True
+        checks.append(("manual_input_fails", not _verify(m)))
+        m = _base_manifest()
+        m["tokens"] = {}
+        m["summary"] = {"attempted": 1, "ok": 0, "error": 1,
+                        "complete_snapshots": 0, "complete_symbols": [],
+                        "usable": False}
+        checks.append(("empty_tokens_fails", not _verify(m)))
+        m = _base_manifest()
+        # Selesai 28 Nov 00:30Z = 08:30 WITA 28 Nov: lewat cut-off hari 27 Nov.
+        m["run_finished_at"] = "2026-11-28T00:30:00Z"
+        m["run_finished_at_wita"] = "2026-11-28T08:30:00+08:00"
+        checks.append(("finished_after_cutoff_fails", not _verify(m)))
+        m = _base_manifest()
+        m["config_hash"] = "0" * 16
+        checks.append(("wrong_config_hash_fails", not _verify(m)))
+        m = _base_manifest()
+        m["trigger"] = "hand_entry"
+        checks.append(("unknown_trigger_fails", not _verify(m)))
+        m = _base_manifest()
+        m["tokens"]["NVDAc"]["sources"]["dexscreener"]["status"] = "error"
+        m["tokens"]["NVDAc"]["sources"]["dexscreener"]["error"] = "http_500"
+        m["tokens"]["NVDAc"]["complete"] = False
+        m["summary"] = {"attempted": 1, "ok": 1, "error": 0,
+                        "complete_snapshots": 0, "complete_symbols": [],
+                        "usable": False}
+        checks.append(("fatal_dexscreener_error_not_complete",
+                       not _vdr.is_complete_token_record(
+                           m["tokens"]["NVDAc"]) and not _verify(m)))
+        # ---- (b) strata kalender 26-30 Nov (jam run 23:00 WITA = 15:00Z)
+        cases = [
+            ("2026-11-26T15:00:00Z", "off_hours", "holiday"),
+            ("2026-11-27T15:00:00Z", "active", "early_close_session"),
+            ("2026-11-28T15:00:00Z", "off_hours", "weekend"),
+            ("2026-11-29T15:00:00Z", "off_hours", "weekend"),
+            ("2026-11-30T15:00:00Z", "active", "regular_session"),
+        ]
+        for iso, strata, calendar in cases:
+            det = pipeline._market_session_detail(
+                pipeline._parse_ts(iso))
+            checks.append(("session_%s_%s" % (iso[:10], strata),
+                           det["strata"] == strata
+                           and det["calendar"] == calendar))
+        # ---- (c) helper run.py (offline)
+        probe = os.path.join(tmp, "probe.txt")
+        with open(probe, "w", encoding="utf-8") as f:
+            f.write("s1d")
+        checks.append(("sha256_file_matches_hashlib",
+                       _run._sha256_file(probe)
+                       == hashlib.sha256(b"s1d").hexdigest()))
+        checks.append(("sha256_file_missing_is_none",
+                       _run._sha256_file(os.path.join(tmp, "nope")) is None))
+        gc = _run._git_commit()
+        checks.append(("git_commit_40_hex",
+                       isinstance(gc, str)
+                       and bool(re.fullmatch(r"[0-9a-f]{40}", gc))))
+        target = os.path.join(tmp, "atomic.json")
+        _run._atomic_write(target, {"a": 1})
+        with open(target, "r", encoding="utf-8") as f:
+            roundtrip = json.load(f)
+        leftovers = [p for p in os.listdir(tmp) if ".tmp." in p]
+        checks.append(("atomic_write_roundtrip_no_tmp_left",
+                       roundtrip == {"a": 1} and leftovers == []))
+        checks.append(("cron_line_and_tz_locked",
+                       _run.SCHEDULE_CRON_LINE == "0 23 * * *"
+                       and _run.SCHEDULE_TIMEZONE == "Asia/Makassar"
+                       and _run.MAX_ATTEMPTS == 3
+                       and _run.RETRY_DELAY_SEC == 1800))
+    finally:
+        shutil.rmtree(tmp, ignore_errors=True)
+
+    failed = [c for c, ok in checks if not ok]
+    return _result(
+        "s1d_daily_manifest_verify",
+        "manifest harian §1.4 lolos verify_daily_runs; tiap mutasi tunggal "
+        "gagal (fail-closed); strata 26-30 Nov benar; helper run.py benar",
+        "%d/%d checks pass; failed: %s" % (len(checks) - len(failed),
+                                           len(checks), failed or "none"),
+        not failed,
+        "S1-D: manifest run harian + verify_daily_runs.py + ketahanan run")
+
+
 # -------------------------------------------------------------------- main
+def test_s1c_v4_canonical_identity():
+    """S1-C: identitas pool kanonis V4 end-to-end (rencana Scope 1 v1.1 §1.3).
+
+    (a) Keccak-256 murni-Python: vektor string kosong/"abc" + selector
+        yang sudah dipakai kode ini (getSlot0 0xc815641c dari sensus S1-B,
+        factory/decimals/token0/token1/quoter/oracle).
+    (b) verify_v4_pool dengan mock RPC: getSlot0 StateView ter-initialize
+        + PoolKey dari event Initialize -> keccak256(abi.encode(PoolKey))
+        == poolId; negatif: sqrtPriceX96=0 (belum initialize) dan PoolKey
+        yang diutak-atik (fee) -> mismatch. fetch_pool_factory(poolId)
+        menolak tanpa eth_call (poolId bukan kontrak).
+    (c) Fixture V4 NVDAc (poolId, TANPA pool_address) lolos build ->
+        assess -> decide -> public snapshot -> replay -> feed (indeks)
+        tanpa KeyError; dedup case-insensitive; count + deviasi benar;
+        venue_verified TIDAK PERNAH true untuk poolId; V3+V4 family
+        "uniswap" = SATU venue; pool konflik klasifikasi + pool tanpa
+        verifikasi ditolak dengan alasan masing-masing.
+    Semua offline — tanpa network.
+    """
+    import adapter as _adapter
+    checks = []
+
+    # ---- (a) keccak-256 + selector -------------------------------
+    checks.append(("keccak_empty",
+                   _adapter._keccak_256(b"").hex()
+                   == "c5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470"))
+    checks.append(("keccak_abc",
+                   _adapter._keccak_256(b"abc").hex()
+                   == "4e03657aea45a94fc7d47ba826c8d667c0d1e6e33a64a036ec44f58fa12d6c45"))
+    _sels = {
+        "getSlot0(bytes32)": "0xc815641c",  # sensus S1-B, evidence census
+        "factory()": "0xc45a0155",
+        "decimals()": "0x313ce567",
+        "token0()": "0x0dfe1681",
+        "token1()": "0xd21220a7",
+        "quoteExactInputSingleV3(address,address,uint256,uint160)": "0x0a674142",
+        "getOracleParams(address)": "0xd4197e82",
+    }
+    for sig, want in _sels.items():
+        checks.append(("selector_%s" % sig.split("(")[0],
+                       _adapter._function_selector(sig) == want))
+
+    # ---- (b) verify_v4_pool dengan mock RPC -----------------------
+    _TOK = config.TOKENS["NVDAc"]["token_address"]
+    _USDC = "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913"
+    _ZERO = "0x0000000000000000000000000000000000000000"
+    _KEY = {"currency0": _USDC, "currency1": _TOK, "fee": 3000,
+            "tickSpacing": 60, "hooks": _ZERO}
+    _PID = _adapter.compute_pool_id(
+        _KEY["currency0"], _KEY["currency1"], _KEY["fee"],
+        _KEY["tickSpacing"], _KEY["hooks"])
+    checks.append(("pool_id_is_66_hex",
+                   len(_PID) == 66 and _PID.startswith("0x")))
+
+    def _w(v):
+        return "%064x" % (v & ((1 << 256) - 1))
+
+    def _addr_w(a):
+        return "0" * 24 + a[2:].lower()
+
+    # slot0 S1-B (pool 0xc8c5...): sqrtPriceX96 -> implied 167,7492 USD,
+    # tick -5174, protocolFee 0, lpFee 998.
+    _SQRT = 61171532313408121399094642184
+    _SLOT0 = (_w(_SQRT) + _w(-5174) + _w(0) + _w(998))
+    _TOPIC0 = "0x" + _adapter._keccak_256(
+        b"Initialize(bytes32,address,address,uint24,int24,address,int24)"
+    ).hex()
+
+    def _init_log(pool_key, pool_id):
+        data = (_w(pool_key["fee"]) + _w(pool_key["tickSpacing"])
+                + _addr_w(pool_key["hooks"]) + _w(-5174))
+        return [{"blockNumber": "0x123456",
+                 "transactionHash": "0x" + "ab" * 32,
+                 "topics": [_TOPIC0, pool_id.lower(),
+                            "0x" + _addr_w(pool_key["currency0"]),
+                            "0x" + _addr_w(pool_key["currency1"])],
+                 "data": "0x" + data}]
+
+    def _rpc_stateview(slot0_hex):
+        def _call(to, data):
+            if to.lower() != config.UNISWAP_V4_STATEVIEW_BASE.lower():
+                return None, "mock_wrong_to"
+            if data[:10] != _adapter._function_selector("getSlot0(bytes32)"):
+                return None, "mock_unexpected_selector"
+            return slot0_hex, None
+        return _call
+
+    def _rpc_logs(logs):
+        def _call(method, params):
+            if method != "eth_getLogs":
+                return None, "mock_unexpected_method"
+            return logs, None
+        return _call
+
+    v = _adapter.verify_v4_pool(
+        _PID, expected_token=_TOK,
+        expected_quote_addresses=[_USDC],
+        rpc_call=_rpc_stateview(_SLOT0),
+        rpc_json=_rpc_logs(_init_log(_KEY, _PID)))
+    checks.append(("v4_verify_ok",
+                   v["ok"] is True and v["initialized"] is True
+                   and v["pool_id_matches_pool_key"] is True))
+    checks.append(("v4_verify_pool_key",
+                   v["pool_key"] is not None
+                   and v["pool_key"]["currency0"].lower() == _USDC.lower()
+                   and v["pool_key"]["currency1"].lower() == _TOK.lower()
+                   and v["pool_key"]["fee"] == 3000
+                   and v["pool_key"]["tickSpacing"] == 60
+                   and v["pool_key"]["hooks"].lower() == _ZERO.lower()))
+    checks.append(("v4_verify_slot0",
+                   v["slot0"] is not None
+                   and v["slot0"]["tick"] == -5174
+                   and v["slot0"]["lpFee"] == 998))
+    checks.append(("v4_verify_implied_price",
+                   v["implied_price_usd"] is not None
+                   and abs(v["implied_price_usd"] - 167.7492) < 0.001))
+    checks.append(("v4_verify_stateview_address",
+                   v["stateview"] == config.UNISWAP_V4_STATEVIEW_BASE
+                   and v["pool_manager"]
+                   == config.UNISWAP_V4_POOLMANAGER_BASE))
+    # Jendela log diteruskan (S1-C, RPC publik membatasi rentang
+    # eth_getLogs: BlastAPI 10 blok, 1rpc 50 blok).
+    _seen_params = {}
+    def _rpc_logs_capture(method, params):
+        _seen_params.update(params[0])
+        return _init_log(_KEY, _PID), None
+    _adapter.verify_v4_pool(
+        _PID, expected_token=_TOK,
+        expected_quote_addresses=[_USDC],
+        rpc_call=_rpc_stateview(_SLOT0),
+        rpc_json=_rpc_logs_capture,
+        from_block="0x100", to_block="0x131")
+    checks.append(("v4_verify_log_window_forwarded",
+                   _seen_params.get("fromBlock") == "0x100"
+                   and _seen_params.get("toBlock") == "0x131"))
+    # Negatif 1: sqrtPriceX96 = 0 -> belum initialize.
+    v0 = _adapter.verify_v4_pool(
+        _PID, expected_token=_TOK, expected_quote_addresses=[_USDC],
+        rpc_call=_rpc_stateview(_w(0) + _w(-5174) + _w(0) + _w(998)),
+        rpc_json=_rpc_logs(_init_log(_KEY, _PID)))
+    checks.append(("v4_uninitialized_rejected",
+                   v0["ok"] is False
+                   and v0["error"] == "v4_pool_not_initialized"))
+    # Negatif 2: PoolKey diutak-atik (fee 3001) -> poolId mismatch.
+    _KEY_BAD = dict(_KEY, fee=3001)
+    vbad = _adapter.verify_v4_pool(
+        _PID, expected_token=_TOK, expected_quote_addresses=[_USDC],
+        rpc_call=_rpc_stateview(_SLOT0),
+        rpc_json=_rpc_logs(_init_log(_KEY_BAD, _PID)))
+    checks.append(("v4_poolkey_mismatch_rejected",
+                   vbad["ok"] is False
+                   and vbad["error"] == "v4_pool_id_pool_key_mismatch"))
+    # Negatif 3: 0 log Initialize -> PoolKey tidak ditemukan.
+    vnone = _adapter.verify_v4_pool(
+        _PID, expected_token=_TOK, expected_quote_addresses=[_USDC],
+        rpc_call=_rpc_stateview(_SLOT0),
+        rpc_json=_rpc_logs([]))
+    checks.append(("v4_no_initialize_log_rejected",
+                   vnone["ok"] is False
+                   and vnone["error"] == "v4_pool_key_not_found"))
+    # fetch_pool_factory(poolId) menolak TANPA eth_call.
+    def _boom(to, data):
+        raise AssertionError("fetch_pool_factory must not eth_call a poolId")
+    checks.append(("factory_skipped_for_pool_id",
+                   _adapter.fetch_pool_factory(_PID, rpc_call=_boom)["ok"]
+                   is False
+                   and _adapter.fetch_pool_factory(
+                       _PID, rpc_call=_boom)["error"]
+                   == "pool_id_not_a_contract"))
+
+    # ---- (c) identitas kanonis ------------------------------------
+    ident = pipeline.canonical_pool_identity(_PID)
+    checks.append(("identity_v4_fields",
+                   ident is not None
+                   and ident["chain"] == "base"
+                   and ident["identifier_kind"] == "pool_id_66"
+                   and ident["pool_id"] == _PID.lower()
+                   and ident["pool_address"] is None
+                   and ident["pool_manager"]
+                   == config.UNISWAP_V4_POOLMANAGER_BASE.lower()
+                   and ident["protocol"] == "uniswap_v4"))
+    _AERO = "0xF668e21993f0ACd7ab00BB1cFbAeD0df28A3C8EC"
+    checks.append(("identity_v3_fields",
+                   pipeline.canonical_pool_identity(_AERO)["pool_address"]
+                   == _AERO.lower()
+                   and pipeline.canonical_pool_identity(_AERO)["pool_id"]
+                   is None
+                   and pipeline.canonical_pool_identity(_AERO)["pool_manager"]
+                   is None))
+    checks.append(("pool_key_v4",
+                   pipeline.pool_key_for_identity(ident)
+                   == "base:poolmanager:%s:%s" % (
+                       config.UNISWAP_V4_POOLMANAGER_BASE.lower(),
+                       _PID.lower())))
+    checks.append(("pool_key_v3",
+                   pipeline.pool_key_for_identity(
+                       pipeline.canonical_pool_identity(_AERO))
+                   == "base:pool:" + _AERO.lower()))
+    checks.append(("pool_key_legacy_address_obs",
+                   pipeline.pool_key({"pool_address": "0x" + _AERO[2:].upper()})
+                   == "base:pool:" + _AERO.lower()))
+    checks.append(("pool_key_legacy_pool_id_obs",
+                   pipeline.pool_key({"pool_id": "0x" + _PID[2:].upper()})
+                   == "base:poolmanager:%s:%s" % (
+                       config.UNISWAP_V4_POOLMANAGER_BASE.lower(),
+                       _PID.lower())))
+    checks.append(("pool_key_no_identifier_none",
+                   pipeline.pool_key({}) is None
+                   and pipeline.canonical_pool_identity("0x1234") is None))
+
+    # ---- (d) fixture end-to-end -----------------------------------
+    _now = pipeline._iso(pipeline._now())
+    _PID_CONFLICT = _adapter.compute_pool_id(_USDC, _TOK, 500, 10, _ZERO)
+    _PID_NOVERIFY = _adapter.compute_pool_id(_USDC, _TOK, 10000, 200, _ZERO)
+
+    def _pair(identifier, labels, price, liq):
+        return {"pairAddress": identifier, "dexId": "uniswap",
+                "labels": labels, "chainId": "base",
+                "baseToken": {"address": _TOK, "symbol": "NVDAc"},
+                "quoteToken": {"address": _USDC, "symbol": "USDC"},
+                "priceUsd": str(price),
+                "liquidity": {"usd": liq}}
+
+    _aero_pair = {"pairAddress": _AERO, "dexId": "aerodrome",
+                  "labels": [], "chainId": "base",
+                  "baseToken": {"address": _TOK, "symbol": "NVDAc"},
+                  "quoteToken": {"address": _USDC, "symbol": "USDC"},
+                  "priceUsd": "167.90", "liquidity": {"usd": 80000.0}}
+    _ing = {
+        "meta": {"fetched_at": _now, "errors": {}, "sources": {}},
+        "coinbase_record": {"contract_address": _TOK, "symbol": "NVDAc",
+                            "nav_price": 167.80,
+                            "nav_price_updated_at": _now,
+                            "multiplier": 1.000538},
+        "dexscreener_pairs": [
+            _pair(_PID, ["v4"], 167.75, 50000.0),
+            _pair(_PID.upper(), ["v4"], 167.75, 50000.0),  # duplikat case
+            _aero_pair,
+            _pair(_PID_CONFLICT, ["v3"], 167.0, 1000.0),  # konflik label
+            _pair(_PID_NOVERIFY, ["v4"], 168.0, 2000.0),  # tanpa verifikasi
+        ],
+        "geckoterminal_pool": None,
+        "geckoterminal_pool_address": None,
+        "hyperliquid": {},
+        "oracle_params": {"ok": False},
+        "pool_factories": {},
+        "v4_verifications": {_PID.lower(): v},
+        "sell_quote": {},
+    }
+    snap = pipeline.build_snapshot("NVDAc", ingested=_ing)
+    checks.append(("v4_fixture_two_pools",
+                   len(snap["pools"]) == 2))
+    v4_obs = [o for o in snap["pools"] if o.get("pool_id") is not None]
+    aero_obs = [o for o in snap["pools"] if o.get("pool_id") is None]
+    checks.append(("v4_fixture_one_v4_one_v3",
+                   len(v4_obs) == 1 and len(aero_obs) == 1))
+    o = v4_obs[0]
+    checks.append(("v4_obs_no_pool_address",
+                   o.get("pool_address") is None
+                   and o.get("pool_id") == _PID.lower()))
+    checks.append(("v4_obs_identity",
+                   o.get("pool_identity") is not None
+                   and o["pool_identity"]["identifier_kind"] == "pool_id_66"
+                   and o["pool_identity"]["pool_manager"]
+                   == config.UNISWAP_V4_POOLMANAGER_BASE.lower()
+                   and o.get("pool_key")
+                   == "base:poolmanager:%s:%s" % (
+                       config.UNISWAP_V4_POOLMANAGER_BASE.lower(),
+                       _PID.lower())))
+    checks.append(("v4_obs_protocol_version",
+                   o.get("protocol_version") == "v4"
+                   and o.get("venue") == "uniswap"
+                   and o.get("protocol_family") == "uniswap"))
+    checks.append(("v4_obs_never_verified",
+                   o.get("venue_verified") is False
+                   and o.get("venue_label_source") == "dexscreener_fallback"
+                   and o.get("factory_verified") is False
+                   and o.get("pool_verified_onchain") is True
+                   and (o.get("onchain_verification") or {}).get(
+                       "pool_id_matches_pool_key") is True))
+    checks.append(("v4_obs_no_verified_pool_anywhere",
+                   not any(p.get("pool_id") is not None
+                           and p.get("venue_verified") is True
+                           for p in snap["pools"])))
+    checks.append(("v3_obs_protocol_version",
+                   aero_obs[0].get("protocol_version") == "not_applicable"
+                   and aero_obs[0].get("pool_address") == _AERO))
+    cov = snap["coverage"]
+    checks.append(("v4_coverage_counts",
+                   cov["independent_pool_count"] == 2
+                   and cov["v4_pool_count"] == 1
+                   and cov["protocol_version_counts"]["v4"] == 1
+                   and cov["v4_onchain_verified_count"] == 1
+                   and cov["verified_venue_count"] == 0
+                   # fallback = V4 (selalu) + Aero tanpa factory terbaca.
+                   and cov["fallback_pool_count"] == 2))
+    rej = {r.get("reason") for r in cov["rejected_observations"]}
+    checks.append(("v4_rejections_labeled",
+                   "classification_conflict" in rej
+                   and "v4_onchain_unverified" in rej))
+    # assess -> decide -> public -> replay -> feed, tanpa KeyError.
+    snap = pipeline.assess_snapshot(snap)
+    la = snap["assessment"]["layer_a"]
+    checks.append(("v4_assess_median",
+                   la["median_price_usd"] is not None
+                   and abs(la["median_price_usd"] - 167.825) < 1e-9))
+    checks.append(("v4_deviation_keyed_by_pool_key",
+                   set(la["per_venue_deviation_pct"].keys())
+                   == {o["pool_key"] for o in snap["pools"]}
+                   and abs(la["per_venue_deviation_pct"][
+                       v4_obs[0]["pool_key"]] - (-0.0447)) < 0.001))
+    rec = snap["assessment"]["coverage_recomputed"]
+    checks.append(("v4_recomputed_counts",
+                   rec["recomputed_pool_count"] == 2
+                   and rec["recomputed_venue_count"] == 2
+                   and rec["v4_pool_count"] == 1
+                   and rec["verified_venue_count"] == 0))
+    snap = pipeline.decide(snap)
+    snap = pipeline.explain(snap)
+    checks.append(("v4_decision_watch_not_paper",
+                   snap["decision"] == "WATCH"
+                   and snap["decision"] != "PAPER_PROPOSAL"))
+    pub = pipeline.public_snapshot(snap)
+    checks.append(("v4_public_carries_identity",
+                   len(pub["pools"]) == 2
+                   and all("pool_identity" in p and "pool_key" in p
+                           and "protocol_version" in p
+                           for p in pub["pools"])))
+    checks.append(("v4_identity_matches_public",
+                   pipeline.verify_snapshot_identity(pub)["matches"]))
+    # Replay dari public snapshot (tanpa field internal _*).
+    snap2 = pipeline.assess_snapshot(copy.deepcopy(pub))
+    snap2 = pipeline.decide(snap2)
+    checks.append(("v4_replay_same_decision",
+                   snap2["decision"] == snap["decision"]
+                   and pipeline.verify_snapshot_identity(
+                       snap2)["matches"]))
+    # Observasi tanpa kunci pool_address SAMA SEKALI tetap lolos assess.
+    snap3 = copy.deepcopy(pub)
+    v4_pub = [p for p in snap3["pools"] if p.get("pool_id") is not None][0]
+    del v4_pub["pool_address"]
+    payload = pipeline._build_time_payload(snap3)
+    snap3["snapshot_id"] = "snap-" + pipeline._short_hash(
+        pipeline._canonical(payload))
+    snap3 = pipeline.assess_snapshot(snap3)
+    checks.append(("v4_assess_without_pool_address_key",
+                   snap3["assessment"]["layer_a"]["median_price_usd"]
+                   is not None))
+    # Feed: indeks harian memuat identitas kanonis.
+    idx = pipeline.build_daily_index([snap])
+    checks.append(("v4_daily_index_carries_identity",
+                   idx["snapshots"][0]["snapshot_id"] == snap["snapshot_id"]
+                   and any(p.get("pool_key", "").startswith(
+                       "base:poolmanager:") and p.get("pool_id") == _PID.lower()
+                       for p in idx["snapshots"][0]["pools"])))
+    failed = [c for c, ok in checks if not ok]
+    return _result(
+        "s1c_v4_canonical_identity",
+        "S1-C §1.3 v1.1: fixture poolId V4 lolos build->assess->decide->"
+        "public->replay->feed tanpa KeyError; dedup/count/deviasi benar; "
+        "venue_verified TIDAK PERNAH true untuk poolId; validasi StateView "
+        "(sqrtPriceX96 initialize + PoolKey keccak256) lolos; decide() "
+        "tidak disentuh",
+        "%d/%d checks pass; failed: %s" % (len(checks) - len(failed),
+                                           len(checks), failed or "none"),
+        not failed,
+        "v4 poolId fixture NVDAc; StateView %s; PoolManager %s"
+        % (config.UNISWAP_V4_STATEVIEW_BASE,
+           config.UNISWAP_V4_POOLMANAGER_BASE))
+
+
 TESTS = [
     ("happy_path", test_happy_path),
     ("controlled_trigger", test_controlled_trigger),
@@ -3015,6 +3632,10 @@ TESTS = [
     ("s1g_decide_source_guard", test_s1g_decide_source_guard),
     # S1-B sensus venue + filter per-pool + _market_session early-close.
     ("s1b_venue_filter_session", test_s1b_venue_filter_session),
+    # S1-D manifest run harian + verify_daily_runs + ketahanan run.
+    ("s1d_daily_manifest_verify", test_s1d_daily_manifest_verify),
+    # S1-C identitas pool kanonis V4 end-to-end + StateView.
+    ("s1c_v4_canonical_identity", test_s1c_v4_canonical_identity),
 ]
 
 

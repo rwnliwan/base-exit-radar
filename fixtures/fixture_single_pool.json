@@ -13,12 +13,18 @@
       ],
       "fallback_pool_count": 0,
       "has_factory_data": false,
+      "protocol_version_counts": {
+        "not_applicable": 0,
+        "v3": 0,
+        "v4": 0
+      },
       "recomputed_pool_count": 11,
       "recomputed_venue_count": 6,
       "stored_pool_count": 11,
       "stored_venue_count": 7,
       "thin_pool_count": 0,
       "thin_pool_liquidity_usd": 0,
+      "v4_pool_count": 0,
       "verified_venue_count": 0,
       "verified_venues": []
     },
@@ -56,17 +62,17 @@
       },
       "note": "",
       "per_venue_deviation_pct": {
-        "0x19cCE0486BB8b36C525E74445A28A2449EE4b2BD": -1.7807,
-        "0x20E5fAd2661Ee9Eb0c04824524030AF31943B62D": -0.2425,
-        "0x337beA70489CD71a8C3951C1Aa49C637b4b9B122": 0.0,
-        "0x3e8126A4a5DF68DD9cCA675E8dc925B5FED70CA9": 0.5228,
-        "0x60661b315553EB81872deEA9a66d567Cf0CCd33B": 0.1894,
-        "0x853F5f1B92b16714Fe6CDA67CAad0856B83C7ab9": -0.0379,
-        "0x8e740D5Fa742B763cD82159894b9919eD57E4f70": 0.2576,
-        "0xCe56168C09f4B7FCa30523822C48008705C01156": 0.0233,
-        "0xF668e21993f0ACd7ab00BB1cFbAeD0df28A3C8EC": 0.0152,
-        "0xFe27C510b1fC9B926c0a144597a62813564a189B": -1.1366,
-        "0xaf37c58BAaD0dF59bBAe19B7Ee17afC93Db8bDF5": -0.8032
+        "base:pool:0x19cce0486bb8b36c525e74445a28a2449ee4b2bd": -1.7807,
+        "base:pool:0x20e5fad2661ee9eb0c04824524030af31943b62d": -0.2425,
+        "base:pool:0x337bea70489cd71a8c3951c1aa49c637b4b9b122": 0.0,
+        "base:pool:0x3e8126a4a5df68dd9cca675e8dc925b5fed70ca9": 0.5228,
+        "base:pool:0x60661b315553eb81872deea9a66d567cf0ccd33b": 0.1894,
+        "base:pool:0x853f5f1b92b16714fe6cda67caad0856b83c7ab9": -0.0379,
+        "base:pool:0x8e740d5fa742b763cd82159894b9919ed57e4f70": 0.2576,
+        "base:pool:0xaf37c58baad0df59bbae19b7ee17afc93db8bdf5": -0.8032,
+        "base:pool:0xce56168c09f4b7fca30523822c48008705c01156": 0.0233,
+        "base:pool:0xf668e21993f0acd7ab00bb1cfbaed0df28a3c8ec": 0.0152,
+        "base:pool:0xfe27c510b1fc9b926c0a144597a62813564a189b": -1.1366
       },
       "thin_pool_excluded_from_median": 0
     },

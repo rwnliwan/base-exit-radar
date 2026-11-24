@@ -13,7 +13,8 @@ KOREKSI YANG MENGIKAT (§3) — diterapkan di seluruh pipeline:
 3. TVL/reserve/likuiditas BUKAN executable depth. Hanya filter kelayakan.
 4. Redemption: desain mengasumsikan TIDAK ADA jalur permissionless retail.
 5. PoR: tidak ada sumber otomatis. Hanya catatan manual atau `unknown`.
-6. Dua agregator baca pool sama = SATU pool (dedup by pool_address).
+6. Dua agregator baca pool sama = SATU pool (dedup by identitas kanonis
+   pool_key, §1.3 S1-C).
 7. Proxy underlying (xyz:NVDA/xyz:AAPL) = UNDERLYING EQUITY PERP PROXY.
    Bukan ukuran exit-risk token. Tidak memicu alert token-exit.
 """
@@ -33,10 +34,95 @@ import config
 
 # ------------------------------------------------------------------ helpers
 _ADDR_RE = re.compile(r"^0x[0-9a-fA-F]{40}$")
+_POOL_ID_RE = re.compile(r"^0x[0-9a-fA-F]{64}$")
 
 
 def _is_address(s):
     return isinstance(s, str) and bool(_ADDR_RE.match(s))
+
+
+def _is_pool_id(s):
+    return isinstance(s, str) and bool(_POOL_ID_RE.match(s))
+
+
+def canonical_pool_identity(identifier, chain=None):
+    """Identitas pool kanonis (S1-C, §1.3): SATU identitas yang sama di
+    seluruh jalur (build -> assess -> decide -> public snapshot ->
+    replay/hash -> feed).
+
+    - V4 (poolId 66 karakter): {"chain", "identifier_kind": "pool_id_66",
+      "pool_id", "pool_address": None,
+      "pool_manager": alamat PoolManager Base,
+      "protocol": "uniswap_v4"}.
+    - V3/alamat (42 karakter): {"chain", "identifier_kind": "address_42",
+      "pool_id": None, "pool_address", "pool_manager": None,
+      "protocol": None}.
+    Kembalikan None bila identifier bukan alamat maupun poolId.
+    Versi protokol (v3/v4) dicatat TERPISAH dari family independensi
+    (lihat obs["protocol_version"] vs obs["venue"]): V3 dan V4 dari
+    family yang sama ("uniswap") adalah SATU venue, bukan dua.
+    """
+    if chain is None:
+        chain = config.CHAIN
+    if _is_pool_id(identifier):
+        return {"chain": chain, "identifier_kind": "pool_id_66",
+                "pool_id": identifier.lower(), "pool_address": None,
+                "pool_manager":
+                    config.UNISWAP_V4_POOLMANAGER_BASE.lower(),
+                "protocol": "uniswap_v4"}
+    if _is_address(identifier):
+        return {"chain": chain, "identifier_kind": "address_42",
+                "pool_id": None, "pool_address": identifier.lower(),
+                "pool_manager": None, "protocol": None}
+    return None
+
+
+def pool_key_for_identity(identity):
+    """Kunci dedup stabil dari identitas kanonis (string, bukan dict).
+
+    V4: "base:poolmanager:<manager>:<poolId>";
+    alamat: "base:pool:<address>". Dua observasi dengan kunci sama = SATU
+    pool, apa pun agregator/labelnya.
+    """
+    if not isinstance(identity, dict):
+        return None
+    if identity.get("identifier_kind") == "pool_id_66" \
+            and identity.get("pool_id"):
+        return "%s:poolmanager:%s:%s" % (
+            identity.get("chain") or config.CHAIN,
+            (identity.get("pool_manager") or "").lower(),
+            identity["pool_id"].lower())
+    if identity.get("identifier_kind") == "address_42" \
+            and identity.get("pool_address"):
+        return "%s:pool:%s" % (
+            identity.get("chain") or config.CHAIN,
+            identity["pool_address"].lower())
+    return None
+
+
+def pool_key(obs):
+    """Kunci dedup satu observasi pool (dict).
+
+    Pakai obs["pool_identity"] bila ada (build S1-C); snapshot/fixture
+    lama tanpa identitas diturunkan dari pool_address / pool_id apa adanya
+    agar replay historis tetap bisa didedup tanpa KeyError.
+    Kembalikan None bila tidak ada identifier yang bisa dipakai.
+    """
+    if not isinstance(obs, dict):
+        return None
+    ident = obs.get("pool_identity")
+    key = pool_key_for_identity(ident)
+    if key is not None:
+        return key
+    addr = obs.get("pool_address")
+    if _is_address(addr):
+        return "%s:pool:%s" % (config.CHAIN, addr.lower())
+    pid = obs.get("pool_id")
+    if _is_pool_id(pid):
+        return "%s:poolmanager:%s:%s" % (
+            config.CHAIN, config.UNISWAP_V4_POOLMANAGER_BASE.lower(),
+            pid.lower())
+    return None
 
 
 def _to_float(x):
@@ -729,7 +815,8 @@ def ingest_token(symbol, coinbase=None):
         meta["errors"]["dexscreener"] = ds["error"]
 
     # Cross-check GeckoTerminal HANYA untuk pool teratas (by liquidity).
-    # Ini pool yang SAMA, bukan venue independen (dedup by pool_address).
+    # Ini pool yang SAMA, bukan venue independen (dedup by identitas
+    # kanonis pool_key).
     gt = {"ok": False, "pool": None, "fetched_at": _iso(fetched_at),
           "source": None, "error": None}
     top_pool = None
@@ -784,6 +871,32 @@ def ingest_token(symbol, coinbase=None):
                     factories[addr.lower()] = f["factory"]
     if factories:
         meta["sources"]["pool_factory"] = "eth_call factory() per pool"
+
+    # Verifikasi on-chain pool V4 (S1-C): StateView.getSlot0 + event
+    # Initialize PoolManager per poolId — hanya pair yang lolos chain +
+    # base-token (sisanya ditolak build apa pun, verifikasi tidak perlu).
+    # Gagal -> unverified (build menolak pool itu, bukan memakai tanpa
+    # bukti). V4 TIDAK pernah masuk jalur quote (Metaquoter V3 tidak bisa
+    # meng-quote pool V4; quote tetap dari pool V3/Aero yang eligible).
+    v4_verifications = {}
+    if ds["ok"]:
+        for p in ds["pairs"]:
+            ident = p.get("pairAddress") or ""
+            if not _is_pool_id(ident):
+                continue
+            if (p.get("chainId") or "") != "base":
+                continue
+            base_addr = (p.get("baseToken") or {}).get("address") or ""
+            if base_addr.lower() != tok["token_address"].lower():
+                continue
+            v = adapter.verify_v4_pool(
+                ident, expected_token=tok["token_address"],
+                expected_quote_addresses=config.USDC_BASE_ADDRESSES,
+                token_decimals=tok["decimals"], block=block_pin)
+            v4_verifications[ident.lower()] = v
+    if v4_verifications:
+        meta["sources"]["v4_stateview"] = (
+            "eth_call StateView.getSlot0 + eth_getLogs Initialize per poolId")
 
     # Sell quote (G2): pilih pool ELIGIBLE pertama menurut likuiditas.
     # Pool teratas yang gagal guard (bukan USDC / decimals salah / factory
@@ -873,6 +986,7 @@ def ingest_token(symbol, coinbase=None):
         "hyperliquid": hl["instruments"] if hl["ok"] else {},
         "oracle_params": oracle,
         "pool_factories": factories,
+        "v4_verifications": v4_verifications,
         "sell_quote": sell_quote,
         "meta": meta,
     }
@@ -963,31 +1077,63 @@ def build_snapshot(symbol, ingested=None):
         else:
             reference["registry_pause_status"] = "unknown"
 
-    # ---- pools: observasi independen, dedup by pool_address.
-    # Dua agregator baca pool sama = SATU pool (bukan dua venue).
+    # ---- pools: observasi independen, dedup by identitas kanonis
+    # pool_key (S1-C, §1.3). Dua agregator baca pool sama = SATU pool
+    # (bukan dua venue). Pool V4 (poolId 66 karakter) diterima sebagai
+    # observasi harga berlabel fallback — DULU ditolak `invalid_address`
+    # karena _is_address() hanya menerima 42 karakter.
     pools = []
     seen_pool = set()
     for p in ingested["dexscreener_pairs"]:
-        addr = (p.get("pairAddress") or "").lower()
-        if not _is_address(p.get("pairAddress") or ""):
+        ident_raw = p.get("pairAddress") or ""
+        ident = canonical_pool_identity(ident_raw)
+        if ident is None:
             rejected.append({"field": "pairAddress", "reason": "invalid_address"})
             continue
-        if addr in seen_pool:
+        key = pool_key_for_identity(ident)
+        if key in seen_pool:
             continue
-        seen_pool.add(addr)
+        seen_pool.add(key)
         if (p.get("chainId") or "") != "base":
-            rejected.append({"pool": addr, "reason": "chain_not_base"})
+            rejected.append({"pool": key, "reason": "chain_not_base"})
             continue
         base_addr = (p.get("baseToken") or {}).get("address") or ""
         if base_addr.lower() != tok["token_address"].lower():
-            rejected.append({"pool": addr, "reason": "base_token_mismatch"})
+            rejected.append({"pool": key, "reason": "base_token_mismatch"})
             continue
+        # Klasifikasi V3/V4 (S1-B): labels + panjang identifier harus
+        # cocok; konflik = dikecualikan, jangan ditebak. Versi protokol
+        # dicatat TERPISAH dari family independensi (venue).
+        cls = adapter.classify_dexscreener_pair(p)
+        protocol_version = cls["protocol_version"]
+        if cls["classification_conflict"]:
+            rejected.append({"pool": key, "reason": "classification_conflict",
+                             "conflict_reason": cls["conflict_reason"]})
+            continue
+        is_v4 = ident["identifier_kind"] == "pool_id_66"
+        # Verifikasi on-chain pool V4 (S1-C): HANYA pool yang terverifikasi
+        # StateView (getSlot0 ter-initialize + PoolKey konsisten dengan
+        # poolId) yang dipakai. Tanpa/gagal verifikasi -> `unverified`,
+        # dicatat di rejected, bukan dipakai sebagai observasi harga.
+        v4_verification = None
+        if is_v4:
+            v4_verification = (ingested.get("v4_verifications") or {}).get(
+                ident["pool_id"])
+            if not isinstance(v4_verification, dict) \
+                    or not v4_verification.get("ok"):
+                rejected.append({
+                    "pool": key, "reason": "v4_onchain_unverified",
+                    "verification_error": (
+                        v4_verification or {}).get("error")
+                    if isinstance(v4_verification, dict)
+                    else "v4_verification_missing"})
+                continue
         dex = p.get("dexId") or ""
         quote = (p.get("quoteToken") or {}).get("symbol") or ""
         price = _to_float(p.get("priceUsd"))
         liq = _to_float((p.get("liquidity") or {}).get("usd"))
         if not dex or not quote:
-            rejected.append({"pool": addr, "reason": "missing_dex_or_quote"})
+            rejected.append({"pool": key, "reason": "missing_dex_or_quote"})
             continue
         # §1.2b (a, S1-B): quote asset adalah USDC berdasarkan ALAMAT
         # terpercaya (config.USDC_BASE_ADDRESSES) — BUKAN simbol
@@ -995,25 +1141,34 @@ def build_snapshot(symbol, ingested=None):
         # alamat yang menentukan. Pool tanpa alamat quote = fail-closed.
         quote_addr = (p.get("quoteToken") or {}).get("address") or ""
         if not quote_addr:
-            rejected.append({"pool": addr,
+            rejected.append({"pool": key,
                              "reason": "quote_token_address_missing"})
             continue
         if quote_addr.lower() not in {a.lower() for a in
                                       config.USDC_BASE_ADDRESSES}:
-            rejected.append({"pool": addr,
+            rejected.append({"pool": key,
                              "reason": "quote_token_not_usdc_address"})
             continue
         if price is None or price <= 0:
-            rejected.append({"pool": addr, "reason": "price_nonpositive_or_missing"})
+            rejected.append({"pool": key, "reason": "price_nonpositive_or_missing"})
             continue
         if liq is None or liq <= 0:
-            rejected.append({"pool": addr, "reason": "liquidity_nonpositive_or_missing"})
+            rejected.append({"pool": key, "reason": "liquidity_nonpositive_or_missing"})
             continue
         # §1.2b (c, S1-B): pool likuiditas < ambang = thin_pool: TETAP
         # dicatat di pools (transparan) tapi DIEKSKLUSI dari median di
         # assess_snapshot dan dihitung terpisah di coverage.
         thin = liq < config.THIN_POOL_LIQUIDITY_USD
-        obs = {"pool_address": p.get("pairAddress"), "dex": dex,
+        # pool_address / pool_id disimpan VERBATIM (case apa adanya dari
+        # DexScreener) — bentuk kanonis lowercase hidup di pool_identity
+        # + pool_key; mengubah case di sini merusak perbandingan dengan
+        # identifier mentah (gate happy_path_both_tokens).
+        obs = {"pool_address": ident_raw if not is_v4 else None,
+               "pool_id": ident_raw if is_v4 else None,
+               "pool_identity": ident, "pool_key": key,
+               "protocol_version": protocol_version,
+               "identifier_kind": ident["identifier_kind"],
+               "dex": dex,
                "quote_asset": quote, "quote_token_address": quote_addr,
                "indicative_price_usd": price,
                "liquidity_usd": liq,
@@ -1027,17 +1182,44 @@ def build_snapshot(symbol, ingested=None):
         # DexScreener. G1 (v0.3.1): simpan identitas factory, label venue,
         # dan status verifikasi TERPISAH — factory terbaca TIDAK sama dengan
         # venue terverifikasi; fallback DITANDAI, bukan dihitung sebagai
-        # independensi terverifikasi.
-        factory = (ingested.get("pool_factories") or {}).get(addr)
+        # independensi terverifikasi. S1-C: fetch_pool_factory dilewati
+        # untuk poolId (bukan kontrak) — venue V4 SELALU
+        # dexscreener_fallback dan venue_verified SELALU False; independensi
+        # V4 tidak pernah diklaim sebagai terverifikasi factory.
+        factory = None if is_v4 else (
+            ingested.get("pool_factories") or {}).get(
+                (ident["pool_address"] or "").lower())
         vinfo = _venue_info_for_pool(dex, factory)
+        if is_v4:
+            vinfo = {"protocol_family": vinfo["protocol_family"],
+                     "venue_label_source": "dexscreener_fallback",
+                     "factory_verified": False, "venue_verified": False}
         obs["factory"] = factory
         obs["factory_verified"] = vinfo["factory_verified"]
         obs["protocol_family"] = vinfo["protocol_family"]
         obs["venue_label_source"] = vinfo["venue_label_source"]
         obs["venue_verified"] = vinfo["venue_verified"]
         obs["venue"] = vinfo["protocol_family"]
+        # Bukti verifikasi on-chain V4 (bila ada): slot0 + PoolKey +
+        # kecocokan poolId — transparan di snapshot, ikut hash snapshot_id.
+        obs["pool_verified_onchain"] = bool(is_v4)
+        if is_v4:
+            obs["onchain_verification"] = {
+                "stateview": v4_verification.get("stateview"),
+                "pool_manager": v4_verification.get("pool_manager"),
+                "slot0": v4_verification.get("slot0"),
+                "pool_key": v4_verification.get("pool_key"),
+                "pool_key_block_number":
+                    v4_verification.get("pool_key_block_number"),
+                "pool_id_matches_pool_key":
+                    v4_verification.get("pool_id_matches_pool_key"),
+                "initialized": v4_verification.get("initialized"),
+                "implied_price_usd":
+                    v4_verification.get("implied_price_usd"),
+                "fetched_at": v4_verification.get("fetched_at")}
         # Cross-check GeckoTerminal untuk pool yang sama (bukan venue baru).
-        if (ingested.get("geckoterminal_pool_address") or "").lower() == addr:
+        # Hanya pool beralamat (GeckoTerminal memakai alamat pool di URL).
+        if not is_v4 and (ingested.get("geckoterminal_pool_address") or "").lower() == (ident["pool_address"] or "").lower():
             g = ingested.get("geckoterminal_pool") or {}
             gattr = g.get("attributes", {}) if isinstance(g, dict) else {}
             gprice = _to_float(gattr.get("base_token_price_usd"))
@@ -1086,7 +1268,25 @@ def build_snapshot(symbol, ingested=None):
         missing.append("underlying_proxy:" + instr)
 
     coverage = {
-        "independent_pool_count": len({o["pool_address"].lower() for o in pools}),
+        # Dedup by identitas kanonis pool_key (S1-C): V3 (alamat) dan V4
+        # (poolId) dihitung dengan kunci yang sama; dua agregator baca
+        # pool sama = SATU pool.
+        "independent_pool_count": len({pool_key(o) for o in pools}),
+        # Versi protokol TERPISAH dari family independensi (S1-C): V3 dan
+        # V4 dari family yang sama ("uniswap") tetap SATU venue.
+        "protocol_version_counts": {
+            "v3": len([o for o in pools
+                       if o.get("protocol_version") == "v3"]),
+            "v4": len([o for o in pools
+                       if o.get("protocol_version") == "v4"]),
+            "not_applicable": len([o for o in pools
+                                   if o.get("protocol_version")
+                                   == "not_applicable"]),
+        },
+        "v4_pool_count": len([o for o in pools
+                              if o.get("protocol_version") == "v4"]),
+        "v4_onchain_verified_count": len([o for o in pools
+                                          if o.get("pool_verified_onchain")]),
         # Venue dihitung dari nama KANONIS (re-audit v2, E2; v0.3.0 dari
         # factory on-chain bila diketahui): "aero" dan "aerodrome" adalah
         # venue yang sama; dua CLFactory Aero = SATU family (G1).
@@ -1293,25 +1493,28 @@ def assess_snapshot(snap, eval_at=None, eval_context="live"):
                  "pool": {}, "nav": {}, "quote": {}}
 
     # ---- Coverage dihitung ULANG dari pool tervalidasi (audit C).
-    # Jangan percaya count tersimpan: dedup address case-insensitive,
-    # venue dikanonisasi (aero == aerodrome). Hasil hitung ulang disimpan
+    # Jangan percaya count tersimpan: dedup by identitas kanonis pool_key
+    # (S1-C: alamat V3 dan poolId V4 pakai kunci yang sama), venue
+    # dikanonisasi (aero == aerodrome). Hasil hitung ulang disimpan
     # HANYA di assessment.coverage_recomputed — snap["coverage"] TIDAK
     # dimutasi (re-audit v2, E2): mutasi itu yang membuat hash snapshot_id
     # (dihitung atas coverage build) tidak cocok dengan isi file, sehingga
     # snapshot live asli ditandai "transformed replay". Selisih vs count
-    # tersimpan dicatat untuk transparansi.
+    # tersimpan dicatat untuk transparansi. TIDAK ADA akses bracket
+    # pool_address di jalur ini (repro Instinct §1.1: observasi yang hanya
+    # punya pool_id menimbulkan KeyError di assess).
     pools = snap["pools"] or []
     stored_pool_count = (snap.get("coverage") or {}).get("independent_pool_count")
     stored_venue_count = (snap.get("coverage") or {}).get("independent_venue_count")
-    seen_addr = set()
+    seen_keys = set()
     venues = set()
     verified_venues = set()
     fallback_pools = 0
     has_factory_data = False
     for p in pools:
-        addr = (p.get("pool_address") or "").lower()
-        if _is_address(p.get("pool_address") or ""):
-            seen_addr.add(addr)
+        key = pool_key(p)
+        if key is not None:
+            seen_keys.add(key)
         v = _pool_venue(p)
         if v:
             venues.add(v)
@@ -1320,19 +1523,27 @@ def assess_snapshot(snap, eval_at=None, eval_context="live"):
         # dihitung; pool lama/fixture tanpa field itu tidak punya data
         # factory -> tidak dihitung sebagai verified, tidak juga sebagai
         # fallback (has_factory_data tetap False bila tak ada field).
+        # S1-C: pool V4 (pool_id) SELALU venue_verified False — tidak
+        # pernah masuk verified_venues apa pun label DexScreener-nya.
         if "venue_verified" in p or "venue_label_source" in p:
             has_factory_data = True
             if p.get("venue_verified") and v:
                 verified_venues.add(v)
             if p.get("venue_label_source") == "dexscreener_fallback":
                 fallback_pools += 1
-    n_pool = len(seen_addr)
+    n_pool = len(seen_keys)
     n_venue = len(venues)
     # §1.2b (c, S1-B): pool tipis dihitung terpisah juga di hitung ulang —
     # snapshot lama tanpa field `thin_pool` dihitung sebagai non-thin.
     thin_count = len([p for p in pools if p.get("thin_pool")])
     thin_liq = round(sum((p.get("liquidity_usd") or 0)
                          for p in pools if p.get("thin_pool")), 2)
+    # Versi protokol dihitung ulang terpisah dari family (S1-C).
+    version_counts = {"v3": 0, "v4": 0, "not_applicable": 0}
+    for p in pools:
+        pv = p.get("protocol_version")
+        if pv in version_counts:
+            version_counts[pv] += 1
     coverage_recomputed = {"stored_pool_count": stored_pool_count,
                            "recomputed_pool_count": n_pool,
                            "stored_venue_count": stored_venue_count,
@@ -1343,7 +1554,9 @@ def assess_snapshot(snap, eval_at=None, eval_context="live"):
                            "fallback_pool_count": fallback_pools,
                            "thin_pool_count": thin_count,
                            "thin_pool_liquidity_usd": thin_liq,
-                           "has_factory_data": has_factory_data}
+                           "has_factory_data": has_factory_data,
+                           "protocol_version_counts": version_counts,
+                           "v4_pool_count": version_counts["v4"]}
     # G1: bila data factory ADA (build v0.3.1) dan venue terverifikasi di
     # bawah minimum, independensi TIDAK terbukti -> proposal-blocking.
     # Fixture/snapshot lama tanpa data factory tidak kena kode ini (mereka
@@ -1368,14 +1581,14 @@ def assess_snapshot(snap, eval_at=None, eval_context="live"):
     for p in pools:
         pf = _parse_ts(p.get("fetched_at"))
         if pf is None:
-            unknown_ts_pools.append(p.get("pool_address"))
+            unknown_ts_pools.append(pool_key(p) or "unknown_pool")
             continue
         age_fetch = (eval_at - pf).total_seconds()
         if age_fetch < -config.MAX_FUTURE_SKEW_SEC:
-            unknown_ts_pools.append(p.get("pool_address"))
+            unknown_ts_pools.append(pool_key(p) or "unknown_pool")
             continue
         if age_fetch > config.MAX_POOL_AGE_MIN * 60:
-            stale_pools.append(p.get("pool_address"))
+            stale_pools.append(pool_key(p) or "unknown_pool")
             continue
         ps = p.get("source_updated_at")
         if ps is None or ps == "unknown":
@@ -1383,17 +1596,17 @@ def assess_snapshot(snap, eval_at=None, eval_context="live"):
         else:
             ps_dt = _parse_ts(ps)
             if ps_dt is None:
-                unknown_ts_pools.append(p.get("pool_address"))
+                unknown_ts_pools.append(pool_key(p) or "unknown_pool")
                 continue
             age_price = (eval_at - ps_dt).total_seconds()
             if age_price < -config.MAX_FUTURE_SKEW_SEC:
-                unknown_ts_pools.append(p.get("pool_address"))
+                unknown_ts_pools.append(pool_key(p) or "unknown_pool")
                 continue
             if age_price > config.MAX_POOL_AGE_MIN * 60:
-                stale_pools.append(p.get("pool_address"))
+                stale_pools.append(pool_key(p) or "unknown_pool")
                 continue
         if p.get("thin_pool"):
-            thin_excluded.append(p.get("pool_address"))
+            thin_excluded.append(pool_key(p) or "unknown_pool")
             continue
         fresh_pools.append(p)
         if (p.get("source_updated_at") or "unknown") == "unknown":
@@ -1416,9 +1629,8 @@ def assess_snapshot(snap, eval_at=None, eval_context="live"):
 
     # ---- Lapisan A: median + deviasi per-venue (hanya observasi independen
     # yang FRESH). Pool basi tidak ikut median.
-    n_fresh = len({(p.get("pool_address") or "").lower()
-                   for p in fresh_pools
-                   if _is_address(p.get("pool_address") or "")})
+    n_fresh = len({pool_key(p) for p in fresh_pools
+                   if pool_key(p) is not None})
     n_fresh_venue = len({_pool_venue(p)
                          for p in fresh_pools
                          if _pool_venue(p)})
@@ -1435,7 +1647,8 @@ def assess_snapshot(snap, eval_at=None, eval_context="live"):
         layer_a["median_price_usd"] = median
         for o in fresh_pools:
             dev = (o["indicative_price_usd"] - median) / median * 100.0
-            layer_a["per_venue_deviation_pct"][o["pool_address"]] = round(dev, 4)
+            layer_a["per_venue_deviation_pct"][
+                pool_key(o) or "unknown_pool"] = round(dev, 4)
         if m == 2:
             codes.append("median_fragile_two_observations")
             layer_a["note"] = "median_from_only_2_observations_fragile"
@@ -1917,3 +2130,44 @@ def run_token(symbol, ingested=None, coinbase=None):
 def public_snapshot(snap):
     """Snapshot tanpa field internal (prefix `_`) untuk disimpan/dibagikan."""
     return {k: v for k, v in snap.items() if not k.startswith("_")}
+
+
+def build_daily_index(snapshots, index_date=None):
+    """Indeks harian feed (§1.5, S1-E contract — S1-C: indeks memuat
+    identitas pool kanonis).
+
+    Kembalikan {"index_date", "schema_version", "snapshots": [...]} dengan
+    tiap entri: snapshot_id, asset, decision, fetched_at, market_session,
+    dan daftar pools (pool_key + pool_identity + protocol_version + venue
+    + venue_verified + venue_label_source + harga + likuiditas). Indeks
+    dibangun dari public_snapshot agar field internal tidak bocor.
+    `index_date` = "YYYY-MM-DD" (WITA, kalender harian); None = tanggal
+    UTC hari ini.
+    """
+    if index_date is None:
+        index_date = _now().strftime("%Y-%m-%d")
+    entries = []
+    for snap in snapshots:
+        pub = public_snapshot(snap)
+        entries.append({
+            "snapshot_id": pub.get("snapshot_id"),
+            "asset": (pub.get("asset") or {}).get("symbol"),
+            "decision": pub.get("decision"),
+            "fetched_at": pub.get("fetched_at"),
+            "market_session": pub.get("market_session"),
+            "pools": [{
+                "pool_key": p.get("pool_key"),
+                "pool_identity": p.get("pool_identity"),
+                "pool_id": p.get("pool_id"),
+                "pool_address": p.get("pool_address"),
+                "protocol_version": p.get("protocol_version"),
+                "venue": p.get("venue"),
+                "venue_verified": p.get("venue_verified"),
+                "venue_label_source": p.get("venue_label_source"),
+                "indicative_price_usd": p.get("indicative_price_usd"),
+                "liquidity_usd": p.get("liquidity_usd"),
+            } for p in pub.get("pools") or []],
+        })
+    return {"index_date": index_date,
+            "schema_version": config.SCHEMA_VERSION,
+            "snapshots": entries}
