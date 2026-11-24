@@ -1,0 +1,1902 @@
+{
+  "meta": {
+    "probe_date": "2026-11-24",
+    "probe_started_at_utc": "2026-11-24T00:35:31Z",
+    "plan": "docs/scope1-rencana-eksekusi-2026-11-24.md \u00a72.1, \u00a72.1b, \u00a72.3, \u00a72.4",
+    "validator": "pipeline.validate_exit_quote (pipeline.py:242-502)",
+    "notional_usd": 10000.0,
+    "direction": "SELL",
+    "token_out": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+    "chain": "base (8453)",
+    "eval_window_sec": 300,
+    "cross_check_spec": {
+      "primary_predeclared": "quote vendor LAIN untuk pair/arah/ukuran sama",
+      "fallback_predeclared": "NAV-implied (Coinbase nav_price, sudah multiplier-adjusted) + proxy Hyperliquid xyz \u2014 keduanya REFERENSI, bukan harga eksekusi",
+      "formula": "|P_implied_execution - P_ref| / P_ref x 100 <= 1%",
+      "P_implied_execution": "min-out / amount_in (harga terburuk yang dikomitmenkan vendor)",
+      "note": "Cross-check \u00a72.1b membandingkan harga eksekusi YANG DIKOMITMENKAN (min-out). Bila vendor tidak memberi min-out, cross-check komitmen TIDAK DAPAT dihitung \u2014 perbandingan harga indikatif antar vendor/referensi dicatat terpisah dengan label INDIKATIF SAJA, bukan sebagai cross-check \u00a72.1b."
+    },
+    "expiry_rule": "expires_at WAJIB provenance semantik vendor; DILARANG dibentuk dari jam lokal (now + TTL).",
+    "no_key": true,
+    "excluded_this_run": "0x permit2/v2 + 1inch v6 (butuh key; key belum diterima)",
+    "rounds_note": "Round 1: timeout HTTP 30 dtk tanpa retry + lookup proxy Hyperliquid salah kunci (\"NVDA\" bukan \"xyz:NVDA\"). Round 2+: timeout 60 dtk + 1 retry, lookup proxy diperbaiki."
+  },
+  "pinned_block": {
+    "ok": true,
+    "block_number": 61453051,
+    "block_hash": "0xeb120a4b2c50648e262f2f71feb5b05eb1a9d7b1619ff3736ab82d23d743026c",
+    "fetched_at": "2026-11-24T00:43:00Z",
+    "source": "eth_blockNumber",
+    "error": null
+  },
+  "references": {
+    "fetch_method": {
+      "coinbase": "probe-local",
+      "hyperliquid": "probe-local",
+      "block": "adapter",
+      "note": "probe-local = adapter rusak saat round itu (edit konkuren S1 merujuk config yang belum ada); endpoint + bentuk respons sama dengan adapter"
+    },
+    "nav_implied": {
+      "ok": true,
+      "tokens_found": [
+        "AAPLc",
+        "NVDAc"
+      ],
+      "fetched_at": "2026-11-24T00:43:14Z",
+      "source": "https://api.coinbase.com/v1/tokenized-stocks",
+      "error": null,
+      "per_token": {
+        "NVDAc": {
+          "nav_price": 166.39306128,
+          "nav_price_updated_at": "2026-11-24T00:28:48Z",
+          "multiplier": 1.0005379395763694,
+          "note": "nav_price SUDAH multiplier-adjusted (\u00a73 koreksi 1)"
+        },
+        "AAPLc": {
+          "nav_price": 350.49029387,
+          "nav_price_updated_at": "2026-11-23T19:31:58Z",
+          "multiplier": 1.0005003893019802,
+          "note": "nav_price SUDAH multiplier-adjusted (\u00a73 koreksi 1)"
+        }
+      },
+      "label": "REFERENSI (bukan harga eksekusi)"
+    },
+    "hyperliquid_proxy_xyz": {
+      "ok": true,
+      "tokens_found": [
+        "AAPLc",
+        "NVDAc"
+      ],
+      "fetched_at": "2026-11-24T00:43:18Z",
+      "source": "https://api.hyperliquid.xyz/info dex=xyz",
+      "error": null,
+      "per_token": {
+        "NVDAc": {
+          "markPx": "166.23",
+          "oraclePx": "166.23",
+          "instrument": "xyz:NVDA",
+          "note": "UNDERLYING EQUITY PERP PROXY, bukan harga token"
+        },
+        "AAPLc": {
+          "markPx": "349.26",
+          "oraclePx": "349.35",
+          "instrument": "xyz:AAPL",
+          "note": "UNDERLYING EQUITY PERP PROXY, bukan harga token"
+        }
+      },
+      "label": "REFERENSI (bukan harga eksekusi)"
+    }
+  },
+  "samples": [
+    {
+      "vendor": "odos",
+      "vendor_endpoint": "POST https://api.odos.xyz/soroban/quote/v2",
+      "symbol": "NVDAc",
+      "requested_at_utc": "2026-11-24T00:35:45Z",
+      "amount_in_base_units": 6016485170,
+      "amount_in_tokens": 60.1648517,
+      "spot_median_dexscreener_usd": 166.21,
+      "computed_notional_usd": 10000.000001057,
+      "http_status": null,
+      "http_error": "fetch_error:TimeoutError",
+      "raw_response": "",
+      "assessment": {
+        "vendor": "odos",
+        "symbol": "NVDAc",
+        "http_status": null,
+        "direction": "SELL",
+        "notional_usd_target": 10000.0,
+        "amount_in_base_units": 6016485170,
+        "amount_in_tokens": 60.1648517,
+        "spot_reference_usd": 166.21,
+        "expected_out_usdc": null,
+        "expected_out_field": null,
+        "amount_out_min_usdc": null,
+        "amount_out_min_field": null,
+        "price_impact_pct": null,
+        "price_impact_field": null,
+        "slippage_pct": null,
+        "slippage_field": null,
+        "slippage_tolerance_requested_pct": 0.5,
+        "client_derived_floor_usdc": null,
+        "client_derived_floor_note": null,
+        "expires_at": null,
+        "expires_at_field": null,
+        "expires_at_provenance": null,
+        "expiry_like_keys_found": [],
+        "kind_label": null,
+        "quoted_at": null,
+        "fee_included_in_min_out": null,
+        "fee_note": null,
+        "route_or_pool": null,
+        "checks": {
+          "response_parseable": false
+        },
+        "verdict": "TIDAK_FIRM",
+        "verdict_reasons": [
+          "no_parseable_response"
+        ],
+        "validator_faithful_mapping": {
+          "status": "invalid",
+          "reason_codes": [
+            "exit_quote_kind_missing"
+          ],
+          "details": {
+            "note": "kind_label_required_not_assumed_firm"
+          }
+        },
+        "validator_generous_hypothetical": {
+          "status": "not_applicable",
+          "reason_codes": [
+            "no_expected_out_to_map"
+          ],
+          "details": {}
+        }
+      },
+      "cross_check": {
+        "comparator_primary": "quote vendor LAIN (pair/arah/ukuran sama)",
+        "comparator_fallback_nav_implied_usd": 166.39306128,
+        "comparator_fallback_proxy_markPx_usd": null,
+        "direction": "SELL",
+        "size_usd": 10000.0,
+        "window_sec": 300,
+        "pinned_block": 61450790,
+        "fee_note": null,
+        "committed_cross_check_applicable": false,
+        "committed_cross_check_reason": "TIDAK DAPAT dihitung: vendor tidak memberi min-out, sehingga P_implied_execution = min-out/amount_in tidak ada. Rumus \u00a72.1b butuh harga yang DIKOMITMENKAN.",
+        "committed_diff_pct": null,
+        "indicative_comparisons": [],
+        "indicative_note": "Perbandingan di bawah ini memakai harga INDIKATIF (expected-out/amount_in), BUKAN harga eksekusi yang dikomitmenkan. Bukan cross-check \u00a72.1b; tidak dapat meloloskan sampel ke bar 10."
+      },
+      "round": 1
+    },
+    {
+      "vendor": "kyber",
+      "vendor_endpoint": "GET https://aggregator-api.kyberswap.com/base/api/v1/routes",
+      "symbol": "NVDAc",
+      "requested_at_utc": "2026-11-24T00:35:45Z",
+      "amount_in_base_units": 6016485170,
+      "amount_in_tokens": 60.1648517,
+      "spot_median_dexscreener_usd": 166.21,
+      "computed_notional_usd": 10000.000001057,
+      "http_status": 429,
+      "http_error": "http_429",
+      "raw_response": {
+        "message": "Forbidden",
+        "path": "/base/api/v1/routes?tokenIn=0xb20000000000000000000078ee7ce2fE4908108C&tokenOut=0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913&amountIn=6016485170&slippageTolerance=50",
+        "request_id": "ade9b989-3111-494f-99c6-349b5cdf3abb",
+        "request_ip": null,
+        "status": 429
+      },
+      "assessment": {
+        "vendor": "kyber",
+        "symbol": "NVDAc",
+        "http_status": 429,
+        "direction": "SELL",
+        "notional_usd_target": 10000.0,
+        "amount_in_base_units": 6016485170,
+        "amount_in_tokens": 60.1648517,
+        "spot_reference_usd": 166.21,
+        "expected_out_usdc": null,
+        "expected_out_field": null,
+        "amount_out_min_usdc": null,
+        "amount_out_min_field": null,
+        "price_impact_pct": null,
+        "price_impact_field": null,
+        "slippage_pct": null,
+        "slippage_field": null,
+        "slippage_tolerance_requested_pct": 0.5,
+        "client_derived_floor_usdc": null,
+        "client_derived_floor_note": null,
+        "expires_at": null,
+        "expires_at_field": null,
+        "expires_at_provenance": null,
+        "expiry_like_keys_found": [],
+        "kind_label": null,
+        "quoted_at": null,
+        "fee_included_in_min_out": "N/A \u2014 no min-out field from vendor",
+        "fee_note": "Kyber: amountOut = expected output sesudah fee pool (bukan minimum); gas dilaporkan terpisah (gasUsd). Tidak ada field min-out. `deadline` hanya ada di POST /route/build sebagai parameter YANG DIPILIH KLIEN (default +20 menit) \u2014 bukan jaminan expiry vendor atas quote GET /routes. Docs: jangan cache route >5-10 detik \u2014 itu anjuran refetch, bukan semantik expiry field.",
+        "route_or_pool": null,
+        "checks": {
+          "response_parseable": true,
+          "kind_in_firm_executable_guaranteed": false,
+          "kind_label_present": false,
+          "amount_out_min_present_from_vendor": false,
+          "expires_at_present_with_vendor_semantics": false,
+          "quoted_at_present": false,
+          "expected_out_present": false,
+          "implied_price_within_10pct_of_spot": null
+        },
+        "verdict": "TIDAK_FIRM",
+        "verdict_reasons": [
+          "kind_absent: vendor tidak memberi label kind (firm/executable/guaranteed) \u2014 validator menolak quote tanpa kind (exit_quote_kind_missing)",
+          "amount_out_min_absent: tidak ada field min-out dari vendor; expected-out bukan min-out",
+          "expires_at_absent: tidak ada field expiry dengan semantik vendor (kunci bertema expiry yang ditemukan: tidak ada) \u2014 tanpa semantik expiry, quote TIDAK dapat diklasifikasikan firm (\u00a72.1b)"
+        ],
+        "vendor_timestamp_raw": null,
+        "validator_faithful_mapping": {
+          "status": "invalid",
+          "reason_codes": [
+            "exit_quote_kind_missing"
+          ],
+          "details": {
+            "note": "kind_label_required_not_assumed_firm"
+          }
+        },
+        "validator_generous_hypothetical": {
+          "status": "not_applicable",
+          "reason_codes": [
+            "no_expected_out_to_map"
+          ],
+          "details": {}
+        }
+      },
+      "cross_check": {
+        "comparator_primary": "quote vendor LAIN (pair/arah/ukuran sama)",
+        "comparator_fallback_nav_implied_usd": 166.39306128,
+        "comparator_fallback_proxy_markPx_usd": null,
+        "direction": "SELL",
+        "size_usd": 10000.0,
+        "window_sec": 300,
+        "pinned_block": 61450790,
+        "fee_note": "Kyber: amountOut = expected output sesudah fee pool (bukan minimum); gas dilaporkan terpisah (gasUsd). Tidak ada field min-out. `deadline` hanya ada di POST /route/build sebagai parameter YANG DIPILIH KLIEN (default +20 menit) \u2014 bukan jaminan expiry vendor atas quote GET /routes. Docs: jangan cache route >5-10 detik \u2014 itu anjuran refetch, bukan semantik expiry field.",
+        "committed_cross_check_applicable": false,
+        "committed_cross_check_reason": "TIDAK DAPAT dihitung: vendor tidak memberi min-out, sehingga P_implied_execution = min-out/amount_in tidak ada. Rumus \u00a72.1b butuh harga yang DIKOMITMENKAN.",
+        "committed_diff_pct": null,
+        "indicative_comparisons": [],
+        "indicative_note": "Perbandingan di bawah ini memakai harga INDIKATIF (expected-out/amount_in), BUKAN harga eksekusi yang dikomitmenkan. Bukan cross-check \u00a72.1b; tidak dapat meloloskan sampel ke bar 10."
+      },
+      "round": 1
+    },
+    {
+      "vendor": "uniswap",
+      "vendor_endpoint": "POST https://trade-api.gateway.uniswap.org/v1/quote (+ legacy GET https://api.uniswap.org/v1/quote)",
+      "symbol": "NVDAc",
+      "requested_at_utc": "2026-11-24T00:35:45Z",
+      "amount_in_base_units": 6016485170,
+      "amount_in_tokens": 60.1648517,
+      "spot_median_dexscreener_usd": 166.21,
+      "computed_notional_usd": 10000.000001057,
+      "http_status": null,
+      "http_error": "fetch_error:TimeoutError",
+      "raw_response": "",
+      "raw_response_legacy_routing_api": {
+        "errorCode": "ACCESS_DENIED"
+      },
+      "http_status_legacy_routing_api": 409,
+      "assessment": {
+        "vendor": "uniswap",
+        "symbol": "NVDAc",
+        "http_status": null,
+        "direction": "SELL",
+        "notional_usd_target": 10000.0,
+        "amount_in_base_units": 6016485170,
+        "amount_in_tokens": 60.1648517,
+        "spot_reference_usd": 166.21,
+        "expected_out_usdc": null,
+        "expected_out_field": null,
+        "amount_out_min_usdc": null,
+        "amount_out_min_field": null,
+        "price_impact_pct": null,
+        "price_impact_field": null,
+        "slippage_pct": null,
+        "slippage_field": null,
+        "slippage_tolerance_requested_pct": 0.5,
+        "client_derived_floor_usdc": null,
+        "client_derived_floor_note": null,
+        "expires_at": null,
+        "expires_at_field": null,
+        "expires_at_provenance": null,
+        "expiry_like_keys_found": [],
+        "kind_label": null,
+        "quoted_at": null,
+        "fee_included_in_min_out": null,
+        "fee_note": null,
+        "route_or_pool": null,
+        "checks": {
+          "response_parseable": false
+        },
+        "verdict": "TIDAK_FIRM",
+        "verdict_reasons": [
+          "no_parseable_response"
+        ],
+        "validator_faithful_mapping": {
+          "status": "invalid",
+          "reason_codes": [
+            "exit_quote_kind_missing"
+          ],
+          "details": {
+            "note": "kind_label_required_not_assumed_firm"
+          }
+        },
+        "validator_generous_hypothetical": {
+          "status": "not_applicable",
+          "reason_codes": [
+            "no_expected_out_to_map"
+          ],
+          "details": {}
+        }
+      },
+      "cross_check": {
+        "comparator_primary": "quote vendor LAIN (pair/arah/ukuran sama)",
+        "comparator_fallback_nav_implied_usd": 166.39306128,
+        "comparator_fallback_proxy_markPx_usd": null,
+        "direction": "SELL",
+        "size_usd": 10000.0,
+        "window_sec": 300,
+        "pinned_block": 61450790,
+        "fee_note": null,
+        "committed_cross_check_applicable": false,
+        "committed_cross_check_reason": "TIDAK DAPAT dihitung: vendor tidak memberi min-out, sehingga P_implied_execution = min-out/amount_in tidak ada. Rumus \u00a72.1b butuh harga yang DIKOMITMENKAN.",
+        "committed_diff_pct": null,
+        "indicative_comparisons": [],
+        "indicative_note": "Perbandingan di bawah ini memakai harga INDIKATIF (expected-out/amount_in), BUKAN harga eksekusi yang dikomitmenkan. Bukan cross-check \u00a72.1b; tidak dapat meloloskan sampel ke bar 10."
+      },
+      "round": 1
+    },
+    {
+      "vendor": "odos",
+      "vendor_endpoint": "POST https://api.odos.xyz/soroban/quote/v2",
+      "symbol": "AAPLc",
+      "requested_at_utc": "2026-11-24T00:37:04Z",
+      "amount_in_base_units": 2861557833,
+      "amount_in_tokens": 28.61557833,
+      "spot_median_dexscreener_usd": 349.46000000000004,
+      "computed_notional_usd": 10000.000003201802,
+      "http_status": null,
+      "http_error": "fetch_error:TimeoutError",
+      "raw_response": "",
+      "assessment": {
+        "vendor": "odos",
+        "symbol": "AAPLc",
+        "http_status": null,
+        "direction": "SELL",
+        "notional_usd_target": 10000.0,
+        "amount_in_base_units": 2861557833,
+        "amount_in_tokens": 28.61557833,
+        "spot_reference_usd": 349.46000000000004,
+        "expected_out_usdc": null,
+        "expected_out_field": null,
+        "amount_out_min_usdc": null,
+        "amount_out_min_field": null,
+        "price_impact_pct": null,
+        "price_impact_field": null,
+        "slippage_pct": null,
+        "slippage_field": null,
+        "slippage_tolerance_requested_pct": 0.5,
+        "client_derived_floor_usdc": null,
+        "client_derived_floor_note": null,
+        "expires_at": null,
+        "expires_at_field": null,
+        "expires_at_provenance": null,
+        "expiry_like_keys_found": [],
+        "kind_label": null,
+        "quoted_at": null,
+        "fee_included_in_min_out": null,
+        "fee_note": null,
+        "route_or_pool": null,
+        "checks": {
+          "response_parseable": false
+        },
+        "verdict": "TIDAK_FIRM",
+        "verdict_reasons": [
+          "no_parseable_response"
+        ],
+        "validator_faithful_mapping": {
+          "status": "invalid",
+          "reason_codes": [
+            "exit_quote_kind_missing"
+          ],
+          "details": {
+            "note": "kind_label_required_not_assumed_firm"
+          }
+        },
+        "validator_generous_hypothetical": {
+          "status": "not_applicable",
+          "reason_codes": [
+            "no_expected_out_to_map"
+          ],
+          "details": {}
+        }
+      },
+      "cross_check": {
+        "comparator_primary": "quote vendor LAIN (pair/arah/ukuran sama)",
+        "comparator_fallback_nav_implied_usd": 350.49029387,
+        "comparator_fallback_proxy_markPx_usd": null,
+        "direction": "SELL",
+        "size_usd": 10000.0,
+        "window_sec": 300,
+        "pinned_block": 61450790,
+        "fee_note": null,
+        "committed_cross_check_applicable": false,
+        "committed_cross_check_reason": "TIDAK DAPAT dihitung: vendor tidak memberi min-out, sehingga P_implied_execution = min-out/amount_in tidak ada. Rumus \u00a72.1b butuh harga yang DIKOMITMENKAN.",
+        "committed_diff_pct": null,
+        "indicative_comparisons": [],
+        "indicative_note": "Perbandingan di bawah ini memakai harga INDIKATIF (expected-out/amount_in), BUKAN harga eksekusi yang dikomitmenkan. Bukan cross-check \u00a72.1b; tidak dapat meloloskan sampel ke bar 10."
+      },
+      "round": 1
+    },
+    {
+      "vendor": "kyber",
+      "vendor_endpoint": "GET https://aggregator-api.kyberswap.com/base/api/v1/routes",
+      "symbol": "AAPLc",
+      "requested_at_utc": "2026-11-24T00:37:04Z",
+      "amount_in_base_units": 2861557833,
+      "amount_in_tokens": 28.61557833,
+      "spot_median_dexscreener_usd": 349.46000000000004,
+      "computed_notional_usd": 10000.000003201802,
+      "http_status": 200,
+      "http_error": null,
+      "raw_response": {
+        "code": 0,
+        "message": "successfully",
+        "data": {
+          "routeSummary": {
+            "tokenIn": "0xb200000000000000000000c2e324d24d7eecd1fb",
+            "amountIn": "2861557833",
+            "amountInUsd": "9999.987319151365",
+            "tokenOut": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
+            "amountOut": "9998837562",
+            "amountOutUsd": "9997.94087214567",
+            "gas": "581331",
+            "gasPrice": "6000000",
+            "gasUsd": "0.0059350715507461745",
+            "l1FeeUsd": "0.00030215862893522304",
+            "extraFee": {
+              "feeAmount": "",
+              "chargeFeeBy": "",
+              "isInBps": false,
+              "feeReceiver": ""
+            },
+            "route": [
+              [
+                {
+                  "pool": "0xf5fcb9cdafce67d50afef298f88e709d2b946ba6",
+                  "tokenIn": "0xb200000000000000000000c2e324d24d7eecd1fb",
+                  "tokenOut": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
+                  "swapAmount": "2861557833",
+                  "amountOut": "9998837562",
+                  "exchange": "aero-cl",
+                  "poolType": "uniswapv3",
+                  "poolExtra": {
+                    "swapFee": 158,
+                    "priceLimit": "1461300573427867316570072651998408279850435624080",
+                    "blockNumber": 61451268,
+                    "sB": 61451268
+                  },
+                  "extra": {
+                    "_cs": "14435603054687306441",
+                    "_ss": {
+                      "pool": "0x749f424a5a14aad0d51cbb38eba57f690d71ba19",
+                      "tokenIn": "0xb200000000000000000000c2e324d24d7eecd1fb",
+                      "tokenOut": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
+                      "swapAmount": "2861557833",
+                      "amountOut": "9990424403",
+                      "exchange": "metric-propamm",
+                      "poolType": "metric-propamm",
+                      "poolExtra": {
+                        "swapDir": true,
+                        "priceProvider": "",
+                        "blockNumber": 52832761
+                      },
+                      "extra": null,
+                      "gas": 215383
+                    },
+                    "_ts": "1795480660",
+                    "nSqrtRx96": "42382599018172945975939277297",
+                    "nT": -12513,
+                    "rAI": "0",
+                    "ri": "0b236feaVJJN0qa4"
+                  },
+                  "gas": 310000
+                }
+              ]
+            ],
+            "routerAddress": "0x6131B5fae19EA4f9D964eAc0408E4408b66337b5",
+            "routeID": "0b236feaVJJN0qa4",
+            "checksum": "14435603054687306441",
+            "timestamp": 1795480660
+          },
+          "routerAddress": "0x6131B5fae19EA4f9D964eAc0408E4408b66337b5"
+        },
+        "requestId": "0b236fea-5492-4dd2-a6b8-5105e33c3e4d"
+      },
+      "assessment": {
+        "vendor": "kyber",
+        "symbol": "AAPLc",
+        "http_status": 200,
+        "direction": "SELL",
+        "notional_usd_target": 10000.0,
+        "amount_in_base_units": 2861557833,
+        "amount_in_tokens": 28.61557833,
+        "spot_reference_usd": 349.46000000000004,
+        "expected_out_usdc": 9998.837562,
+        "expected_out_field": "data.routeSummary.amountOut",
+        "amount_out_min_usdc": null,
+        "amount_out_min_field": null,
+        "price_impact_pct": null,
+        "price_impact_field": null,
+        "slippage_pct": -0.011624412014277219,
+        "slippage_field": "computed: (expected-out/amount_in)/spot - 1 (deviasi harga indikatif vs spot DexScreener, bukan realisasi vs ekspektasi)",
+        "slippage_tolerance_requested_pct": 0.5,
+        "client_derived_floor_usdc": 9948.84337419,
+        "client_derived_floor_note": "expected-out x (1 - 0,5%) \u2014 dihitung klien dari toleransi slippage yang diminta. BUKAN amount_out_min vendor dan TIDAK memenuhi \u00a72.1.",
+        "expires_at": null,
+        "expires_at_field": null,
+        "expires_at_provenance": null,
+        "expiry_like_keys_found": [],
+        "kind_label": null,
+        "quoted_at": null,
+        "fee_included_in_min_out": "N/A \u2014 no min-out field from vendor",
+        "fee_note": "Kyber: amountOut = expected output sesudah fee pool (bukan minimum); gas dilaporkan terpisah (gasUsd). Tidak ada field min-out. `deadline` hanya ada di POST /route/build sebagai parameter YANG DIPILIH KLIEN (default +20 menit) \u2014 bukan jaminan expiry vendor atas quote GET /routes. Docs: jangan cache route >5-10 detik \u2014 itu anjuran refetch, bukan semantik expiry field.",
+        "route_or_pool": "aero-cl:0xb200000000000000000000c2e324d24d7eecd1fb->0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
+        "checks": {
+          "response_parseable": true,
+          "kind_in_firm_executable_guaranteed": false,
+          "kind_label_present": false,
+          "amount_out_min_present_from_vendor": false,
+          "expires_at_present_with_vendor_semantics": false,
+          "quoted_at_present": false,
+          "expected_out_present": true,
+          "implied_price_within_10pct_of_spot": true
+        },
+        "verdict": "TIDAK_FIRM",
+        "verdict_reasons": [
+          "kind_absent: vendor tidak memberi label kind (firm/executable/guaranteed) \u2014 validator menolak quote tanpa kind (exit_quote_kind_missing)",
+          "amount_out_min_absent: tidak ada field min-out dari vendor; expected-out bukan min-out",
+          "expires_at_absent: tidak ada field expiry dengan semantik vendor (kunci bertema expiry yang ditemukan: tidak ada) \u2014 tanpa semantik expiry, quote TIDAK dapat diklasifikasikan firm (\u00a72.1b)"
+        ],
+        "vendor_timestamp_raw": 1795480660,
+        "validator_faithful_mapping": {
+          "status": "invalid",
+          "reason_codes": [
+            "exit_quote_kind_missing"
+          ],
+          "details": {
+            "note": "kind_label_required_not_assumed_firm"
+          }
+        },
+        "validator_generous_hypothetical": {
+          "status": "invalid",
+          "reason_codes": [
+            "exit_quote_missing_fields"
+          ],
+          "details": {
+            "missing_fields": [
+              "expires_at"
+            ],
+            "evidence_class": "firm"
+          }
+        }
+      },
+      "cross_check": {
+        "comparator_primary": "quote vendor LAIN (pair/arah/ukuran sama)",
+        "comparator_fallback_nav_implied_usd": 350.49029387,
+        "comparator_fallback_proxy_markPx_usd": null,
+        "direction": "SELL",
+        "size_usd": 10000.0,
+        "window_sec": 300,
+        "pinned_block": 61450790,
+        "fee_note": "Kyber: amountOut = expected output sesudah fee pool (bukan minimum); gas dilaporkan terpisah (gasUsd). Tidak ada field min-out. `deadline` hanya ada di POST /route/build sebagai parameter YANG DIPILIH KLIEN (default +20 menit) \u2014 bukan jaminan expiry vendor atas quote GET /routes. Docs: jangan cache route >5-10 detik \u2014 itu anjuran refetch, bukan semantik expiry field.",
+        "committed_cross_check_applicable": false,
+        "committed_cross_check_reason": "TIDAK DAPAT dihitung: vendor tidak memberi min-out, sehingga P_implied_execution = min-out/amount_in tidak ada. Rumus \u00a72.1b butuh harga yang DIKOMITMENKAN.",
+        "committed_diff_pct": null,
+        "indicative_comparisons": [
+          {
+            "reference": "nav_implied",
+            "ref_price_usd": 350.49029387,
+            "indicative_price_usd": 349.41937732977493,
+            "diff_pct": 0.3055481304204952,
+            "within_1pct": true
+          }
+        ],
+        "indicative_note": "Perbandingan di bawah ini memakai harga INDIKATIF (expected-out/amount_in), BUKAN harga eksekusi yang dikomitmenkan. Bukan cross-check \u00a72.1b; tidak dapat meloloskan sampel ke bar 10."
+      },
+      "round": 1
+    },
+    {
+      "vendor": "uniswap",
+      "vendor_endpoint": "POST https://trade-api.gateway.uniswap.org/v1/quote (+ legacy GET https://api.uniswap.org/v1/quote)",
+      "symbol": "AAPLc",
+      "requested_at_utc": "2026-11-24T00:37:04Z",
+      "amount_in_base_units": 2861557833,
+      "amount_in_tokens": 28.61557833,
+      "spot_median_dexscreener_usd": 349.46000000000004,
+      "computed_notional_usd": 10000.000003201802,
+      "http_status": null,
+      "http_error": "fetch_error:TimeoutError",
+      "raw_response": "",
+      "raw_response_legacy_routing_api": {
+        "errorCode": "ACCESS_DENIED"
+      },
+      "http_status_legacy_routing_api": 409,
+      "assessment": {
+        "vendor": "uniswap",
+        "symbol": "AAPLc",
+        "http_status": null,
+        "direction": "SELL",
+        "notional_usd_target": 10000.0,
+        "amount_in_base_units": 2861557833,
+        "amount_in_tokens": 28.61557833,
+        "spot_reference_usd": 349.46000000000004,
+        "expected_out_usdc": null,
+        "expected_out_field": null,
+        "amount_out_min_usdc": null,
+        "amount_out_min_field": null,
+        "price_impact_pct": null,
+        "price_impact_field": null,
+        "slippage_pct": null,
+        "slippage_field": null,
+        "slippage_tolerance_requested_pct": 0.5,
+        "client_derived_floor_usdc": null,
+        "client_derived_floor_note": null,
+        "expires_at": null,
+        "expires_at_field": null,
+        "expires_at_provenance": null,
+        "expiry_like_keys_found": [],
+        "kind_label": null,
+        "quoted_at": null,
+        "fee_included_in_min_out": null,
+        "fee_note": null,
+        "route_or_pool": null,
+        "checks": {
+          "response_parseable": false
+        },
+        "verdict": "TIDAK_FIRM",
+        "verdict_reasons": [
+          "no_parseable_response"
+        ],
+        "validator_faithful_mapping": {
+          "status": "invalid",
+          "reason_codes": [
+            "exit_quote_kind_missing"
+          ],
+          "details": {
+            "note": "kind_label_required_not_assumed_firm"
+          }
+        },
+        "validator_generous_hypothetical": {
+          "status": "not_applicable",
+          "reason_codes": [
+            "no_expected_out_to_map"
+          ],
+          "details": {}
+        }
+      },
+      "cross_check": {
+        "comparator_primary": "quote vendor LAIN (pair/arah/ukuran sama)",
+        "comparator_fallback_nav_implied_usd": 350.49029387,
+        "comparator_fallback_proxy_markPx_usd": null,
+        "direction": "SELL",
+        "size_usd": 10000.0,
+        "window_sec": 300,
+        "pinned_block": 61450790,
+        "fee_note": null,
+        "committed_cross_check_applicable": false,
+        "committed_cross_check_reason": "TIDAK DAPAT dihitung: vendor tidak memberi min-out, sehingga P_implied_execution = min-out/amount_in tidak ada. Rumus \u00a72.1b butuh harga yang DIKOMITMENKAN.",
+        "committed_diff_pct": null,
+        "indicative_comparisons": [],
+        "indicative_note": "Perbandingan di bawah ini memakai harga INDIKATIF (expected-out/amount_in), BUKAN harga eksekusi yang dikomitmenkan. Bukan cross-check \u00a72.1b; tidak dapat meloloskan sampel ke bar 10."
+      },
+      "round": 1
+    },
+    {
+      "vendor": "odos",
+      "vendor_endpoint": "POST https://api.odos.xyz/soroban/quote/v2",
+      "round": 2,
+      "symbol": "NVDAc",
+      "requested_at_utc": "2026-11-24T00:43:23Z",
+      "amount_in_base_units": 6017209219,
+      "amount_in_tokens": 60.17209219,
+      "spot_median_dexscreener_usd": 166.19,
+      "computed_notional_usd": 10000.0000010561,
+      "http_status": 530,
+      "http_error": "http_530",
+      "http_attempts": [
+        {
+          "http_status": 530,
+          "error": "http_530",
+          "elapsed_sec": 3.36
+        },
+        {
+          "http_status": 530,
+          "error": "http_530",
+          "elapsed_sec": 3.59
+        }
+      ],
+      "raw_response": "error code: 1033\n",
+      "assessment": {
+        "vendor": "odos",
+        "symbol": "NVDAc",
+        "http_status": 530,
+        "direction": "SELL",
+        "notional_usd_target": 10000.0,
+        "amount_in_base_units": 6017209219,
+        "amount_in_tokens": 60.17209219,
+        "spot_reference_usd": 166.19,
+        "expected_out_usdc": null,
+        "expected_out_field": null,
+        "amount_out_min_usdc": null,
+        "amount_out_min_field": null,
+        "price_impact_pct": null,
+        "price_impact_field": null,
+        "slippage_pct": null,
+        "slippage_field": null,
+        "slippage_tolerance_requested_pct": 0.5,
+        "client_derived_floor_usdc": null,
+        "client_derived_floor_note": null,
+        "expires_at": null,
+        "expires_at_field": null,
+        "expires_at_provenance": null,
+        "expiry_like_keys_found": [],
+        "kind_label": null,
+        "quoted_at": null,
+        "fee_included_in_min_out": null,
+        "fee_note": null,
+        "route_or_pool": null,
+        "checks": {
+          "response_parseable": false
+        },
+        "verdict": "TIDAK_FIRM",
+        "verdict_reasons": [
+          "no_parseable_response"
+        ],
+        "validator_faithful_mapping": {
+          "status": "invalid",
+          "reason_codes": [
+            "exit_quote_kind_missing"
+          ],
+          "details": {
+            "note": "kind_label_required_not_assumed_firm"
+          }
+        },
+        "validator_generous_hypothetical": {
+          "status": "not_applicable",
+          "reason_codes": [
+            "no_expected_out_to_map"
+          ],
+          "details": {}
+        }
+      },
+      "cross_check": {
+        "comparator_primary": "quote vendor LAIN (pair/arah/ukuran sama)",
+        "comparator_fallback_nav_implied_usd": 166.39306128,
+        "comparator_fallback_proxy_markPx_usd": 166.23,
+        "direction": "SELL",
+        "size_usd": 10000.0,
+        "window_sec": 300,
+        "pinned_block": 61453051,
+        "fee_note": null,
+        "committed_cross_check_applicable": false,
+        "committed_cross_check_reason": "TIDAK DAPAT dihitung: vendor tidak memberi min-out, sehingga P_implied_execution = min-out/amount_in tidak ada. Rumus \u00a72.1b butuh harga yang DIKOMITMENKAN.",
+        "committed_diff_pct": null,
+        "indicative_comparisons": [],
+        "indicative_note": "Perbandingan di bawah ini memakai harga INDIKATIF (expected-out/amount_in), BUKAN harga eksekusi yang dikomitmenkan. Bukan cross-check \u00a72.1b; tidak dapat meloloskan sampel ke bar 10."
+      }
+    },
+    {
+      "vendor": "kyber",
+      "vendor_endpoint": "GET https://aggregator-api.kyberswap.com/base/api/v1/routes",
+      "round": 2,
+      "symbol": "NVDAc",
+      "requested_at_utc": "2026-11-24T00:43:23Z",
+      "amount_in_base_units": 6017209219,
+      "amount_in_tokens": 60.17209219,
+      "spot_median_dexscreener_usd": 166.19,
+      "computed_notional_usd": 10000.0000010561,
+      "http_status": 200,
+      "http_error": null,
+      "http_attempts": [
+        {
+          "http_status": 200,
+          "error": null,
+          "elapsed_sec": 4.79
+        }
+      ],
+      "raw_response": {
+        "code": 0,
+        "message": "successfully",
+        "data": {
+          "routeSummary": {
+            "tokenIn": "0xb20000000000000000000078ee7ce2fe4908108c",
+            "amountIn": "6017209219",
+            "amountInUsd": "10007.37204333703",
+            "tokenOut": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
+            "amountOut": "9996657629",
+            "amountOutUsd": "9999.61464108052",
+            "gas": "3435753",
+            "gasPrice": "6000000",
+            "gasUsd": "0.035245389785238224",
+            "l1FeeUsd": "0.00038198021579867",
+            "extraFee": {
+              "feeAmount": "",
+              "chargeFeeBy": "",
+              "isInBps": false,
+              "feeReceiver": ""
+            },
+            "route": [
+              [
+                {
+                  "pool": "0xce56168c09f4b7fca30523822c48008705c01156",
+                  "tokenIn": "0xb20000000000000000000078ee7ce2fe4908108c",
+                  "tokenOut": "0x4200000000000000000000000000000000000006",
+                  "swapAmount": "567473483",
+                  "amountOut": "551032055709038978",
+                  "exchange": "aero-cl",
+                  "poolType": "uniswapv3",
+                  "poolExtra": {
+                    "swapFee": 306,
+                    "priceLimit": "1459840076248373162167899255275506587012164559122",
+                    "blockNumber": 61453204,
+                    "sB": 61453204
+                  },
+                  "extra": {
+                    "_cs": "6582850546696824095",
+                    "_ts": "1795481021",
+                    "nSqrtRx96": "2542387759063565599359761",
+                    "nT": -206951,
+                    "rAI": "0",
+                    "ri": "f9b41642yLdMF4QA"
+                  },
+                  "gas": 310000
+                }
+              ],
+              [
+                {
+                  "pool": "0xc7fd29b23c9de23d2dc0d22973aed01660ebd3aa0429332e7958579736c2ade9",
+                  "tokenIn": "0xb20000000000000000000078ee7ce2fe4908108c",
+                  "tokenOut": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
+                  "swapAmount": "1513580840",
+                  "amountOut": "2514428940",
+                  "exchange": "flux-prop",
+                  "poolType": "flux-prop",
+                  "poolExtra": {
+                    "blockNumber": 61453226,
+                    "qC": "0x998B2F003e79C01b88B3CDBFDE90CAdEf53D996b",
+                    "s": "0x388e0D8f610a80C75e8a049C39DDc5816f56c012",
+                    "v": "0x0F8E0136f09e8b188d21EdDF17f65522f81f7151"
+                  },
+                  "extra": {
+                    "_ce": {
+                      "prCnt": 1,
+                      "tgtAmtOut": "2514428940",
+                      "ces": [
+                        {
+                          "pool": "tidefiprop_0x833589fcd6edb6e08f4c7c32d4f71b54bda02913_0xb20000000000000000000078ee7ce2fe4908108c",
+                          "tokenIn": "0xb20000000000000000000078ee7ce2fe4908108c",
+                          "tokenOut": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
+                          "swapAmount": "1513580840",
+                          "amountOut": "2512807145",
+                          "exchange": "tidefi-prop",
+                          "poolType": "tidefi-prop",
+                          "poolExtra": {
+                            "approvalAddress": "0x71def1fee62224622ad0755a2887edd4d6b2ccd1",
+                            "blockNumber": 61453218
+                          },
+                          "extra": null,
+                          "gas": 150000
+                        },
+                        {
+                          "pool": "0xf668e21993f0acd7ab00bb1cfbaed0df28a3c8ec",
+                          "tokenIn": "0xb20000000000000000000078ee7ce2fe4908108c",
+                          "tokenOut": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
+                          "swapAmount": "1513580840",
+                          "amountOut": "2514178093",
+                          "exchange": "aero-cl",
+                          "poolType": "uniswapv3",
+                          "poolExtra": {
+                            "swapFee": 338,
+                            "priceLimit": "1461300573427867316570072651998408279850435624080",
+                            "blockNumber": 61453180,
+                            "sB": 61453180
+                          },
+                          "extra": {
+                            "rAI": "0",
+                            "nSqrtRx96": "61464301214856018275930894212",
+                            "nT": -5078
+                          },
+                          "gas": 310000
+                        }
+                      ]
+                    }
+                  },
+                  "gas": 150000
+                }
+              ],
+              [
+                {
+                  "pool": "0xf668e21993f0acd7ab00bb1cfbaed0df28a3c8ec",
+                  "tokenIn": "0xb20000000000000000000078ee7ce2fe4908108c",
+                  "tokenOut": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
+                  "swapAmount": "3936154896",
+                  "amountOut": "6539493012",
+                  "exchange": "aero-cl",
+                  "poolType": "uniswapv3",
+                  "poolExtra": {
+                    "swapFee": 338,
+                    "priceLimit": "1461300573427867316570072651998408279850435624080",
+                    "blockNumber": 61453180,
+                    "sB": 61453180
+                  },
+                  "extra": {
+                    "_ss": {
+                      "pool": "0x345d4337134a718b0f62c56ed5b82af033e4237d",
+                      "tokenIn": "0xb20000000000000000000078ee7ce2fe4908108c",
+                      "tokenOut": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
+                      "swapAmount": "3936154896",
+                      "amountOut": "8525615",
+                      "exchange": "scale",
+                      "poolType": "equalizer",
+                      "poolExtra": {
+                        "stable": false,
+                        "blockNumber": 61285183
+                      },
+                      "extra": null,
+                      "gas": 227000
+                    },
+                    "nSqrtRx96": "61460909961912573272619621635",
+                    "nT": -5079,
+                    "rAI": "0"
+                  },
+                  "gas": 385000
+                }
+              ],
+              [
+                {
+                  "pool": "0x3c3d7b1b3f1024a4538562b741644a05e9d3efa556ce70f6d98adcd507b37188",
+                  "tokenIn": "0x4200000000000000000000000000000000000006",
+                  "tokenOut": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
+                  "swapAmount": "317345659273548427",
+                  "amountOut": "542932858",
+                  "exchange": "flux-prop",
+                  "poolType": "flux-prop",
+                  "poolExtra": {
+                    "blockNumber": 61453217,
+                    "qC": "0x998B2F003e79C01b88B3CDBFDE90CAdEf53D996b",
+                    "s": "0x388e0D8f610a80C75e8a049C39DDc5816f56c012",
+                    "v": "0x0F8E0136f09e8b188d21EdDF17f65522f81f7151"
+                  },
+                  "extra": {
+                    "_ce": {
+                      "prCnt": 1,
+                      "tgtAmtOut": "542932858",
+                      "ces": [
+                        {
+                          "pool": "pmm_13_0x4200000000000000000000000000000000000006_0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
+                          "tokenIn": "0x4200000000000000000000000000000000000006",
+                          "tokenOut": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
+                          "swapAmount": "317345659273548427",
+                          "amountOut": "542906284",
+                          "exchange": "pmm-13",
+                          "poolType": "orderbook",
+                          "poolExtra": {
+                            "approvalAddress": "",
+                            "blockNumber": 0
+                          },
+                          "extra": null,
+                          "gas": 574269
+                        },
+                        {
+                          "pool": "0x72ab388e2e2f6facef59e3c3fa2c4e29011c2d38",
+                          "tokenIn": "0x4200000000000000000000000000000000000006",
+                          "tokenOut": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
+                          "swapAmount": "317345659273548427",
+                          "amountOut": "542915901",
+                          "exchange": "pancake-v3",
+                          "poolType": "pancake-v3",
+                          "poolExtra": {
+                            "swapFee": 100,
+                            "priceLimit": "4295128740",
+                            "blockNumber": 61453219,
+                            "sB": 61453219
+                          },
+                          "extra": {
+                            "rAI": "0",
+                            "nSqrtRx96": "3277101791298854473838372",
+                            "nT": -201873
+                          },
+                          "gas": 130826
+                        }
+                      ]
+                    }
+                  },
+                  "gas": 150000
+                }
+              ],
+              [
+                {
+                  "pool": "mantaprop_0x4200000000000000000000000000000000000006_0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
+                  "tokenIn": "0x4200000000000000000000000000000000000006",
+                  "tokenOut": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
+                  "swapAmount": "233686396435490551",
+                  "amountOut": "399802819",
+                  "exchange": "manta-prop",
+                  "poolType": "manta-prop",
+                  "poolExtra": {
+                    "router": "0x5d2806b9af9e9f740b55eda02a8484af5805803a",
+                    "blockNumber": 61453215
+                  },
+                  "extra": {
+                    "_ce": {
+                      "prCnt": 1,
+                      "tgtAmtOut": "399802819",
+                      "ces": [
+                        {
+                          "pool": "pmm_13_0x4200000000000000000000000000000000000006_0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
+                          "tokenIn": "0x4200000000000000000000000000000000000006",
+                          "tokenOut": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
+                          "swapAmount": "233686396435490551",
+                          "amountOut": "399799303",
+                          "exchange": "pmm-13",
+                          "poolType": "orderbook",
+                          "poolExtra": {
+                            "approvalAddress": "",
+                            "blockNumber": 0
+                          },
+                          "extra": null,
+                          "gas": 574269
+                        },
+                        {
+                          "pool": "0x72ab388e2e2f6facef59e3c3fa2c4e29011c2d38",
+                          "tokenIn": "0x4200000000000000000000000000000000000006",
+                          "tokenOut": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
+                          "swapAmount": "233686396435490551",
+                          "amountOut": "399796902",
+                          "exchange": "pancake-v3",
+                          "poolType": "pancake-v3",
+                          "poolExtra": {
+                            "swapFee": 100,
+                            "priceLimit": "4295128740",
+                            "blockNumber": 61453219,
+                            "sB": 61453219
+                          },
+                          "extra": {
+                            "rAI": "0",
+                            "nSqrtRx96": "3277147019166804292343301",
+                            "nT": -201873
+                          },
+                          "gas": 130826
+                        }
+                      ]
+                    }
+                  },
+                  "gas": 300000
+                }
+              ]
+            ],
+            "routerAddress": "0x6131B5fae19EA4f9D964eAc0408E4408b66337b5",
+            "routeID": "f9b41642yLdMF4QA",
+            "checksum": "6582850546696824095",
+            "timestamp": 1795481021
+          },
+          "routerAddress": "0x6131B5fae19EA4f9D964eAc0408E4408b66337b5"
+        },
+        "requestId": "f9b41642-c8b7-4c17-8400-ed0e7b4e8882"
+      },
+      "assessment": {
+        "vendor": "kyber",
+        "symbol": "NVDAc",
+        "http_status": 200,
+        "direction": "SELL",
+        "notional_usd_target": 10000.0,
+        "amount_in_base_units": 6017209219,
+        "amount_in_tokens": 60.17209219,
+        "spot_reference_usd": 166.19,
+        "expected_out_usdc": 9996.657629,
+        "expected_out_field": "data.routeSummary.amountOut",
+        "amount_out_min_usdc": null,
+        "amount_out_min_field": null,
+        "price_impact_pct": null,
+        "price_impact_field": null,
+        "slippage_pct": -0.03342372055746834,
+        "slippage_field": "computed: (expected-out/amount_in)/spot - 1 (deviasi harga indikatif vs spot DexScreener, bukan realisasi vs ekspektasi)",
+        "slippage_tolerance_requested_pct": 0.5,
+        "client_derived_floor_usdc": 9946.674340855,
+        "client_derived_floor_note": "expected-out x (1 - 0,5%) \u2014 dihitung klien dari toleransi slippage yang diminta. BUKAN amount_out_min vendor dan TIDAK memenuhi \u00a72.1.",
+        "expires_at": null,
+        "expires_at_field": null,
+        "expires_at_provenance": null,
+        "expiry_like_keys_found": [],
+        "kind_label": null,
+        "quoted_at": null,
+        "fee_included_in_min_out": "N/A \u2014 no min-out field from vendor",
+        "fee_note": "Kyber: amountOut = expected output sesudah fee pool (bukan minimum); gas dilaporkan terpisah (gasUsd). Tidak ada field min-out. `deadline` hanya ada di POST /route/build sebagai parameter YANG DIPILIH KLIEN (default +20 menit) \u2014 bukan jaminan expiry vendor atas quote GET /routes. Docs: jangan cache route >5-10 detik \u2014 itu anjuran refetch, bukan semantik expiry field.",
+        "route_or_pool": "aero-cl:0xb20000000000000000000078ee7ce2fe4908108c->0x4200000000000000000000000000000000000006; flux-prop:0xb20000000000000000000078ee7ce2fe4908108c->0x833589fcd6edb6e08f4c7c32d4f71b54bda02913; aero-cl:0xb20000000000000000000078ee7ce2fe4908108c->0x833589fcd6edb6e08f4c7c32d4f71b54bda02913; flux-prop:0x4200000000000000000000000000000000000006->0x833589fcd6edb6e08f4c7c32d4f71b54bda02913; manta-prop:0x4200000000000000000000000000000000000006->0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
+        "checks": {
+          "response_parseable": true,
+          "kind_in_firm_executable_guaranteed": false,
+          "kind_label_present": false,
+          "amount_out_min_present_from_vendor": false,
+          "expires_at_present_with_vendor_semantics": false,
+          "quoted_at_present": false,
+          "expected_out_present": true,
+          "implied_price_within_10pct_of_spot": true
+        },
+        "verdict": "TIDAK_FIRM",
+        "verdict_reasons": [
+          "kind_absent: vendor tidak memberi label kind (firm/executable/guaranteed) \u2014 validator menolak quote tanpa kind (exit_quote_kind_missing)",
+          "amount_out_min_absent: tidak ada field min-out dari vendor; expected-out bukan min-out",
+          "expires_at_absent: tidak ada field expiry dengan semantik vendor (kunci bertema expiry yang ditemukan: tidak ada) \u2014 tanpa semantik expiry, quote TIDAK dapat diklasifikasikan firm (\u00a72.1b)"
+        ],
+        "vendor_timestamp_raw": 1795481021,
+        "validator_faithful_mapping": {
+          "status": "invalid",
+          "reason_codes": [
+            "exit_quote_kind_missing"
+          ],
+          "details": {
+            "note": "kind_label_required_not_assumed_firm"
+          }
+        },
+        "validator_generous_hypothetical": {
+          "status": "invalid",
+          "reason_codes": [
+            "exit_quote_missing_fields"
+          ],
+          "details": {
+            "missing_fields": [
+              "expires_at"
+            ],
+            "evidence_class": "firm"
+          }
+        }
+      },
+      "cross_check": {
+        "comparator_primary": "quote vendor LAIN (pair/arah/ukuran sama)",
+        "comparator_fallback_nav_implied_usd": 166.39306128,
+        "comparator_fallback_proxy_markPx_usd": 166.23,
+        "direction": "SELL",
+        "size_usd": 10000.0,
+        "window_sec": 300,
+        "pinned_block": 61453051,
+        "fee_note": "Kyber: amountOut = expected output sesudah fee pool (bukan minimum); gas dilaporkan terpisah (gasUsd). Tidak ada field min-out. `deadline` hanya ada di POST /route/build sebagai parameter YANG DIPILIH KLIEN (default +20 menit) \u2014 bukan jaminan expiry vendor atas quote GET /routes. Docs: jangan cache route >5-10 detik \u2014 itu anjuran refetch, bukan semantik expiry field.",
+        "committed_cross_check_applicable": false,
+        "committed_cross_check_reason": "TIDAK DAPAT dihitung: vendor tidak memberi min-out, sehingga P_implied_execution = min-out/amount_in tidak ada. Rumus \u00a72.1b butuh harga yang DIKOMITMENKAN.",
+        "committed_diff_pct": null,
+        "indicative_comparisons": [
+          {
+            "reference": "nav_implied",
+            "ref_price_usd": 166.39306128,
+            "indicative_price_usd": 166.13445311880554,
+            "diff_pct": 0.15542003927633577,
+            "within_1pct": true
+          },
+          {
+            "reference": "hyperliquid_proxy_xyz",
+            "ref_price_usd": 166.23,
+            "indicative_price_usd": 166.13445311880554,
+            "diff_pct": 0.05747872297085443,
+            "within_1pct": true
+          }
+        ],
+        "indicative_note": "Perbandingan di bawah ini memakai harga INDIKATIF (expected-out/amount_in), BUKAN harga eksekusi yang dikomitmenkan. Bukan cross-check \u00a72.1b; tidak dapat meloloskan sampel ke bar 10."
+      }
+    },
+    {
+      "vendor": "uniswap",
+      "vendor_endpoint": "POST https://trade-api.gateway.uniswap.org/v1/quote (+ legacy GET https://api.uniswap.org/v1/quote)",
+      "round": 2,
+      "symbol": "NVDAc",
+      "requested_at_utc": "2026-11-24T00:43:23Z",
+      "amount_in_base_units": 6017209219,
+      "amount_in_tokens": 60.17209219,
+      "spot_median_dexscreener_usd": 166.19,
+      "computed_notional_usd": 10000.0000010561,
+      "http_status": 401,
+      "http_error": "http_401",
+      "http_attempts": [
+        {
+          "http_status": 401,
+          "error": "http_401",
+          "elapsed_sec": 3.57
+        }
+      ],
+      "raw_response": {
+        "errorCode": "Unauthorized",
+        "detail": "Unauthenticated api key or session",
+        "requestId": "11ecb3d3a1c87856109b57fa4f1f8c12"
+      },
+      "raw_response_legacy_routing_api": {
+        "errorCode": "ACCESS_DENIED"
+      },
+      "http_status_legacy_routing_api": 409,
+      "http_attempts_legacy_routing_api": [
+        {
+          "http_status": 409,
+          "error": "http_409",
+          "elapsed_sec": 4.04
+        }
+      ],
+      "assessment": {
+        "vendor": "uniswap",
+        "symbol": "NVDAc",
+        "http_status": 401,
+        "direction": "SELL",
+        "notional_usd_target": 10000.0,
+        "amount_in_base_units": 6017209219,
+        "amount_in_tokens": 60.17209219,
+        "spot_reference_usd": 166.19,
+        "expected_out_usdc": null,
+        "expected_out_field": null,
+        "amount_out_min_usdc": null,
+        "amount_out_min_field": null,
+        "price_impact_pct": null,
+        "price_impact_field": null,
+        "slippage_pct": null,
+        "slippage_field": null,
+        "slippage_tolerance_requested_pct": 0.5,
+        "client_derived_floor_usdc": null,
+        "client_derived_floor_note": null,
+        "expires_at": null,
+        "expires_at_field": null,
+        "expires_at_provenance": null,
+        "expiry_like_keys_found": [],
+        "kind_label": null,
+        "quoted_at": null,
+        "fee_included_in_min_out": null,
+        "fee_note": "Tidak ada respons quote (penolakan auth / tanpa rute). Tidak ada field apa pun untuk dinilai.",
+        "route_or_pool": null,
+        "checks": {
+          "response_parseable": true,
+          "kind_in_firm_executable_guaranteed": false,
+          "kind_label_present": false,
+          "amount_out_min_present_from_vendor": false,
+          "expires_at_present_with_vendor_semantics": false,
+          "quoted_at_present": false,
+          "expected_out_present": false,
+          "implied_price_within_10pct_of_spot": null
+        },
+        "verdict": "TIDAK_FIRM",
+        "verdict_reasons": [
+          "kind_absent: vendor tidak memberi label kind (firm/executable/guaranteed) \u2014 validator menolak quote tanpa kind (exit_quote_kind_missing)",
+          "amount_out_min_absent: tidak ada field min-out dari vendor; expected-out bukan min-out",
+          "expires_at_absent: tidak ada field expiry dengan semantik vendor (kunci bertema expiry yang ditemukan: tidak ada) \u2014 tanpa semantik expiry, quote TIDAK dapat diklasifikasikan firm (\u00a72.1b)"
+        ],
+        "validator_faithful_mapping": {
+          "status": "invalid",
+          "reason_codes": [
+            "exit_quote_kind_missing"
+          ],
+          "details": {
+            "note": "kind_label_required_not_assumed_firm"
+          }
+        },
+        "validator_generous_hypothetical": {
+          "status": "not_applicable",
+          "reason_codes": [
+            "no_expected_out_to_map"
+          ],
+          "details": {}
+        }
+      },
+      "cross_check": {
+        "comparator_primary": "quote vendor LAIN (pair/arah/ukuran sama)",
+        "comparator_fallback_nav_implied_usd": 166.39306128,
+        "comparator_fallback_proxy_markPx_usd": 166.23,
+        "direction": "SELL",
+        "size_usd": 10000.0,
+        "window_sec": 300,
+        "pinned_block": 61453051,
+        "fee_note": "Tidak ada respons quote (penolakan auth / tanpa rute). Tidak ada field apa pun untuk dinilai.",
+        "committed_cross_check_applicable": false,
+        "committed_cross_check_reason": "TIDAK DAPAT dihitung: vendor tidak memberi min-out, sehingga P_implied_execution = min-out/amount_in tidak ada. Rumus \u00a72.1b butuh harga yang DIKOMITMENKAN.",
+        "committed_diff_pct": null,
+        "indicative_comparisons": [],
+        "indicative_note": "Perbandingan di bawah ini memakai harga INDIKATIF (expected-out/amount_in), BUKAN harga eksekusi yang dikomitmenkan. Bukan cross-check \u00a72.1b; tidak dapat meloloskan sampel ke bar 10."
+      }
+    },
+    {
+      "vendor": "odos",
+      "vendor_endpoint": "POST https://api.odos.xyz/soroban/quote/v2",
+      "round": 2,
+      "symbol": "AAPLc",
+      "requested_at_utc": "2026-11-24T00:43:54Z",
+      "amount_in_base_units": 2861516891,
+      "amount_in_tokens": 28.61516891,
+      "spot_median_dexscreener_usd": 349.46500000000003,
+      "computed_notional_usd": 10000.000003133151,
+      "http_status": null,
+      "http_error": "fetch_error:RemoteDisconnected",
+      "http_attempts": [
+        {
+          "http_status": null,
+          "error": "fetch_error:RemoteDisconnected",
+          "elapsed_sec": 3.39
+        },
+        {
+          "http_status": null,
+          "error": "fetch_error:RemoteDisconnected",
+          "elapsed_sec": 2.09
+        }
+      ],
+      "raw_response": "",
+      "assessment": {
+        "vendor": "odos",
+        "symbol": "AAPLc",
+        "http_status": null,
+        "direction": "SELL",
+        "notional_usd_target": 10000.0,
+        "amount_in_base_units": 2861516891,
+        "amount_in_tokens": 28.61516891,
+        "spot_reference_usd": 349.46500000000003,
+        "expected_out_usdc": null,
+        "expected_out_field": null,
+        "amount_out_min_usdc": null,
+        "amount_out_min_field": null,
+        "price_impact_pct": null,
+        "price_impact_field": null,
+        "slippage_pct": null,
+        "slippage_field": null,
+        "slippage_tolerance_requested_pct": 0.5,
+        "client_derived_floor_usdc": null,
+        "client_derived_floor_note": null,
+        "expires_at": null,
+        "expires_at_field": null,
+        "expires_at_provenance": null,
+        "expiry_like_keys_found": [],
+        "kind_label": null,
+        "quoted_at": null,
+        "fee_included_in_min_out": null,
+        "fee_note": null,
+        "route_or_pool": null,
+        "checks": {
+          "response_parseable": false
+        },
+        "verdict": "TIDAK_FIRM",
+        "verdict_reasons": [
+          "no_parseable_response"
+        ],
+        "validator_faithful_mapping": {
+          "status": "invalid",
+          "reason_codes": [
+            "exit_quote_kind_missing"
+          ],
+          "details": {
+            "note": "kind_label_required_not_assumed_firm"
+          }
+        },
+        "validator_generous_hypothetical": {
+          "status": "not_applicable",
+          "reason_codes": [
+            "no_expected_out_to_map"
+          ],
+          "details": {}
+        }
+      },
+      "cross_check": {
+        "comparator_primary": "quote vendor LAIN (pair/arah/ukuran sama)",
+        "comparator_fallback_nav_implied_usd": 350.49029387,
+        "comparator_fallback_proxy_markPx_usd": 349.26,
+        "direction": "SELL",
+        "size_usd": 10000.0,
+        "window_sec": 300,
+        "pinned_block": 61453051,
+        "fee_note": null,
+        "committed_cross_check_applicable": false,
+        "committed_cross_check_reason": "TIDAK DAPAT dihitung: vendor tidak memberi min-out, sehingga P_implied_execution = min-out/amount_in tidak ada. Rumus \u00a72.1b butuh harga yang DIKOMITMENKAN.",
+        "committed_diff_pct": null,
+        "indicative_comparisons": [],
+        "indicative_note": "Perbandingan di bawah ini memakai harga INDIKATIF (expected-out/amount_in), BUKAN harga eksekusi yang dikomitmenkan. Bukan cross-check \u00a72.1b; tidak dapat meloloskan sampel ke bar 10."
+      }
+    },
+    {
+      "vendor": "kyber",
+      "vendor_endpoint": "GET https://aggregator-api.kyberswap.com/base/api/v1/routes",
+      "round": 2,
+      "symbol": "AAPLc",
+      "requested_at_utc": "2026-11-24T00:43:54Z",
+      "amount_in_base_units": 2861516891,
+      "amount_in_tokens": 28.61516891,
+      "spot_median_dexscreener_usd": 349.46500000000003,
+      "computed_notional_usd": 10000.000003133151,
+      "http_status": 200,
+      "http_error": null,
+      "http_attempts": [
+        {
+          "http_status": 200,
+          "error": null,
+          "elapsed_sec": 5.22
+        }
+      ],
+      "raw_response": {
+        "code": 0,
+        "message": "successfully",
+        "data": {
+          "routeSummary": {
+            "tokenIn": "0xb200000000000000000000c2e324d24d7eecd1fb",
+            "amountIn": "2861516891",
+            "amountInUsd": "9987.899642590557",
+            "tokenOut": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
+            "amountOut": "9998955837",
+            "amountOutUsd": "9985.814387909897",
+            "gas": "581331",
+            "gasPrice": "6000000",
+            "gasUsd": "0.005962909789011994",
+            "l1FeeUsd": "0.0002714252450558955",
+            "extraFee": {
+              "feeAmount": "",
+              "chargeFeeBy": "",
+              "isInBps": false,
+              "feeReceiver": ""
+            },
+            "route": [
+              [
+                {
+                  "pool": "0xf5fcb9cdafce67d50afef298f88e709d2b946ba6",
+                  "tokenIn": "0xb200000000000000000000c2e324d24d7eecd1fb",
+                  "tokenOut": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
+                  "swapAmount": "2861516891",
+                  "amountOut": "9998955837",
+                  "exchange": "aero-cl",
+                  "poolType": "uniswapv3",
+                  "poolExtra": {
+                    "swapFee": 158,
+                    "priceLimit": "1461300573427867316570072651998408279850435624080",
+                    "blockNumber": 61453215,
+                    "sB": 61453215
+                  },
+                  "extra": {
+                    "_cs": "10500006027073207413",
+                    "_ss": {
+                      "pool": "0x749f424a5a14aad0d51cbb38eba57f690d71ba19",
+                      "tokenIn": "0xb200000000000000000000c2e324d24d7eecd1fb",
+                      "tokenOut": "0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
+                      "swapAmount": "2861516891",
+                      "amountOut": "9991116517",
+                      "exchange": "metric-propamm",
+                      "poolType": "metric-propamm",
+                      "poolExtra": {
+                        "swapDir": true,
+                        "priceProvider": "",
+                        "blockNumber": 52832761
+                      },
+                      "extra": null,
+                      "gas": 215383
+                    },
+                    "_ts": "1795481051",
+                    "nSqrtRx96": "42382129178206099075583881211",
+                    "nT": -12513,
+                    "rAI": "0",
+                    "ri": "b1a813f4ZhNFj4MF"
+                  },
+                  "gas": 310000
+                }
+              ]
+            ],
+            "routerAddress": "0x6131B5fae19EA4f9D964eAc0408E4408b66337b5",
+            "routeID": "b1a813f4ZhNFj4MF",
+            "checksum": "10500006027073207413",
+            "timestamp": 1795481051
+          },
+          "routerAddress": "0x6131B5fae19EA4f9D964eAc0408E4408b66337b5"
+        },
+        "requestId": "b1a813f4-6613-458f-8305-3af515139046"
+      },
+      "assessment": {
+        "vendor": "kyber",
+        "symbol": "AAPLc",
+        "http_status": 200,
+        "direction": "SELL",
+        "notional_usd_target": 10000.0,
+        "amount_in_base_units": 2861516891,
+        "amount_in_tokens": 28.61516891,
+        "spot_reference_usd": 349.46500000000003,
+        "expected_out_usdc": 9998.955837,
+        "expected_out_field": "data.routeSummary.amountOut",
+        "amount_out_min_usdc": null,
+        "amount_out_min_field": null,
+        "price_impact_pct": null,
+        "price_impact_field": null,
+        "slippage_pct": -0.010441661328242091,
+        "slippage_field": "computed: (expected-out/amount_in)/spot - 1 (deviasi harga indikatif vs spot DexScreener, bukan realisasi vs ekspektasi)",
+        "slippage_tolerance_requested_pct": 0.5,
+        "client_derived_floor_usdc": 9948.961057814999,
+        "client_derived_floor_note": "expected-out x (1 - 0,5%) \u2014 dihitung klien dari toleransi slippage yang diminta. BUKAN amount_out_min vendor dan TIDAK memenuhi \u00a72.1.",
+        "expires_at": null,
+        "expires_at_field": null,
+        "expires_at_provenance": null,
+        "expiry_like_keys_found": [],
+        "kind_label": null,
+        "quoted_at": null,
+        "fee_included_in_min_out": "N/A \u2014 no min-out field from vendor",
+        "fee_note": "Kyber: amountOut = expected output sesudah fee pool (bukan minimum); gas dilaporkan terpisah (gasUsd). Tidak ada field min-out. `deadline` hanya ada di POST /route/build sebagai parameter YANG DIPILIH KLIEN (default +20 menit) \u2014 bukan jaminan expiry vendor atas quote GET /routes. Docs: jangan cache route >5-10 detik \u2014 itu anjuran refetch, bukan semantik expiry field.",
+        "route_or_pool": "aero-cl:0xb200000000000000000000c2e324d24d7eecd1fb->0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
+        "checks": {
+          "response_parseable": true,
+          "kind_in_firm_executable_guaranteed": false,
+          "kind_label_present": false,
+          "amount_out_min_present_from_vendor": false,
+          "expires_at_present_with_vendor_semantics": false,
+          "quoted_at_present": false,
+          "expected_out_present": true,
+          "implied_price_within_10pct_of_spot": true
+        },
+        "verdict": "TIDAK_FIRM",
+        "verdict_reasons": [
+          "kind_absent: vendor tidak memberi label kind (firm/executable/guaranteed) \u2014 validator menolak quote tanpa kind (exit_quote_kind_missing)",
+          "amount_out_min_absent: tidak ada field min-out dari vendor; expected-out bukan min-out",
+          "expires_at_absent: tidak ada field expiry dengan semantik vendor (kunci bertema expiry yang ditemukan: tidak ada) \u2014 tanpa semantik expiry, quote TIDAK dapat diklasifikasikan firm (\u00a72.1b)"
+        ],
+        "vendor_timestamp_raw": 1795481051,
+        "validator_faithful_mapping": {
+          "status": "invalid",
+          "reason_codes": [
+            "exit_quote_kind_missing"
+          ],
+          "details": {
+            "note": "kind_label_required_not_assumed_firm"
+          }
+        },
+        "validator_generous_hypothetical": {
+          "status": "invalid",
+          "reason_codes": [
+            "exit_quote_missing_fields"
+          ],
+          "details": {
+            "missing_fields": [
+              "expires_at"
+            ],
+            "evidence_class": "firm"
+          }
+        }
+      },
+      "cross_check": {
+        "comparator_primary": "quote vendor LAIN (pair/arah/ukuran sama)",
+        "comparator_fallback_nav_implied_usd": 350.49029387,
+        "comparator_fallback_proxy_markPx_usd": 349.26,
+        "direction": "SELL",
+        "size_usd": 10000.0,
+        "window_sec": 300,
+        "pinned_block": 61453051,
+        "fee_note": "Kyber: amountOut = expected output sesudah fee pool (bukan minimum); gas dilaporkan terpisah (gasUsd). Tidak ada field min-out. `deadline` hanya ada di POST /route/build sebagai parameter YANG DIPILIH KLIEN (default +20 menit) \u2014 bukan jaminan expiry vendor atas quote GET /routes. Docs: jangan cache route >5-10 detik \u2014 itu anjuran refetch, bukan semantik expiry field.",
+        "committed_cross_check_applicable": false,
+        "committed_cross_check_reason": "TIDAK DAPAT dihitung: vendor tidak memberi min-out, sehingga P_implied_execution = min-out/amount_in tidak ada. Rumus \u00a72.1b butuh harga yang DIKOMITMENKAN.",
+        "committed_diff_pct": null,
+        "indicative_comparisons": [
+          {
+            "reference": "nav_implied",
+            "ref_price_usd": 350.49029387,
+            "indicative_price_usd": 349.4285100482393,
+            "diff_pct": 0.30294243245279895,
+            "within_1pct": true
+          },
+          {
+            "reference": "hyperliquid_proxy_xyz",
+            "ref_price_usd": 349.26,
+            "indicative_price_usd": 349.4285100482393,
+            "diff_pct": 0.04824773757065912,
+            "within_1pct": true
+          }
+        ],
+        "indicative_note": "Perbandingan di bawah ini memakai harga INDIKATIF (expected-out/amount_in), BUKAN harga eksekusi yang dikomitmenkan. Bukan cross-check \u00a72.1b; tidak dapat meloloskan sampel ke bar 10."
+      }
+    },
+    {
+      "vendor": "uniswap",
+      "vendor_endpoint": "POST https://trade-api.gateway.uniswap.org/v1/quote (+ legacy GET https://api.uniswap.org/v1/quote)",
+      "round": 2,
+      "symbol": "AAPLc",
+      "requested_at_utc": "2026-11-24T00:43:54Z",
+      "amount_in_base_units": 2861516891,
+      "amount_in_tokens": 28.61516891,
+      "spot_median_dexscreener_usd": 349.46500000000003,
+      "computed_notional_usd": 10000.000003133151,
+      "http_status": 401,
+      "http_error": "http_401",
+      "http_attempts": [
+        {
+          "http_status": 401,
+          "error": "http_401",
+          "elapsed_sec": 3.09
+        }
+      ],
+      "raw_response": {
+        "errorCode": "Unauthorized",
+        "detail": "Unauthenticated api key or session",
+        "requestId": "703fc3f7cef9ef3ab16e3e50f13a77ab"
+      },
+      "raw_response_legacy_routing_api": {
+        "errorCode": "ACCESS_DENIED"
+      },
+      "http_status_legacy_routing_api": 409,
+      "http_attempts_legacy_routing_api": [
+        {
+          "http_status": 409,
+          "error": "http_409",
+          "elapsed_sec": 4.15
+        }
+      ],
+      "assessment": {
+        "vendor": "uniswap",
+        "symbol": "AAPLc",
+        "http_status": 401,
+        "direction": "SELL",
+        "notional_usd_target": 10000.0,
+        "amount_in_base_units": 2861516891,
+        "amount_in_tokens": 28.61516891,
+        "spot_reference_usd": 349.46500000000003,
+        "expected_out_usdc": null,
+        "expected_out_field": null,
+        "amount_out_min_usdc": null,
+        "amount_out_min_field": null,
+        "price_impact_pct": null,
+        "price_impact_field": null,
+        "slippage_pct": null,
+        "slippage_field": null,
+        "slippage_tolerance_requested_pct": 0.5,
+        "client_derived_floor_usdc": null,
+        "client_derived_floor_note": null,
+        "expires_at": null,
+        "expires_at_field": null,
+        "expires_at_provenance": null,
+        "expiry_like_keys_found": [],
+        "kind_label": null,
+        "quoted_at": null,
+        "fee_included_in_min_out": null,
+        "fee_note": "Tidak ada respons quote (penolakan auth / tanpa rute). Tidak ada field apa pun untuk dinilai.",
+        "route_or_pool": null,
+        "checks": {
+          "response_parseable": true,
+          "kind_in_firm_executable_guaranteed": false,
+          "kind_label_present": false,
+          "amount_out_min_present_from_vendor": false,
+          "expires_at_present_with_vendor_semantics": false,
+          "quoted_at_present": false,
+          "expected_out_present": false,
+          "implied_price_within_10pct_of_spot": null
+        },
+        "verdict": "TIDAK_FIRM",
+        "verdict_reasons": [
+          "kind_absent: vendor tidak memberi label kind (firm/executable/guaranteed) \u2014 validator menolak quote tanpa kind (exit_quote_kind_missing)",
+          "amount_out_min_absent: tidak ada field min-out dari vendor; expected-out bukan min-out",
+          "expires_at_absent: tidak ada field expiry dengan semantik vendor (kunci bertema expiry yang ditemukan: tidak ada) \u2014 tanpa semantik expiry, quote TIDAK dapat diklasifikasikan firm (\u00a72.1b)"
+        ],
+        "validator_faithful_mapping": {
+          "status": "invalid",
+          "reason_codes": [
+            "exit_quote_kind_missing"
+          ],
+          "details": {
+            "note": "kind_label_required_not_assumed_firm"
+          }
+        },
+        "validator_generous_hypothetical": {
+          "status": "not_applicable",
+          "reason_codes": [
+            "no_expected_out_to_map"
+          ],
+          "details": {}
+        }
+      },
+      "cross_check": {
+        "comparator_primary": "quote vendor LAIN (pair/arah/ukuran sama)",
+        "comparator_fallback_nav_implied_usd": 350.49029387,
+        "comparator_fallback_proxy_markPx_usd": 349.26,
+        "direction": "SELL",
+        "size_usd": 10000.0,
+        "window_sec": 300,
+        "pinned_block": 61453051,
+        "fee_note": "Tidak ada respons quote (penolakan auth / tanpa rute). Tidak ada field apa pun untuk dinilai.",
+        "committed_cross_check_applicable": false,
+        "committed_cross_check_reason": "TIDAK DAPAT dihitung: vendor tidak memberi min-out, sehingga P_implied_execution = min-out/amount_in tidak ada. Rumus \u00a72.1b butuh harga yang DIKOMITMENKAN.",
+        "committed_diff_pct": null,
+        "indicative_comparisons": [],
+        "indicative_note": "Perbandingan di bawah ini memakai harga INDIKATIF (expected-out/amount_in), BUKAN harga eksekusi yang dikomitmenkan. Bukan cross-check \u00a72.1b; tidak dapat meloloskan sampel ke bar 10."
+      }
+    }
+  ],
+  "summary": {
+    "probe_finished_at_utc": "2026-11-24T00:44:17Z",
+    "rounds": [
+      1,
+      2
+    ],
+    "samples_total": 12,
+    "samples_firm": 0,
+    "per_round": {
+      "1": {
+        "samples": 6,
+        "firm": 0,
+        "fallback_nav_ok": true,
+        "fallback_proxy_ok": true,
+        "fallback_proxy_tokens": []
+      },
+      "2": {
+        "samples": 6,
+        "firm": 0,
+        "fallback_nav_ok": true,
+        "fallback_proxy_ok": true,
+        "fallback_proxy_tokens": [
+          "AAPLc",
+          "NVDAc"
+        ]
+      }
+    },
+    "per_vendor": {
+      "odos": {
+        "samples": 4,
+        "firm": 0,
+        "verdict": "TIDAK_FIRM"
+      },
+      "kyber": {
+        "samples": 4,
+        "firm": 0,
+        "verdict": "TIDAK_FIRM"
+      },
+      "uniswap": {
+        "samples": 4,
+        "firm": 0,
+        "verdict": "TIDAK_FIRM"
+      }
+    },
+    "fallback_references_available": {
+      "nav_implied": true,
+      "hyperliquid_proxy_xyz": true
+    },
+    "overall": "TIDAK ADA kandidat yang lolos \u2014 hasil sah (\u00a72.5)"
+  },
+  "manual_transport_checks": [
+    {
+      "checked_at_utc": "2026-11-24 ~00:40-00:46 UTC (via curl, VM + egress yang sama)",
+      "note": "Pemeriksaan transport manual setelah round 1, untuk membedakan kegagalan transport dari kegagalan skema vendor.",
+      "checks": [
+        {
+          "target": "POST https://api.odos.xyz/soroban/quote/v2",
+          "tries": 3,
+          "result": "HTTP 530, body 'error code: 1033' (Cloudflare) \u2014 3/3 kali, ~4 dtk",
+          "interpretation": "endpoint tidak terjangkau dari egress VM ini (Cloudflare 1033)"
+        },
+        {
+          "target": "POST https://trade-api.gateway.uniswap.org/v1/quote (tanpa x-api-key)",
+          "tries": 1,
+          "result": "HTTP 401 {\"errorCode\":\"Unauthorized\",\"detail\":\"Unauthenticated api key or session\"}",
+          "interpretation": "definitif: Trading API wajib API key \u2014 jalur tanpa key mati di auth"
+        },
+        {
+          "target": "GET https://aggregator-api.kyberswap.com/base/api/v1/routes (NVDAc $10k)",
+          "tries": 2,
+          "result": "HTTP 429 {\"message\":\"Forbidden\",\"status\":429} \u2014 2/2 kali",
+          "interpretation": "rate-limit dari sisi Kyber/egress untuk pair NVDAc; AAPLc sempat 200 di round 1"
+        }
+      ]
+    }
+  ],
+  "pinned_block_rounds": {
+    "2": {
+      "ok": true,
+      "block_number": 61453051,
+      "block_hash": "0xeb120a4b2c50648e262f2f71feb5b05eb1a9d7b1619ff3736ab82d23d743026c",
+      "fetched_at": "2026-11-24T00:43:00Z",
+      "source": "eth_blockNumber",
+      "error": null
+    },
+    "1": {
+      "ok": true,
+      "block_number": 61450790,
+      "block_hash": "0x8679df8d10af24af137255e55ad5622ad6352712f4ccac4276a03559eb0c3d3a",
+      "fetched_at": "2026-11-24T00:35:31Z",
+      "source": "eth_blockNumber",
+      "error": null
+    }
+  },
+  "reference_rounds": {
+    "2": {
+      "fetch_method": {
+        "coinbase": "probe-local",
+        "hyperliquid": "probe-local",
+        "block": "adapter",
+        "note": "probe-local = adapter rusak saat round itu (edit konkuren S1 merujuk config yang belum ada); endpoint + bentuk respons sama dengan adapter"
+      },
+      "nav_implied": {
+        "ok": true,
+        "tokens_found": [
+          "AAPLc",
+          "NVDAc"
+        ],
+        "fetched_at": "2026-11-24T00:43:14Z",
+        "source": "https://api.coinbase.com/v1/tokenized-stocks",
+        "error": null,
+        "per_token": {
+          "NVDAc": {
+            "nav_price": 166.39306128,
+            "nav_price_updated_at": "2026-11-24T00:28:48Z",
+            "multiplier": 1.0005379395763694,
+            "note": "nav_price SUDAH multiplier-adjusted (\u00a73 koreksi 1)"
+          },
+          "AAPLc": {
+            "nav_price": 350.49029387,
+            "nav_price_updated_at": "2026-11-23T19:31:58Z",
+            "multiplier": 1.0005003893019802,
+            "note": "nav_price SUDAH multiplier-adjusted (\u00a73 koreksi 1)"
+          }
+        },
+        "label": "REFERENSI (bukan harga eksekusi)"
+      },
+      "hyperliquid_proxy_xyz": {
+        "ok": true,
+        "tokens_found": [
+          "AAPLc",
+          "NVDAc"
+        ],
+        "fetched_at": "2026-11-24T00:43:18Z",
+        "source": "https://api.hyperliquid.xyz/info dex=xyz",
+        "error": null,
+        "per_token": {
+          "NVDAc": {
+            "markPx": "166.23",
+            "oraclePx": "166.23",
+            "instrument": "xyz:NVDA",
+            "note": "UNDERLYING EQUITY PERP PROXY, bukan harga token"
+          },
+          "AAPLc": {
+            "markPx": "349.26",
+            "oraclePx": "349.35",
+            "instrument": "xyz:AAPL",
+            "note": "UNDERLYING EQUITY PERP PROXY, bukan harga token"
+          }
+        },
+        "label": "REFERENSI (bukan harga eksekusi)"
+      }
+    },
+    "1": {
+      "nav_implied": {
+        "ok": true,
+        "tokens_found": [
+          "AAPLc",
+          "NVDAc"
+        ],
+        "fetched_at": "2026-11-24T00:35:31Z (approx, round-1 run)",
+        "source": "https://api.coinbase.com/v1/tokenized-stocks",
+        "error": null,
+        "per_token": {
+          "NVDAc": {
+            "nav_price": 166.39306128,
+            "nav_price_updated_at": "2026-11-24T00:28:48Z",
+            "multiplier": 1.0005379395763694
+          },
+          "AAPLc": {
+            "nav_price": 350.49029387,
+            "nav_price_updated_at": "2026-11-23T19:31:58Z",
+            "multiplier": 1.0005003893019802
+          }
+        },
+        "label": "REFERENSI (bukan harga eksekusi)"
+      },
+      "hyperliquid_proxy_xyz": {
+        "ok": true,
+        "tokens_found": [],
+        "fetched_at": "2026-11-24T00:35:43Z (round-1 run)",
+        "source": "https://api.hyperliquid.xyz/info dex=xyz",
+        "error": null,
+        "per_token": {},
+        "label": "REFERENSI (bukan harga eksekusi)",
+        "note": "REKONSTRUKSI dari catatan console round 1: fetch Hyperliquid BERHASIL (error None) tetapi probe script salah lookup (\"NVDA\" bukan \"xyz:NVDA\") sehingga tokens_found kosong. Bukan outage Hyperliquid \u2014 universe xyz lengkap terverifikasi via curl sesudahnya. Lihat docs/firm-quote-definition-2026-11-24.md \u00a7R6."
+      },
+      "fetch_method": {
+        "coinbase": "adapter",
+        "hyperliquid": "adapter",
+        "block": "adapter"
+      }
+    }
+  }
+}
