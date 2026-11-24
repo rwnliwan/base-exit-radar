@@ -1,7 +1,7 @@
 """Runner prototipe Base (lokal/offline).
 
 Penggunaan:
-  python3 run.py                  # satu pass live untuk NVDAc + AAPLc
+  python3 run.py                  # satu pass live untuk semua token universe
   python3 run.py --token NVDAc    # satu token saja
   python3 run.py --replay fixtures/snapshot_live_20261122_NVDAc.json
                                   # replay snapshot (mode TEST/REPLAY)
@@ -21,9 +21,11 @@ import argparse
 import json
 import os
 import sys
+from datetime import datetime, timezone
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
+import adapter
 import config
 import pipeline
 
@@ -39,8 +41,8 @@ def _write(path, obj):
     return path
 
 
-def _run_live_token(symbol):
-    snap = pipeline.run_token(symbol)
+def _run_live_token(symbol, coinbase=None):
+    snap = pipeline.run_token(symbol, coinbase=coinbase)
     pub = pipeline.public_snapshot(snap)
     sid = snap["snapshot_id"]
     paths = {}
@@ -116,7 +118,7 @@ def _replay(path):
 def main():
     ap = argparse.ArgumentParser(description="Base prototype runner (local/offline)")
     ap.add_argument("--token", choices=list(config.TOKENS),
-                    help="satu token saja (default: keduanya)")
+                    help="satu token saja (default: semua token universe)")
     ap.add_argument("--replay", metavar="SNAPSHOT_JSON",
                     help="replay snapshot (mode TEST/REPLAY)")
     args = ap.parse_args()
@@ -125,9 +127,49 @@ def main():
         _replay(args.replay)
         return 0
     symbols = [args.token] if args.token else list(config.TOKENS)
+    started = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    # §1.2c (S1-A): shared fetch cache per run — fetch_coinbase_tokens()
+    # SATU kali, dipakai bersama semua token. Gagal -> fallback per-token
+    # (ingest fetch sendiri) + dicatat di manifest run, bukan diam-diam.
+    shared_cb = adapter.fetch_coinbase_tokens()
+    shared_cb_error = None
+    if not shared_cb.get("ok"):
+        shared_cb_error = shared_cb.get("error")
+        print("WARNING shared coinbase fetch failed (%s); falling back to "
+              "per-token fetch." % shared_cb_error)
+        shared_cb = None
+    successes, failures = [], []
     for sym in symbols:
-        _run_live_token(sym)
+        # §1.2c (S1-A): exception isolation per token — satu token gagal
+        # ingest TIDAK menggagalkan run; token itu dicatat gagal +
+        # alasannya di manifest run, run lanjut ke token berikutnya.
+        try:
+            _run_live_token(sym, coinbase=shared_cb)
+            successes.append(sym)
+        except Exception as e:  # noqa: BLE001 - isolasi per token
+            failures.append({"symbol": sym,
+                             "error": "%s: %s" % (type(e).__name__, e)})
+            print("[%s] FAILED (%s: %s) — run continues."
+                  % (sym, type(e).__name__, e))
+    finished = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    manifest = {
+        "run_started_at": started,
+        "run_finished_at": finished,
+        "universe_version": config.UNIVERSE_VERSION,
+        "config_hash": config.CONFIG_HASH,
+        "symbols_attempted": symbols,
+        "successes": successes,
+        "failures": failures,
+        "coinbase_shared": shared_cb is not None,
+        "coinbase_error": shared_cb_error,
+    }
+    _write(os.path.join(
+        OUT, "run_manifest_%s.json" % started.replace(":", "").replace("-", "")),
+        manifest)
     print("Done. Output di %s (lokal saja)." % OUT)
+    print("Run manifest: %d sukses, %d gagal: %s"
+          % (len(successes), len(failures),
+             [f["symbol"] for f in failures] or "none"))
     return 0
 
 

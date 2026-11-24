@@ -1,0 +1,3519 @@
+{
+  "fetched_at": "2026-11-24T00:56:02Z",
+  "per_token": {
+    "0xb200000000000000000000000d3176ee4af1102d": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "RKTc",
+      "venues": []
+    },
+    "0xb2000000000000000000000199ae48796c61909e": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "FUNc",
+      "venues": []
+    },
+    "0xb200000000000000000000045beafafbe0dc7664": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "ABNBc",
+      "venues": []
+    },
+    "0xb20000000000000000000005717baa337022c782": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "LYFTc",
+      "venues": []
+    },
+    "0xb20000000000000000000005befa57b9b871e737": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "DOCNc",
+      "venues": []
+    },
+    "0xb20000000000000000000006f910a0e7bbd3c168": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "APPc",
+      "venues": []
+    },
+    "0xb20000000000000000000007b4fcc48e2d70dcc6": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "COHUc",
+      "venues": []
+    },
+    "0xb200000000000000000000082f7fea8f2ee8f438": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "BJc",
+      "venues": []
+    },
+    "0xb20000000000000000000009614107be6f562ba8": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "MIRc",
+      "venues": []
+    },
+    "0xb2000000000000000000000a22ac22d031b657da": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "TRONc",
+      "venues": []
+    },
+    "0xb2000000000000000000000bd75bf439a38bf7df": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "DISc",
+      "venues": []
+    },
+    "0xb2000000000000000000000c1f8acd3c4496a762": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "SEZLc",
+      "venues": []
+    },
+    "0xb2000000000000000000000c431e2a7c0ce7ea31": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "SLSc",
+      "venues": []
+    },
+    "0xb2000000000000000000000cd31253817b36f88a": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "QXOc",
+      "venues": []
+    },
+    "0xb2000000000000000000000d46361d597f543d06": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "QBTSc",
+      "venues": []
+    },
+    "0xb2000000000000000000000d8ce462e99ee7a47b": {
+      "coverage_tier": "decision-eligible",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 2,
+      "symbol": "AMDc",
+      "venues": [
+        "aerodrome",
+        "uniswap"
+      ]
+    },
+    "0xb2000000000000000000000d9947c759429e7fe5": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "SHAZc",
+      "venues": []
+    },
+    "0xb2000000000000000000000de6a780902db4ec09": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "NUVBc",
+      "venues": []
+    },
+    "0xb2000000000000000000000e63b7b0b6bc5b9213": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "ZMc",
+      "venues": []
+    },
+    "0xb2000000000000000000000f28146eb28ea2835b": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "RUMc",
+      "venues": []
+    },
+    "0xb200000000000000000000105a1f43ff3605c5de": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "KSSc",
+      "venues": []
+    },
+    "0xb20000000000000000000010718397aca876a20a": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "ABSIc",
+      "venues": []
+    },
+    "0xb200000000000000000000115bf2283265fb04db": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "XXIc",
+      "venues": []
+    },
+    "0xb20000000000000000000011b20aebe0bd567f1c": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "PLNTc",
+      "venues": []
+    },
+    "0xb20000000000000000000011eea811eaedb29156": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "ALNTc",
+      "venues": []
+    },
+    "0xb2000000000000000000001347ccd9e83d5bf3e0": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "LYVc",
+      "venues": []
+    },
+    "0xb2000000000000000000001409f816682b7772b7": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "SMPLc",
+      "venues": []
+    },
+    "0xb20000000000000000000015776ea82655c4f034": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "CSCOc",
+      "venues": []
+    },
+    "0xb20000000000000000000016e38fd364d271ba28": {
+      "coverage_tier": "decision-eligible",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 7,
+      "symbol": "ANTc",
+      "venues": [
+        "aerodrome",
+        "nami",
+        "pancakeswap",
+        "uniswap"
+      ]
+    },
+    "0xb20000000000000000000016f9dfe862feba122b": {
+      "coverage_tier": "covered",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 1,
+      "symbol": "BEc",
+      "venues": [
+        "aerodrome"
+      ]
+    },
+    "0xb2000000000000000000001775bd17f2289de527": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "AEHRc",
+      "venues": []
+    },
+    "0xb200000000000000000000178d4c37485ea47ef6": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "OMERc",
+      "venues": []
+    },
+    "0xb20000000000000000000017bb66e9301e913a99": {
+      "coverage_tier": "covered",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 2,
+      "symbol": "SANc",
+      "venues": [
+        "aerodrome"
+      ]
+    },
+    "0xb200000000000000000000187f7071d6e321a7d2": {
+      "coverage_tier": "decision-eligible",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 4,
+      "symbol": "SKHYc",
+      "venues": [
+        "aerodrome",
+        "uniswap"
+      ]
+    },
+    "0xb20000000000000000000018fe7ec7d6dfeeb528": {
+      "coverage_tier": "covered",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 1,
+      "symbol": "PFEc",
+      "venues": [
+        "aerodrome"
+      ]
+    },
+    "0xb20000000000000000000019641b253b3e2c8a24": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "ANFc",
+      "venues": []
+    },
+    "0xb2000000000000000000001997390508a5617d47": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "IONSc",
+      "venues": []
+    },
+    "0xb20000000000000000000019f6e7c675b73c2e4d": {
+      "coverage_tier": "decision-eligible",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 2,
+      "symbol": "CRCLc",
+      "venues": [
+        "aerodrome",
+        "uniswap"
+      ]
+    },
+    "0xb2000000000000000000001a114de6d32433f3c0": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "SERVc",
+      "venues": []
+    },
+    "0xb2000000000000000000001aaa9010cd65f82c5e": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "CORZc",
+      "venues": []
+    },
+    "0xb2000000000000000000001ac12227a8ae0ef3ac": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "STZc",
+      "venues": []
+    },
+    "0xb2000000000000000000001b6e407239eb31edcf": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "CAVAc",
+      "venues": []
+    },
+    "0xb2000000000000000000001bcf0441201d513fa5": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "DHRc",
+      "venues": []
+    },
+    "0xb2000000000000000000001bcf8e5022d7f61919": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "MVISc",
+      "venues": []
+    },
+    "0xb2000000000000000000001ca01a48688ec7d3cc": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "CHPTc",
+      "venues": []
+    },
+    "0xb2000000000000000000001dfd8c413ecd6ec630": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "PINSc",
+      "venues": []
+    },
+    "0xb2000000000000000000001e800a7f5189430cd0": {
+      "coverage_tier": "decision-eligible",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 7,
+      "symbol": "TSLAc",
+      "venues": [
+        "aerodrome",
+        "equalizer",
+        "uniswap"
+      ]
+    },
+    "0xb2000000000000000000001e838d4beb66cf8fb7": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "FWDIc",
+      "venues": []
+    },
+    "0xb2000000000000000000001ecfaccd9047d3b544": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "BROSc",
+      "venues": []
+    },
+    "0xb2000000000000000000001f6b9c31e43560a924": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "TNDMc",
+      "venues": []
+    },
+    "0xb2000000000000000000001faa7fa5ef4184ede5": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "HOGc",
+      "venues": []
+    },
+    "0xb2000000000000000000001fab744de0b829eed1": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "SOCc",
+      "venues": []
+    },
+    "0xb20000000000000000000020790305a981e88a67": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "RRc",
+      "venues": []
+    },
+    "0xb200000000000000000000211a2ed33fad95b0b3": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "REALc",
+      "venues": []
+    },
+    "0xb2000000000000000000002137743d4a01fe4e88": {
+      "coverage_tier": "covered",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 1,
+      "symbol": "SOUNc",
+      "venues": [
+        "aerodrome"
+      ]
+    },
+    "0xb20000000000000000000024170488e788cbbcb4": {
+      "coverage_tier": "covered",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 1,
+      "symbol": "BRK.Bc",
+      "venues": [
+        "aerodrome"
+      ]
+    },
+    "0xb200000000000000000000241fe94fe97fcbf034": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "MRKc",
+      "venues": []
+    },
+    "0xb2000000000000000000002451af655ae942308d": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "CGNXc",
+      "venues": []
+    },
+    "0xb200000000000000000000252c42b75f49dacf59": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "ROKc",
+      "venues": []
+    },
+    "0xb2000000000000000000002570652530a5e0f771": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "OKTAc",
+      "venues": []
+    },
+    "0xb200000000000000000000259694b27bf052e7d7": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "OPENc",
+      "venues": []
+    },
+    "0xb2000000000000000000002601c5c94f435da168": {
+      "coverage_tier": "decision-eligible",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 2,
+      "symbol": "HTZc",
+      "venues": [
+        "aerodrome",
+        "uniswap"
+      ]
+    },
+    "0xb20000000000000000000026215d755356e5043f": {
+      "coverage_tier": "decision-eligible",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 3,
+      "symbol": "ARMc",
+      "venues": [
+        "aerodrome",
+        "uniswap"
+      ]
+    },
+    "0xb200000000000000000000264d3a9dea68aa6631": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "GTc",
+      "venues": []
+    },
+    "0xb2000000000000000000002756093a39e13e08c6": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "FMCc",
+      "venues": []
+    },
+    "0xb200000000000000000000281c973bf2555dd94b": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "WINGc",
+      "venues": []
+    },
+    "0xb2000000000000000000002a0ec8f8861ce98983": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "NVTSc",
+      "venues": []
+    },
+    "0xb2000000000000000000002a3e91e59ffc3ced94": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "OPNWc",
+      "venues": []
+    },
+    "0xb2000000000000000000002b9ac07a0544688079": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "SIDUc",
+      "venues": []
+    },
+    "0xb2000000000000000000002c8b0e3d7ff26f81a0": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "AMKRc",
+      "venues": []
+    },
+    "0xb2000000000000000000002c99976e240ed773e6": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "DDOGc",
+      "venues": []
+    },
+    "0xb2000000000000000000002cd78d7c981e97c330": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "ASSTc",
+      "venues": []
+    },
+    "0xb2000000000000000000002d0ba3164cc74f58b7": {
+      "coverage_tier": "decision-eligible",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 12,
+      "symbol": "GOOGLc",
+      "venues": [
+        "aerodrome",
+        "equalizer",
+        "nami",
+        "pancakeswap",
+        "solidlycom",
+        "uniswap"
+      ]
+    },
+    "0xb2000000000000000000002d2b5dc53c61f1ba06": {
+      "coverage_tier": "covered",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 2,
+      "symbol": "NIOc",
+      "venues": [
+        "aerodrome"
+      ]
+    },
+    "0xb2000000000000000000002f12afa8f583b6ce85": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "TRIPc",
+      "venues": []
+    },
+    "0xb2000000000000000000002f7bd112b645574214": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "ISRGc",
+      "venues": []
+    },
+    "0xb2000000000000000000003086b1355bd43e25da": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "OPADc",
+      "venues": []
+    },
+    "0xb2000000000000000000003088798f6d0722aaac": {
+      "coverage_tier": "covered",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 2,
+      "symbol": "SEc",
+      "venues": [
+        "aerodrome"
+      ]
+    },
+    "0xb20000000000000000000030945cb9c538d0b326": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "VCc",
+      "venues": []
+    },
+    "0xb200000000000000000000314b9f5f580168766a": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "OUSTc",
+      "venues": []
+    },
+    "0xb20000000000000000000033be01089cf02a2025": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "WUc",
+      "venues": []
+    },
+    "0xb20000000000000000000034533ed3961f222cd4": {
+      "coverage_tier": "covered",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 1,
+      "symbol": "ADBEc",
+      "venues": [
+        "aerodrome"
+      ]
+    },
+    "0xb200000000000000000000347afba223d7b6b63c": {
+      "coverage_tier": "decision-eligible",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 2,
+      "symbol": "ORCLc",
+      "venues": [
+        "aerodrome",
+        "uniswap"
+      ]
+    },
+    "0xb2000000000000000000003496c04fcfee6997e0": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "WAYc",
+      "venues": []
+    },
+    "0xb20000000000000000000034975347ff1848aab9": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "LRCXc",
+      "venues": []
+    },
+    "0xb200000000000000000000349ef3aa93a0897476": {
+      "coverage_tier": "covered",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 2,
+      "symbol": "ULc",
+      "venues": [
+        "aerodrome"
+      ]
+    },
+    "0xb200000000000000000000351bd76098b359ada8": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "PRMEc",
+      "venues": []
+    },
+    "0xb200000000000000000000386f243773d48a4be7": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "CRMDc",
+      "venues": []
+    },
+    "0xb20000000000000000000038e9982fe875b7e066": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "CPNGc",
+      "venues": []
+    },
+    "0xb2000000000000000000003958003d801724f9d3": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "MPc",
+      "venues": []
+    },
+    "0xb2000000000000000000003963c3beaa3eba9bfc": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "QNTc",
+      "venues": []
+    },
+    "0xb200000000000000000000397293cb8cda9a10c5": {
+      "coverage_tier": "decision-eligible",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 6,
+      "symbol": "SNDKc",
+      "venues": [
+        "aerodrome",
+        "equalizer",
+        "uniswap"
+      ]
+    },
+    "0xb2000000000000000000003a67b9f116f25513d6": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "TGTXc",
+      "venues": []
+    },
+    "0xb2000000000000000000003aa0410688baf4da88": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "NEMc",
+      "venues": []
+    },
+    "0xb2000000000000000000003ac3d02891f0fc785e": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "NRGVc",
+      "venues": []
+    },
+    "0xb2000000000000000000003ae0817c304acbb1de": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "UMACc",
+      "venues": []
+    },
+    "0xb2000000000000000000003bd46dbde905508b16": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "CMCSAc",
+      "venues": []
+    },
+    "0xb2000000000000000000003bf350e420c13e431a": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "CVXc",
+      "venues": []
+    },
+    "0xb2000000000000000000003c5564b8161680c86d": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "HRBc",
+      "venues": []
+    },
+    "0xb2000000000000000000003cdb2c0f94e4ebf605": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "YOUc",
+      "venues": []
+    },
+    "0xb2000000000000000000003e4249c65bd6c037d9": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "RIVNc",
+      "venues": []
+    },
+    "0xb2000000000000000000003e5e2892158e25dd7b": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "BOOTc",
+      "venues": []
+    },
+    "0xb2000000000000000000003ebe6a3a1df07db619": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "FIGSc",
+      "venues": []
+    },
+    "0xb2000000000000000000003ef37a7c863dc1482a": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "SOFIc",
+      "venues": []
+    },
+    "0xb2000000000000000000003f265ab1f74dd89ac0": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "SNAPc",
+      "venues": []
+    },
+    "0xb2000000000000000000003fa80315bfd87efed8": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "FIGc",
+      "venues": []
+    },
+    "0xb2000000000000000000003fc6f17c8b775bca78": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "UIc",
+      "venues": []
+    },
+    "0xb2000000000000000000003fe90a64263b7f9e74": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "SWBIc",
+      "venues": []
+    },
+    "0xb2000000000000000000004161b4168d03841511": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "CELHc",
+      "venues": []
+    },
+    "0xb2000000000000000000004217b9b4f6f6acb7b8": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "TEAMc",
+      "venues": []
+    },
+    "0xb200000000000000000000426663e7212288fa97": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "QUITc",
+      "venues": []
+    },
+    "0xb200000000000000000000428e3a3eebbb20692b": {
+      "coverage_tier": "covered",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 1,
+      "symbol": "DJTc",
+      "venues": [
+        "uniswap"
+      ]
+    },
+    "0xb20000000000000000000042cbbae483635c3774": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "ITc",
+      "venues": []
+    },
+    "0xb200000000000000000000431a5c1e48e3b1d130": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "CROXc",
+      "venues": []
+    },
+    "0xb200000000000000000000432a1d2bd864acec82": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "WULFc",
+      "venues": []
+    },
+    "0xb20000000000000000000043a599976181bcf336": {
+      "coverage_tier": "covered",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 1,
+      "symbol": "HIMSc",
+      "venues": [
+        "aerodrome"
+      ]
+    },
+    "0xb20000000000000000000044e3cd7a0e1028e57a": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "WENc",
+      "venues": []
+    },
+    "0xb200000000000000000000450ad3abe5d4846c6e": {
+      "coverage_tier": "covered",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 1,
+      "symbol": "PYPLc",
+      "venues": [
+        "aerodrome"
+      ]
+    },
+    "0xb2000000000000000000004637e5a787885c720d": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "GRPNc",
+      "venues": []
+    },
+    "0xb200000000000000000000473f033036350312da": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "ANNXc",
+      "venues": []
+    },
+    "0xb200000000000000000000476c5a355abe1a2794": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "ALABc",
+      "venues": []
+    },
+    "0xb20000000000000000000047984ecae84db5fcf9": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "SYMc",
+      "venues": []
+    },
+    "0xb2000000000000000000004884b426556b92883d": {
+      "coverage_tier": "decision-eligible",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 7,
+      "symbol": "MSTRc",
+      "venues": [
+        "aerodrome",
+        "equalizer",
+        "nami",
+        "uniswap"
+      ]
+    },
+    "0xb20000000000000000000049b9fc3b3c8c9402ff": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "TKRc",
+      "venues": []
+    },
+    "0xb20000000000000000000049d38a179c97e33381": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "AMGNc",
+      "venues": []
+    },
+    "0xb2000000000000000000004aa2b559ca0a0bbf5d": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "ROOTc",
+      "venues": []
+    },
+    "0xb2000000000000000000004acdc9a922fcfbcc7f": {
+      "coverage_tier": "covered",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 1,
+      "symbol": "SNOWc",
+      "venues": [
+        "aerodrome"
+      ]
+    },
+    "0xb2000000000000000000004aff16039ba04bdfbc": {
+      "coverage_tier": "decision-eligible",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 2,
+      "symbol": "INTCc",
+      "venues": [
+        "aerodrome",
+        "uniswap"
+      ]
+    },
+    "0xb2000000000000000000004cc3e96ceb78541d33": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "AXONc",
+      "venues": []
+    },
+    "0xb2000000000000000000004ec7c19212979672f9": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "BLNKc",
+      "venues": []
+    },
+    "0xb2000000000000000000004f13a2441d3c82ee54": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "VOYGc",
+      "venues": []
+    },
+    "0xb2000000000000000000004fc7a0c25178a0d633": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "FLYc",
+      "venues": []
+    },
+    "0xb2000000000000000000004feb8d277dd14b08bb": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "AALc",
+      "venues": []
+    },
+    "0xb200000000000000000000501ef81f911eb57656": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "RXRXc",
+      "venues": []
+    },
+    "0xb20000000000000000000050fe6d1ef35b02e8fd": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "DELLc",
+      "venues": []
+    },
+    "0xb20000000000000000000051b531471096c5caf6": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "VPGc",
+      "venues": []
+    },
+    "0xb200000000000000000000535fe96f18204bfd96": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "BIRDc",
+      "venues": []
+    },
+    "0xb20000000000000000000053d000bac95662d1e4": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "ULTAc",
+      "venues": []
+    },
+    "0xb20000000000000000000054a4a3659b55272125": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "NTLAc",
+      "venues": []
+    },
+    "0xb20000000000000000000054b11fd279a4f7d4ef": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "Vc",
+      "venues": []
+    },
+    "0xb2000000000000000000005550e8506124236271": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "GAMEc",
+      "venues": []
+    },
+    "0xb200000000000000000000559ec0bedaacf436ea": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "SBETc",
+      "venues": []
+    },
+    "0xb20000000000000000000055e63c4c1cdc6b7a36": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "CLOVc",
+      "venues": []
+    },
+    "0xb2000000000000000000005672d78eff30d24665": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "QCOMc",
+      "venues": []
+    },
+    "0xb20000000000000000000058b8c947e44011dfe6": {
+      "coverage_tier": "decision-eligible",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 2,
+      "symbol": "NFLXc",
+      "venues": [
+        "aerodrome",
+        "uniswap"
+      ]
+    },
+    "0xb20000000000000000000058f143099d5f79b0ec": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "IONQc",
+      "venues": []
+    },
+    "0xb200000000000000000000593460934fec1b43dc": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "CADLc",
+      "venues": []
+    },
+    "0xb2000000000000000000005a41bef59807119850": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "FIGRc",
+      "venues": []
+    },
+    "0xb2000000000000000000005ac674f707e357409c": {
+      "coverage_tier": "decision-eligible",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 3,
+      "symbol": "NOKc",
+      "venues": [
+        "aerodrome",
+        "uniswap"
+      ]
+    },
+    "0xb2000000000000000000005b1e5ad3c6aeabeddd": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "NDSNc",
+      "venues": []
+    },
+    "0xb2000000000000000000005b8cece4a5f9306bb4": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "SNDXc",
+      "venues": []
+    },
+    "0xb2000000000000000000005bcde0a6926919fef9": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "MNSTc",
+      "venues": []
+    },
+    "0xb2000000000000000000005bd7ae89b9e6189bb5": {
+      "coverage_tier": "covered",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 3,
+      "symbol": "RBLXc",
+      "venues": [
+        "aerodrome"
+      ]
+    },
+    "0xb2000000000000000000005c16dd6f675bf8ceb7": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "SHAKc",
+      "venues": []
+    },
+    "0xb2000000000000000000005c41b0018612629072": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "DNUTc",
+      "venues": []
+    },
+    "0xb2000000000000000000005c8324136de0f4134a": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "YUMc",
+      "venues": []
+    },
+    "0xb2000000000000000000005d6afb89705cd203ea": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "NNc",
+      "venues": []
+    },
+    "0xb2000000000000000000005de7f2e0aca219c070": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "CATc",
+      "venues": []
+    },
+    "0xb2000000000000000000006064f8ec027f042294": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "AEOc",
+      "venues": []
+    },
+    "0xb200000000000000000000613c15f118df2b189b": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "YETIc",
+      "venues": []
+    },
+    "0xb20000000000000000000063376b142c0764b489": {
+      "coverage_tier": "covered",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 2,
+      "symbol": "VALEc",
+      "venues": [
+        "aerodrome"
+      ]
+    },
+    "0xb2000000000000000000006377b3c06a3e3e9ae5": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "REGNc",
+      "venues": []
+    },
+    "0xb2000000000000000000006432a3a7991e718dbb": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "CRMc",
+      "venues": []
+    },
+    "0xb2000000000000000000006448a906e8942850fa": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "WHRc",
+      "venues": []
+    },
+    "0xb2000000000000000000006454926ad8576dc50e": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "YELPc",
+      "venues": []
+    },
+    "0xb200000000000000000000645c1ec509e4261682": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "BXc",
+      "venues": []
+    },
+    "0xb20000000000000000000064832d0d2d38e2f4fc": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "JBLUc",
+      "venues": []
+    },
+    "0xb20000000000000000000065ca0f772a5502e976": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "PURRc",
+      "venues": []
+    },
+    "0xb20000000000000000000065f11d53a1e442bb84": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "SMCIc",
+      "venues": []
+    },
+    "0xb20000000000000000000065f7d0d6aac5fd4bfd": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "XOMc",
+      "venues": []
+    },
+    "0xb20000000000000000000066242d4067724cb7a1": {
+      "coverage_tier": "decision-eligible",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 2,
+      "symbol": "RDDTc",
+      "venues": [
+        "aerodrome",
+        "uniswap"
+      ]
+    },
+    "0xb200000000000000000000674e1325dbdf06b309": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "LUNRc",
+      "venues": []
+    },
+    "0xb20000000000000000000067c8c151f24e1c9924": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "XYZc",
+      "venues": []
+    },
+    "0xb20000000000000000000068987dacde1db79cd4": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "PZZAc",
+      "venues": []
+    },
+    "0xb200000000000000000000690275843b6e246286": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "CIFRc",
+      "venues": []
+    },
+    "0xb200000000000000000000695b10dd3e1b0ea070": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "FLNCc",
+      "venues": []
+    },
+    "0xb20000000000000000000069d694d397b9388dac": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "NNEc",
+      "venues": []
+    },
+    "0xb2000000000000000000006b7f6966ee0453e251": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "ELFc",
+      "venues": []
+    },
+    "0xb2000000000000000000006bc65af32d24870a2d": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "TERc",
+      "venues": []
+    },
+    "0xb2000000000000000000006d02167c4864e72bd2": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "PATHc",
+      "venues": []
+    },
+    "0xb2000000000000000000006d1bc7faa266eb099d": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "PEPc",
+      "venues": []
+    },
+    "0xb2000000000000000000006de7888c3fffd803ac": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "GLXYc",
+      "venues": []
+    },
+    "0xb2000000000000000000006ee1c139a723872e09": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "HUTc",
+      "venues": []
+    },
+    "0xb2000000000000000000006f944897540579d3f2": {
+      "coverage_tier": "covered",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 1,
+      "symbol": "HOODc",
+      "venues": [
+        "aerodrome"
+      ]
+    },
+    "0xb20000000000000000000071f6c75c5892b09beb": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "NKEc",
+      "venues": []
+    },
+    "0xb200000000000000000000720133eedf525f93e2": {
+      "coverage_tier": "covered",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 1,
+      "symbol": "CBRSc",
+      "venues": [
+        "aerodrome"
+      ]
+    },
+    "0xb2000000000000000000007292d3d91c6b559058": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "TTMIc",
+      "venues": []
+    },
+    "0xb20000000000000000000072b5c2b2d18ee8a2a5": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "AIc",
+      "venues": []
+    },
+    "0xb200000000000000000000747bffa52fe2c2510b": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "BALLc",
+      "venues": []
+    },
+    "0xb2000000000000000000007578836b0ff7780eb4": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "EBAYc",
+      "venues": []
+    },
+    "0xb20000000000000000000076a288b15b61ec78f6": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "ZSc",
+      "venues": []
+    },
+    "0xb2000000000000000000007790ed6e48e06ed935": {
+      "coverage_tier": "decision-eligible",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 4,
+      "symbol": "GMEc",
+      "venues": [
+        "aerodrome",
+        "uniswap"
+      ]
+    },
+    "0xb20000000000000000000077bbd6469ecfe8c0b4": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "BIIBc",
+      "venues": []
+    },
+    "0xb20000000000000000000077d13d6c79b6c11c5a": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "IBRXc",
+      "venues": []
+    },
+    "0xb20000000000000000000078ee7ce2fe4908108c": {
+      "coverage_tier": "decision-eligible",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 11,
+      "symbol": "NVDAc",
+      "venues": [
+        "aerodrome",
+        "equalizer",
+        "nami",
+        "uniswap"
+      ]
+    },
+    "0xb200000000000000000000796c05dd2536c7f91c": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "PCTc",
+      "venues": []
+    },
+    "0xb20000000000000000000079dc24fe2fbd09110f": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "VSTc",
+      "venues": []
+    },
+    "0xb2000000000000000000007a8a3ab2d3b319036d": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "UPSTc",
+      "venues": []
+    },
+    "0xb2000000000000000000007a90b2d9ed101035a8": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "ENPHc",
+      "venues": []
+    },
+    "0xb2000000000000000000007b9fcbd005511acbd5": {
+      "coverage_tier": "decision-eligible",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 11,
+      "symbol": "SPCXc",
+      "venues": [
+        "aerodrome",
+        "equalizer",
+        "pancakeswap",
+        "uniswap"
+      ]
+    },
+    "0xb2000000000000000000007c7088757cb3703648": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "AMPXc",
+      "venues": []
+    },
+    "0xb2000000000000000000007c92881e458338b34d": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "NEXTc",
+      "venues": []
+    },
+    "0xb2000000000000000000007cbdf8fa3861e51721": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "APLDc",
+      "venues": []
+    },
+    "0xb2000000000000000000007d16372840df4dabbe": {
+      "coverage_tier": "decision-eligible",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 3,
+      "symbol": "PLTRc",
+      "venues": [
+        "aerodrome",
+        "uniswap"
+      ]
+    },
+    "0xb2000000000000000000007e032680bad472032f": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "GSATc",
+      "venues": []
+    },
+    "0xb200000000000000000000801830b13b8e493423": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "BYNDc",
+      "venues": []
+    },
+    "0xb200000000000000000000808e9cca9ed8e4da61": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "EATc",
+      "venues": []
+    },
+    "0xb20000000000000000000080bae0f654b5cc762c": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "RHc",
+      "venues": []
+    },
+    "0xb20000000000000000000081050ac3d4395df527": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "LCIDc",
+      "venues": []
+    },
+    "0xb2000000000000000000008258e8647cea5f4a19": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "CIENc",
+      "venues": []
+    },
+    "0xb20000000000000000000082cd2c7801305808df": {
+      "coverage_tier": "covered",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 1,
+      "symbol": "NOWc",
+      "venues": [
+        "aerodrome"
+      ]
+    },
+    "0xb2000000000000000000008451db06977def7b3a": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "DRIc",
+      "venues": []
+    },
+    "0xb2000000000000000000008463bf2557b483abf9": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "DKSc",
+      "venues": []
+    },
+    "0xb20000000000000000000084b031036e4dc7515b": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "BZFDc",
+      "venues": []
+    },
+    "0xb20000000000000000000085367ee92c15b5f613": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "ONc",
+      "venues": []
+    },
+    "0xb20000000000000000000086fffb23cbfbb1f1d8": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "MDBc",
+      "venues": []
+    },
+    "0xb200000000000000000000879a74c76c73a27d71": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "UAAc",
+      "venues": []
+    },
+    "0xb20000000000000000000087d144f2c70cd1a5f6": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "PLAYc",
+      "venues": []
+    },
+    "0xb20000000000000000000089221e238277d52515": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "WWc",
+      "venues": []
+    },
+    "0xb200000000000000000000896d4cf2f1866d9bce": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "AFRMc",
+      "venues": []
+    },
+    "0xb200000000000000000000898ed394469db1845c": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "BBAIc",
+      "venues": []
+    },
+    "0xb20000000000000000000089bc72c3e637a02adb": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "Wc",
+      "venues": []
+    },
+    "0xb2000000000000000000008a494d531d88cf55d6": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "ACHRc",
+      "venues": []
+    },
+    "0xb2000000000000000000008a7508619c717a7106": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "WMTc",
+      "venues": []
+    },
+    "0xb2000000000000000000008b934a18e189efe90f": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "PANWc",
+      "venues": []
+    },
+    "0xb2000000000000000000008baf7bb82e4c37743f": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "TTDc",
+      "venues": []
+    },
+    "0xb2000000000000000000008bc8786b856e61707c": {
+      "coverage_tier": "decision-eligible",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 7,
+      "symbol": "METAc",
+      "venues": [
+        "aerodrome",
+        "nami",
+        "uniswap"
+      ]
+    },
+    "0xb2000000000000000000008c02be39ba2cbda822": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "FOURc",
+      "venues": []
+    },
+    "0xb2000000000000000000008c06c1b3e7590ac982": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "GLWc",
+      "venues": []
+    },
+    "0xb2000000000000000000008c1bad82fa061f818a": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "BNCc",
+      "venues": []
+    },
+    "0xb2000000000000000000008cae79b36e9269eb86": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "Sc",
+      "venues": []
+    },
+    "0xb2000000000000000000008ce554342c043602a4": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "NRGc",
+      "venues": []
+    },
+    "0xb2000000000000000000008d426f3543babee7bb": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "MDGLc",
+      "venues": []
+    },
+    "0xb2000000000000000000008d5328e9208773dc58": {
+      "coverage_tier": "covered",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 2,
+      "symbol": "NVOc",
+      "venues": [
+        "aerodrome"
+      ]
+    },
+    "0xb2000000000000000000008d84c0d360848dbbde": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "UPSc",
+      "venues": []
+    },
+    "0xb2000000000000000000008df9bc22db1d7da2a5": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "WOLFc",
+      "venues": []
+    },
+    "0xb2000000000000000000008fc2a8c23cf5937b66": {
+      "coverage_tier": "covered",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 1,
+      "symbol": "PMc",
+      "venues": [
+        "aerodrome"
+      ]
+    },
+    "0xb2000000000000000000008fde21a1f5c69fec0b": {
+      "coverage_tier": "covered",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 1,
+      "symbol": "WDCc",
+      "venues": [
+        "aerodrome"
+      ]
+    },
+    "0xb200000000000000000000902f48cba1f39149f7": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "Uc",
+      "venues": []
+    },
+    "0xb20000000000000000000090658e3f9b29e2f5c2": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "JNJc",
+      "venues": []
+    },
+    "0xb2000000000000000000009188edfd2fcc8cc81e": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "OKLOc",
+      "venues": []
+    },
+    "0xb2000000000000000000009272a491812842aa84": {
+      "coverage_tier": "covered",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 1,
+      "symbol": "PTONc",
+      "venues": [
+        "aerodrome"
+      ]
+    },
+    "0xb2000000000000000000009426b660396ebcf343": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "USDEc",
+      "venues": []
+    },
+    "0xb20000000000000000000095528fb26ac48bda96": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "FPSc",
+      "venues": []
+    },
+    "0xb200000000000000000000964b7f3f335d7e70b5": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "SRPTc",
+      "venues": []
+    },
+    "0xb200000000000000000000964eed57d188766e55": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "ACIc",
+      "venues": []
+    },
+    "0xb200000000000000000000966cbe5b99be9b981a": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "RIGLc",
+      "venues": []
+    },
+    "0xb200000000000000000000978546fe604b8dcbc6": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "SMRc",
+      "venues": []
+    },
+    "0xb200000000000000000000979ef4dd6a001b58b1": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "VKTXc",
+      "venues": []
+    },
+    "0xb20000000000000000000097ca7d4003399c67e6": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "OLLIc",
+      "venues": []
+    },
+    "0xb200000000000000000000989432cd85947ee845": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "INTUc",
+      "venues": []
+    },
+    "0xb200000000000000000000989dc22d3656717734": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "LULUc",
+      "venues": []
+    },
+    "0xb2000000000000000000009a3602cf5d020afa98": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "HPQc",
+      "venues": []
+    },
+    "0xb2000000000000000000009b05748ece723cc6a6": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "ALLc",
+      "venues": []
+    },
+    "0xb2000000000000000000009b6d9e39d1667cabe1": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "NKTRc",
+      "venues": []
+    },
+    "0xb2000000000000000000009bba9a926f19cff8e7": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "DAVEc",
+      "venues": []
+    },
+    "0xb2000000000000000000009c1a6794874ddab197": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "AMATc",
+      "venues": []
+    },
+    "0xb2000000000000000000009c52748e1d1cbd5fd6": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "GEMIc",
+      "venues": []
+    },
+    "0xb2000000000000000000009cfe164a21cb5a11c5": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "AXPc",
+      "venues": []
+    },
+    "0xb2000000000000000000009db9ea88c3583b1ec8": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "IBMc",
+      "venues": []
+    },
+    "0xb200000000000000000000a0390525880c1ac72b": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "PRc",
+      "venues": []
+    },
+    "0xb200000000000000000000a071d80fa5b480c448": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "PSc",
+      "venues": []
+    },
+    "0xb200000000000000000000a0de75786c9f8fc58c": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "CRWDc",
+      "venues": []
+    },
+    "0xb200000000000000000000a15628dcea6934ede0": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "TWSTc",
+      "venues": []
+    },
+    "0xb200000000000000000000a1d16a625a68f38811": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "COMPc",
+      "venues": []
+    },
+    "0xb200000000000000000000a21b5ae62fea392b73": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "SKYDc",
+      "venues": []
+    },
+    "0xb200000000000000000000a26326a922ffa87f6c": {
+      "coverage_tier": "decision-eligible",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 4,
+      "symbol": "SONYc",
+      "venues": [
+        "aerodrome",
+        "uniswap"
+      ]
+    },
+    "0xb200000000000000000000a310e034e09186fb2d": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "MARAc",
+      "venues": []
+    },
+    "0xb200000000000000000000a49b5eed0c1cf792ba": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "TDOCc",
+      "venues": []
+    },
+    "0xb200000000000000000000a5e12a1842dfcdb118": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "CHWYc",
+      "venues": []
+    },
+    "0xb200000000000000000000a613d12deafbbb1db7": {
+      "coverage_tier": "decision-eligible",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 2,
+      "symbol": "DUOLc",
+      "venues": [
+        "aerodrome",
+        "uniswap"
+      ]
+    },
+    "0xb200000000000000000000a63e35e673e3776b88": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "KODKc",
+      "venues": []
+    },
+    "0xb200000000000000000000a640ec8c1de0efb484": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "AXTIc",
+      "venues": []
+    },
+    "0xb200000000000000000000a67c3271f0584f6c1d": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "RCATc",
+      "venues": []
+    },
+    "0xb200000000000000000000a70e43dff7acc203b0": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "KRMNc",
+      "venues": []
+    },
+    "0xb200000000000000000000a82a0c88dd258ed141": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "GSc",
+      "venues": []
+    },
+    "0xb200000000000000000000a8c925f62e6d194715": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "COHRc",
+      "venues": []
+    },
+    "0xb200000000000000000000a8f1c97d05a15e89e2": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "KMBc",
+      "venues": []
+    },
+    "0xb200000000000000000000a8fff5b07c6c45a5d2": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "KDc",
+      "venues": []
+    },
+    "0xb200000000000000000000a9dabfd3f0c5f21304": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "VSXYc",
+      "venues": []
+    },
+    "0xb200000000000000000000aa0aa80f99c33081e1": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "TMDXc",
+      "venues": []
+    },
+    "0xb200000000000000000000ab665a0775e19f0dc5": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "HONc",
+      "venues": []
+    },
+    "0xb200000000000000000000ab99cfa739e253872b": {
+      "coverage_tier": "decision-eligible",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 5,
+      "symbol": "MSFTc",
+      "venues": [
+        "aerodrome",
+        "uniswap"
+      ]
+    },
+    "0xb200000000000000000000abadf9b1fdb845db73": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "SPHRc",
+      "venues": []
+    },
+    "0xb200000000000000000000acccfe56da68b19a0d": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "GILDc",
+      "venues": []
+    },
+    "0xb200000000000000000000ad4ca95ce451578243": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "EVERc",
+      "venues": []
+    },
+    "0xb200000000000000000000b096f2f6021ac39617": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "FSLRc",
+      "venues": []
+    },
+    "0xb200000000000000000000b11c7e7295fe11fba7": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "HDc",
+      "venues": []
+    },
+    "0xb200000000000000000000b1a29cf17a1819288a": {
+      "coverage_tier": "decision-eligible",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 3,
+      "symbol": "ASTSc",
+      "venues": [
+        "aerodrome",
+        "uniswap"
+      ]
+    },
+    "0xb200000000000000000000b1b9200405fb52a8cf": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "RUNc",
+      "venues": []
+    },
+    "0xb200000000000000000000b1e11478cdd89ef7b2": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "OWLc",
+      "venues": []
+    },
+    "0xb200000000000000000000b2e8dba585b1ffb158": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "VRTc",
+      "venues": []
+    },
+    "0xb200000000000000000000b387255897c96fa9b1": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "INFQc",
+      "venues": []
+    },
+    "0xb200000000000000000000b44f193b3ffdf17037": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "JACKc",
+      "venues": []
+    },
+    "0xb200000000000000000000b576d2d93de1e93c8e": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "AAPc",
+      "venues": []
+    },
+    "0xb200000000000000000000b57f99acec3a7490d0": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "SGc",
+      "venues": []
+    },
+    "0xb200000000000000000000b5e07d13b2d68d60dd": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "WOOFc",
+      "venues": []
+    },
+    "0xb200000000000000000000b6354bc256dbcd93a8": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "RBRKc",
+      "venues": []
+    },
+    "0xb200000000000000000000b85fff48d4a26c3145": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "DECKc",
+      "venues": []
+    },
+    "0xb200000000000000000000b8f841940325db6b2c": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "TKOc",
+      "venues": []
+    },
+    "0xb200000000000000000000b92922f6d0c592a456": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "VRTXc",
+      "venues": []
+    },
+    "0xb200000000000000000000ba4309e1e35bc09f54": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "LWLGc",
+      "venues": []
+    },
+    "0xb200000000000000000000ba75b2046aad1c0a13": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "ETSYc",
+      "venues": []
+    },
+    "0xb200000000000000000000bba79a25edfd4b66c0": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "GAPc",
+      "venues": []
+    },
+    "0xb200000000000000000000bbc68170eb0b049e42": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "ENVXc",
+      "venues": []
+    },
+    "0xb200000000000000000000bc043cf5053540a588": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "SANAc",
+      "venues": []
+    },
+    "0xb200000000000000000000bc4d895df1eeed1d06": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "BKSYc",
+      "venues": []
+    },
+    "0xb200000000000000000000bd0c7627b663c581a6": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "RIOTc",
+      "venues": []
+    },
+    "0xb200000000000000000000bd0ea991ec5b5a8a03": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "ACMRc",
+      "venues": []
+    },
+    "0xb200000000000000000000bd938fa95e3e20c5a1": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "QSc",
+      "venues": []
+    },
+    "0xb200000000000000000000bf391678bf2e38cedb": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "DASHc",
+      "venues": []
+    },
+    "0xb200000000000000000000bf75a42183508f2614": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "CLFc",
+      "venues": []
+    },
+    "0xb200000000000000000000bfeabea0524c94af03": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "IRONc",
+      "venues": []
+    },
+    "0xb200000000000000000000c22fff2785bb27b39a": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "RGTIc",
+      "venues": []
+    },
+    "0xb200000000000000000000c25611c4bda138d298": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "PGc",
+      "venues": []
+    },
+    "0xb200000000000000000000c2e324d24d7eecd1fb": {
+      "coverage_tier": "decision-eligible",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 6,
+      "symbol": "AAPLc",
+      "venues": [
+        "aerodrome",
+        "uniswap"
+      ]
+    },
+    "0xb200000000000000000000c33e458d1f892a7917": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "ADIc",
+      "venues": []
+    },
+    "0xb200000000000000000000c367d37d07150182a2": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "UNHc",
+      "venues": []
+    },
+    "0xb200000000000000000000c36ce081dd09e86ca2": {
+      "coverage_tier": "covered",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 2,
+      "symbol": "BUDc",
+      "venues": [
+        "aerodrome"
+      ]
+    },
+    "0xb200000000000000000000c3de197eac6faa1e64": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "SBUXc",
+      "venues": []
+    },
+    "0xb200000000000000000000c3e498043bb44e8cbf": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "LOVEc",
+      "venues": []
+    },
+    "0xb200000000000000000000c597c476fcf9aed3a8": {
+      "coverage_tier": "covered",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 1,
+      "symbol": "NVAXc",
+      "venues": [
+        "aerodrome"
+      ]
+    },
+    "0xb200000000000000000000c5b17c065e5378d2a5": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "NOCc",
+      "venues": []
+    },
+    "0xb200000000000000000000c6dbae193c95c4e056": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "PLUGc",
+      "venues": []
+    },
+    "0xb200000000000000000000c6f4b26bd2be77f18d": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "WGSc",
+      "venues": []
+    },
+    "0xb200000000000000000000c715439d0cc5a8c67d": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "TGTc",
+      "venues": []
+    },
+    "0xb200000000000000000000c7d6120c543159ac73": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "MEDc",
+      "venues": []
+    },
+    "0xb200000000000000000000c8a7223510467d8563": {
+      "coverage_tier": "covered",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 3,
+      "symbol": "PDDc",
+      "venues": [
+        "aerodrome"
+      ]
+    },
+    "0xb200000000000000000000ca425ab42e07c35bc3": {
+      "coverage_tier": "covered",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 1,
+      "symbol": "QUBTc",
+      "venues": [
+        "aerodrome"
+      ]
+    },
+    "0xb200000000000000000000ca7c6d1438e7245eb6": {
+      "coverage_tier": "covered",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 1,
+      "symbol": "BILIc",
+      "venues": [
+        "aerodrome"
+      ]
+    },
+    "0xb200000000000000000000cae20cb1446462e24c": {
+      "coverage_tier": "covered",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 1,
+      "symbol": "UBERc",
+      "venues": [
+        "aerodrome"
+      ]
+    },
+    "0xb200000000000000000000cb6b2f4e33f0471556": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "PLc",
+      "venues": []
+    },
+    "0xb200000000000000000000cc17eea8c9495e1499": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "DNAc",
+      "venues": []
+    },
+    "0xb200000000000000000000cd7dfaef0423f1f103": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "RDWc",
+      "venues": []
+    },
+    "0xb200000000000000000000cd7e6b8042cb7c2bb5": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "AMCc",
+      "venues": []
+    },
+    "0xb200000000000000000000cdbf3e786ff34dbe51": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "UALc",
+      "venues": []
+    },
+    "0xb200000000000000000000ce4f8fc7ba5ca0359b": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "Fc",
+      "venues": []
+    },
+    "0xb200000000000000000000cf2593d5ffc13bd817": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "TOSTc",
+      "venues": []
+    },
+    "0xb200000000000000000000cf36d05963a3e2205c": {
+      "coverage_tier": "decision-eligible",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 2,
+      "symbol": "AAOIc",
+      "venues": [
+        "aerodrome",
+        "uniswap"
+      ]
+    },
+    "0xb200000000000000000000cf62d7125cc77d2f96": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "AURc",
+      "venues": []
+    },
+    "0xb200000000000000000000cf9b4854beb312e351": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "CRVSc",
+      "venues": []
+    },
+    "0xb200000000000000000000d033253abb1104107b": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "TEMc",
+      "venues": []
+    },
+    "0xb200000000000000000000d0d00a5e1f2d2eb61a": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "AVAVc",
+      "venues": []
+    },
+    "0xb200000000000000000000d154b5666b2d1e5a02": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "SWKSc",
+      "venues": []
+    },
+    "0xb200000000000000000000d2a1ee1f57be718e71": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "HEc",
+      "venues": []
+    },
+    "0xb200000000000000000000d2b7d9aee52f6c6bef": {
+      "coverage_tier": "covered",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 2,
+      "symbol": "BIDUc",
+      "venues": [
+        "aerodrome"
+      ]
+    },
+    "0xb200000000000000000000d2f4cf2f7debb244bb": {
+      "coverage_tier": "covered",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 1,
+      "symbol": "MCDc",
+      "venues": [
+        "aerodrome"
+      ]
+    },
+    "0xb200000000000000000000d2f94f19aa759f4690": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "WTIc",
+      "venues": []
+    },
+    "0xb200000000000000000000d5c0393796e92fcab0": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "LUVc",
+      "venues": []
+    },
+    "0xb200000000000000000000d61efd9f54a23ef9eb": {
+      "coverage_tier": "covered",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 2,
+      "symbol": "LIc",
+      "venues": [
+        "aerodrome"
+      ]
+    },
+    "0xb200000000000000000000d6351d2eb7ed29bf0b": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "ABTc",
+      "venues": []
+    },
+    "0xb200000000000000000000d65c9253b025af8c56": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "SPCEc",
+      "venues": []
+    },
+    "0xb200000000000000000000d80d163781a37a20f6": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "USARc",
+      "venues": []
+    },
+    "0xb200000000000000000000d8aeccf70906ab125d": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "HPEc",
+      "venues": []
+    },
+    "0xb200000000000000000000d9192b6b456483c2e8": {
+      "coverage_tier": "decision-eligible",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 6,
+      "symbol": "AMZNc",
+      "venues": [
+        "aerodrome",
+        "nami",
+        "uniswap"
+      ]
+    },
+    "0xb200000000000000000000da21e7163dc02c0616": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "BEAMc",
+      "venues": []
+    },
+    "0xb200000000000000000000da6f64c306234127e0": {
+      "coverage_tier": "covered",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 2,
+      "symbol": "SAPc",
+      "venues": [
+        "aerodrome"
+      ]
+    },
+    "0xb200000000000000000000da9874b62b55e791b5": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "CEGc",
+      "venues": []
+    },
+    "0xb200000000000000000000db15c02e133a9dab99": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "LFMDc",
+      "venues": []
+    },
+    "0xb200000000000000000000dba9e310296c1066c0": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "KLACc",
+      "venues": []
+    },
+    "0xb200000000000000000000dd40740e9c445e211b": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "SMc",
+      "venues": []
+    },
+    "0xb200000000000000000000df14b76c292a32982d": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "GTLBc",
+      "venues": []
+    },
+    "0xb200000000000000000000df3eb2af7316b29122": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "SLDPc",
+      "venues": []
+    },
+    "0xb200000000000000000000dfa6c77aea5329d187": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "WKHSc",
+      "venues": []
+    },
+    "0xb200000000000000000000e0b9460c97f38f412f": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "TAPc",
+      "venues": []
+    },
+    "0xb200000000000000000000e1b0b17fd671771813": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "PUMPc",
+      "venues": []
+    },
+    "0xb200000000000000000000e215e9b76ecba02468": {
+      "coverage_tier": "covered",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 1,
+      "symbol": "MRNAc",
+      "venues": [
+        "aerodrome"
+      ]
+    },
+    "0xb200000000000000000000e2c4cb0f18b68cc776": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "ZBRAc",
+      "venues": []
+    },
+    "0xb200000000000000000000e359b2ca361e1905c9": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "CCc",
+      "venues": []
+    },
+    "0xb200000000000000000000e3e784cdf88df2959d": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "BACc",
+      "venues": []
+    },
+    "0xb200000000000000000000e410ae30abdda3aee0": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "SAMc",
+      "venues": []
+    },
+    "0xb200000000000000000000e47c019ec313aad347": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "KTOSc",
+      "venues": []
+    },
+    "0xb200000000000000000000e4a60215e10d6d8c2b": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "CMGc",
+      "venues": []
+    },
+    "0xb200000000000000000000e6d729a9705303bd2b": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "NTAPc",
+      "venues": []
+    },
+    "0xb200000000000000000000e6eb8a05d09d73dad5": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "RTXc",
+      "venues": []
+    },
+    "0xb200000000000000000000e7137ca231c5e35f25": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "ONDSc",
+      "venues": []
+    },
+    "0xb200000000000000000000e71d4e45d1421251cb": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "ANETc",
+      "venues": []
+    },
+    "0xb200000000000000000000e88efe88d8ade3f0da": {
+      "coverage_tier": "covered",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 2,
+      "symbol": "WRDc",
+      "venues": [
+        "aerodrome"
+      ]
+    },
+    "0xb200000000000000000000e8e50cbbb9a3861a3c": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "RKLBc",
+      "venues": []
+    },
+    "0xb200000000000000000000e90b1ac2da02106417": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "ESc",
+      "venues": []
+    },
+    "0xb200000000000000000000ea2df44a307cab279c": {
+      "coverage_tier": "covered",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 1,
+      "symbol": "BMNRc",
+      "venues": [
+        "aerodrome"
+      ]
+    },
+    "0xb200000000000000000000ec3c4c7395cc609813": {
+      "coverage_tier": "covered",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 1,
+      "symbol": "MRVLc",
+      "venues": [
+        "aerodrome"
+      ]
+    },
+    "0xb200000000000000000000ec3cd781acad151fdc": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "SPBc",
+      "venues": []
+    },
+    "0xb200000000000000000000ec622942b76a2d3b21": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "COPc",
+      "venues": []
+    },
+    "0xb200000000000000000000eda6c2c6f11e0f838f": {
+      "coverage_tier": "covered",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 1,
+      "symbol": "LITEc",
+      "venues": [
+        "aerodrome"
+      ]
+    },
+    "0xb200000000000000000000ee6fd7de967ea1a0dc": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "FIZZc",
+      "venues": []
+    },
+    "0xb200000000000000000000ee80a37e1f888644b3": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "MTNc",
+      "venues": []
+    },
+    "0xb200000000000000000000ef65afe26a07bab24e": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "PENGc",
+      "venues": []
+    },
+    "0xb200000000000000000000ef7f9a89256fa06887": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "VERAc",
+      "venues": []
+    },
+    "0xb200000000000000000000ef8d64f65302ec1fb2": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "VRDNc",
+      "venues": []
+    },
+    "0xb200000000000000000000f0e13d9c1cdfd211c8": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "GPROc",
+      "venues": []
+    },
+    "0xb200000000000000000000f111184a74720787e6": {
+      "coverage_tier": "covered",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 1,
+      "symbol": "CRWVc",
+      "venues": [
+        "aerodrome"
+      ]
+    },
+    "0xb200000000000000000000f1a0f91e34892e4718": {
+      "coverage_tier": "decision-eligible",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 3,
+      "symbol": "LLYc",
+      "venues": [
+        "aerodrome",
+        "uniswap"
+      ]
+    },
+    "0xb200000000000000000000f215e4c890cfb7176b": {
+      "coverage_tier": "covered",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 1,
+      "symbol": "CAKEc",
+      "venues": [
+        "aerodrome"
+      ]
+    },
+    "0xb200000000000000000000f3049f4aa834b23b64": {
+      "coverage_tier": "covered",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 2,
+      "symbol": "HSAIc",
+      "venues": [
+        "aerodrome"
+      ]
+    },
+    "0xb200000000000000000000f327a373aa86ac86a8": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "HSYc",
+      "venues": []
+    },
+    "0xb200000000000000000000f32d61ba597eddfbfd": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "CANc",
+      "venues": []
+    },
+    "0xb200000000000000000000f5049c6a6f3a47348d": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "GEc",
+      "venues": []
+    },
+    "0xb200000000000000000000f6b0417af5f52341fc": {
+      "coverage_tier": "covered",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 2,
+      "symbol": "INFYc",
+      "venues": [
+        "aerodrome"
+      ]
+    },
+    "0xb200000000000000000000f720c26062bc3067da": {
+      "coverage_tier": "decision-eligible",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 4,
+      "symbol": "TTWOc",
+      "venues": [
+        "aerodrome",
+        "uniswap"
+      ]
+    },
+    "0xb200000000000000000000f814b4666c2d70a670": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "SOc",
+      "venues": []
+    },
+    "0xb200000000000000000000f9274fe22c626373f2": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "BWc",
+      "venues": []
+    },
+    "0xb200000000000000000000fa63cfff5c794dbb95": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "CLSKc",
+      "venues": []
+    },
+    "0xb200000000000000000000fab55ad3773f2c8ef1": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "LEUc",
+      "venues": []
+    },
+    "0xb200000000000000000000fbc17101e786511a5e": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "HYMCc",
+      "venues": []
+    },
+    "0xb200000000000000000000fc737aea6196ab5a4c": {
+      "coverage_tier": "decision-eligible",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 2,
+      "symbol": "AVGOc",
+      "venues": [
+        "aerodrome",
+        "uniswap"
+      ]
+    },
+    "0xb200000000000000000000fcd9c2a4ee4a2b5481": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "EMRc",
+      "venues": []
+    },
+    "0xb200000000000000000000fd10d35a781efb5c2f": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "BAc",
+      "venues": []
+    },
+    "0xb200000000000000000000fd2f87532b90095211": {
+      "coverage_tier": "decision-eligible",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 4,
+      "symbol": "MUc",
+      "venues": [
+        "aerodrome",
+        "uniswap"
+      ]
+    },
+    "0xb200000000000000000000fde956536a25725156": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "JPMc",
+      "venues": []
+    },
+    "0xb200000000000000000000fe6b283199e6bd432d": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "OPRAc",
+      "venues": []
+    },
+    "0xb200000000000000000000fec679b39992f67627": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "VVVc",
+      "venues": []
+    },
+    "0xb200000000000000000000ffada41c4ed20b8d0f": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "FUBOc",
+      "venues": []
+    },
+    "0xb200000000000000000000ffb10718f880a48274": {
+      "coverage_tier": "listed",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 0,
+      "symbol": "CVNAc",
+      "venues": []
+    },
+    "0xb200000000000000000000ffef181db6dc5ed6a3": {
+      "coverage_tier": "covered",
+      "decimals": 8,
+      "decimals_source": "rpc_validated",
+      "qualifying_pools": 1,
+      "symbol": "KOc",
+      "venues": [
+        "aerodrome"
+      ]
+    }
+  },
+  "universe_version": "2026-11-24-census-v1"
+}

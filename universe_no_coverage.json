@@ -1,0 +1,2745 @@
+{
+  "census_date": "2026-11-24",
+  "count_no_coverage": 342,
+  "note": "Token listed di Coinbase TANPA >=1 pool USDC yang lolos filter per-pool (\u00a71.2b, preliminary DexScreener-only; S1-B mengonfirmasi). BUKAN dihapus \u2014 tercatat di sini.",
+  "tokens": [
+    {
+      "coverage_tier": "listed",
+      "name": "AppLovin Corporation",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "APPc",
+      "token_address": "0xb20000000000000000000006f910a0e7BBD3c168"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Merck & Co., Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "MRKc",
+      "token_address": "0xb200000000000000000000241fe94fe97FcBf034"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Lam Research Corporation",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "LRCXc",
+      "token_address": "0xB20000000000000000000034975347FF1848AAb9"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "MP Materials Corp.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "MPc",
+      "token_address": "0xB2000000000000000000003958003d801724F9d3"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Rivian Automotive, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "RIVNc",
+      "token_address": "0xB2000000000000000000003e4249C65bd6c037d9"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "SoFi Technologies, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "SOFIc",
+      "token_address": "0xB2000000000000000000003eF37a7c863DC1482A"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Wendy's Co",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "WENc",
+      "token_address": "0xB20000000000000000000044E3CD7a0E1028E57a"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Smartbird, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "BIRDc",
+      "token_address": "0xB200000000000000000000535fE96f18204BFD96"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Qualcomm Incorporated",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "QCOMc",
+      "token_address": "0xB2000000000000000000005672D78eFF30D24665"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Salesforce, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "CRMc",
+      "token_address": "0xB2000000000000000000006432a3a7991e718DBB"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Vistra Corp.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "VSTc",
+      "token_address": "0xB20000000000000000000079DC24fe2FBD09110f"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Johnson & Johnson",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "JNJc",
+      "token_address": "0xb20000000000000000000090658e3f9b29E2f5C2"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "lululemon athletica inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "LULUc",
+      "token_address": "0xB200000000000000000000989dc22D3656717734"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Vertiv Holdings Co",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "VRTc",
+      "token_address": "0xB200000000000000000000b2E8dBA585B1ffB158"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "UnitedHealth Group Incorporated",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "UNHc",
+      "token_address": "0xb200000000000000000000c367d37d07150182A2"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "AMC Entertainment Holdings, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "AMCc",
+      "token_address": "0xB200000000000000000000CD7e6b8042cb7c2BB5"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "GitLab Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "GTLBc",
+      "token_address": "0xb200000000000000000000df14B76C292A32982d"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Bank of America Corporation",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "BACc",
+      "token_address": "0xB200000000000000000000E3e784CDF88Df2959d"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Chipotle Mexican Grill, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "CMGc",
+      "token_address": "0xB200000000000000000000E4A60215E10D6D8c2b"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Arista Networks, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "ANETc",
+      "token_address": "0xB200000000000000000000E71D4E45D1421251cb"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Rocket Lab Corporation",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "RKLBc",
+      "token_address": "0xb200000000000000000000e8E50CBbb9a3861a3C"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Rocket Companies, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "RKTc",
+      "token_address": "0xb200000000000000000000000D3176ee4af1102d"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Six Flags Entertainment Corporation",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "FUNc",
+      "token_address": "0xb2000000000000000000000199aE48796c61909e"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Airbnb, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "ABNBc",
+      "token_address": "0xb200000000000000000000045beafafBE0Dc7664"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Lyft, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "LYFTc",
+      "token_address": "0xB20000000000000000000005717Baa337022c782"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "DigitalOcean Holdings, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "DOCNc",
+      "token_address": "0xB20000000000000000000005bEFA57b9B871E737"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Cohu, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "COHUc",
+      "token_address": "0xb20000000000000000000007b4Fcc48E2d70dCc6"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "BJ's Wholesale Club Holdings, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "BJc",
+      "token_address": "0xB200000000000000000000082f7FEA8F2eE8f438"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Mirion Technologies, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "MIRc",
+      "token_address": "0xb20000000000000000000009614107be6f562BA8"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Tron Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "TRONc",
+      "token_address": "0xb2000000000000000000000A22ac22D031B657DA"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "The Walt Disney Company",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "DISc",
+      "token_address": "0xb2000000000000000000000bD75bF439A38bF7DF"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Sezzle Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "SEZLc",
+      "token_address": "0xb2000000000000000000000C1F8aCD3c4496a762"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "SELLAS Life Sciences Group, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "SLSc",
+      "token_address": "0xB2000000000000000000000C431e2a7c0CE7Ea31"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "QXO, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "QXOc",
+      "token_address": "0xB2000000000000000000000Cd31253817b36f88a"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "D-Wave Quantum Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "QBTSc",
+      "token_address": "0xb2000000000000000000000d46361d597f543d06"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "SharonAI Holdings Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "SHAZc",
+      "token_address": "0xB2000000000000000000000D9947c759429e7fE5"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Nuvation Bio Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "NUVBc",
+      "token_address": "0xB2000000000000000000000dE6A780902Db4eC09"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Zoom Communications, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "ZMc",
+      "token_address": "0xB2000000000000000000000E63b7B0b6BC5B9213"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "RUM Group Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "RUMc",
+      "token_address": "0xb2000000000000000000000F28146Eb28ea2835B"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Kohl's Corporation",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "KSSc",
+      "token_address": "0xB200000000000000000000105A1f43ff3605C5De"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Absci Corporation",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "ABSIc",
+      "token_address": "0xb20000000000000000000010718397ACA876A20a"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Twenty One Capital, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "XXIc",
+      "token_address": "0xB200000000000000000000115bf2283265FB04Db"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Planet Fitness, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "PLNTc",
+      "token_address": "0xb20000000000000000000011b20aebe0Bd567F1c"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Allient Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "ALNTc",
+      "token_address": "0xB20000000000000000000011EEA811eAEdb29156"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Live Nation Entertainment, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "LYVc",
+      "token_address": "0xb2000000000000000000001347ccD9e83d5Bf3e0"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "The Simply Good Foods Company",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "SMPLc",
+      "token_address": "0xB2000000000000000000001409f816682b7772b7"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Cisco Systems, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "CSCOc",
+      "token_address": "0xb20000000000000000000015776Ea82655C4F034"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Aehr Test Systems",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "AEHRc",
+      "token_address": "0xb2000000000000000000001775Bd17f2289DE527"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Omeros Corporation",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "OMERc",
+      "token_address": "0xb200000000000000000000178D4c37485ea47eF6"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Abercrombie & Fitch Co.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "ANFc",
+      "token_address": "0xb20000000000000000000019641B253b3e2c8A24"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Ionis Pharmaceuticals, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "IONSc",
+      "token_address": "0xB2000000000000000000001997390508A5617d47"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Serve Robotics Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "SERVc",
+      "token_address": "0xB2000000000000000000001A114de6d32433F3C0"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Core Scientific, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "CORZc",
+      "token_address": "0xB2000000000000000000001aaa9010Cd65f82c5E"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Constellation Brands, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "STZc",
+      "token_address": "0xB2000000000000000000001AC12227a8aE0Ef3Ac"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "CAVA Group, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "CAVAc",
+      "token_address": "0xb2000000000000000000001b6e407239EB31EDCf"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Danaher Corporation",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "DHRc",
+      "token_address": "0xB2000000000000000000001bcF0441201d513Fa5"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "MicroVision, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "MVISc",
+      "token_address": "0xB2000000000000000000001BCf8E5022d7f61919"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "ChargePoint Holdings, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "CHPTc",
+      "token_address": "0xB2000000000000000000001cA01a48688eC7D3CC"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Pinterest, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "PINSc",
+      "token_address": "0xB2000000000000000000001dFD8c413Ecd6EC630"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Forward Industries, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "FWDIc",
+      "token_address": "0xB2000000000000000000001e838D4bEb66cf8FB7"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Dutch Bros Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "BROSc",
+      "token_address": "0xB2000000000000000000001ECFAcCd9047D3B544"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Tandem Diabetes Care, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "TNDMc",
+      "token_address": "0xB2000000000000000000001F6B9c31e43560a924"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Harley-Davidson, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "HOGc",
+      "token_address": "0xB2000000000000000000001FaA7Fa5eF4184eDE5"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Sable Offshore Corp.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "SOCc",
+      "token_address": "0xb2000000000000000000001fAb744De0b829EeD1"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Richtech Robotics Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "RRc",
+      "token_address": "0xB20000000000000000000020790305A981E88a67"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "The RealReal, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "REALc",
+      "token_address": "0xb200000000000000000000211a2ED33FAD95B0B3"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Cognex Corporation",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "CGNXc",
+      "token_address": "0xB2000000000000000000002451aF655AE942308D"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Rockwell Automation, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "ROKc",
+      "token_address": "0xb200000000000000000000252C42b75F49DacF59"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Okta, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "OKTAc",
+      "token_address": "0xb2000000000000000000002570652530A5E0F771"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Opendoor Technologies Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "OPENc",
+      "token_address": "0xb200000000000000000000259694B27Bf052E7d7"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "The Goodyear Tire & Rubber Company",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "GTc",
+      "token_address": "0xb200000000000000000000264d3A9dea68aA6631"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "FMC Corporation",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "FMCc",
+      "token_address": "0xB2000000000000000000002756093a39E13E08c6"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Wingstop Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "WINGc",
+      "token_address": "0xB200000000000000000000281C973bf2555dD94B"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Navitas Semiconductor Corporation",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "NVTSc",
+      "token_address": "0xb2000000000000000000002a0EC8F8861cE98983"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "OpenWorld, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "OPNWc",
+      "token_address": "0xb2000000000000000000002a3E91E59fFc3CeD94"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Sidus Space, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "SIDUc",
+      "token_address": "0xb2000000000000000000002B9AC07a0544688079"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Amkor Technology, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "AMKRc",
+      "token_address": "0xb2000000000000000000002C8b0e3d7Ff26f81a0"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Datadog, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "DDOGc",
+      "token_address": "0xb2000000000000000000002C99976e240eD773E6"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Strive, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "ASSTc",
+      "token_address": "0xb2000000000000000000002Cd78D7C981e97c330"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Tripadvisor, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "TRIPc",
+      "token_address": "0xb2000000000000000000002f12AfA8f583b6CE85"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Intuitive Surgical, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "ISRGc",
+      "token_address": "0xB2000000000000000000002F7Bd112b645574214"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Offerpad Solutions Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "OPADc",
+      "token_address": "0xB2000000000000000000003086b1355bd43e25Da"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Visteon Corporation",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "VCc",
+      "token_address": "0xb20000000000000000000030945cB9c538D0B326"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Ouster, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "OUSTc",
+      "token_address": "0xB200000000000000000000314B9f5F580168766a"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "The Western Union Company",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "WUc",
+      "token_address": "0xb20000000000000000000033be01089Cf02a2025"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Waystar Holding Corp.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "WAYc",
+      "token_address": "0xB2000000000000000000003496C04Fcfee6997E0"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Prime Medicine, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "PRMEc",
+      "token_address": "0xb200000000000000000000351bd76098B359ADa8"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "CorMedix Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "CRMDc",
+      "token_address": "0xb200000000000000000000386f243773D48a4Be7"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Coupang, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "CPNGc",
+      "token_address": "0xB20000000000000000000038e9982fE875b7E066"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Quantinuum Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "QNTc",
+      "token_address": "0xb2000000000000000000003963C3bEAA3eba9bfc"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "TG Therapeutics, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "TGTXc",
+      "token_address": "0xb2000000000000000000003A67b9f116f25513d6"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Newmont Corporation",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "NEMc",
+      "token_address": "0xb2000000000000000000003AA0410688bAf4Da88"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Energy Vault Holdings, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "NRGVc",
+      "token_address": "0xB2000000000000000000003ac3D02891f0FC785e"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Unusual Machines, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "UMACc",
+      "token_address": "0xb2000000000000000000003aE0817C304acBB1DE"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Comcast Corporation",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "CMCSAc",
+      "token_address": "0xb2000000000000000000003bd46dbdE905508B16"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Chevron Corporation",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "CVXc",
+      "token_address": "0xB2000000000000000000003bf350E420c13e431a"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "H&R Block, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "HRBc",
+      "token_address": "0xB2000000000000000000003C5564b8161680C86D"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "CLEAR Secure, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "YOUc",
+      "token_address": "0xb2000000000000000000003cdB2c0F94e4EBf605"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Boot Barn Holdings, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "BOOTc",
+      "token_address": "0xB2000000000000000000003E5e2892158e25DD7b"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "FIGS, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "FIGSc",
+      "token_address": "0xB2000000000000000000003EbE6a3A1Df07DB619"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Snap Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "SNAPc",
+      "token_address": "0xb2000000000000000000003F265aB1f74Dd89AC0"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Figma, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "FIGc",
+      "token_address": "0xb2000000000000000000003Fa80315bFd87eFed8"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Ubiquiti Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "UIc",
+      "token_address": "0xb2000000000000000000003fC6f17C8B775bcA78"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Smith & Wesson Brands, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "SWBIc",
+      "token_address": "0xb2000000000000000000003FE90a64263B7F9E74"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Celsius Holdings, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "CELHc",
+      "token_address": "0xB2000000000000000000004161B4168d03841511"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Atlassian Corporation",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "TEAMc",
+      "token_address": "0xB2000000000000000000004217B9b4f6f6aCb7B8"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Achieve Life Sciences, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "QUITc",
+      "token_address": "0xb200000000000000000000426663e7212288FA97"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Gartner, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "ITc",
+      "token_address": "0xB20000000000000000000042CBbae483635C3774"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Crocs, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "CROXc",
+      "token_address": "0xb200000000000000000000431a5C1E48E3b1d130"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "TeraWulf Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "WULFc",
+      "token_address": "0xb200000000000000000000432a1d2Bd864ACEc82"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Groupon, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "GRPNc",
+      "token_address": "0xB2000000000000000000004637e5A787885C720D"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Annexon, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "ANNXc",
+      "token_address": "0xB200000000000000000000473F033036350312Da"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Astera Labs, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "ALABc",
+      "token_address": "0xb200000000000000000000476C5a355AbE1a2794"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Symbotic Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "SYMc",
+      "token_address": "0xb20000000000000000000047984EcaE84db5fcF9"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "The Timken Company",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "TKRc",
+      "token_address": "0xB20000000000000000000049B9fC3b3c8C9402ff"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Amgen Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "AMGNc",
+      "token_address": "0xB20000000000000000000049d38a179C97E33381"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Root, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "ROOTc",
+      "token_address": "0xB2000000000000000000004AA2B559CA0a0bbF5D"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Axon Enterprise, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "AXONc",
+      "token_address": "0xb2000000000000000000004cc3E96cEb78541d33"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Blink Charging Co.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "BLNKc",
+      "token_address": "0xB2000000000000000000004EC7c19212979672F9"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Voyager Technologies, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "VOYGc",
+      "token_address": "0xb2000000000000000000004F13a2441D3C82eE54"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Firefly Aerospace Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "FLYc",
+      "token_address": "0xB2000000000000000000004fc7a0C25178A0D633"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "American Airlines Group Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "AALc",
+      "token_address": "0xB2000000000000000000004FeB8D277Dd14b08Bb"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Recursion Pharmaceuticals, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "RXRXc",
+      "token_address": "0xb200000000000000000000501Ef81F911eB57656"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Dell Technologies Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "DELLc",
+      "token_address": "0xb20000000000000000000050fE6d1Ef35B02E8fD"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Vishay Precision Group, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "VPGc",
+      "token_address": "0xb20000000000000000000051B531471096C5CAf6"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Ulta Beauty, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "ULTAc",
+      "token_address": "0xb20000000000000000000053d000bAC95662D1e4"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Intellia Therapeutics, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "NTLAc",
+      "token_address": "0xB20000000000000000000054a4a3659B55272125"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Visa Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "Vc",
+      "token_address": "0xB20000000000000000000054b11Fd279a4f7D4EF"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "GameSquare Holdings, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "GAMEc",
+      "token_address": "0xb2000000000000000000005550e8506124236271"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Sharplink, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "SBETc",
+      "token_address": "0xb200000000000000000000559eC0BEdaacf436eA"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Clover Health Investments, Corp.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "CLOVc",
+      "token_address": "0xb20000000000000000000055e63C4c1cDC6b7A36"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "IonQ, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "IONQc",
+      "token_address": "0xb20000000000000000000058F143099d5F79b0ec"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Candel Therapeutics, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "CADLc",
+      "token_address": "0xb200000000000000000000593460934fEC1b43Dc"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Figure Technology Solutions, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "FIGRc",
+      "token_address": "0xb2000000000000000000005A41bef59807119850"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Nordson Corporation",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "NDSNc",
+      "token_address": "0xb2000000000000000000005B1E5aD3c6aeaBedDd"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Syndax Pharmaceuticals, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "SNDXc",
+      "token_address": "0xB2000000000000000000005B8CEcE4a5F9306bb4"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Monster Beverage Corporation",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "MNSTc",
+      "token_address": "0xb2000000000000000000005BCdE0a6926919FEF9"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Shake Shack Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "SHAKc",
+      "token_address": "0xb2000000000000000000005C16DD6f675BF8Ceb7"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Krispy Kreme, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "DNUTc",
+      "token_address": "0xB2000000000000000000005c41b0018612629072"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "YUM! Brands, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "YUMc",
+      "token_address": "0xB2000000000000000000005C8324136dE0f4134a"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "NextNav Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "NNc",
+      "token_address": "0xB2000000000000000000005D6Afb89705Cd203eA"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Caterpillar Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "CATc",
+      "token_address": "0xB2000000000000000000005de7f2E0AcA219c070"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "American Eagle Outfitters, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "AEOc",
+      "token_address": "0xB2000000000000000000006064f8EC027f042294"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "YETI Holdings, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "YETIc",
+      "token_address": "0xb200000000000000000000613C15F118DF2b189B"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Regeneron Pharmaceuticals, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "REGNc",
+      "token_address": "0xb2000000000000000000006377b3C06A3e3e9ae5"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Whirlpool Corporation",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "WHRc",
+      "token_address": "0xb2000000000000000000006448A906E8942850fa"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Yelp Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "YELPc",
+      "token_address": "0xB2000000000000000000006454926Ad8576DC50e"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Blackstone Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "BXc",
+      "token_address": "0xB200000000000000000000645c1Ec509E4261682"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "JetBlue Airways Corporation",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "JBLUc",
+      "token_address": "0xB20000000000000000000064832d0d2d38E2F4fc"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Hyperliquid Strategies Inc",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "PURRc",
+      "token_address": "0xB20000000000000000000065ca0F772a5502E976"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Super Micro Computer, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "SMCIc",
+      "token_address": "0xB20000000000000000000065F11d53A1e442bB84"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "ExxonMobil Holdings Corporation",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "XOMc",
+      "token_address": "0xb20000000000000000000065F7d0D6aac5fD4Bfd"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Intuitive Machines, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "LUNRc",
+      "token_address": "0xB200000000000000000000674E1325DBdF06B309"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Block, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "XYZc",
+      "token_address": "0xB20000000000000000000067C8C151f24E1c9924"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Papa John\u2019s International, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "PZZAc",
+      "token_address": "0xb20000000000000000000068987dacde1dB79Cd4"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Cipher Digital Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "CIFRc",
+      "token_address": "0xB200000000000000000000690275843B6e246286"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Fluence Energy, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "FLNCc",
+      "token_address": "0xB200000000000000000000695b10DD3E1B0EA070"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "NANO Nuclear Energy Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "NNEc",
+      "token_address": "0xB20000000000000000000069d694d397b9388dAC"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "e.l.f. Beauty, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "ELFc",
+      "token_address": "0xb2000000000000000000006b7f6966EE0453E251"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Teradyne, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "TERc",
+      "token_address": "0xB2000000000000000000006BC65AF32d24870A2d"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "UiPath, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "PATHc",
+      "token_address": "0xB2000000000000000000006D02167C4864e72bD2"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "PepsiCo, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "PEPc",
+      "token_address": "0xB2000000000000000000006d1bC7Faa266Eb099D"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Galaxy Digital Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "GLXYc",
+      "token_address": "0xB2000000000000000000006de7888c3FffD803ac"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Hut 8 Corp.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "HUTc",
+      "token_address": "0xb2000000000000000000006Ee1C139a723872e09"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "NIKE, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "NKEc",
+      "token_address": "0xB20000000000000000000071F6c75C5892b09Beb"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "TTM Technologies, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "TTMIc",
+      "token_address": "0xB2000000000000000000007292D3D91c6b559058"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "C3.ai, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "AIc",
+      "token_address": "0xb20000000000000000000072B5C2B2D18Ee8A2a5"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Ball Corporation",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "BALLc",
+      "token_address": "0xb200000000000000000000747BFfA52Fe2C2510B"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "eBay Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "EBAYc",
+      "token_address": "0xB2000000000000000000007578836b0Ff7780EB4"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Zscaler, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "ZSc",
+      "token_address": "0xB20000000000000000000076A288B15B61Ec78F6"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Biogen Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "BIIBc",
+      "token_address": "0xB20000000000000000000077bbd6469ecFE8c0b4"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "ImmunityBio, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "IBRXc",
+      "token_address": "0xB20000000000000000000077D13D6c79B6C11c5A"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "PureCycle Technologies, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "PCTc",
+      "token_address": "0xB200000000000000000000796c05DD2536C7f91c"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Upstart Holdings, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "UPSTc",
+      "token_address": "0xB2000000000000000000007A8a3Ab2d3b319036D"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Enphase Energy, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "ENPHc",
+      "token_address": "0xB2000000000000000000007a90b2D9Ed101035A8"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Amprius Technologies, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "AMPXc",
+      "token_address": "0xB2000000000000000000007c7088757Cb3703648"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "NextDecade Corporation",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "NEXTc",
+      "token_address": "0xb2000000000000000000007c92881e458338B34d"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Applied Digital Corporation",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "APLDc",
+      "token_address": "0xb2000000000000000000007Cbdf8fa3861E51721"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Globalstar, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "GSATc",
+      "token_address": "0xb2000000000000000000007E032680bAd472032f"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Beyond Meat, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "BYNDc",
+      "token_address": "0xB200000000000000000000801830b13b8E493423"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Brinker International, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "EATc",
+      "token_address": "0xB200000000000000000000808E9CCA9ED8e4Da61"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "RH",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "RHc",
+      "token_address": "0xB20000000000000000000080bAE0f654B5cC762C"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Lucid Group, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "LCIDc",
+      "token_address": "0xB20000000000000000000081050Ac3d4395Df527"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Ciena Corporation",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "CIENc",
+      "token_address": "0xB2000000000000000000008258e8647CEa5F4A19"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Darden Restaurants, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "DRIc",
+      "token_address": "0xB2000000000000000000008451dB06977dEF7b3A"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "DICK'S Sporting Goods, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "DKSc",
+      "token_address": "0xB2000000000000000000008463bf2557B483AbF9"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "BuzzFeed, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "BZFDc",
+      "token_address": "0xB20000000000000000000084B031036E4dc7515B"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "ON Semiconductor Corporation",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "ONc",
+      "token_address": "0xB20000000000000000000085367ee92c15B5F613"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "MongoDB, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "MDBc",
+      "token_address": "0xB20000000000000000000086ffFb23cBfbb1F1D8"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Under Armour, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "UAAc",
+      "token_address": "0xb200000000000000000000879A74C76C73a27d71"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Dave & Buster\u2019s Entertainment, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "PLAYc",
+      "token_address": "0xB20000000000000000000087d144F2C70cd1A5F6"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "WW International, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "WWc",
+      "token_address": "0xb20000000000000000000089221e238277d52515"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Affirm Holdings, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "AFRMc",
+      "token_address": "0xb200000000000000000000896d4cF2f1866d9bCe"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "BigBear.ai Holdings, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "BBAIc",
+      "token_address": "0xb200000000000000000000898eD394469DB1845C"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Wayfair Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "Wc",
+      "token_address": "0xb20000000000000000000089BC72C3E637a02AdB"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Archer Aviation Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "ACHRc",
+      "token_address": "0xb2000000000000000000008a494D531D88cF55d6"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Walmart Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "WMTc",
+      "token_address": "0xb2000000000000000000008a7508619c717A7106"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Palo Alto Networks, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "PANWc",
+      "token_address": "0xb2000000000000000000008b934a18e189efe90f"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "The Trade Desk, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "TTDc",
+      "token_address": "0xB2000000000000000000008baF7bb82e4C37743f"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Shift4 Payments, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "FOURc",
+      "token_address": "0xB2000000000000000000008C02BE39ba2CbdA822"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Corning Incorporated",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "GLWc",
+      "token_address": "0xB2000000000000000000008C06c1B3E7590ac982"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "BNB Standard Corporation",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "BNCc",
+      "token_address": "0xb2000000000000000000008c1bAD82Fa061F818a"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "SentinelOne, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "Sc",
+      "token_address": "0xb2000000000000000000008CaE79B36e9269Eb86"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "NRG Energy, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "NRGc",
+      "token_address": "0xb2000000000000000000008cE554342C043602a4"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Madrigal Pharmaceuticals, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "MDGLc",
+      "token_address": "0xB2000000000000000000008D426f3543BaBeE7bB"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "United Parcel Service, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "UPSc",
+      "token_address": "0xb2000000000000000000008D84C0d360848dBbdE"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Wolfspeed, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "WOLFc",
+      "token_address": "0xB2000000000000000000008Df9Bc22Db1d7dA2a5"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Unity Software Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "Uc",
+      "token_address": "0xB200000000000000000000902F48CBa1f39149F7"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Oklo Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "OKLOc",
+      "token_address": "0xB2000000000000000000009188EDFd2FCc8cc81e"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "StablecoinX Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "USDEc",
+      "token_address": "0xB2000000000000000000009426B660396eBCf343"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Forgent Power Solutions, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "FPSc",
+      "token_address": "0xb20000000000000000000095528Fb26aC48Bda96"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Sarepta Therapeutics, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "SRPTc",
+      "token_address": "0xB200000000000000000000964b7F3f335d7e70B5"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Albertsons Companies, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "ACIc",
+      "token_address": "0xB200000000000000000000964eeD57D188766e55"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Rigel Pharmaceuticals, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "RIGLc",
+      "token_address": "0xB200000000000000000000966Cbe5b99Be9b981a"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "NuScale Power Corporation",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "SMRc",
+      "token_address": "0xb200000000000000000000978546Fe604b8dcbC6"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Viking Therapeutics, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "VKTXc",
+      "token_address": "0xb200000000000000000000979eF4Dd6A001b58b1"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Ollie's Bargain Outlet Holdings, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "OLLIc",
+      "token_address": "0xB20000000000000000000097CA7d4003399C67E6"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Intuit Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "INTUc",
+      "token_address": "0xb200000000000000000000989432cD85947EE845"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "HP Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "HPQc",
+      "token_address": "0xB2000000000000000000009a3602cF5d020afA98"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "The Allstate Corporation",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "ALLc",
+      "token_address": "0xb2000000000000000000009B05748Ece723cc6A6"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Nektar Therapeutics",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "NKTRc",
+      "token_address": "0xb2000000000000000000009B6D9e39d1667cabE1"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Dave Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "DAVEc",
+      "token_address": "0xb2000000000000000000009BBA9A926f19cfF8e7"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Applied Materials, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "AMATc",
+      "token_address": "0xb2000000000000000000009C1A6794874DdAb197"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Gemini Space Station, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "GEMIc",
+      "token_address": "0xB2000000000000000000009C52748e1D1Cbd5fd6"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "American Express Company",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "AXPc",
+      "token_address": "0xb2000000000000000000009CFe164A21cB5a11C5"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "International Business Machines Corporation",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "IBMc",
+      "token_address": "0xb2000000000000000000009DB9ea88c3583B1EC8"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Permian Resources Corporation",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "PRc",
+      "token_address": "0xB200000000000000000000a0390525880C1ac72B"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Pershing Square Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "PSc",
+      "token_address": "0xb200000000000000000000A071d80FA5B480c448"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "CrowdStrike Holdings, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "CRWDc",
+      "token_address": "0xb200000000000000000000A0dE75786C9f8fC58c"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Twist Bioscience Corporation",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "TWSTc",
+      "token_address": "0xB200000000000000000000A15628dCEA6934EDE0"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Compass, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "COMPc",
+      "token_address": "0xB200000000000000000000A1d16a625A68F38811"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Skydance Corporation",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "SKYDc",
+      "token_address": "0xB200000000000000000000a21B5ae62fEA392B73"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "MARA Holdings, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "MARAc",
+      "token_address": "0xB200000000000000000000a310e034E09186Fb2d"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Teladoc Health, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "TDOCc",
+      "token_address": "0xB200000000000000000000A49b5EED0c1CF792BA"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Chewy, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "CHWYc",
+      "token_address": "0xb200000000000000000000A5E12a1842DfcDb118"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Eastman Kodak Company",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "KODKc",
+      "token_address": "0xb200000000000000000000a63E35E673e3776B88"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "AXT Inc",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "AXTIc",
+      "token_address": "0xb200000000000000000000A640Ec8C1de0EFb484"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Red Cat Holdings, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "RCATc",
+      "token_address": "0xB200000000000000000000a67C3271F0584F6C1D"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Karman Holdings Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "KRMNc",
+      "token_address": "0xB200000000000000000000A70e43DfF7aCC203B0"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "The Goldman Sachs Group, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "GSc",
+      "token_address": "0xB200000000000000000000a82a0C88DD258eD141"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Coherent Corp.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "COHRc",
+      "token_address": "0xB200000000000000000000A8C925F62e6D194715"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Kimberly-Clark Corporation",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "KMBc",
+      "token_address": "0xB200000000000000000000A8F1c97d05a15e89e2"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Kyndryl Holdings, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "KDc",
+      "token_address": "0xB200000000000000000000A8fff5B07C6c45a5d2"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Victoria's Secret & Co.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "VSXYc",
+      "token_address": "0xB200000000000000000000a9dabFD3F0c5f21304"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "TransMedics Group, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "TMDXc",
+      "token_address": "0xb200000000000000000000AA0aA80F99c33081E1"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Honeywell International Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "HONc",
+      "token_address": "0xB200000000000000000000aB665a0775E19F0Dc5"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Sphere Entertainment Co.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "SPHRc",
+      "token_address": "0xb200000000000000000000aBaDF9B1FDb845DB73"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Gilead Sciences, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "GILDc",
+      "token_address": "0xb200000000000000000000AcccFe56da68b19a0D"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "EverQuote, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "EVERc",
+      "token_address": "0xb200000000000000000000ad4Ca95Ce451578243"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "First Solar, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "FSLRc",
+      "token_address": "0xb200000000000000000000b096f2f6021Ac39617"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "The Home Depot, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "HDc",
+      "token_address": "0xB200000000000000000000b11c7e7295fE11fBa7"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Sunrun Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "RUNc",
+      "token_address": "0xb200000000000000000000b1b9200405Fb52A8cF"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Blue Owl Capital Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "OWLc",
+      "token_address": "0xb200000000000000000000b1E11478cdd89Ef7B2"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Infleqtion, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "INFQc",
+      "token_address": "0xb200000000000000000000b387255897C96fA9B1"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Jack in the Box Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "JACKc",
+      "token_address": "0xb200000000000000000000B44f193b3fFdF17037"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Advance Auto Parts, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "AAPc",
+      "token_address": "0xB200000000000000000000B576d2d93De1e93c8e"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Sweetgreen, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "SGc",
+      "token_address": "0xB200000000000000000000b57f99Acec3A7490D0"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Petco Health and Wellness Company, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "WOOFc",
+      "token_address": "0xB200000000000000000000b5e07d13B2D68D60Dd"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Rubrik, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "RBRKc",
+      "token_address": "0xb200000000000000000000B6354bC256DbCD93a8"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Deckers Outdoor Corporation",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "DECKc",
+      "token_address": "0xb200000000000000000000B85ffF48d4a26C3145"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "TKO Group Holdings, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "TKOc",
+      "token_address": "0xB200000000000000000000b8f841940325DB6B2c"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Vertex Pharmaceuticals Incorporated",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "VRTXc",
+      "token_address": "0xb200000000000000000000B92922f6d0c592a456"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Lightwave Logic, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "LWLGc",
+      "token_address": "0xb200000000000000000000Ba4309E1E35bc09F54"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Etsy, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "ETSYc",
+      "token_address": "0xB200000000000000000000Ba75b2046AAD1C0a13"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "The Gap, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "GAPc",
+      "token_address": "0xb200000000000000000000bBA79A25EdfD4B66c0"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Enovix Corporation",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "ENVXc",
+      "token_address": "0xB200000000000000000000BBc68170Eb0b049E42"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Sana Biotechnology, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "SANAc",
+      "token_address": "0xb200000000000000000000Bc043Cf5053540A588"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "BlackSky Technology Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "BKSYc",
+      "token_address": "0xB200000000000000000000bC4d895DF1eEeD1d06"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Riot Platforms, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "RIOTc",
+      "token_address": "0xb200000000000000000000bd0C7627b663c581A6"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "ACM Research, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "ACMRc",
+      "token_address": "0xB200000000000000000000Bd0EA991Ec5B5A8A03"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "QuantumScape Corporation",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "QSc",
+      "token_address": "0xb200000000000000000000bD938fa95e3E20c5A1"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "DoorDash, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "DASHc",
+      "token_address": "0xb200000000000000000000bf391678bf2e38CedB"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Cleveland-Cliffs Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "CLFc",
+      "token_address": "0xb200000000000000000000bf75A42183508f2614"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Disc Medicine, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "IRONc",
+      "token_address": "0xb200000000000000000000bfeaBea0524c94AF03"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Rigetti Computing, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "RGTIc",
+      "token_address": "0xb200000000000000000000C22fFF2785Bb27b39A"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "The Procter & Gamble Company",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "PGc",
+      "token_address": "0xb200000000000000000000c25611C4BdA138d298"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Analog Devices, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "ADIc",
+      "token_address": "0xB200000000000000000000c33e458d1f892A7917"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Starbucks Corporation",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "SBUXc",
+      "token_address": "0xb200000000000000000000C3dE197eAC6faA1e64"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "The Lovesac Company",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "LOVEc",
+      "token_address": "0xb200000000000000000000C3e498043bb44E8CbF"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Northrop Grumman Corporation",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "NOCc",
+      "token_address": "0xb200000000000000000000C5B17C065e5378d2A5"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Plug Power Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "PLUGc",
+      "token_address": "0xB200000000000000000000C6dbAe193C95C4E056"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "GeneDx Holdings Corp.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "WGSc",
+      "token_address": "0xB200000000000000000000c6F4B26Bd2BE77F18D"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Target Corporation",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "TGTc",
+      "token_address": "0xb200000000000000000000c715439d0CC5A8c67d"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Medifast, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "MEDc",
+      "token_address": "0xb200000000000000000000C7d6120C543159aC73"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Planet Labs PBC",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "PLc",
+      "token_address": "0xB200000000000000000000cB6B2f4e33f0471556"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Ginkgo Bioworks Holdings, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "DNAc",
+      "token_address": "0xB200000000000000000000CC17EEa8c9495E1499"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Redwire Corporation",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "RDWc",
+      "token_address": "0xB200000000000000000000cd7dFaef0423F1f103"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "United Airlines Holdings, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "UALc",
+      "token_address": "0xb200000000000000000000Cdbf3E786FF34DBE51"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Ford Motor Company",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "Fc",
+      "token_address": "0xB200000000000000000000CE4f8fC7ba5cA0359b"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Toast, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "TOSTc",
+      "token_address": "0xB200000000000000000000cF2593D5FFC13Bd817"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Aurora Innovation, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "AURc",
+      "token_address": "0xb200000000000000000000cF62D7125cC77D2F96"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Corvus Pharmaceuticals, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "CRVSc",
+      "token_address": "0xB200000000000000000000Cf9b4854BEb312e351"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Tempus AI, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "TEMc",
+      "token_address": "0xb200000000000000000000d033253ABB1104107b"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "AeroVironment, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "AVAVc",
+      "token_address": "0xb200000000000000000000D0d00a5e1f2D2eb61A"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Skyworks Solutions, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "SWKSc",
+      "token_address": "0xB200000000000000000000d154b5666b2d1e5A02"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Hawaiian Electric Industries, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "HEc",
+      "token_address": "0xb200000000000000000000D2a1ee1F57Be718E71"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "W&T Offshore, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "WTIc",
+      "token_address": "0xb200000000000000000000d2f94f19Aa759f4690"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Southwest Airlines Company",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "LUVc",
+      "token_address": "0xb200000000000000000000d5c0393796E92FCAB0"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Abbott Laboratories",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "ABTc",
+      "token_address": "0xb200000000000000000000D6351D2Eb7ED29bf0b"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Virgin Galactic Holdings, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "SPCEc",
+      "token_address": "0xb200000000000000000000d65c9253b025Af8C56"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "USA Rare Earth, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "USARc",
+      "token_address": "0xB200000000000000000000D80D163781a37A20F6"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Hewlett Packard Enterprise Company",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "HPEc",
+      "token_address": "0xB200000000000000000000d8aEccF70906AB125d"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Beam Therapeutics Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "BEAMc",
+      "token_address": "0xB200000000000000000000dA21e7163dC02c0616"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Constellation Energy Corporation",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "CEGc",
+      "token_address": "0xb200000000000000000000Da9874B62B55e791b5"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "LifeMD, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "LFMDc",
+      "token_address": "0xB200000000000000000000db15c02E133a9dAB99"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "KLA Corporation",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "KLACc",
+      "token_address": "0xB200000000000000000000DBa9e310296C1066C0"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "SM Energy Company",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "SMc",
+      "token_address": "0xb200000000000000000000DD40740E9c445E211b"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Solid Power, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "SLDPc",
+      "token_address": "0xb200000000000000000000dF3EB2AF7316B29122"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Workhorse Group Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "WKHSc",
+      "token_address": "0xb200000000000000000000DfA6C77AEa5329D187"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Molson Coors Beverage Company",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "TAPc",
+      "token_address": "0xb200000000000000000000e0B9460c97F38f412F"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "ProPetro Holding Corp.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "PUMPc",
+      "token_address": "0xB200000000000000000000E1b0b17fD671771813"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Zebra Technologies Corporation",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "ZBRAc",
+      "token_address": "0xb200000000000000000000e2C4CB0F18B68Cc776"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "The Chemours Company",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "CCc",
+      "token_address": "0xB200000000000000000000E359b2ca361E1905C9"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "The Boston Beer Company, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "SAMc",
+      "token_address": "0xb200000000000000000000e410ae30ABDdA3Aee0"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Kratos Defense & Security Solutions, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "KTOSc",
+      "token_address": "0xB200000000000000000000e47c019ec313AaD347"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "NetApp, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "NTAPc",
+      "token_address": "0xb200000000000000000000e6D729A9705303bd2B"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "RTX Corporation",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "RTXc",
+      "token_address": "0xB200000000000000000000e6Eb8A05D09d73DAD5"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Ondas Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "ONDSc",
+      "token_address": "0xB200000000000000000000e7137cA231c5e35f25"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Eversource Energy",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "ESc",
+      "token_address": "0xb200000000000000000000E90b1aC2DA02106417"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Spectrum Brands Holdings, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "SPBc",
+      "token_address": "0xb200000000000000000000Ec3cD781ACaD151fDC"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "ConocoPhillips",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "COPc",
+      "token_address": "0xB200000000000000000000eC622942B76a2d3b21"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "National Beverage Corp.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "FIZZc",
+      "token_address": "0xB200000000000000000000ee6fD7De967ea1A0DC"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Vail Resorts, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "MTNc",
+      "token_address": "0xb200000000000000000000EE80a37e1f888644b3"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Penguin Solutions, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "PENGc",
+      "token_address": "0xb200000000000000000000EF65AFE26a07bab24e"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Vera Therapeutics, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "VERAc",
+      "token_address": "0xB200000000000000000000Ef7F9A89256Fa06887"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Viridian Therapeutics, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "VRDNc",
+      "token_address": "0xb200000000000000000000ef8D64f65302eC1FB2"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "GoPro, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "GPROc",
+      "token_address": "0xB200000000000000000000F0e13d9C1cdfd211C8"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "The Hershey Company",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "HSYc",
+      "token_address": "0xb200000000000000000000F327a373aa86Ac86A8"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Canaan Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "CANc",
+      "token_address": "0xB200000000000000000000f32d61BA597EDdFbfd"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "General Electric Company",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "GEc",
+      "token_address": "0xb200000000000000000000F5049c6a6F3a47348d"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "The Southern Company",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "SOc",
+      "token_address": "0xB200000000000000000000F814b4666c2d70a670"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Babcock & Wilcox Enterprises, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "BWc",
+      "token_address": "0xb200000000000000000000F9274fE22C626373F2"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "CleanSpark, Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "CLSKc",
+      "token_address": "0xB200000000000000000000fa63cFFF5c794dbB95"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Centrus Energy Corp.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "LEUc",
+      "token_address": "0xB200000000000000000000fab55ad3773F2c8eF1"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Hycroft Mining Holding Corporation",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "HYMCc",
+      "token_address": "0xb200000000000000000000fbC17101E786511A5E"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Emerson Electric Co.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "EMRc",
+      "token_address": "0xB200000000000000000000FCD9C2A4Ee4A2B5481"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "The Boeing Company",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "BAc",
+      "token_address": "0xB200000000000000000000Fd10D35a781efB5C2F"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "JPMorgan Chase & Co.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "JPMc",
+      "token_address": "0xB200000000000000000000FDe956536A25725156"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Opera Limited",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "OPRAc",
+      "token_address": "0xB200000000000000000000fE6b283199e6BD432d"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Valvoline Inc",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "VVVc",
+      "token_address": "0xb200000000000000000000FEC679b39992F67627"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "FuboTV Inc.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "FUBOc",
+      "token_address": "0xB200000000000000000000FfADA41C4ed20B8D0F"
+    },
+    {
+      "coverage_tier": "listed",
+      "name": "Carvana Co.",
+      "qualifying_pools": 0,
+      "reason": "no_usdc_pool_qualifying",
+      "symbol": "CVNAc",
+      "token_address": "0xb200000000000000000000Ffb10718f880A48274"
+    }
+  ],
+  "total_universe": 415,
+  "universe_version": "2026-11-24-census-v1"
+}

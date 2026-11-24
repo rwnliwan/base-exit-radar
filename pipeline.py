@@ -214,10 +214,18 @@ def _build_time_payload(snap):
     menandai snapshot lama yang sah sebagai "transformed replay"."""
     build_keys = ("schema_version", "methodology_version", "fetched_at",
                   "asset", "reference", "multiplier", "pools", "coverage",
-                  "exit_quote", "underlying_proxy", "oracle")
+                  "exit_quote", "underlying_proxy", "oracle",
+                  "universe_version", "config_hash")
     payload = {k: snap.get(k) for k in build_keys}
     if "oracle" not in snap:
         payload.pop("oracle", None)
+    # Seperti "oracle": snapshot lama (pre-S1-A) tidak punya field versi;
+    # memaksa None akan mengubah hash dan menandai snapshot lama yang sah
+    # sebagai "transformed replay".
+    if "universe_version" not in snap:
+        payload.pop("universe_version", None)
+    if "config_hash" not in snap:
+        payload.pop("config_hash", None)
     payload["assessment"] = None
     payload["proposal"] = None
     payload["alert"] = None
@@ -623,19 +631,30 @@ def _probe_quote_usable(probe):
 
 
 # ------------------------------------------------------------------ ingest
-def ingest_token(symbol):
+def ingest_token(symbol, coinbase=None):
     """Ingest satu token: Coinbase record + pool DexScreener + cross-check
     GeckoTerminal + proxy Hyperliquid (dex baseline "xyz").
 
     Kembalikan (snapshot_partial, fetch_meta). `snapshot_partial` berisi
     data mentah + fetched_at per sumber. Validasi dilakukan di build_snapshot.
     Tidak ada yang di-hard-code dari snapshot harga sebelumnya.
+
+    `coinbase` (§1.2c, S1-A): hasil SATU kali `fetch_coinbase_tokens()`
+    per run yang dipakai bersama semua token (diteruskan run.py).
+    Bila None, fetch dilakukan di sini (satu token = satu fetch, perilaku
+    lama — dipakai tes/gate). `meta["coinbase_shared"]` mencatat mana yang
+    dipakai, agar run tanpa cache bersama terlihat di snapshot.
     """
     tok = config.TOKENS[symbol]
     fetched_at = _now()
     meta = {"fetched_at": _iso(fetched_at), "sources": {}, "errors": {}}
 
-    cb = adapter.fetch_coinbase_tokens()
+    if coinbase is None:
+        cb = adapter.fetch_coinbase_tokens()
+        meta["coinbase_shared"] = False
+    else:
+        cb = coinbase
+        meta["coinbase_shared"] = True
     meta["sources"]["coinbase"] = cb["source"]
     if not cb["ok"]:
         meta["errors"]["coinbase"] = cb["error"]
@@ -949,10 +968,17 @@ def build_snapshot(symbol, ingested=None):
     pools.sort(key=lambda o: o["liquidity_usd"], reverse=True)
 
     # ---- underlying proxy (dex baseline "xyz"). Label eksplisit.
+    # §1.2c (S1-A): proxy_instrument/proxy_dex OPTIONAL — token tanpa
+    # pemetaan proxy TIDAK crash (dulu akses bracket tok["proxy_instrument"]
+    # melempar KeyError). Tanpa pemetaan, proxy = unknown: layer C
+    # `unknown` (proxy None -> reason code proxy_missing), dicatat di
+    # missing_fields sebagai "underlying_proxy:unknown".
     proxy = None
     hl = ingested["hyperliquid"]
-    instr = tok["proxy_instrument"]
-    if instr in hl:
+    instr = tok.get("proxy_instrument")
+    if instr is None:
+        missing.append("underlying_proxy:unknown")
+    elif instr in hl:
         raw = hl[instr]
         funding = _to_float(raw.get("funding"))
         oi = _to_float(raw.get("openInterest"))
@@ -961,7 +987,7 @@ def build_snapshot(symbol, ingested=None):
         oi_notional = None
         if oi is not None and mark is not None:
             oi_notional = oi * mark  # DERIVED, beri label (bukan raw)
-        proxy = {"instrument": instr, "dex": tok["proxy_dex"],
+        proxy = {"instrument": instr, "dex": tok.get("proxy_dex") or "unknown",
                  "funding_raw": funding, "funding_unit": "fraction/1h",
                  "funding_interval": "1h",
                  "open_interest_raw": oi, "oi_unit": "base_asset_units",
@@ -1056,6 +1082,11 @@ def build_snapshot(symbol, ingested=None):
     snap = {
         "schema_version": config.SCHEMA_VERSION,
         "methodology_version": config.METHODOLOGY_VERSION,
+        # §1.2c (S1-A): universe/config berversi — replay historis tidak
+        # berubah diam-diam bila universe/config berubah. Kedua field masuk
+        # hash snapshot_id (lihat _build_time_payload).
+        "universe_version": config.UNIVERSE_VERSION,
+        "config_hash": config.CONFIG_HASH,
         "fetched_at": ingested["meta"]["fetched_at"],
         "asset": asset,
         "reference": reference,
@@ -1756,8 +1787,14 @@ def paper_record(snap):
 
 
 # ------------------------------------------------------------------- driver
-def run_token(symbol, ingested=None):
-    """Satu alur end-to-end untuk satu token (ingest->...->paper record)."""
+def run_token(symbol, ingested=None, coinbase=None):
+    """Satu alur end-to-end untuk satu token (ingest->...->paper record).
+
+    `coinbase`: hasil SATU kali fetch_coinbase_tokens() per run (shared
+    cache §1.2c) — diteruskan ke ingest_token; None = fetch per token.
+    """
+    if ingested is None:
+        ingested = ingest_token(symbol, coinbase=coinbase)
     snap = build_snapshot(symbol, ingested=ingested)
     snap = assess_snapshot(snap)
     snap = decide(snap)

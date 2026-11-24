@@ -25,6 +25,63 @@ import urllib.error
 import urllib.request
 from datetime import datetime, timezone
 
+import config as _config
+
+# --- Request budget + backoff (§1.2c, S1-A) ---------------------------------
+# Semua fetch publik HTTP di adapter ini melewati _fetch_json() yang:
+# (a) menghitung tiap request terhadap budget per proses (satu run = satu
+#     proses) — budget habis = error "request_budget_exceeded" (fail-closed,
+#     bukan diam-diam berhenti mengambil data);
+# (b) retry error TRANSIENT (HTTP 429/5xx, timeout/URLError) dengan backoff
+#     eksponensial; HTTP 4xx lain / respons malformed TIDAK di-retry.
+# RPC eth_call (adapter bagian bawah) TIDAK dihitung di budget ini — ia
+# punya retry/fallback sendiri (_eth_call_with_fallback).
+_REQUEST_COUNT = 0
+
+
+def _budget_check():
+    """Hitung satu request HTTP. Kembalikan error str bila budget habis."""
+    global _REQUEST_COUNT
+    _REQUEST_COUNT += 1
+    if _REQUEST_COUNT > _config.HTTP_REQUEST_BUDGET_PER_RUN:
+        return "request_budget_exceeded"
+    return None
+
+
+def _is_transient_http_error(err):
+    if isinstance(err, urllib.error.HTTPError):
+        return err.code in (429, 500, 502, 503, 504)
+    return isinstance(err, (urllib.error.URLError, TimeoutError,
+                            ConnectionError))
+
+
+def _fetch_json(req):
+    """Satu request HTTP -> (payload_dict_or_None, error_str_or_None).
+
+    Retry transient dengan backoff eksponensial
+    (HTTP_BACKOFF_BASE_SEC * 2**attempt). Budget dihitung per PERCOBAAN.
+    """
+    last_err = None
+    attempts = 1 + _config.HTTP_MAX_RETRIES
+    for attempt in range(attempts):
+        budget_err = _budget_check()
+        if budget_err is not None:
+            return None, budget_err
+        try:
+            with urllib.request.urlopen(req, timeout=_config.HTTP_TIMEOUT_SEC) as resp:
+                return json.loads(resp.read().decode("utf-8")), None
+        except urllib.error.HTTPError as e:
+            last_err = "http_%s" % e.code
+            if not _is_transient_http_error(e):
+                return None, last_err
+        except Exception as e:  # noqa: BLE001 - laporkan sebagai error sumber
+            last_err = "fetch_error:%s" % type(e).__name__
+            if not _is_transient_http_error(e):
+                return None, last_err
+        if attempt < attempts - 1:
+            time.sleep(_config.HTTP_BACKOFF_BASE_SEC * (2 ** attempt))
+    return None, last_err
+
 from config import (
     AERODROME_CL_FACTORY,
     AERO_METAQUOTER,
@@ -48,15 +105,12 @@ def _now_iso():
 
 
 def _get_json(url):
-    """GET JSON publik. Kembalikan (payload_dict_or_None, error_str_or_None)."""
+    """GET JSON publik. Kembalikan (payload_dict_or_None, error_str_or_None).
+
+    Retry transient + budget via _fetch_json (§1.2c).
+    """
     req = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
-    try:
-        with urllib.request.urlopen(req, timeout=HTTP_TIMEOUT_SEC) as resp:
-            return json.loads(resp.read().decode("utf-8")), None
-    except urllib.error.HTTPError as e:
-        return None, "http_%s" % e.code
-    except Exception as e:  # noqa: BLE001 - laporkan sebagai error sumber
-        return None, "fetch_error:%s" % type(e).__name__
+    return _fetch_json(req)
 
 
 def _post_json(url, payload):
@@ -66,44 +120,60 @@ def _post_json(url, payload):
         url, data=body,
         headers={"User-Agent": USER_AGENT, "Content-Type": "application/json"},
     )
-    try:
-        with urllib.request.urlopen(req, timeout=HTTP_TIMEOUT_SEC) as resp:
-            return json.loads(resp.read().decode("utf-8")), None
-    except urllib.error.HTTPError as e:
-        return None, "http_%s" % e.code
-    except Exception as e:  # noqa: BLE001
-        return None, "fetch_error:%s" % type(e).__name__
+    return _fetch_json(req)
 
 
 # ------------------------------------------------------------------ Coinbase
 def fetch_coinbase_tokens():
     """Ambil SEMUA token dari Coinbase API (ikuti pagination).
 
-    Kembalikan {"ok", "tokens", "fetched_at", "source", "error", "pages"}.
-    `tokens` = list record mentah apa adanya (tidak dinormalisasi di sini).
+    Kembalikan {"ok", "tokens", "fetched_at", "source", "error", "pages",
+    "last_next_page_token"}. `tokens` = list record mentah apa adanya
+    (tidak dinormalisasi di sini). `last_next_page_token` = None bila
+    cursor terminal habis (sensus lengkap); non-None berarti paginasi
+    berhenti sebelum terminal (guard/error) — pemanggil WAJIB memeriksa.
     Fail-closed: `ok` True HANYA bila tidak ada error — sensus yang
     terpotong (mis. guard pagination trip) dilaporkan gagal, bukan sukses.
+    Halaman malformed (bukan dict / tanpa field `tokens`) dan token tanpa
+    `contract_address` juga = error (acceptance §1.2: halaman malformed
+    menggagalkan sensus, bukan dilewati diam-diam).
     """
     out = {"ok": False, "tokens": [], "fetched_at": _now_iso(),
-           "source": COINBASE_API_URL, "error": None, "pages": 0}
+           "source": COINBASE_API_URL, "error": None, "pages": 0,
+           "last_next_page_token": None}
     url = COINBASE_API_URL
     seen_tokens = set()
+    seen_page_tokens = set()
     while url:
         payload, err = _get_json(url)
         if err is not None:
             out["error"] = err
             return out
+        if not isinstance(payload, dict) or not isinstance(
+                payload.get("tokens"), list):
+            out["error"] = "malformed_page_no_tokens_field"
+            return out
         out["pages"] += 1
-        toks = payload.get("tokens", []) if isinstance(payload, dict) else []
+        toks = payload["tokens"]
         for t in toks:
+            if not isinstance(t, dict) or not t.get("contract_address"):
+                out["error"] = "malformed_token_no_contract_address"
+                return out
             key = (t.get("contract_address") or "").lower()
             if key and key not in seen_tokens:
                 seen_tokens.add(key)
                 out["tokens"].append(t)
-        nxt = payload.get("next_page_token") if isinstance(payload, dict) else None
+        nxt = payload.get("next_page_token")
+        if nxt is not None:
+            if nxt in seen_page_tokens:
+                out["error"] = "pagination_loop_page_token_reused"
+                out["last_next_page_token"] = nxt
+                return out
+            seen_page_tokens.add(nxt)
+        out["last_next_page_token"] = nxt
         url = COINBASE_API_URL + "?page_token=" + nxt if nxt else None
-        if out["pages"] >= 10:  # guard: jangan loop tanpa batas
-            out["error"] = "pagination_guard_10_pages"
+        if out["pages"] >= 100 and url is not None:  # guard: jangan loop tanpa batas
+            out["error"] = "pagination_guard_100_pages"
             break
     # Fail-closed (revisi rencana v1.1, must-fix 5): ok=True HANYA bila
     # tidak ada error. Sebelumnya baris ini `out["ok"] = True` tanpa syarat,
@@ -133,7 +203,7 @@ def fetch_dexscreener_pools(token_address):
     if err is not None:
         return {"ok": False, "pairs": [], "fetched_at": _now_iso(),
                 "source": url, "error": err}
-    pairs = payload.get("pairs", []) if isinstance(payload, dict) else []
+    pairs = payload.get("pairs") or [] if isinstance(payload, dict) else []
     return {"ok": True, "pairs": pairs, "fetched_at": _now_iso(),
             "source": url, "error": None}
 

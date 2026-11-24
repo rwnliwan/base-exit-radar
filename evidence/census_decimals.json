@@ -1,0 +1,2081 @@
+{
+  "fetched_at": "2026-11-24T00:56:02Z",
+  "results": {
+    "0xb200000000000000000000000d3176ee4af1102d": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000000199ae48796c61909e": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000045beafafbe0dc7664": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb20000000000000000000005717baa337022c782": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb20000000000000000000005befa57b9b871e737": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb20000000000000000000006f910a0e7bbd3c168": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb20000000000000000000007b4fcc48e2d70dcc6": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000082f7fea8f2ee8f438": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb20000000000000000000009614107be6f562ba8": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000000a22ac22d031b657da": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000000bd75bf439a38bf7df": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000000c1f8acd3c4496a762": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000000c431e2a7c0ce7ea31": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000000cd31253817b36f88a": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000000d46361d597f543d06": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000000d8ce462e99ee7a47b": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000000d9947c759429e7fe5": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000000de6a780902db4ec09": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000000e63b7b0b6bc5b9213": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000000f28146eb28ea2835b": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000105a1f43ff3605c5de": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb20000000000000000000010718397aca876a20a": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000115bf2283265fb04db": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb20000000000000000000011b20aebe0bd567f1c": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb20000000000000000000011eea811eaedb29156": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000001347ccd9e83d5bf3e0": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000001409f816682b7772b7": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb20000000000000000000015776ea82655c4f034": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb20000000000000000000016e38fd364d271ba28": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb20000000000000000000016f9dfe862feba122b": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000001775bd17f2289de527": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000178d4c37485ea47ef6": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb20000000000000000000017bb66e9301e913a99": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000187f7071d6e321a7d2": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb20000000000000000000018fe7ec7d6dfeeb528": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb20000000000000000000019641b253b3e2c8a24": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000001997390508a5617d47": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb20000000000000000000019f6e7c675b73c2e4d": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000001a114de6d32433f3c0": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000001aaa9010cd65f82c5e": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000001ac12227a8ae0ef3ac": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000001b6e407239eb31edcf": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000001bcf0441201d513fa5": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000001bcf8e5022d7f61919": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000001ca01a48688ec7d3cc": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000001dfd8c413ecd6ec630": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000001e800a7f5189430cd0": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000001e838d4beb66cf8fb7": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000001ecfaccd9047d3b544": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000001f6b9c31e43560a924": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000001faa7fa5ef4184ede5": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000001fab744de0b829eed1": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb20000000000000000000020790305a981e88a67": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000211a2ed33fad95b0b3": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000002137743d4a01fe4e88": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb20000000000000000000024170488e788cbbcb4": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000241fe94fe97fcbf034": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000002451af655ae942308d": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000252c42b75f49dacf59": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000002570652530a5e0f771": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000259694b27bf052e7d7": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000002601c5c94f435da168": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb20000000000000000000026215d755356e5043f": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000264d3a9dea68aa6631": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000002756093a39e13e08c6": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000281c973bf2555dd94b": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000002a0ec8f8861ce98983": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000002a3e91e59ffc3ced94": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000002b9ac07a0544688079": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000002c8b0e3d7ff26f81a0": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000002c99976e240ed773e6": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000002cd78d7c981e97c330": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000002d0ba3164cc74f58b7": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000002d2b5dc53c61f1ba06": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000002f12afa8f583b6ce85": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000002f7bd112b645574214": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000003086b1355bd43e25da": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000003088798f6d0722aaac": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb20000000000000000000030945cb9c538d0b326": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000314b9f5f580168766a": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb20000000000000000000033be01089cf02a2025": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb20000000000000000000034533ed3961f222cd4": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000347afba223d7b6b63c": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000003496c04fcfee6997e0": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb20000000000000000000034975347ff1848aab9": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000349ef3aa93a0897476": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000351bd76098b359ada8": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000386f243773d48a4be7": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb20000000000000000000038e9982fe875b7e066": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000003958003d801724f9d3": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000003963c3beaa3eba9bfc": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000397293cb8cda9a10c5": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000003a67b9f116f25513d6": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000003aa0410688baf4da88": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000003ac3d02891f0fc785e": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000003ae0817c304acbb1de": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000003bd46dbde905508b16": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000003bf350e420c13e431a": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000003c5564b8161680c86d": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000003cdb2c0f94e4ebf605": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000003e4249c65bd6c037d9": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000003e5e2892158e25dd7b": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000003ebe6a3a1df07db619": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000003ef37a7c863dc1482a": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000003f265ab1f74dd89ac0": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000003fa80315bfd87efed8": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000003fc6f17c8b775bca78": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000003fe90a64263b7f9e74": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000004161b4168d03841511": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000004217b9b4f6f6acb7b8": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000426663e7212288fa97": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000428e3a3eebbb20692b": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb20000000000000000000042cbbae483635c3774": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000431a5c1e48e3b1d130": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000432a1d2bd864acec82": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb20000000000000000000043a599976181bcf336": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb20000000000000000000044e3cd7a0e1028e57a": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000450ad3abe5d4846c6e": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000004637e5a787885c720d": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000473f033036350312da": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000476c5a355abe1a2794": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb20000000000000000000047984ecae84db5fcf9": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000004884b426556b92883d": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb20000000000000000000049b9fc3b3c8c9402ff": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb20000000000000000000049d38a179c97e33381": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000004aa2b559ca0a0bbf5d": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000004acdc9a922fcfbcc7f": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000004aff16039ba04bdfbc": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000004cc3e96ceb78541d33": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000004ec7c19212979672f9": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000004f13a2441d3c82ee54": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000004fc7a0c25178a0d633": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000004feb8d277dd14b08bb": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000501ef81f911eb57656": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb20000000000000000000050fe6d1ef35b02e8fd": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb20000000000000000000051b531471096c5caf6": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000535fe96f18204bfd96": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb20000000000000000000053d000bac95662d1e4": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb20000000000000000000054a4a3659b55272125": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb20000000000000000000054b11fd279a4f7d4ef": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000005550e8506124236271": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000559ec0bedaacf436ea": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb20000000000000000000055e63c4c1cdc6b7a36": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000005672d78eff30d24665": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb20000000000000000000058b8c947e44011dfe6": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb20000000000000000000058f143099d5f79b0ec": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000593460934fec1b43dc": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000005a41bef59807119850": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000005ac674f707e357409c": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000005b1e5ad3c6aeabeddd": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000005b8cece4a5f9306bb4": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000005bcde0a6926919fef9": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000005bd7ae89b9e6189bb5": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000005c16dd6f675bf8ceb7": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000005c41b0018612629072": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000005c8324136de0f4134a": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000005d6afb89705cd203ea": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000005de7f2e0aca219c070": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000006064f8ec027f042294": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000613c15f118df2b189b": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb20000000000000000000063376b142c0764b489": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000006377b3c06a3e3e9ae5": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000006432a3a7991e718dbb": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000006448a906e8942850fa": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000006454926ad8576dc50e": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000645c1ec509e4261682": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb20000000000000000000064832d0d2d38e2f4fc": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb20000000000000000000065ca0f772a5502e976": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb20000000000000000000065f11d53a1e442bb84": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb20000000000000000000065f7d0d6aac5fd4bfd": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb20000000000000000000066242d4067724cb7a1": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000674e1325dbdf06b309": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb20000000000000000000067c8c151f24e1c9924": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb20000000000000000000068987dacde1db79cd4": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000690275843b6e246286": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000695b10dd3e1b0ea070": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb20000000000000000000069d694d397b9388dac": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000006b7f6966ee0453e251": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000006bc65af32d24870a2d": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000006d02167c4864e72bd2": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000006d1bc7faa266eb099d": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000006de7888c3fffd803ac": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000006ee1c139a723872e09": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000006f944897540579d3f2": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb20000000000000000000071f6c75c5892b09beb": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000720133eedf525f93e2": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000007292d3d91c6b559058": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb20000000000000000000072b5c2b2d18ee8a2a5": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000747bffa52fe2c2510b": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000007578836b0ff7780eb4": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb20000000000000000000076a288b15b61ec78f6": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000007790ed6e48e06ed935": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb20000000000000000000077bbd6469ecfe8c0b4": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb20000000000000000000077d13d6c79b6c11c5a": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb20000000000000000000078ee7ce2fe4908108c": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000796c05dd2536c7f91c": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb20000000000000000000079dc24fe2fbd09110f": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000007a8a3ab2d3b319036d": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000007a90b2d9ed101035a8": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000007b9fcbd005511acbd5": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000007c7088757cb3703648": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000007c92881e458338b34d": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000007cbdf8fa3861e51721": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000007d16372840df4dabbe": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000007e032680bad472032f": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000801830b13b8e493423": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000808e9cca9ed8e4da61": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb20000000000000000000080bae0f654b5cc762c": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb20000000000000000000081050ac3d4395df527": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000008258e8647cea5f4a19": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb20000000000000000000082cd2c7801305808df": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000008451db06977def7b3a": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000008463bf2557b483abf9": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb20000000000000000000084b031036e4dc7515b": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb20000000000000000000085367ee92c15b5f613": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb20000000000000000000086fffb23cbfbb1f1d8": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000879a74c76c73a27d71": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb20000000000000000000087d144f2c70cd1a5f6": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb20000000000000000000089221e238277d52515": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000896d4cf2f1866d9bce": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000898ed394469db1845c": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb20000000000000000000089bc72c3e637a02adb": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000008a494d531d88cf55d6": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000008a7508619c717a7106": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000008b934a18e189efe90f": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000008baf7bb82e4c37743f": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000008bc8786b856e61707c": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000008c02be39ba2cbda822": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000008c06c1b3e7590ac982": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000008c1bad82fa061f818a": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000008cae79b36e9269eb86": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000008ce554342c043602a4": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000008d426f3543babee7bb": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000008d5328e9208773dc58": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000008d84c0d360848dbbde": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000008df9bc22db1d7da2a5": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000008fc2a8c23cf5937b66": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000008fde21a1f5c69fec0b": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000902f48cba1f39149f7": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb20000000000000000000090658e3f9b29e2f5c2": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000009188edfd2fcc8cc81e": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000009272a491812842aa84": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000009426b660396ebcf343": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb20000000000000000000095528fb26ac48bda96": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000964b7f3f335d7e70b5": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000964eed57d188766e55": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000966cbe5b99be9b981a": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000978546fe604b8dcbc6": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000979ef4dd6a001b58b1": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb20000000000000000000097ca7d4003399c67e6": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000989432cd85947ee845": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000989dc22d3656717734": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000009a3602cf5d020afa98": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000009b05748ece723cc6a6": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000009b6d9e39d1667cabe1": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000009bba9a926f19cff8e7": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000009c1a6794874ddab197": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000009c52748e1d1cbd5fd6": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000009cfe164a21cb5a11c5": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb2000000000000000000009db9ea88c3583b1ec8": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000a0390525880c1ac72b": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000a071d80fa5b480c448": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000a0de75786c9f8fc58c": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000a15628dcea6934ede0": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000a1d16a625a68f38811": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000a21b5ae62fea392b73": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000a26326a922ffa87f6c": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000a310e034e09186fb2d": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000a49b5eed0c1cf792ba": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000a5e12a1842dfcdb118": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000a613d12deafbbb1db7": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000a63e35e673e3776b88": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000a640ec8c1de0efb484": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000a67c3271f0584f6c1d": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000a70e43dff7acc203b0": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000a82a0c88dd258ed141": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000a8c925f62e6d194715": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000a8f1c97d05a15e89e2": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000a8fff5b07c6c45a5d2": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000a9dabfd3f0c5f21304": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000aa0aa80f99c33081e1": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000ab665a0775e19f0dc5": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000ab99cfa739e253872b": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000abadf9b1fdb845db73": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000acccfe56da68b19a0d": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000ad4ca95ce451578243": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000b096f2f6021ac39617": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000b11c7e7295fe11fba7": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000b1a29cf17a1819288a": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000b1b9200405fb52a8cf": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000b1e11478cdd89ef7b2": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000b2e8dba585b1ffb158": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000b387255897c96fa9b1": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000b44f193b3ffdf17037": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000b576d2d93de1e93c8e": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000b57f99acec3a7490d0": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000b5e07d13b2d68d60dd": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000b6354bc256dbcd93a8": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000b85fff48d4a26c3145": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000b8f841940325db6b2c": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000b92922f6d0c592a456": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000ba4309e1e35bc09f54": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000ba75b2046aad1c0a13": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000bba79a25edfd4b66c0": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000bbc68170eb0b049e42": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000bc043cf5053540a588": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000bc4d895df1eeed1d06": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000bd0c7627b663c581a6": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000bd0ea991ec5b5a8a03": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000bd938fa95e3e20c5a1": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000bf391678bf2e38cedb": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000bf75a42183508f2614": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000bfeabea0524c94af03": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000c22fff2785bb27b39a": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000c25611c4bda138d298": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000c2e324d24d7eecd1fb": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000c33e458d1f892a7917": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000c367d37d07150182a2": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000c36ce081dd09e86ca2": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000c3de197eac6faa1e64": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000c3e498043bb44e8cbf": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000c597c476fcf9aed3a8": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000c5b17c065e5378d2a5": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000c6dbae193c95c4e056": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000c6f4b26bd2be77f18d": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000c715439d0cc5a8c67d": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000c7d6120c543159ac73": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000c8a7223510467d8563": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000ca425ab42e07c35bc3": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000ca7c6d1438e7245eb6": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000cae20cb1446462e24c": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000cb6b2f4e33f0471556": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000cc17eea8c9495e1499": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000cd7dfaef0423f1f103": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000cd7e6b8042cb7c2bb5": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000cdbf3e786ff34dbe51": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000ce4f8fc7ba5ca0359b": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000cf2593d5ffc13bd817": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000cf36d05963a3e2205c": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000cf62d7125cc77d2f96": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000cf9b4854beb312e351": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000d033253abb1104107b": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000d0d00a5e1f2d2eb61a": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000d154b5666b2d1e5a02": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000d2a1ee1f57be718e71": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000d2b7d9aee52f6c6bef": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000d2f4cf2f7debb244bb": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000d2f94f19aa759f4690": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000d5c0393796e92fcab0": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000d61efd9f54a23ef9eb": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000d6351d2eb7ed29bf0b": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000d65c9253b025af8c56": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000d80d163781a37a20f6": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000d8aeccf70906ab125d": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000d9192b6b456483c2e8": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000da21e7163dc02c0616": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000da6f64c306234127e0": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000da9874b62b55e791b5": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000db15c02e133a9dab99": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000dba9e310296c1066c0": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000dd40740e9c445e211b": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000df14b76c292a32982d": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000df3eb2af7316b29122": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000dfa6c77aea5329d187": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000e0b9460c97f38f412f": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000e1b0b17fd671771813": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000e215e9b76ecba02468": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000e2c4cb0f18b68cc776": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000e359b2ca361e1905c9": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000e3e784cdf88df2959d": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000e410ae30abdda3aee0": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000e47c019ec313aad347": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000e4a60215e10d6d8c2b": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000e6d729a9705303bd2b": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000e6eb8a05d09d73dad5": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000e7137ca231c5e35f25": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000e71d4e45d1421251cb": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000e88efe88d8ade3f0da": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000e8e50cbbb9a3861a3c": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000e90b1ac2da02106417": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000ea2df44a307cab279c": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000ec3c4c7395cc609813": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000ec3cd781acad151fdc": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000ec622942b76a2d3b21": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000eda6c2c6f11e0f838f": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000ee6fd7de967ea1a0dc": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000ee80a37e1f888644b3": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000ef65afe26a07bab24e": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000ef7f9a89256fa06887": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000ef8d64f65302ec1fb2": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000f0e13d9c1cdfd211c8": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000f111184a74720787e6": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000f1a0f91e34892e4718": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000f215e4c890cfb7176b": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000f3049f4aa834b23b64": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000f327a373aa86ac86a8": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000f32d61ba597eddfbfd": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000f5049c6a6f3a47348d": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000f6b0417af5f52341fc": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000f720c26062bc3067da": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000f814b4666c2d70a670": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000f9274fe22c626373f2": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000fa63cfff5c794dbb95": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000fab55ad3773f2c8ef1": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000fbc17101e786511a5e": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000fc737aea6196ab5a4c": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000fcd9c2a4ee4a2b5481": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000fd10d35a781efb5c2f": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000fd2f87532b90095211": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000fde956536a25725156": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000fe6b283199e6bd432d": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000fec679b39992f67627": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000ffada41c4ed20b8d0f": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000ffb10718f880a48274": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    },
+    "0xb200000000000000000000ffef181db6dc5ed6a3": {
+      "decimals": 8,
+      "decimals_rpc": 8,
+      "decimals_source": "rpc_validated"
+    }
+  },
+  "universe_version": "2026-11-24-census-v1"
+}

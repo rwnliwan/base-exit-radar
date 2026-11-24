@@ -1,0 +1,60 @@
+{
+  "address_pattern_mismatches": 0,
+  "census_date": "2026-11-24",
+  "config_hash": "7d4cbb3cd0288f44",
+  "coverage_method": "DexScreener per token (preliminary, \u00a71.2b): pool lolos bila chainId=base + baseToken=token + quoteToken alamat USDC + liquidity>0 + price>0; decision-eligible bila >=2 pool dari >=2 venue + metadata lengkap. S1-B mengonfirmasi dgn cek factory on-chain.",
+  "cursor_terminal": true,
+  "decimals_validated_rpc": "415/415 (22 awalnya gagal RPC saat sensus, re-validasi sekuensial via adapter.fetch_token_decimals 24 Nov ~01:00 WITA lolos semua, 0 konflik; evidence/census_decimals.json)",
+  "duplicate_addresses": 0,
+  "error": null,
+  "fetched_at_end": "2026-11-24T00:41:22Z",
+  "fetched_at_start": "2026-11-24T00:41:13Z",
+  "last_next_page_token": null,
+  "method": "walk all pages until next_page_token absent; exponential backoff 1/2/4/8s on 429/5xx/timeout, max 5 attempts per page; dedup by contract_address",
+  "ok": true,
+  "page_size_observed": 100,
+  "page_summaries": [
+    {
+      "next_page_token": "ejoweGIyMDAwMDAwMDAwMDAwMDAwMDAwMDAwN2I0ZmNjNDhlMmQ3MGRjYzY",
+      "page": 1,
+      "page_token_in": null,
+      "token_count": 100,
+      "unique_new": 100
+    },
+    {
+      "next_page_token": "ejoweGIyMDAwMDAwMDAwMDAwMDAwMDAwMDA1NGE0YTM2NTliNTUyNzIxMjU",
+      "page": 2,
+      "page_token_in": "ejoweGIyMDAwMDAwMDAwMDAwMDAwMDAwMDAwN2I0ZmNjNDhlMmQ3MGRjYzY",
+      "token_count": 100,
+      "unique_new": 100
+    },
+    {
+      "next_page_token": "ejoweGIyMDAwMDAwMDAwMDAwMDAwMDAwMDBhMDM5MDUyNTg4MGMxYWM3MmI",
+      "page": 3,
+      "page_token_in": "ejoweGIyMDAwMDAwMDAwMDAwMDAwMDAwMDA1NGE0YTM2NTliNTUyNzIxMjU",
+      "token_count": 100,
+      "unique_new": 100
+    },
+    {
+      "next_page_token": "ejoweGIyMDAwMDAwMDAwMDAwMDAwMDAwMDBmMGUxM2Q5YzFjZGZkMjExYzg",
+      "page": 4,
+      "page_token_in": "ejoweGIyMDAwMDAwMDAwMDAwMDAwMDAwMDBhMDM5MDUyNTg4MGMxYWM3MmI",
+      "token_count": 100,
+      "unique_new": 100
+    },
+    {
+      "next_page_token": null,
+      "page": 5,
+      "page_token_in": "ejoweGIyMDAwMDAwMDAwMDAwMDAwMDAwMDBmMGUxM2Q5YzFjZGZkMjExYzg",
+      "token_count": 15,
+      "unique_new": 15
+    }
+  ],
+  "page_tokens_unique": true,
+  "pages": 5,
+  "source": "https://api.coinbase.com/v1/tokenized-stocks",
+  "subset_suspected": false,
+  "subset_suspected_reason": null,
+  "total_tokens": 415,
+  "universe_version": "2026-11-24-census-v1"
+}
