@@ -3046,12 +3046,19 @@ def test_s1b_venue_filter_session():
 
 
 def test_s1d_daily_manifest_verify():
-    """S1-D: manifest run harian + verify_daily_runs.py (rencana §1.4 v1.1).
+    """S1-D: manifest run harian + verify_daily_runs.py (rencana §1.4 v1.1,
+    aturan (b) sesi-aware ACC 24 Nov 11:39).
 
-    (a) Manifest sintetis yang valid lolos verify_daily_runs (23 cek);
+    (a) Manifest sintetis yang valid lolos verify_daily_runs (24 cek);
     mutasi tunggal (fetched_at hilang / manual_input True / tokens kosong
-    / selesai lewat cut-off 23:59 WITA / config_hash salah / trigger tak
+    / selesai lewat tutup sesi / config_hash salah / trigger tak
     dikenal) masing-masing MENGGAGALKAN verifikasi (fail-closed).
+    (a2) Aturan (b) sesi-aware: run hari bursa yang melewati tengah
+    malam WITA tapi seluruhnya dalam satu sesi NYSE LOLOS (atribusi ke
+    tanggal mulai); run libur/akhir pekan LOLOS sebagai off_hours; run
+    di luar sesi pada hari bursa buka, run yang menjangkau dua sesi,
+    dan strata manifest yang tidak konsisten dengan kalender GAGAL;
+    trigger dry_run dikecualikan dari containment (gladi pagi).
     (b) market_session di manifest: 26 Nov (Thanksgiving) + 28-29 Nov
     (akhir pekan) = off_hours; 27 Nov 23:00 WITA = active early-close;
     30 Nov 23:00 WITA = active regular.
@@ -3152,10 +3159,11 @@ def test_s1d_daily_manifest_verify():
                         "usable": False}
         checks.append(("empty_tokens_fails", not _verify(m)))
         m = _base_manifest()
-        # Selesai 28 Nov 00:30Z = 08:30 WITA 28 Nov: lewat cut-off hari 27 Nov.
+        # Selesai 28 Nov 00:30Z = 19:30 ET 27 Nov: lewat tutup sesi
+        # early-close 13:00 ET (aturan (b): seluruh run harus dalam satu sesi).
         m["run_finished_at"] = "2026-11-28T00:30:00Z"
         m["run_finished_at_wita"] = "2026-11-28T08:30:00+08:00"
-        checks.append(("finished_after_cutoff_fails", not _verify(m)))
+        checks.append(("finished_after_session_close_fails", not _verify(m)))
         m = _base_manifest()
         m["config_hash"] = "0" * 16
         checks.append(("wrong_config_hash_fails", not _verify(m)))
@@ -3186,6 +3194,72 @@ def test_s1d_daily_manifest_verify():
             checks.append(("session_%s_%s" % (iso[:10], strata),
                            det["strata"] == strata
                            and det["calendar"] == calendar))
+        # ---- (a2) aturan (b) sesi-aware: jendela run vs sesi NYSE ------
+        def _manifest_for(start_z, finish_z, start_w, finish_w,
+                          run_date, trigger):
+            mm = _base_manifest()
+            ms = pipeline._market_session_detail(
+                pipeline._parse_ts(start_z))
+            mm["run_started_at"] = start_z
+            mm["run_finished_at"] = finish_z
+            mm["run_started_at_wita"] = start_w
+            mm["run_finished_at_wita"] = finish_w
+            mm["run_date_wita"] = run_date
+            mm["trigger"] = trigger
+            mm["run_market_session"] = ms
+            mm["tokens"]["NVDAc"]["market_session"] = ms
+            return mm
+
+        # Run hari bursa yang melewati tengah malam WITA tapi seluruhnya
+        # dalam sesi early-close 27 Nov (10:00-11:19 ET): LOLOS, milik 27 Nov.
+        checks.append(("cross_midnight_wita_inside_session_passes",
+                       _verify(_manifest_for(
+                           "2026-11-27T15:00:00Z", "2026-11-27T16:19:00Z",
+                           "2026-11-27T23:00:00+08:00",
+                           "2026-11-28T00:19:00+08:00",
+                           "2026-11-27", "cron"))))
+        # Thanksgiving 26 Nov: run 23:00 WITA = 10:00 ET, libur -> off_hours.
+        checks.append(("holiday_run_off_hours_passes",
+                       _verify(_manifest_for(
+                           "2026-11-26T15:00:00Z", "2026-11-26T16:19:00Z",
+                           "2026-11-26T23:00:00+08:00",
+                           "2026-11-27T00:19:00+08:00",
+                           "2026-11-26", "cron"))))
+        # Sabtu 28 Nov: akhir pekan -> off_hours.
+        checks.append(("weekend_run_off_hours_passes",
+                       _verify(_manifest_for(
+                           "2026-11-28T15:00:00Z", "2026-11-28T16:19:00Z",
+                           "2026-11-28T23:00:00+08:00",
+                           "2026-11-29T00:19:00+08:00",
+                           "2026-11-28", "cron"))))
+        # Hari bursa buka tapi run di luar jam sesi (08:00-09:19 ET 30 Nov).
+        checks.append(("outside_session_open_day_fails",
+                       not _verify(_manifest_for(
+                           "2026-11-30T13:00:00Z", "2026-11-30T14:19:00Z",
+                           "2026-11-30T21:00:00+08:00",
+                           "2026-11-30T22:19:00+08:00",
+                           "2026-11-30", "cron"))))
+        # Run menjangkau dua sesi (30 Nov 10:00 ET -> 1 Des 10:00 ET).
+        checks.append(("straddling_two_sessions_fails",
+                       not _verify(_manifest_for(
+                           "2026-11-30T15:00:00Z", "2026-12-01T15:00:00Z",
+                           "2026-11-30T23:00:00+08:00",
+                           "2026-12-01T23:00:00+08:00",
+                           "2026-11-30", "cron"))))
+        # Strata manifest tidak konsisten: run dalam sesi tapi klaim off_hours.
+        _mm = _manifest_for(
+            "2026-11-27T15:00:00Z", "2026-11-27T16:19:00Z",
+            "2026-11-27T23:00:00+08:00", "2026-11-28T00:19:00+08:00",
+            "2026-11-27", "cron")
+        _mm["run_market_session"]["strata"] = "off_hours"
+        checks.append(("strata_mismatch_fails", not _verify(_mm)))
+        # Dry-run gladi pagi WITA (di luar jam sesi) dikecualikan.
+        checks.append(("dry_run_morning_passes",
+                       _verify(_manifest_for(
+                           "2026-11-24T01:56:17Z", "2026-11-24T03:15:33Z",
+                           "2026-11-24T09:56:17+08:00",
+                           "2026-11-24T11:15:33+08:00",
+                           "2026-11-24", "dry_run"))))
         # ---- (c) helper run.py (offline)
         probe = os.path.join(tmp, "probe.txt")
         with open(probe, "w", encoding="utf-8") as f:
@@ -3217,8 +3291,9 @@ def test_s1d_daily_manifest_verify():
     failed = [c for c, ok in checks if not ok]
     return _result(
         "s1d_daily_manifest_verify",
-        "manifest harian §1.4 lolos verify_daily_runs; tiap mutasi tunggal "
-        "gagal (fail-closed); strata 26-30 Nov benar; helper run.py benar",
+        "manifest harian §1.4 lolos verify_daily_runs (aturan (b) "
+        "sesi-aware); tiap mutasi tunggal gagal (fail-closed); strata "
+        "26-30 Nov benar; helper run.py benar",
         "%d/%d checks pass; failed: %s" % (len(checks) - len(failed),
                                            len(checks), failed or "none"),
         not failed,

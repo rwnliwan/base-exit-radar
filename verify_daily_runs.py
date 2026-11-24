@@ -7,7 +7,12 @@ Memeriksa, per manifest:
     status per sumber per token, status per token, market_session.
   * tiap record token yang sukses punya `fetched_at` + `source`.
   * tidak ada input manual (`manual_input` False, trigger dikenal).
-  * manifest selesai sebelum cut-off hari itu (23:59 WITA hari run).
+  * manifest diatribusikan ke tanggal MULAI run (WITA) — aturan (b)
+    sesi-aware (ACC 24 Nov 11:39): hari bursa buka, seluruh jendela
+    [mulai, selesai] harus berada dalam SATU sesi NYSE (regular
+    09:30-16:00 ET; early close 13:00 ET); hari libur/akhir pekan
+    tetap valid, dicatat off_hours. Trigger dry_run dikecualikan dari
+    containment (gladi, bukan hari yang dihitung).
   * minimum data usable per hari: >=1 token punya snapshot lengkap
     (keputusan + coverage + `fetched_at` + `source` ada, tanpa error
     ingest fatal untuk token itu).
@@ -43,8 +48,8 @@ WITA = ZoneInfo("Asia/Makassar")
 MANIFEST_SCHEMA_VERSION = "1"
 DEFAULT_START = "2026-11-26"
 DEFAULT_END = "2026-11-30"
-# Cut-off checkpoint (§1.4): manifest hari D paling lambat 23:59 WITA hari D.
-CUTOFF_TIME_WITA = "23:59"
+# Zona waktu sesi NYSE (aturan (b) sesi-aware, §1.4).
+ET = ZoneInfo("America/New_York")
 KNOWN_TRIGGERS = ("cron", "manual", "dry_run")
 KNOWN_SOURCES = ("coinbase", "dexscreener", "geckoterminal", "hyperliquid",
                  "block", "oracle_registry", "pool_factory", "quoter")
@@ -99,6 +104,62 @@ def _parse_iso(s):
             tzinfo=_dt.timezone.utc)
     except ValueError:
         return None
+
+
+def _session_window_check(mani, started, finished):
+    """Aturan (b) sesi-aware (§1.4, ACC 24 Nov 11:39). Kembalikan
+    (name, ok, detail) — satu cek bernama session_window.
+
+    Logika sesi HANYA dari `pipeline._market_session_detail` (satu-satunya
+    sumber kebenaran sesi; TIDAK ada jalur paralel di sini — kalender
+    libur/early-close/weekday tetap milik pipeline/config):
+    - trigger dry_run: containment TIDAK diterapkan (gladi, bukan hari
+      yang dihitung; manifest dry-run pagi WITA yang di luar jam sesi
+      tetap lolos).
+    - hari libur/akhir pekan (calendar holiday/weekend pada tanggal ET
+      saat mulai): valid sebagai off_hours — syaratnya strata
+      run_market_session di manifest == off_hours (konsisten dengan
+      kalender) dan mulai/selesai pada tanggal ET yang sama.
+    - hari bursa buka: seluruh jendela [mulai, selesai] harus berada
+      dalam SATU sesi — status open di kedua ujung, tanggal ET yang
+      sama, dan strata run_market_session == active.
+    - di luar itu (run di luar jam sesi pada hari bursa buka, atau
+      kalender unknown): GAGAL (fail-closed).
+    """
+    try:
+        import pipeline as _pipeline
+    except Exception as e:  # noqa: BLE001 - session logic tidak tersedia
+        return ("session_window", False,
+                "import pipeline gagal: %s: %s" % (type(e).__name__, e))
+    det_s = _pipeline._market_session_detail(started)
+    det_f = _pipeline._market_session_detail(finished)
+    rms = mani.get("run_market_session") or {}
+    strata = rms.get("strata")
+    same_et_day = (started.astimezone(ET).strftime("%Y-%m-%d")
+                   == finished.astimezone(ET).strftime("%Y-%m-%d"))
+    if mani.get("trigger") == "dry_run":
+        return ("session_window", True,
+                "dry_run: containment tidak diterapkan (gladi); "
+                "started=%s finished=%s"
+                % (started, finished))
+    if det_s.get("calendar") in ("holiday", "weekend"):
+        ok = strata == "off_hours" and same_et_day
+        return ("session_window", ok,
+                "hari libur/akhir pekan: calendar=%s strata=%s "
+                "same_et_day=%s (valid sebagai off_hours)"
+                % (det_s.get("calendar"), strata, same_et_day))
+    if det_s.get("status") == "open":
+        ok = (det_f.get("status") == "open" and same_et_day
+              and strata == "active")
+        return ("session_window", ok,
+                "hari bursa buka: start_status=%s finish_status=%s "
+                "same_et_day=%s strata=%s (seluruh run harus dalam satu "
+                "sesi)" % (det_s.get("status"), det_f.get("status"),
+                           same_et_day, strata))
+    return ("session_window", False,
+            "run di luar sesi pada hari bursa buka / kalender unknown: "
+            "start calendar=%s status=%s"
+            % (det_s.get("calendar"), det_s.get("status")))
 
 
 def verify_manifest(mani, path="<manifest>"):
@@ -172,7 +233,10 @@ def verify_manifest(mani, path="<manifest>"):
           and all(isinstance(v, str) and bool(HEX64.match(v))
                   for v in ev.values()),
           "evidence_files=%s" % sorted(ev))
-    # --- waktu mulai/selesai + cut-off 23:59 WITA hari run
+    # --- waktu mulai/selesai + atribusi (b) sesi-aware (ACC 24 Nov 11:39)
+    # Manifest diatribusikan ke tanggal MULAI run (WITA), bukan tanggal
+    # selesai — run 23:00 WITA yang selesai ~00:19 WITA hari berikutnya
+    # tetap milik hari mulai, asal seluruh jendelanya dalam satu sesi.
     started = _parse_iso(mani.get("run_started_at"))
     finished = _parse_iso(mani.get("run_finished_at"))
     check("run_times_present", started is not None and finished is not None,
@@ -182,16 +246,17 @@ def verify_manifest(mani, path="<manifest>"):
         check("run_started_before_finished", started < finished,
               "started=%s finished=%s"
               % (mani.get("run_started_at"), mani.get("run_finished_at")))
-        fin_wita = finished.astimezone(WITA)
-        check("cutoff_before_midnight_wita",
-              fin_wita.strftime("%Y-%m-%d") == run_date
-              and fin_wita.strftime("%H:%M") <= CUTOFF_TIME_WITA,
-              "finished_wita=%s run_date=%s (cut-off %s WITA)"
-              % (fin_wita.strftime("%Y-%m-%dT%H:%M"), run_date,
-                 CUTOFF_TIME_WITA))
+        start_wita = started.astimezone(WITA)
+        check("run_attributed_to_start_date_wita",
+              start_wita.strftime("%Y-%m-%d") == run_date,
+              "started_wita=%s run_date=%s"
+              % (start_wita.strftime("%Y-%m-%dT%H:%M"), run_date))
+        check(*_session_window_check(mani, started, finished))
     else:
         check("run_started_before_finished", False, "waktu tidak ter-parse")
-        check("cutoff_before_midnight_wita", False, "waktu tidak ter-parse")
+        check("run_attributed_to_start_date_wita", False,
+              "waktu tidak ter-parse")
+        check("session_window", False, "waktu tidak ter-parse")
     # --- market_session level run (§1.4b: sesi kalender di manifest)
     rms = mani.get("run_market_session") or {}
     check("run_market_session_present",

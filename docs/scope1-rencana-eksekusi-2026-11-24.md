@@ -347,9 +347,25 @@ pada 26 Nov, kriteria 1 sudah mustahil secara matematis (pemicu T1).
   1×/hari, **jam tetap 23:00 WITA**. Jam ini dipilih agar run jatuh
   di dalam regular session NYSE pada hari bursa normal (09:30–16:00
   EST = 22:30–05:00 WITA); cron pagi WITA berpotensi tidak mengambil
-  satu pun observasi saat regular session terbuka (§1.4b). Cut-off
-  checkpoint: manifest hari D harus ada paling lambat 23:59 WITA
-  hari D. Retry: maks 2×, jeda 30 menit, dalam hari yang sama;
+  satu pun observasi saat regular session terbuka (§1.4b).
+  **Atribusi (b) sesi-aware (v1.1 revisi, ACC 24 Nov 11:39 — menggantikan
+  cut-off 23:59 WITA):** manifest diatribusikan ke tanggal MULAI run
+  (WITA), bukan tanggal selesai — run 23:00 WITA yang selesai ~00:19
+  WITA hari berikutnya tetap milik hari mulai. Syaratnya, di hari
+  bursa buka, SELURUH jendela [mulai, selesai] harus berada dalam
+  SATU sesi NYSE (regular 09:30–16:00 ET; Jumat 27 Nov early close
+  13:00 ET) — verifier (`verify_daily_runs.py`, cek `session_window`)
+  menolak run yang keluar sesi, menjangkau dua sesi, atau strata
+  manifest-nya tidak konsisten dengan kalender. Hari libur/akhir
+  pekan (26 Nov Thanksgiving, 28–29 Nov) tetap VALID, dicatat
+  `off_hours` — tidak ada syarat containment untuk hari-hari itu.
+  Trigger `dry_run` dikecualikan dari containment (gladi, bukan hari
+  yang dihitung). Alasan perubahan: satu run memakan ~79 menit
+  (dry-run 24 Nov: 09:56→11:15 WITA), jadi cut-off 23:59 WITA membuat
+  run normal GAGAL verifikasi bukan karena data, melainkan karena
+  aritmetika jam — dan retry pun mati. Aturan (b) memperbaiki aturan,
+  bukan data.
+  Retry: maks 2×, jeda 30 menit, dalam hari yang sama;
   overlap lock (flock/pidfile) agar dua run tidak pernah tumpang
   tindih; atomic write (tulis file temp + rename); alert gagal ke
   chief via log cron + laporan (cron yang gagal = kabari, bukan
@@ -368,7 +384,18 @@ pada 26 Nov, kriteria 1 sudah mustahil secara matematis (pemicu T1).
   record punya `fetched_at` + `source` + tidak ada input manual.
   **Lima hari kalender (26–30 Nov), BUKAN 120 jam** — keduanya
   tidak sama: yang dihitung adalah 5 tanggal kalender, masing-masing
-  dengan manifest sebelum cut-off hari itu.
+  dengan satu manifest yang lolos `verify_daily_runs.py` dan
+  diatribusikan ke tanggal mulai run itu (aturan (b)).
+- **Catatan retry (jujur, 24 Nov):** wrapper `run_daily.sh` hanya
+  me-retry bila tanggal WITA masih sama DAN jam < 23:30 — untuk
+  jadwal 23:00, retry praktis hanya mungkin bila attempt pertama
+  gagal CEPAT (dalam ~30 menit pertama); gagal di tengah run (mis.
+  VM restart, seperti attempt 1 dry-run 24 Nov yang mati di token
+  168/415) TIDAK di-retry karena tanggal WITA sudah berganti.
+  Perbaikan retry berbasis sesi (retry diizinkan selama masih bisa
+  selesai dalam sesi yang sama, manifest tetap milik tanggal mulai)
+  adalah item TERPISAH di luar revisi ini — diputuskan sesudah
+  26 Nov bila dibutuhkan.
 - **§1.4b — Sesi bursa dipisah dari freshness NAV (v1.1, baru).**
   `market_session` (berbasis kalender: hari bursa + jam regular
   session + libur + early close) disimpan TERPISAH dari
