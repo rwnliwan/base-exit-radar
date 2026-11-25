@@ -61,6 +61,96 @@ def _is_transient_http_error(err):
                             ConnectionError, http.client.IncompleteRead))
 
 
+# --- Opener keep-alive (opsi A, ACC Septian 25 Nov 14:47) ------------------
+# CPython urllib hard-code `headers["Connection"] = "close"` di
+# AbstractHTTPHandler.do_open (3.12.3, terverifikasi dari source stdlib
+# mesin ini) — proxy egress diduga memotong respons saat melihat header
+# itu (IncompleteRead 24-25 Nov: 316 token Hyperliquid + 89 snapshot
+# rehearsal 25 Nov). Handler di bawah menyalin do_open stdlib TANPA
+# baris pemaksa itu; selebihnya identik (tunnel proxy, penanda socket).
+# _fetch_json TIDAK berubah badan: ia tetap memanggil
+# urllib.request.urlopen, yang memakai opener ini karena dipasang via
+# install_opener saat adapter diimpor. decide() tidak tersentuh; hanya
+# jalur fetch HTTP publik. Bila rehearsal 23:00 25 Nov tetap gagal
+# karena IncompleteRead, opsi A dinyatakan gagal -> rollback ke 5db22de
+# (syarat Instinct 25 Nov 14:36, diteruskan Septian).
+
+
+class _KeepAliveHTTPHandler(urllib.request.HTTPHandler):
+    """HTTPHandler yang tidak memaksa `Connection: close`.
+
+    Salinan AbstractHTTPHandler.do_open (CPython 3.12.3) dengan SATU
+    perbedaan: tidak ada `headers["Connection"] = "close"`. _fetch_json
+    selalu `resp.read()` penuh sebelum menutup respons, jadi kekhawatiran
+    stdlib soal addinfourl + koneksi persisten tidak berlaku di sini.
+    """
+
+    def do_open(self, http_class, req, **http_conn_args):
+        host = req.host
+        if not host:
+            raise urllib.error.URLError("no host given")
+
+        # will parse host:port
+        h = http_class(host, timeout=req.timeout, **http_conn_args)
+        h.set_debuglevel(self._debuglevel)
+
+        headers = dict(req.unredirected_hdrs)
+        headers.update({k: v for k, v in req.headers.items()
+                        if k not in headers})
+
+        # PERBEDAAN DARI STDLIB: tidak ada `headers["Connection"] =
+        # "close"` di sini (opsi A). Tanpa header Connection, http.client
+        # tidak menambahkan Connection apa pun — koneksi dibiarkan hidup
+        # sampai respons dibaca penuh lalu ditutup oleh pemanggil.
+        headers = {name.title(): val for name, val in headers.items()}
+
+        if req._tunnel_host:
+            tunnel_headers = {}
+            proxy_auth_hdr = "Proxy-Authorization"
+            if proxy_auth_hdr in headers:
+                tunnel_headers[proxy_auth_hdr] = headers[proxy_auth_hdr]
+                # Proxy-Authorization should not be sent to origin
+                # server.
+                del headers[proxy_auth_hdr]
+            h.set_tunnel(req._tunnel_host, headers=tunnel_headers)
+
+        try:
+            try:
+                h.request(req.get_method(), req.selector, req.data, headers,
+                          encode_chunked=req.has_header("Transfer-encoding"))
+            except OSError as err:  # timeout error
+                raise urllib.error.URLError(err)
+            r = h.getresponse()
+        except:
+            h.close()
+            raise
+
+        # If the server does not send us a 'Connection: close' header,
+        # HTTPConnection assumes the socket should be left open. Manually
+        # mark the socket to be closed when this response object goes away.
+        if h.sock:
+            h.sock.close()
+            h.sock = None
+
+        r.url = req.get_full_url()
+        # This line replaces the .msg attribute of the HTTPResponse
+        # with .headers, because urllib clients expect the response to
+        # have the reason in .msg.
+        r.msg = r.reason
+        return r
+
+
+class _KeepAliveHTTPSHandler(_KeepAliveHTTPHandler,
+                             urllib.request.HTTPSHandler):
+    """HTTPS twin: https_open dari HTTPSHandler memanggil do_open di atas."""
+    pass
+
+
+_OPENER = urllib.request.build_opener(_KeepAliveHTTPHandler,
+                                      _KeepAliveHTTPSHandler)
+urllib.request.install_opener(_OPENER)
+
+
 def _fetch_json(req):
     """Satu request HTTP -> (payload_dict_or_None, error_str_or_None).
 

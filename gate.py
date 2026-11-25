@@ -3615,6 +3615,107 @@ def test_s1d_session_retry_incompleteread():
         "S1-D revisi 25 Nov: session_retry.py + --run-date + IncompleteRead")
 
 
+def test_s1d_option_a_keepalive():
+    """Opsi A (ACC Septian 25 Nov 14:47, pilihan Instinct 14:36).
+
+    urllib stdlib memaksa `Connection: close` di AbstractHTTPHandler.do_open
+    (CPython 3.12.3) — adapter memakai handler kustom tanpa baris itu.
+    Tes offline dengan koneksi HTTP palsu yang merekam header:
+    (a) handler kustom TIDAK mengirim `Connection: close`;
+    (b) handler stdlib (kontrol) MENGIRIM `Connection: close` — tes ini
+        membedakan, bukan tautologi;
+    (c) opener yang dipasang adapter berisi handler kustom + ProxyHandler
+        (proxy env tetap dihormati) dan terpasang sebagai opener global
+        urllib, jadi `_fetch_json` (yang memanggil urllib.request.urlopen)
+        memakainya tanpa perubahan badan.
+    decide() tidak tersentuh; hanya jalur fetch HTTP publik."""
+    import urllib.request
+    import adapter as _adapter
+
+    class _RecordingConn:
+        """Koneksi HTTP palsu: merekam header request, mengembalikan
+        respons palsu yang bisa diberi url/msg."""
+
+        def __init__(self, host, timeout=None, **kw):
+            self.host = host
+            self.timeout = timeout
+            self.sock = None
+            self.sent_headers = None
+
+        def set_debuglevel(self, level):
+            pass
+
+        def request(self, method, url, body=None, headers=None,
+                    encode_chunked=False):
+            self.sent_headers = dict(headers or {})
+
+        def getresponse(self):
+            resp = _FakeRespA()
+            return resp
+
+        def close(self):
+            pass
+
+    class _FakeRespA:
+        def __init__(self):
+            self.reason = "OK"
+            self.msg = None
+            self.url = None
+
+    checks = []
+    holder = {}
+
+    class _ConnCapture(_RecordingConn):
+        def __init__(self, *a, **kw):
+            super().__init__(*a, **kw)
+            holder["conn"] = self
+
+    req = urllib.request.Request("http://example.invalid/x",
+                                 headers={"User-Agent": "gate-test"})
+    # OpenerDirector.open() menyetel req.timeout sebelum memanggil handler;
+    # do_open (stdlib maupun kustom) membacanya — tiru di sini.
+    req.timeout = 30
+    # (a) handler kustom: tanpa Connection: close.
+    custom = _adapter._KeepAliveHTTPHandler()
+    r = custom.do_open(_ConnCapture, req)
+    sent = holder["conn"].sent_headers or {}
+    checks.append(("keepalive_handler_sends_no_connection_close",
+                   "Connection" not in sent))
+    checks.append(("keepalive_handler_response_usable",
+                   r is not None and r.url == "http://example.invalid/x"
+                   and r.msg == "OK"))
+    # (b) kontrol stdlib: handler bawaan MEMAKSA Connection: close.
+    stdlib = urllib.request.HTTPHandler()
+    holder.clear()
+    stdlib.do_open(_ConnCapture, req)
+    sent2 = holder["conn"].sent_headers or {}
+    checks.append(("stdlib_handler_sends_connection_close_control",
+                   sent2.get("Connection") == "close"))
+    # (c) wiring opener.
+    checks.append(("opener_installed_globally",
+                   urllib.request._opener is _adapter._OPENER))
+    handler_types = [type(h) for h in _adapter._OPENER.handlers]
+    checks.append(("opener_has_keepalive_http_handler",
+                   any(issubclass(t, _adapter._KeepAliveHTTPHandler)
+                       for t in handler_types)))
+    checks.append(("opener_has_keepalive_https_handler",
+                   any(issubclass(t, _adapter._KeepAliveHTTPSHandler)
+                       for t in handler_types)))
+    checks.append(("opener_keeps_proxy_handler",
+                   any(issubclass(t, urllib.request.ProxyHandler)
+                       for t in handler_types)))
+
+    failed = [c for c, ok in checks if not ok]
+    return _result(
+        "s1d_option_a_keepalive",
+        "handler kustom tanpa Connection: close + opener terpasang global "
+        "(opsi A 25 Nov); kontrol stdlib tetap mengirim close",
+        "%d/%d checks pass; failed: %s" % (len(checks) - len(failed),
+                                           len(checks), failed or "none"),
+        not failed,
+        "S1-D opsi A 25 Nov: handler keep-alive + install_opener")
+
+
 # -------------------------------------------------------------------- main
 def test_s1c_v4_canonical_identity():
     """S1-C: identitas pool kanonis V4 end-to-end (rencana Scope 1 v1.1 §1.3).
@@ -4026,6 +4127,8 @@ TESTS = [
     ("s1d_daily_manifest_verify", test_s1d_daily_manifest_verify),
     # Sesi fix 25 Nov: retry berbasis sesi + IncompleteRead (ACC 24 Nov 12:00).
     ("s1d_session_retry_incompleteread", test_s1d_session_retry_incompleteread),
+    # Opsi A 25 Nov: handler keep-alive tanpa Connection: close (ACC 25 Nov 14:47).
+    ("s1d_option_a_keepalive", test_s1d_option_a_keepalive),
     # S1-C identitas pool kanonis V4 end-to-end + StateView.
     ("s1c_v4_canonical_identity", test_s1c_v4_canonical_identity),
 ]
