@@ -19,6 +19,7 @@ Setiap fetch mengembalikan dict {"ok", "data", "fetched_at", "source", "error"}.
 Bila sumber tidak memberi timestamp harga, harga itu `unknown` (brief §5).
 """
 
+import http.client
 import json
 import time
 import urllib.error
@@ -32,8 +33,13 @@ import config as _config
 # (a) menghitung tiap request terhadap budget per proses (satu run = satu
 #     proses) — budget habis = error "request_budget_exceeded" (fail-closed,
 #     bukan diam-diam berhenti mengambil data);
-# (b) retry error TRANSIENT (HTTP 429/5xx, timeout/URLError) dengan backoff
+# (b) retry error TRANSIENT (HTTP 429/5xx, timeout/URLError,
+#     http.client.IncompleteRead) dengan backoff
 #     eksponensial; HTTP 4xx lain / respons malformed TIDAK di-retry.
+#     IncompleteRead = respons terpotong di tengah (terbukti 24 Nov:
+#     316 token Hyperliquid kena ini dan gagal tanpa retry) — ia
+#     transient: sumber yang sama menjawab lengkap pada percobaan
+#     berikut, jadi masuk daftar retry (sesi fix 25 Nov).
 # RPC eth_call (adapter bagian bawah) TIDAK dihitung di budget ini — ia
 # punya retry/fallback sendiri (_eth_call_with_fallback).
 _REQUEST_COUNT = 0
@@ -52,7 +58,7 @@ def _is_transient_http_error(err):
     if isinstance(err, urllib.error.HTTPError):
         return err.code in (429, 500, 502, 503, 504)
     return isinstance(err, (urllib.error.URLError, TimeoutError,
-                            ConnectionError))
+                            ConnectionError, http.client.IncompleteRead))
 
 
 def _fetch_json(req):

@@ -2,7 +2,7 @@
   "failed": 0,
   "gate": "base-prototype \u00a77 + audit regression A-D",
   "methodology_version": "base-proto-method v0.3.3",
-  "passed": 27,
+  "passed": 28,
   "policy_version": "base-proto-policy v0.3.3",
   "results": [
     {
@@ -188,6 +188,13 @@
       "test": "s1d_daily_manifest_verify"
     },
     {
+      "actual": "28/28 checks pass; failed: none",
+      "details": "S1-D revisi 25 Nov: session_retry.py + --run-date + IncompleteRead",
+      "expected": "retry berbasis sesi + IncompleteRead transient + --run-date (sesi fix 25 Nov); tiap kasus batas lolos/gagal sesuai aturan",
+      "pass": true,
+      "test": "s1d_session_retry_incompleteread"
+    },
+    {
       "actual": "46/46 checks pass; failed: none",
       "details": "v4 poolId fixture NVDAc; StateView 0xA3c0c9b65baD0b08107Aa264b0f3dB444b867A71; PoolManager 0x498581fF718922c3f8e6A244956aF099B2652b2b",
       "expected": "S1-C \u00a71.3 v1.1: fixture poolId V4 lolos build->assess->decide->public->replay->feed tanpa KeyError; dedup/count/deviasi benar; venue_verified TIDAK PERNAH true untuk poolId; validasi StateView (sqrtPriceX96 initialize + PoolKey keccak256) lolos; decide() tidak disentuh",
@@ -195,15 +202,15 @@
       "test": "s1c_v4_canonical_identity"
     }
   ],
-  "run_at": "2026-11-24T03:56:00Z",
+  "run_at": "2026-11-25T05:08:34Z",
   "schema_version": "base-proto-schema v0.3.3",
   "source_identity": {
-    "adapter.py": "bcb745f731771c1bb1ffe2c8d0f5adf104e9f968318c504125400f0ed887ec20",
+    "adapter.py": "b39ae7c9217081bb666ce47290445214b651c2d899735b66cac8be03d5b9b3b6",
     "capture_evidence.py": "601386c52863e21c3102d2875a3be14b9011c357c337a971cbbbb833daff5853",
     "config.py": "cbda38b83b23849f7fbdf9615da4fed6d7f91d3a7a7f8b2e4ba63ec8c56e60bc",
-    "gate.py": "2c651118519f0ad1d9c4f67ba96ea8670783cce6ddb5699284c2f1adbda81d29",
+    "gate.py": "f5d56c61f3957942874952281e5dc9cf6c2d94fe9ac6a7646231849ed6ae9f1d",
     "pipeline.py": "f02fbb0e2e5793f0b09f0061799fbf103149643c0488ee892e75e771133fc709",
-    "run.py": "933dc812a51f40032052d96758d2f983d923cec8feb82d0b47290117f6a1849e"
+    "run.py": "9c6e6df2adb94c30fd7692a510b0a2a7f004108aa83b7799a09dad6af8f245d9"
   },
   "test_config": {
     "dev_abstain_pct": 5.0,
@@ -218,5 +225,5 @@
     "quote_max_age_sec": 300,
     "simulation_notional_usd": 10000.0
   },
-  "total": 27
+  "total": 28
 }

@@ -2,7 +2,7 @@
 
 Policy: base-proto-policy v0.3.3 | Method: base-proto-method v0.3.3 | Schema: base-proto-schema v0.3.3
 
-Hasil: **27/27 PASS**.
+Hasil: **28/28 PASS**.
 
 | Tes | Hasil | Expected | Actual |
 |-----|-------|----------|--------|
@@ -32,6 +32,7 @@ Hasil: **27/27 PASS**.
 | s1g_decide_source_guard | PASS | decide() source_sha256 matches the S1-G recording (no change since 24 Nov 2026) | source_sha256=9fbaae011f040bbc317acf7b51f4a8c08bd3340a12c597a8fa25b57eff2d12c4 (recorded 9fbaae011f040bbc317acf7b51f4a8c08bd3340a12c597a8fa25b57eff2d12c4); ast_sha256=2d8b5447749c438870d4b47fcd76f4ef38c77701686de8a13e32d1d75a3afc5f (informational only — ast.dump varies by Python version); module=pipeline; lines=71 |
 | s1b_venue_filter_session | PASS | V3/V4 classification agrees (labels+length); quote USDC by address; thin pools excluded from median + counted separately; early-close calendar + strata; market_session separate from NAV freshness | 43/43 checks pass; failed: none |
 | s1d_daily_manifest_verify | PASS | manifest harian §1.4 lolos verify_daily_runs (aturan (b) sesi-aware); tiap mutasi tunggal gagal (fail-closed); strata 26-30 Nov benar; helper run.py benar | 25/25 checks pass; failed: none |
+| s1d_session_retry_incompleteread | PASS | retry berbasis sesi + IncompleteRead transient + --run-date (sesi fix 25 Nov); tiap kasus batas lolos/gagal sesuai aturan | 28/28 checks pass; failed: none |
 | s1c_v4_canonical_identity | PASS | S1-C §1.3 v1.1: fixture poolId V4 lolos build->assess->decide->public->replay->feed tanpa KeyError; dedup/count/deviasi benar; venue_verified TIDAK PERNAH true untuk poolId; validasi StateView (sqrtPriceX96 initialize + PoolKey keccak256) lolos; decide() tidak disentuh | 46/46 checks pass; failed: none |
 
 Detail per tes (termasuk fixture yang dimodifikasi) ada di `gate_results.json` dan `fixtures/`. Replay memakai mode TEST/REPLAY; alert sintetis bukan kejadian pasar live.

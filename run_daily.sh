@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 # Wrapper run harian S1-D — Exit Radar / Base Stocks Maxxing
-# (rencana Scope 1 v1.1 §1.4: cron 23:00 WITA, retry maks 2x jeda 30 menit
-# dalam hari yang sama, overlap lock, atomic write di run.py, alert gagal).
+# (rencana Scope 1 v1.1 §1.4, revisi 25 Nov: cron 23:00 WITA, retry maks 2x
+# jeda 30 menit berbasis sesi NYSE yang sama, overlap lock, atomic write
+# di run.py, alert gagal).
 #
 # Dipasang oleh KOORDINATOR via cron (builder TIDAK memasang cron sendiri):
 #   TZ=Asia/Makassar
@@ -11,8 +12,12 @@
 #   * Overlap lock: flock non-blocking atas out/daily_run.lock — bila ada
 #     run lain yang masih jalan, wrapper keluar (exit 2) TANPA menimpa.
 #   * Retry: run awal + maks 2 retry (total 3 attempt), jeda 30 menit,
-#     HANYA bila tanggal WITA masih sama DAN jam WITA < 23:30 (retry yang
-#     mulai setelah itu tidak mungkin selesai sebelum cut-off 23:59 WITA).
+#     HANYA bila retry masih bisa SELESAI di dalam sesi NYSE yang sama
+#     (sekarang + jeda + estimasi durasi run < akhir sesi — dihitung
+#     session_retry.py dari kalender pipeline/config; regular 16:00 ET,
+#     early close 13:00 ET, libur/akhir pekan = akhir hari ET). Tanggal
+#     WITA yang berganti BUKAN alasan batal: retry membawa --run-date
+#     agar manifest tetap milik tanggal sesi asal (§1.4b).
 #   * Sukses = `python3 run.py --daily` exit 0 (manifest usable: >=1
 #     snapshot lengkap, lihat verify_daily_runs.py).
 #   * Gagal final = baris ALERT ke log + stderr (cron log) + exit 1.
@@ -33,7 +38,10 @@ LOG="out/daily_run.log"
 LOCK="out/daily_run.lock"
 MAX_ATTEMPTS=3
 RETRY_DELAY_SEC=1800
-RETRY_CUTOFF_HHMM="2330"
+# Estimasi durasi satu run penuh (detik): dry-run 24 Nov makan 79 menit
+# (09:56→11:15 WITA); 100 menit = buffer konservatif untuk keputusan
+# retry berbasis sesi (session_retry.py).
+ESTIMATED_RUN_SEC=6000
 
 ONCE=0
 DRY_RUN=0
@@ -67,8 +75,14 @@ fi
 
 attempt=1
 while [ "$attempt" -le "$MAX_ATTEMPTS" ]; do
-    echo "--- attempt $attempt/$MAX_ATTEMPTS: python3 run.py $RUN_ARGS ---"
-    if python3 run.py $RUN_ARGS; then
+    ATTEMPT_ARGS="$RUN_ARGS"
+    if [ "$attempt" -gt 1 ]; then
+        # Retry sesi (§1.4b): manifest tetap milik tanggal sesi asal,
+        # walau retry jalan setelah tengah malam WITA.
+        ATTEMPT_ARGS="$ATTEMPT_ARGS --run-date $RUN_DATE"
+    fi
+    echo "--- attempt $attempt/$MAX_ATTEMPTS: python3 run.py $ATTEMPT_ARGS ---"
+    if python3 run.py $ATTEMPT_ARGS; then
         echo "=== S1-D daily run SELESAI (attempt $attempt): manifest usable untuk $RUN_DATE ==="
         exit 0
     fi
@@ -76,17 +90,17 @@ while [ "$attempt" -le "$MAX_ATTEMPTS" ]; do
     if [ "$ONCE" = 1 ] || [ "$attempt" -ge "$MAX_ATTEMPTS" ]; then
         break
     fi
-    # Retry hanya dalam hari yang sama + masih sempat sebelum cut-off.
-    NOW_DATE="$(TZ=Asia/Makassar date '+%Y-%m-%d')"
-    NOW_HHMM="$(TZ=Asia/Makassar date '+%H%M')"
-    if [ "$NOW_DATE" != "$RUN_DATE" ]; then
-        echo "ALERT S1-D: tanggal WITA sudah berganti ($NOW_DATE) — retry DIBATALKAN (retry hanya dalam hari yang sama)."
+    # Retry berbasis sesi (§1.4b, revisi 25 Nov): retry hanya bila masih
+    # bisa SELESAI di dalam sesi NYSE yang sama — sekarang + jeda 30 mnt
+    # + estimasi durasi run < akhir sesi (session_retry.py; satu-satunya
+    # sumber kebenaran kalender = pipeline/config). Tanggal WITA yang
+    # berganti BUKAN lagi alasan batal.
+    REMAINING_SEC=$((RETRY_DELAY_SEC + ESTIMATED_RUN_SEC))
+    if ! RETRY_REASON="$(python3 session_retry.py --run-date "$RUN_DATE" --remaining-sec "$REMAINING_SEC")"; then
+        echo "ALERT S1-D: $RETRY_REASON"
         break
     fi
-    if [ "$NOW_HHMM" -ge "$RETRY_CUTOFF_HHMM" ]; then
-        echo "ALERT S1-D: jam WITA $NOW_HHMM sudah >= $RETRY_CUTOFF_HHMM — retry DIBATALKAN (tidak sempat sebelum cut-off 23:59 WITA)."
-        break
-    fi
+    echo "--- $RETRY_REASON ---"
     echo "--- retry dalam 30 menit (attempt $((attempt + 1))/$MAX_ATTEMPTS) ---"
     sleep "$RETRY_DELAY_SEC"
     attempt=$((attempt + 1))

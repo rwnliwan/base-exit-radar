@@ -13,6 +13,11 @@ Memeriksa, per manifest:
     09:30-16:00 ET; early close 13:00 ET); hari libur/akhir pekan
     tetap valid, dicatat off_hours. Trigger dry_run dikecualikan dari
     containment (gladi, bukan hari yang dihitung).
+  * retry sesi (revisi 25 Nov, §1.4): retry yang jalan setelah tengah
+    malam WITA tetap milik tanggal sesi asal — atribusi diterima bila
+    run_date_wita sama dengan tanggal WITA saat sesi NYSE yang memuat
+    run itu DIBUKA (bukan hanya tanggal WITA saat run mulai); tanggal
+    lain DITOLAK (fail-closed). Lihat `_session_start_wita_date()`.
   * minimum data usable per hari: >=1 token punya snapshot lengkap
     (keputusan + coverage + `fetched_at` + `source` ada, tanpa error
     ingest fatal untuk token itu).
@@ -104,6 +109,32 @@ def _parse_iso(s):
             tzinfo=_dt.timezone.utc)
     except ValueError:
         return None
+
+
+def _session_start_wita_date(started):
+    """Tanggal WITA saat sesi NYSE yang memuat `started` DIBUKA.
+
+    Satu-satunya sumber kebenaran = `pipeline._market_session_detail`
+    (kalender NYSE; TIDAK ada jalur paralel):
+    - hari bursa buka: tanggal WITA dari jam buka sesi hari ET itu
+      (09:30 ET = 21:30 WITA hari yang sama; early close tetap buka
+      09:30 ET, jadi rumusnya sama).
+    - hari libur/akhir pekan: tidak ada jam buka — dipakai tanggal WITA
+      dari tengah malam ET hari itu (00:00 ET = 12:00 WITA).
+    Dipakai cek atribusi retry sesi: retry 00:05 WITA 26 Nov milik sesi
+    25 Nov (dibuka 21:30 WITA 25 Nov) — bukan 26 Nov.
+    """
+    try:
+        import pipeline as _pipeline
+    except Exception:  # noqa: BLE001 - session logic tidak tersedia
+        return None
+    et = started.astimezone(ET)
+    open_dt = et.replace(hour=9, minute=30, second=0, microsecond=0)
+    det = _pipeline._market_session_detail(open_dt)
+    if det.get("status") == "open":
+        return open_dt.astimezone(WITA).strftime("%Y-%m-%d")
+    midnight = et.replace(hour=0, minute=0, second=0, microsecond=0)
+    return midnight.astimezone(WITA).strftime("%Y-%m-%d")
 
 
 def _session_window_check(mani, started, finished):
@@ -247,10 +278,14 @@ def verify_manifest(mani, path="<manifest>"):
               "started=%s finished=%s"
               % (mani.get("run_started_at"), mani.get("run_finished_at")))
         start_wita = started.astimezone(WITA)
+        session_start_wita = _session_start_wita_date(started)
         check("run_attributed_to_start_date_wita",
-              start_wita.strftime("%Y-%m-%d") == run_date,
-              "started_wita=%s run_date=%s"
-              % (start_wita.strftime("%Y-%m-%dT%H:%M"), run_date))
+              start_wita.strftime("%Y-%m-%d") == run_date
+              or session_start_wita == run_date,
+              "started_wita=%s session_opened_wita=%s run_date=%s "
+              "(retry sesi: run_date = tanggal WITA sesi dibuka)"
+              % (start_wita.strftime("%Y-%m-%dT%H:%M"),
+                 session_start_wita, run_date))
         check(*_session_window_check(mani, started, finished))
     else:
         check("run_started_before_finished", False, "waktu tidak ter-parse")

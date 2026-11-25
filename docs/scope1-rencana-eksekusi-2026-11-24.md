@@ -3,6 +3,11 @@
 **Status: RENCANA v1.1 — revisi atas review Instinct. Belum ACC. Build DITAHAN sampai ACC review atas v1.1.**
 **Ditulis v1.0:** 24 Nov 2026 ~02:2x WITA, koordinator build.
 **Direvisi v1.1:** 24 Nov 2026 08:18 WITA, reviser (atas ACC Septian 24 Nov 08:13 WITA).
+**Direvisi v1.2:** 25 Nov 2026 (sesi fix retry/IncompleteRead, ACC Septian
+24 Nov 12:00): retry berbasis sesi (§1.4, `run_daily.sh` +
+`session_retry.py` + `--run-date` di `run.py`) + IncompleteRead masuk
+daftar transient (`adapter.py`); verifier menerima manifest retry sesi.
+Tidak ada perubahan pada decide()/threshold/kill-switch.
 **Dasar v1.1:** rencana v1.0 (commit `2ce2f36`) + review Instinct
 24 Nov 2026 (7,5/10, "revisi dulu sebelum ACC penuh", 8 must-fix) +
 verifikasi chief atas klaim-klaim review dari kode + sumber live
@@ -365,8 +370,17 @@ pada 26 Nov, kriteria 1 sudah mustahil secara matematis (pemicu T1).
   run normal GAGAL verifikasi bukan karena data, melainkan karena
   aritmetika jam — dan retry pun mati. Aturan (b) memperbaiki aturan,
   bukan data.
-  Retry: maks 2×, jeda 30 menit, dalam hari yang sama;
-  overlap lock (flock/pidfile) agar dua run tidak pernah tumpang
+  Retry (revisi v1.2, 25 Nov): maks 2×, jeda 30 menit, HANYA bila retry
+  masih bisa SELESAI di dalam sesi NYSE yang sama (sekarang + jeda +
+  estimasi durasi run 100 menit < akhir sesi: regular 16:00 ET, early
+  close 13:00 ET, libur/akhir pekan = akhir hari ET) — dihitung
+  `session_retry.py` dari kalender pipeline/config, bukan dari jam
+  WITA. Retry membawa `--run-date <tanggal sesi asal>` agar manifest
+  tetap milik tanggal mulai sesi, dan verifier (`verify_daily_runs.py`,
+  cek `run_attributed_to_start_date_wita`) menerima atribusi itu bila
+  tanggalnya sama dengan tanggal WITA saat sesi dibuka; tanggal lain
+  DITOLAK. Aturan lama (tanggal WITA sama DAN jam < 23:30) DICABUT.
+  Overlap lock (flock/pidfile) agar dua run tidak pernah tumpang
   tindih; atomic write (tulis file temp + rename); alert gagal ke
   chief via log cron + laporan (cron yang gagal = kabari, bukan
   diam). Bukti otomatisasi = manifest 5 hari berturut-turut
@@ -386,16 +400,26 @@ pada 26 Nov, kriteria 1 sudah mustahil secara matematis (pemicu T1).
   tidak sama: yang dihitung adalah 5 tanggal kalender, masing-masing
   dengan satu manifest yang lolos `verify_daily_runs.py` dan
   diatribusikan ke tanggal mulai run itu (aturan (b)).
-- **Catatan retry (jujur, 24 Nov):** wrapper `run_daily.sh` hanya
-  me-retry bila tanggal WITA masih sama DAN jam < 23:30 — untuk
-  jadwal 23:00, retry praktis hanya mungkin bila attempt pertama
-  gagal CEPAT (dalam ~30 menit pertama); gagal di tengah run (mis.
-  VM restart, seperti attempt 1 dry-run 24 Nov yang mati di token
-  168/415) TIDAK di-retry karena tanggal WITA sudah berganti.
-  Perbaikan retry berbasis sesi (retry diizinkan selama masih bisa
-  selesai dalam sesi yang sama, manifest tetap milik tanggal mulai)
-  adalah item TERPISAH di luar revisi ini — diputuskan sesudah
-  26 Nov bila dibutuhkan.
+- **Catatan retry (jujur, 24 Nov; DIPERBAIKI 25 Nov):** wrapper
+  `run_daily.sh` dulu hanya me-retry bila tanggal WITA masih sama DAN
+  jam < 23:30 — untuk jadwal 23:00, retry praktis hanya mungkin bila
+  attempt pertama gagal CEPAT (dalam ~30 menit pertama); gagal di
+  tengah run (mis. VM restart, seperti attempt 1 dry-run 24 Nov yang
+  mati di token 168/415) TIDAK di-retry karena tanggal WITA sudah
+  berganti. Perbaikan retry berbasis sesi (revisi v1.2, sesi fix
+  25 Nov, commit menyusul): retry diizinkan selama masih bisa selesai
+  dalam sesi yang sama, manifest tetap milik tanggal mulai via
+  `--run-date`, verifier sesi-aware menerima manifest retry (gate
+  `test_s1d_session_retry_incompleteread` hijau). Item ini tadinya
+  "TERPISAH ... diputuskan sesudah 26 Nov" — dimajukan ke 25 Nov atas
+  ACC Septian 24 Nov 12:00, agar run pertama 26 Nov sudah terlindungi.
+- **Catatan IncompleteRead (jujur, 24 Nov; DIPERBAIKI 25 Nov):**
+  316 token Hyperliquid kena `http.client.IncompleteRead` (respons
+  terpotong) yang tidak dikenal `_is_transient_http_error`, sehingga
+  fetch gagal tanpa retry. Sejak v1.2, IncompleteRead masuk daftar
+  transient dan `_fetch_json` me-retry-nya (gate menguji jalur
+  `resp.read()` yang terpotong + kasus persisten menyerah sesudah
+  `HTTP_MAX_RETRIES`).
 - **§1.4b — Sesi bursa dipisah dari freshness NAV (v1.1, baru).**
   `market_session` (berbasis kalender: hari bursa + jam regular
   session + libur + early close) disimpan TERPISAH dari

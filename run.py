@@ -9,6 +9,12 @@ Penggunaan:
                                   # manifest run harian (out/daily_manifest_<tgl>_attempt<N>.json)
   python3 run.py --daily --dry-run   # gladi: manifest sama, trigger dry_run,
                                   # TIDAK dihitung ke 5 hari (26-30 Nov)
+  python3 run.py --daily --run-date 2026-11-25
+                                  # retry sesi: manifest diatribusikan ke
+                                  # tanggal sesi asal (bukan tanggal WITA
+                                  # saat retry jalan); dipakai run_daily.sh
+                                  # saat attempt pertama gagal dan retry
+                                  # jatuh setelah tengah malam WITA (§1.4b)
   bash run_daily.sh               # wrapper cron: lock + retry 2x + log
                                   # (lihat run_daily.sh; cron dipasang koordinator)
 
@@ -44,6 +50,7 @@ import os
 import re
 import subprocess
 import sys
+from datetime import date as _date
 from datetime import datetime, timezone
 from zoneinfo import ZoneInfo
 
@@ -155,6 +162,32 @@ def _scheduler_log_excerpt(max_lines=20):
 
 def _wita_date(dt):
     return dt.astimezone(WITA).strftime("%Y-%m-%d")
+
+
+def _run_date_type(s):
+    """Tipe argparse untuk --run-date: YYYY-MM-DD kalender yang valid."""
+    if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", s or ""):
+        raise argparse.ArgumentTypeError(
+            "--run-date harus YYYY-MM-DD, dapat %r" % s)
+    try:
+        _date.fromisoformat(s)
+    except ValueError:
+        raise argparse.ArgumentTypeError(
+            "--run-date bukan tanggal kalender: %r" % s)
+    return s
+
+
+def _resolve_run_date(run_date_arg, started_dt):
+    """Tanggal atribusi manifest (§1.4b, aturan (b) sesi-aware).
+
+    Tanpa override: tanggal WITA saat run mulai. Dengan --run-date
+    (retry sesi): tanggal sesi asal — retry yang jalan setelah tengah
+    malam WITA tetap milik hari sesi itu dimulai, bukan hari WITA
+    berikutnya. Verifier (verify_daily_runs.py) menerima override ini
+    HANYA bila tanggalnya sama dengan tanggal WITA saat sesi NYSE yang
+    memuat run itu dibuka; tanggal lain DITOLAK di sana (fail-closed).
+    """
+    return run_date_arg if run_date_arg else _wita_date(started_dt)
 
 
 def _next_attempt_number(run_date):
@@ -315,6 +348,12 @@ def main():
                     help="asal run (cron/manual/dry_run); default: cron "
                          "bila --daily tanpa --dry-run, manual bila bukan "
                          "--daily, dry_run bila --dry-run")
+    ap.add_argument("--run-date", metavar="YYYY-MM-DD", type=_run_date_type,
+                    default=None,
+                    help="override tanggal atribusi manifest (retry sesi, "
+                         "§1.4b): manifest tetap milik tanggal sesi asal "
+                         "bila retry jalan setelah tengah malam WITA; "
+                         "default: tanggal WITA saat run mulai")
     args = ap.parse_args()
     os.makedirs(OUT, exist_ok=True)
     if args.replay:
@@ -384,7 +423,7 @@ def main():
     trigger = args.trigger
     if trigger is None:
         trigger = "dry_run" if args.dry_run else "cron"
-    run_date = _wita_date(started_dt)
+    run_date = _resolve_run_date(args.run_date, started_dt)
     attempt = _next_attempt_number(run_date)
     run_id = "daily-%s-%s-a%d-%s" % (
         run_date.replace("-", ""),
@@ -400,6 +439,9 @@ def main():
         "manifest_schema_version": MANIFEST_SCHEMA_VERSION,
         "run_id": run_id,
         "run_date_wita": run_date,
+        # --run-date dipakai (retry sesi) atau tidak: jejak audit agar
+        # atribusi ke tanggal sesi asal bisa dilacak dari manifestnya.
+        "run_date_override": bool(args.run_date),
         "trigger": trigger,
         "dry_run": bool(args.dry_run),
         # TIDAK ada input manual di jalur ini: semua data dari fetch
@@ -462,7 +504,7 @@ def main():
     if not usable:
         print("ALERT S1-D: run %s TIDAK usable (0 snapshot lengkap) — "
               "hari %s TIDAK dihitung sukses; wrapper akan retry bila "
-              "masih dalam hari yang sama." % (run_id, run_date))
+              "masih dalam sesi NYSE yang sama." % (run_id, run_date))
         return 1
     return 0
 

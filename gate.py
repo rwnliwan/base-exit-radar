@@ -3313,6 +3313,308 @@ def test_s1d_daily_manifest_verify():
         "S1-D: manifest run harian + verify_daily_runs.py + ketahanan run")
 
 
+def test_s1d_session_retry_incompleteread():
+    """S1-D revisi 25 Nov (sesi fix retry/IncompleteRead, ACC 24 Nov 12:00).
+
+    (a) IncompleteRead = transient: `_is_transient_http_error` True
+        untuk http.client.IncompleteRead; HTTP 404 + ValueError tetap
+        TIDAK transient. `_fetch_json` me-retry IncompleteRead yang
+        muncul di `resp.read()` (jalur nyata Hyperliquid 24 Nov: 316
+        token) lalu berhasil; IncompleteRead persisten menyerah sesudah
+        HTTP_MAX_RETRIES dengan error fetch_error:IncompleteRead.
+    (b) Retry berbasis sesi (`session_retry.retry_allowed`, offline,
+        waktu sintetis): retry regular diizinkan selama selesai < 16:00
+        ET — termasuk retry 00:35 WITA (tengah malam WITA lewat, masih
+        11:35 ET sesi yang sama); ditolak bila selesai >= 16:00 ET;
+        early close 27 Nov ditolak bila selesai >= 13:00 ET (tapi
+        diizinkan bila selesai < 13:00 ET); libur Thanksgiving
+        diizinkan selama selesai di hari ET yang sama; tanggal ET sudah
+        berganti = ditolak; run_date tak valid = ditolak.
+    (c) `--run-date` di run.py: `_resolve_run_date` memakai override
+        bila ada, tanggal WITA mulai bila tidak; `_run_date_type`
+        menolak format/tanggal tak valid; `_next_attempt_number`
+        melanjutkan nomor attempt untuk tanggal override.
+    (d) Verifier sesi-aware menerima manifest retry: attempt 2,
+        run_date 25 Nov, mulai 00:05 WITA 26 Nov (11:05 ET 25 Nov),
+        selesai 01:24 WITA (12:24 ET) — seluruhnya dalam sesi 25 Nov —
+        LOLOS 24/24; run_date salah (24 Nov) GAGAL atribusi; retry
+        early-close 27 Nov yang selesai 13:24 ET GAGAL session_window.
+    Semua offline — urlopen dipalsukan, tanpa network."""
+    import argparse
+    import http.client
+    import shutil
+    import tempfile
+    import time as _time
+    import urllib.error
+    import urllib.request
+    from datetime import datetime, timezone
+    import adapter as _adapter
+    import session_retry as _sr
+    import verify_daily_runs as _vdr
+    import run as _run
+    checks = []
+
+    # ---- (a) IncompleteRead transient + _fetch_json me-retry ----------
+    checks.append(("incompleteread_is_transient",
+                   _adapter._is_transient_http_error(
+                       http.client.IncompleteRead(b"partial"))))
+    checks.append(("http_404_not_transient",
+                   not _adapter._is_transient_http_error(
+                       urllib.error.HTTPError(
+                           "https://example.invalid/x", 404, "x", {}, None))))
+    checks.append(("value_error_not_transient",
+                   not _adapter._is_transient_http_error(ValueError("x"))))
+    checks.append(("timeout_still_transient",
+                   _adapter._is_transient_http_error(TimeoutError())))
+
+    class _FakeResp:
+        def __init__(self, body):
+            self._body = body.encode("utf-8")
+
+        def __enter__(self):
+            return self
+
+        def __exit__(self, *a):
+            return False
+
+        def read(self):
+            return self._body
+
+    class _FlakyResp:
+        """read() pertama IncompleteRead (respons terpotong, jalur nyata),
+        read() berikut mengembalikan JSON lengkap."""
+
+        def __init__(self):
+            self._reads = 0
+
+        def __enter__(self):
+            return self
+
+        def __exit__(self, *a):
+            return False
+
+        def read(self):
+            self._reads += 1
+            if self._reads == 1:
+                raise http.client.IncompleteRead(b"partial")
+            return b'{"ok": true}'
+
+    class _AlwaysTruncatedResp:
+        def __enter__(self):
+            return self
+
+        def __exit__(self, *a):
+            return False
+
+        def read(self):
+            raise http.client.IncompleteRead(b"partial")
+
+    orig_urlopen = urllib.request.urlopen
+    orig_sleep = _time.sleep
+    try:
+        _time.sleep = lambda s: None  # backoff tidak ditunggu di gate
+        req = urllib.request.Request(
+            "https://example.invalid/x", headers={"User-Agent": "gate-test"})
+        flaky = _FlakyResp()
+        calls = {"n": 0}
+
+        def _counting_urlopen(r, timeout=None):
+            calls["n"] += 1
+            return flaky
+
+        urllib.request.urlopen = _counting_urlopen
+        payload, err = _adapter._fetch_json(req)
+        checks.append(("fetch_json_retries_incompleteread_then_succeeds",
+                       payload == {"ok": True} and err is None
+                       and calls["n"] == 2))
+        calls["n"] = 0
+        # Hitung percobaan urlopen pada kasus persisten.
+        def _counting_truncated(r, timeout=None):
+            calls["n"] += 1
+            return _AlwaysTruncatedResp()
+
+        urllib.request.urlopen = _counting_truncated
+        payload, err = _adapter._fetch_json(req)
+        checks.append(("fetch_json_persistent_incompleteread_gives_up",
+                       payload is None
+                       and err == "fetch_error:IncompleteRead"
+                       and calls["n"] == 1 + config.HTTP_MAX_RETRIES))
+    finally:
+        urllib.request.urlopen = orig_urlopen
+        _time.sleep = orig_sleep
+
+    # ---- (b) retry berbasis sesi (waktu sintetis, offline) ------------
+    def _utc(y, mo, d, h, mi):
+        return datetime(y, mo, d, h, mi, tzinfo=timezone.utc)
+
+    REMAIN = 30 * 60 + 100 * 60  # jeda 30 mnt + estimasi run 100 mnt
+    # Regular 25 Nov: 23:35 WITA = 10:35 ET, selesai 12:45 ET < 16:00.
+    ok, _r, _e = _sr.retry_allowed("2026-11-25", _utc(2026, 11, 25, 15, 35),
+                                   REMAIN)
+    checks.append(("retry_regular_evening_allowed", ok))
+    # Regular 25 Nov: 00:35 WITA 26 Nov = 11:35 ET 25 Nov (tengah malam
+    # WITA lewat, masih sesi yang sama), selesai 13:45 ET < 16:00.
+    ok, _r, _e = _sr.retry_allowed("2026-11-25", _utc(2026, 11, 25, 16, 35),
+                                   REMAIN)
+    checks.append(("retry_regular_past_midnight_wita_allowed", ok))
+    # Regular 25 Nov: 03:00 WITA 26 Nov = 14:00 ET, selesai 16:10 ET.
+    ok, _r, _e = _sr.retry_allowed("2026-11-25", _utc(2026, 11, 25, 19, 0),
+                                   REMAIN)
+    checks.append(("retry_regular_too_late_denied", not ok))
+    # Early close 27 Nov: 00:05 WITA 28 Nov = 11:05 ET 27 Nov, selesai
+    # 13:15 ET >= tutup 13:00 ET.
+    ok, _r, _e = _sr.retry_allowed("2026-11-27", _utc(2026, 11, 27, 16, 5),
+                                   REMAIN)
+    checks.append(("retry_early_close_past_close_denied", not ok))
+    # Early close 27 Nov: sisa 60 mnt dari 11:05 ET -> selesai 12:05 ET.
+    ok, _r, _e = _sr.retry_allowed("2026-11-27", _utc(2026, 11, 27, 16, 5),
+                                   60 * 60)
+    checks.append(("retry_early_close_fits_allowed", ok))
+    # Thanksgiving 26 Nov (libur): 00:35 WITA 27 Nov = 11:35 ET 26 Nov,
+    # selesai 13:45 ET 26 Nov — hari ET yang sama.
+    ok, _r, _e = _sr.retry_allowed("2026-11-26", _utc(2026, 11, 26, 16, 35),
+                                   REMAIN)
+    checks.append(("retry_holiday_same_et_day_allowed", ok))
+    # Thanksgiving 26 Nov: 11:35 WITA 27 Nov = 22:35 ET 26 Nov, selesai
+    # 00:45 ET 27 Nov — melewati akhir hari ET.
+    ok, _r, _e = _sr.retry_allowed("2026-11-26", _utc(2026, 11, 27, 3, 35),
+                                   REMAIN)
+    checks.append(("retry_holiday_crosses_et_midnight_denied", not ok))
+    # Tanggal ET sudah berganti (run 25 Nov, sekarang 00:00 ET 26 Nov).
+    ok, _r, _e = _sr.retry_allowed("2026-11-25", _utc(2026, 11, 26, 5, 0),
+                                   REMAIN)
+    checks.append(("retry_next_et_day_denied", not ok))
+    ok, _r, _e = _sr.retry_allowed("25-11-2026", _utc(2026, 11, 25, 15, 35),
+                                   REMAIN)
+    checks.append(("retry_invalid_run_date_denied", not ok))
+    end, kind = _sr.session_end_for_et_date(
+        _utc(2026, 11, 27, 12, 0).date())
+    checks.append(("session_end_early_close_1300",
+                   kind == "early_close" and end.hour == 13
+                   and end.minute == 0))
+    end, kind = _sr.session_end_for_et_date(
+        _utc(2026, 11, 30, 12, 0).date())
+    checks.append(("session_end_regular_1600",
+                   kind == "regular" and end.hour == 16))
+    end, kind = _sr.session_end_for_et_date(
+        _utc(2026, 11, 26, 12, 0).date())
+    checks.append(("session_end_holiday_off_hours",
+                   kind == "off_hours" and end.hour == 23
+                   and end.minute == 59))
+
+    # ---- (c) --run-date di run.py --------------------------------------
+    started = datetime(2026, 11, 25, 15, 0, tzinfo=timezone.utc)  # 23:00 WITA
+    checks.append(("resolve_run_date_uses_override",
+                   _run._resolve_run_date("2026-11-24", started)
+                   == "2026-11-24"))
+    checks.append(("resolve_run_date_defaults_to_start_wita",
+                   _run._resolve_run_date(None, started) == "2026-11-25"))
+    try:
+        _run._run_date_type("2026-13-01")
+        checks.append(("run_date_type_rejects_bad_month", False))
+    except argparse.ArgumentTypeError:
+        checks.append(("run_date_type_rejects_bad_month", True))
+    try:
+        _run._run_date_type("25 Nov 2026")
+        checks.append(("run_date_type_rejects_bad_format", False))
+    except argparse.ArgumentTypeError:
+        checks.append(("run_date_type_rejects_bad_format", True))
+    checks.append(("run_date_type_accepts_valid",
+                   _run._run_date_type("2026-11-25") == "2026-11-25"))
+    tmp = tempfile.mkdtemp(prefix="s1d_retry_gate_")
+    try:
+        orig_out = _run.OUT
+        _run.OUT = tmp
+        try:
+            for n in (1, 2):
+                with open(os.path.join(
+                        tmp, "daily_manifest_2026-11-25_attempt%d.json" % n),
+                        "w", encoding="utf-8") as f:
+                    f.write("{}")
+            checks.append(("next_attempt_continues_override_date",
+                           _run._next_attempt_number("2026-11-25") == 3))
+            checks.append(("next_attempt_fresh_date_is_one",
+                           _run._next_attempt_number("2026-11-26") == 1))
+        finally:
+            _run.OUT = orig_out
+    finally:
+        shutil.rmtree(tmp, ignore_errors=True)
+
+    # ---- (d) verifier menerima manifest retry sesi --------------------
+    def _retry_manifest(start_z, finish_z, run_date, attempt):
+        ms = pipeline._market_session_detail(pipeline._parse_ts(start_z))
+        tok = {"symbol": "NVDAc", "status": "ok",
+               "snapshot_id": "snap-retry", "decision": "WATCH",
+               "decision_reasons": [], "fetched_at": finish_z,
+               "source": {"coinbase": config.COINBASE_API_URL},
+               "sources": {
+                   "coinbase": {"status": "ok",
+                                "source": config.COINBASE_API_URL,
+                                "error": None},
+                   "dexscreener": {"status": "ok",
+                                   "source": "https://api.dexscreener.com",
+                                   "error": None}},
+               "market_session": ms,
+               "coverage": {"independent_pool_count": 6,
+                            "independent_venue_count": 4},
+               "files": {}, "error": None, "complete": True}
+        return {
+            "manifest_schema_version": "1",
+            "run_id": "daily-%s-a%d-retry" % (run_date.replace("-", ""),
+                                              attempt),
+            "run_date_wita": run_date, "trigger": "cron", "dry_run": False,
+            "manual_input": False, "input_mode": "automated",
+            "scheduler": {"cron_line": "0 23 * * *",
+                          "timezone": "Asia/Makassar",
+                          "command": "cd ~/workspace/base-exit-radar && "
+                                     "bash run_daily.sh",
+                          "log_excerpt": None},
+            "git_commit": "a" * 40,
+            "schema_version": config.SCHEMA_VERSION,
+            "methodology_version": config.METHODOLOGY_VERSION,
+            "policy_version": config.POLICY_VERSION,
+            "config_hash": config.CONFIG_HASH,
+            "universe_version": config.UNIVERSE_VERSION,
+            "universe_total_tokens": config.UNIVERSE_TOTAL_TOKENS,
+            "input_hashes": {"universe_manifest": "b" * 64,
+                             "evidence_files": {"universe_manifest": "b" * 64}},
+            "run_started_at": start_z, "run_finished_at": finish_z,
+            "run_started_at_wita": start_z, "run_finished_at_wita": finish_z,
+            "run_market_session": ms, "attempt": attempt,
+            "max_attempts": 3, "retry_delay_sec": 1800,
+            "symbols_attempted": ["NVDAc"], "successes": ["NVDAc"],
+            "failures": [], "coinbase_shared": True, "coinbase_error": None,
+            "tokens": {"NVDAc": tok},
+            "summary": {"attempted": 1, "ok": 1, "error": 0,
+                        "complete_snapshots": 1,
+                        "complete_symbols": ["NVDAc"], "usable": True}}
+
+    # Retry 25 Nov: mulai 00:05 WITA 26 Nov (11:05 ET 25 Nov), selesai
+    # 01:24 WITA (12:24 ET) — seluruhnya dalam sesi 25 Nov.
+    ok, vchecks = _vdr.verify_manifest(_retry_manifest(
+        "2026-11-25T16:05:00Z", "2026-11-25T17:24:00Z", "2026-11-25", 2))
+    checks.append(("verifier_accepts_session_retry_manifest",
+                   ok and len(vchecks) == 24))
+    # run_date salah (24 Nov): atribusi gagal.
+    ok, _vc = _vdr.verify_manifest(_retry_manifest(
+        "2026-11-25T16:05:00Z", "2026-11-25T17:24:00Z", "2026-11-24", 2))
+    checks.append(("verifier_rejects_wrong_retry_run_date", not ok))
+    # Retry early-close 27 Nov selesai 13:30 ET (> tutup 13:00 ET).
+    ok, _vc = _vdr.verify_manifest(_retry_manifest(
+        "2026-11-27T16:05:00Z", "2026-11-27T18:30:00Z", "2026-11-27", 2))
+    checks.append(("verifier_rejects_retry_past_early_close", not ok))
+
+    failed = [c for c, ok in checks if not ok]
+    return _result(
+        "s1d_session_retry_incompleteread",
+        "retry berbasis sesi + IncompleteRead transient + --run-date "
+        "(sesi fix 25 Nov); tiap kasus batas lolos/gagal sesuai aturan",
+        "%d/%d checks pass; failed: %s" % (len(checks) - len(failed),
+                                           len(checks), failed or "none"),
+        not failed,
+        "S1-D revisi 25 Nov: session_retry.py + --run-date + IncompleteRead")
+
+
 # -------------------------------------------------------------------- main
 def test_s1c_v4_canonical_identity():
     """S1-C: identitas pool kanonis V4 end-to-end (rencana Scope 1 v1.1 §1.3).
@@ -3722,6 +4024,8 @@ TESTS = [
     ("s1b_venue_filter_session", test_s1b_venue_filter_session),
     # S1-D manifest run harian + verify_daily_runs + ketahanan run.
     ("s1d_daily_manifest_verify", test_s1d_daily_manifest_verify),
+    # Sesi fix 25 Nov: retry berbasis sesi + IncompleteRead (ACC 24 Nov 12:00).
+    ("s1d_session_retry_incompleteread", test_s1d_session_retry_incompleteread),
     # S1-C identitas pool kanonis V4 end-to-end + StateView.
     ("s1c_v4_canonical_identity", test_s1c_v4_canonical_identity),
 ]
