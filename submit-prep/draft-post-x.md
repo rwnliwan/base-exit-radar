@@ -36,7 +36,7 @@ radar.omdanny.site
   hapus baris link video.
 ---
 
-## FINAL — English (diusulkan 28 Nov 2026, menunggu kata Septian)
+## FINAL — English (DISETUJUI Septian 28 Nov 2026, 14:21 WITA)
 
 **Keputusan Instinct 28 Nov 14:09:** pakai Varian 1 (pendek) — form hanya
 minta satu link post X, Varian 2 terlalu panjang. Draf Indonesia TIDAK
@@ -66,4 +66,5 @@ bukan firm, Gate 29/29, tanpa janji profit, tanpa skor 9,8/10.
 @buildonbase). Aturan bahasa Inggris TIDAK ditemukan eksplisit di Rules
 §5 maupun halaman Quest (yang ter-fetch) — Inggris tetap pilihan yang
 benar untuk hackathon yang dinilai Base (form + rules berbahasa Inggris).
-**Rekomendasi chief: pakai versi pendek di atas.**
+**DISETUJUI Septian 28 Nov 14:21 WITA — teks di atas adalah post X
+final (249 karakter). Diposting 3 Des dengan link video.**
