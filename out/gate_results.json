@@ -2,7 +2,7 @@
   "failed": 0,
   "gate": "base-prototype \u00a77 + audit regression A-D",
   "methodology_version": "base-proto-method v0.3.3",
-  "passed": 28,
+  "passed": 29,
   "policy_version": "base-proto-policy v0.3.3",
   "results": [
     {
@@ -195,6 +195,13 @@
       "test": "s1d_session_retry_incompleteread"
     },
     {
+      "actual": "7/7 checks pass; failed: none",
+      "details": "S1-D opsi A 25 Nov: handler keep-alive + install_opener",
+      "expected": "handler kustom tanpa Connection: close + opener terpasang global (opsi A 25 Nov); kontrol stdlib tetap mengirim close",
+      "pass": true,
+      "test": "s1d_option_a_keepalive"
+    },
+    {
       "actual": "46/46 checks pass; failed: none",
       "details": "v4 poolId fixture NVDAc; StateView 0xA3c0c9b65baD0b08107Aa264b0f3dB444b867A71; PoolManager 0x498581fF718922c3f8e6A244956aF099B2652b2b",
       "expected": "S1-C \u00a71.3 v1.1: fixture poolId V4 lolos build->assess->decide->public->replay->feed tanpa KeyError; dedup/count/deviasi benar; venue_verified TIDAK PERNAH true untuk poolId; validasi StateView (sqrtPriceX96 initialize + PoolKey keccak256) lolos; decide() tidak disentuh",
@@ -202,13 +209,13 @@
       "test": "s1c_v4_canonical_identity"
     }
   ],
-  "run_at": "2026-11-25T05:08:34Z",
+  "run_at": "2026-11-28T05:48:25Z",
   "schema_version": "base-proto-schema v0.3.3",
   "source_identity": {
-    "adapter.py": "b39ae7c9217081bb666ce47290445214b651c2d899735b66cac8be03d5b9b3b6",
+    "adapter.py": "918f1119c0d10dc23866daa465792765cf60d860a9e340a1901e24eb0bb80a31",
     "capture_evidence.py": "601386c52863e21c3102d2875a3be14b9011c357c337a971cbbbb833daff5853",
     "config.py": "cbda38b83b23849f7fbdf9615da4fed6d7f91d3a7a7f8b2e4ba63ec8c56e60bc",
-    "gate.py": "f5d56c61f3957942874952281e5dc9cf6c2d94fe9ac6a7646231849ed6ae9f1d",
+    "gate.py": "34c662fbe1642d805cf4f0d1d072491879c59a6fea4b81040b59d10cc21e3f71",
     "pipeline.py": "f02fbb0e2e5793f0b09f0061799fbf103149643c0488ee892e75e771133fc709",
     "run.py": "9c6e6df2adb94c30fd7692a510b0a2a7f004108aa83b7799a09dad6af8f245d9"
   },
@@ -225,5 +232,5 @@
     "quote_max_age_sec": 300,
     "simulation_notional_usd": 10000.0
   },
-  "total": 28
+  "total": 29
 }

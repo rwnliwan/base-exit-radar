@@ -6,6 +6,10 @@ Method: read-only browser inspection. No field filled, nothing submitted.
 Deadline (from conditions field): Ends December 5, 2026, 11:59pm EST (= 6 Dec 12:59 WITA).
 Note: form has a "Berikutnya" (Next) button — at least one more page exists. Page 2 fields UNKNOWN (cannot be reached without filling page-1 required fields).
 
+## Page 2 — dilaporkan Septian 24 Nov 2026 20:05 WITA (belum dikonfirmasi detailnya)
+
+Septian (balasan chat 20:05): "Setelah berikutnya, hanya suruh ikuti d telegram beberapa grup" — halaman 2 hanya meminta follow beberapa grup Telegram. Nama/link grup + apakah ada tombol Submit sesudahnya BELUM dikonfirmasi — menunggu jawaban Septian.
+
 ## Page 1 — 17 fields (16 required, 1 optional)
 
 No character limit, file-size limit, or format hint shown on any field. No file-upload field on page 1.
@@ -33,7 +37,7 @@ No character limit, file-size limit, or format hint shown on any field. No file-
 ## Implications for submit-prep drafts (draft-form.md)
 
 - The 1–2 sentence description (field 6) and "why select you" (field 14, single line) are the two free-text pitches — the draft must have both ready, tight.
-- The evidence link (repo / demo / X post) goes in field 13 (Product or demo URL). GitHub repo is the strongest single link.
+- **Field 13 (Product or demo URL) = LINK POST X (koreksi 24 Nov 2026, sesudah verifikasi Rules §5):** Rules §5.2 mewajibkan form menyertakan "a link to the X post", dan field 13 adalah SATU-SATUNYA field URL di form (tidak ada field khusus "X post link"; field 5 hanya X Handle). Jadi isi field 13 dengan link post X. Link repo GitHub ikut lewat post X itu sendiri (cantumkan URL repo di teks post/thread) — dan video demo juga bisa menampilkan URL repo. Draf lama yang menyebut repo sebagai "strongest single link" untuk field 13 SUDAH TIDAK BERLAKU untuk field ini.
 - No file upload on page 1: the demo video is NOT uploaded here — per Official Rules §5 the video demo lives in the X post, and the form takes the link to that X post. The video + X post draft remain the right deliverables.
 - Track = "Agentic Stock Finance" (field 10). Stage = "Prototype" (field 7). Entry type = "Build New" (field 9). Token = "No" (field 8).
 - Page 2 unknown — expect more fields at submit time; check again when the draft is un-parked (reminder 24 Nov 09:00 WITA).
