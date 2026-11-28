@@ -59,9 +59,11 @@ NOTIONAL_USD = config.SIMULATION_NOTIONAL_USD  # 10_000.0
 USDC_NATIVE = config.USDC_NATIVE_BASE
 WETH_BASE = "0x4200000000000000000000000000000000000006"
 TOKENS = ("NVDAc", "AAPLc")
-# Taker untuk quote 0x/1inch: wallet EVM Septian (read-only; quote hanya
-# mengembalikan data + tx siap-sign, tidak ada dana bergerak).
-TAKER = "0x7164463c4f01128a3824ea7580ad59455604b9f3"
+# Taker untuk quote 0x/1inch: alamat EVM taker, dibaca dari env PROBE_TAKER.
+# Quote read-only — hanya mengembalikan data + tx siap-sign, tidak ada dana
+# bergerak. Alamat pribadi tidak disimpan di repo (Rules 6.5); set env
+# sebelum menjalankan probe ber-key.
+TAKER = os.environ.get("PROBE_TAKER", "")
 SLIPPAGE_BPS = 50          # 0x: slippageBps
 SLIPPAGE_PCT = 0.5         # 1inch: slippage (persen)
 UA = {"User-Agent": config.USER_AGENT}
@@ -607,6 +609,8 @@ def _validator_faithful(a, symbol, median_usd):
 
 
 def main():
+    if not TAKER:
+        raise SystemExit("Set PROBE_TAKER env ke alamat EVM taker untuk probe ber-key.")
     out = {"probe": "S2 keyed firm-quote probes 0x + 1inch",
            "date": DATE_TAG,
            "generated_at_utc": _now_iso(),
@@ -620,8 +624,8 @@ def main():
                                 "tidak dipakai",
            "weth_address": WETH_BASE,
            "taker": TAKER,
-           "taker_note": "wallet EVM Septian; quote read-only, tidak ada "
-                         "signing/broadcast/dana bergerak",
+           "taker_note": "taker dari env PROBE_TAKER; quote read-only, "
+                         "tidak ada signing/broadcast/dana bergerak",
            "slippage_requested_pct": SLIPPAGE_PCT,
            "slippage_requested_bps_0x": SLIPPAGE_BPS,
            "cross_check_predeclared": {

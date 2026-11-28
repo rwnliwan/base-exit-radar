@@ -10,7 +10,7 @@
   "usdc_address": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
   "usdc_address_note": "native Circle; alamat lama bd029029 SALAH, tidak dipakai",
   "weth_address": "0x4200000000000000000000000000000000000006",
-  "taker": "0x7164463c4f01128a3824ea7580ad59455604b9f3",
+  "taker": "0x7164...b9f3",
   "taker_note": "wallet EVM Septian; quote read-only, tidak ada signing/broadcast/dana bergerak",
   "slippage_requested_pct": 0.5,
   "slippage_requested_bps_0x": 50,

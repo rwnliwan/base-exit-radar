@@ -9,7 +9,7 @@ stage **Prototype**, entry type **Build New**. A daily read-only brief over
 
 - Live brief: https://exit-radar-brief.rwnliwan.workers.dev
 - Daily manifests: `out/daily_manifest_YYYY-MM-DD_attempt1.json`
-- Demo video + X post: linked from the submission form (field 13), posted 3 Dec 2026.
+- Demo video + X post: linked from the submission form (field 13).
 
 ## What it does
 
@@ -150,8 +150,8 @@ local run artifacts. The daily manifest is the committed, verifiable record.
 ## History (condensed)
 
 - **22 Nov 2026** — Live run v0.3.3: NVDAc → WATCH (median $132.82),
-  AAPLc → WATCH (median $349.565). Quoter v0.3.2 ACC'd read-only by
-  Instinct (re-audit v7, 9.5/10). RPC replay byte-exact (18/18 transcripts).
+  AAPLc → WATCH (median $349.565). Quoter v0.3.2 (re-audit v7, 9.5/10,
+  no new must-fix). RPC replay byte-exact (18/18 transcripts).
 - **23 Nov 2026** — Repo split out from radar-tokenized-stocks. v0.3.3
   fixes M1–M3 (TickMath constant, probe must succeed, factory stored).
 - **24 Nov 2026** — Re-audit Instinct, 8.5/10, 2 must-fix, both fixed and

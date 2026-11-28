@@ -374,7 +374,7 @@ di luar tugas ini):
 1inch quote 10 USDC→WETH HTTP 200 `dstAmount: 5839361162514238`). Key via
 konektor terdaftar (`custom.0x` / `custom.1inch`, surrogate — tidak ada key di
 repo/log/chat/evidence; grep `hsurr` di evidence = 0). Taker: wallet EVM
-Septian `0x7164463c4f01128a3824ea7580ad59455604b9f3` (quote read-only; tidak ada
+Septian `0x7164...b9f3` (quote read-only; tidak ada
 signing/broadcast/dana bergerak). Slippage yang diminta: 0,5% seragam
 (0x `slippageBps: 50`, 1inch `slippage: 0.5`). Block pin:
 **61461903** (`0x9269ebf0…f6d80`, 01:12:30Z). Spot median DexScreener saat
