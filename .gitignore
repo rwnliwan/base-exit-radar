@@ -2,3 +2,16 @@ __pycache__/
 *.py[cod]
 .env*
 .DS_Store
+
+# Base Exit Radar — per-run artifacts (local only, never committed).
+# The daily manifests (out/daily_manifest_*.json) and out/gate_results.json
+# ARE committed as evidence; everything below is local run state.
+out/snapshot_*.json
+out/decision_*.json
+out/paper_record_*.json
+out/alert_*.json
+out/alerts_seen*.json
+out/gate_log.md
+out/run_manifest_*.json
+out/*.log
+out/*.lock

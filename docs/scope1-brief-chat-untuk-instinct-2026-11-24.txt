@@ -1,0 +1,41 @@
+BRIEF REVIEW — Rencana Eksekusi Scope 1, Base Stocks Maxxing ("Exit Radar")
+Status: RENCANA, belum ACC. Build ditahan sampai review selesai.
+Dokumen lengkap: base-exit-radar/docs/scope1-rencana-eksekusi-2026-11-24.md (524 baris, commit 2ce2f36, branch main).
+
+KONTEKS (sudah ACC, jangan dibuka lagi):
+- Paket: (a) research-to-portfolio + (a1') reframe: proposal = artefak terpisah RESEARCH_DRAFT/ILLUSTRATIVE di luar decide(), gate tetap OFF, PAPER_PROPOSAL hanya untuk quote FIRM + Sepolia + fallback (a2).
+- Kill-switch 5 kriteria (checkpoint 30 Nov): (1) data Base asli masuk otomatis min 5 hari berturut-turut, tiap record ada timestamp + sumber; (2) min 1 jalur quote FIRM, dicek silang ke sumber independen (selisih <=1%), min 10 sampel; (3) brief harian otomatis min 3 hari, reproducible dari data sama; (4) hash Sepolia terbukti (ada tx, bisa diverifikasi ulang dari brief); (5) gate tetap OFF, decide() tidak diubah, tes membuktikan simulasi tidak pernah menghasilkan PAPER_PROPOSAL. Poin 1/2 gagal = kill-switch jalan.
+- Nama: "Exit Radar" (display "Exit Radar for Base"). Deadline submit 5 Des 2026 23:59 UTC = 6 Des 07:59 WITA.
+
+APA ITU SCOPE 1 (3 hal):
+1. Coverage Base: poller otomatis + sensus universe + sensus venue + jalur kode V4 + feed/indeks harian.
+2. Jalur quote FIRM — satu-satunya risiko terbuka (lihat bawah).
+3. Kalibrasi Exit Score Base — BUKAN skor 0-100; yang dikalibrasi = distribusi deviasi + tinjau ulang threshold 2%/5% + MIN_POOLS 2.
+
+TANGGAL YANG MENGIKAT: 26 NOV, BUKAN 30 NOV. Kriteria 1 menuntut 5 hari berturut-turut sampai checkpoint 30 Nov, jadi run otomatis pertama HARUS terjadi 26 Nov (26-30 Nov = tepat 5 hari). Bila review belum diputuskan sampai pagi 25 Nov, 26 Nov slip — dan itu sendiri pemicu early exit.
+
+FAKTA KUNCI (terverifikasi dari kode + live):
+- Universe: API Coinbase bersifat paginasi — page 1 = 100 token, page 2 = 100 token, masih ada next_page_token. Total universe >200 token.
+- V4 tidak ter-cover hari ini karena _is_address() hanya menerima 42 karakter; poolId V4 66 karakter jatuh ke rejected_observations. Butuh jalur kode baru (S1-C); V4 dilabeli venue fallback, BUKAN venue_verified (factory tidak bisa dibaca untuk poolId).
+- Koreksi likuiditas: V4 NVDAc/USDC yang material ~$92rb dari 2 pool — angka ~$130rb adalah pool BLUECHIP/NVDAc (NVDAc sebagai QUOTE), JANGAN dipakai lagi.
+- Definisi FIRM BEKU dari validate_exit_quote: kind firm/executable/guaranteed + amount_out_min + expires_at + sanity checks. Tidak ada pelonggaran definisi.
+- Kandidat FIRM yang tersisa untuk di-probe: 0x permit2/v2 + 1inch (butuh API key — registrasi Septian, key via env saja, BUKAN repo); Odos, KyberSwap, Uniswap Routing API (dugaan: indikatif saja, belum terbukti). Yang sudah gugur 22 Nov: 0x v1 tanpa rute; DexScreener/GeckoTerminal (bukan quoter); Coinbase (tanpa endpoint quote); hitung quote off-chain dari state pool (= simulasi, bukan firm).
+- Kalibrasi: N realistis puluhan token-hari (bukan ratusan); 26 Nov = Thanksgiving + 28-29 Nov = akhir pekan, jadi mayoritas sampel 5 hari ini adalah observasi libur/akhir pekan — WAJIB dipisah session_status active vs off_hours. Jawaban jujur bila ditanya: "Kalibrasi awal, N kecil, belum tervalidasi — threshold masih eksperimen."
+
+JADWAL (total ~3-3,5 hari kerja):
+- 25 Nov: S1-A sensus universe + S1-B sensus venue + S2 probe jalur FIRM (paralel). Keputusan review paling lambat 25 Nov 09:00 WITA.
+- 26 Nov: S1-C jalur kode V4 + S1-D cron + manifest (HARD — run otomatis pertama). Malam 26 Nov: REVIEW EARLY EXIT.
+- 27 Nov: S1-E feed + indeks harian + S1-F kalibrasi pass 1 + S1-G tes integritas gate (kriteria 5).
+- 28-30 Nov: Fase 2 (fitur agen a1' + registry Sepolia). 30 Nov: checkpoint kill-switch. 1-3 Des QA akhir, 4-5 Des submit (Septian).
+
+EARLY EXIT (review malam 26 Nov) — salah satu saja = kunci paket ke (a2):
+- T1: poller belum otomatis 26 Nov → kriteria 1 mustahil secara matematis.
+- T2: tidak ada >=1 sampel firm sampai akhir 26 Nov → kriteria 2 dinyatakan tidak terpenuhi. Jangan tunggu 30 Nov; jangan ubah definisi supaya ada yang lolos.
+
+BATAS KERAS: decide() TIDAK disentuh; PAPER_PROPOSALS_ENABLED tetap False; tanpa mainnet; tanpa kredensial/API key/wallet/seed di repo; tanpa submit di rencana ini (submit 4-5 Des, Septian).
+
+PERTANYAAN UNTUK INSTINCT:
+1. Apakah rencana ini cukup kokoh untuk di-ACC — atau ada lubang yang harus diperbaiki dulu?
+2. Apakah aturan early exit T1/T2 sudah tepat, atau terlalu keras / terlalu lunak?
+3. Apakah pendekatan kalibrasi (distribusi mentah diterbitkan, N kecil, jawaban jujur) cukup jujur untuk juri/auditor?
+4. Ada risiko lain yang belum ditulis di rencana ini?
