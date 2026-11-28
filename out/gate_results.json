@@ -209,7 +209,7 @@
       "test": "s1c_v4_canonical_identity"
     }
   ],
-  "run_at": "2026-11-28T05:48:25Z",
+  "run_at": "2026-11-28T07:33:45Z",
   "schema_version": "base-proto-schema v0.3.3",
   "source_identity": {
     "adapter.py": "918f1119c0d10dc23866daa465792765cf60d860a9e340a1901e24eb0bb80a31",
