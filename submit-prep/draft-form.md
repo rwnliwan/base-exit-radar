@@ -15,13 +15,15 @@
 
 ---
 
-## Project name (NAMA PROYEK — butuh keputusan Septian)
+## Project name (NAMA PROYEK — DIPUTUSKAN Septian 28 Nov 2026)
 
-**Draf: "Radar — Exit Radar for Base Tokenized Stocks"**
+**"Exit Radar Brief"**
 
-Alternatif (pilih satu sebelum submit):
-- "Exit Radar" (nama produk yang sudah live di radar.omdanny.site)
-- "Radar: Research-to-Paper-Portfolio Agent for Base Tokenized Stocks"
+Alasan: "Exit Radar" mentah bentrok dengan nama produk live (44 ticker);
+"Exit Radar for Base" kurang membedakan karena produk live sudah Base;
+"Exit Radar Brief" membedakan lewat artefak (brief harian + prototipe
+read-only) dan cocok persis dengan isi submit (b). Rekomendasi chief +
+Instinct; diputuskan Septian 28 Nov 14:08 WITA.
 
 ## Track
 
