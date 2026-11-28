@@ -55,7 +55,7 @@ probe ratio, oracle multiplier, block number, factory.
 > 10.498 dolar, harga implisit 132,90 — cuma 0,059 persen dari median.
 > Probe partial-fill rasionya 1,9999 — sehat, nggak capped. Oracle
 > registry juga dibaca tiap run: multiplier 1,0005, paused false.
-> Replay RPC-nya 22 dari 22 cocok. Gate 19 dari 19 lolos, audit
+> Replay RPC-nya 22 dari 22 cocok. Gate 29 dari 29 lolos, audit
 > independen 9,8 dari 10, nol must-fix."
 
 ## Scene 5 — Batasan jujur (2:05–2:30)
@@ -94,8 +94,9 @@ Agentic Stock Finance".
   60867888 / probe 1,99991884 / oracle 1,0005379395763696 /
   11 pool 6 venue. AAPLc median $349,565 / implisit $349,5407879
   (−0,007%) / block 60868044 / probe 1,99983284 / oracle
-  1,0005003893019802 / 6 pool 4 venue. Gate 19/19, audit 9,8/10,
-  replay 22/22.
+  1,0005003893019802 / 6 pool 4 venue. Gate 29/29 (re-run 28 Nov),
+  audit 9,8/10, replay 22/22. Daily brief otomatis: 25–27 Nov
+  (26–27 Nov 415/415, ABSTAIN 405/WATCH 10).
 - **Jangan ucapkan:** "pasti cuan", "dijamin", "live trading",
   "sudah terbukti menguntungkan". Bila salah ucap saat rekam, ulang
   scene-nya.
