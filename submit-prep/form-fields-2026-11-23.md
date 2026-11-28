@@ -6,9 +6,12 @@ Method: read-only browser inspection. No field filled, nothing submitted.
 Deadline (from conditions field): Ends December 5, 2026, 11:59pm EST (= 6 Dec 12:59 WITA).
 Note: form has a "Berikutnya" (Next) button — at least one more page exists. Page 2 fields UNKNOWN (cannot be reached without filling page-1 required fields).
 
-## Page 2 — dilaporkan Septian 24 Nov 2026 20:05 WITA (belum dikonfirmasi detailnya)
+## Page 2 — TERKONFIRMASI Septian 28 Nov 2026 ~14:00 WITA
 
-Septian (balasan chat 20:05): "Setelah berikutnya, hanya suruh ikuti d telegram beberapa grup" — halaman 2 hanya meminta follow beberapa grup Telegram. Nama/link grup + apakah ada tombol Submit sesudahnya BELUM dikonfirmasi — menunggu jawaban Septian.
+Halaman 2 hanya meminta gabung ke 5–6 grup Telegram. Septian sudah gabung
+semuanya. Sesudah itu ada tombol Submit. Nama/link grup TIDAK dicatat
+Septian (hanya jumlahnya: 5–6 grup) — bila Instinct butuh nama grupnya,
+tanya Septian langsung.
 
 ## Page 1 — 17 fields (16 required, 1 optional)
 
